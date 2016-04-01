@@ -1,8 +1,8 @@
 {
   "name": "react-onsenui",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "React extension for Onsen UI",
-  "main": "dist/index.js",
+  "main": "dist/react-onsenui.js",
   "scripts": {
     "build": "npm run lint && rollup -c",
     "release": "npm run build && npm publish",
