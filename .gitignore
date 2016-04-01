@@ -34,3 +34,6 @@ node_modules
 
 # Distribution directory
 dist
+
+# Demo bundle
+demo/bundle.js
