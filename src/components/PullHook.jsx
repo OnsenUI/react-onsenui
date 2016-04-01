@@ -15,7 +15,7 @@ class PullHook extends React.Component {
   }
 
   render() {
-    return <ons-pull-hook ref="pullHook" {...this.props} />;
+    return <ons-pull-hook ref='pullHook' {...this.props} />;
   }
 }
 

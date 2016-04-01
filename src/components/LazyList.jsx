@@ -10,30 +10,30 @@ class LazyList extends React.Component {
       calculateItemHeight: function(index) {
         return self.props.calculateItemHeight(index);
       },
-    _render: function(items, newHeight) {
-        var createElement =  function({index: index, top: top}) {
-        return (
-          <ListItem key={index} class="list__item" _compiled>
+      _render: function(items, newHeight) {
+        var createElement = function({index: index, top: top}) {
+          return (
+          <ListItem key={index} class='list__item' _compiled>
             {self.props.renderRow(index)}
           </ListItem>
-        )};
+        ); };
 
         var el = items.map(createElement);
         self.setState({children: el, height: newHeight},
                       () => {
                         var list = this.refs.list;
                         // ignore i=0 <lazy repat
-                        for (var i=1; i< list.children.length; i++) {
-                           list.children[i].style.position = 'absolute';
-                           list.children[i].style.top = items[i-1].top + 'px';
-                           list.children[i].style.left = '0px';
-                           list.children[i].style.right = '0px';
+                        for (var i = 1; i < list.children.length; i++) {
+                          list.children[i].style.position = 'absolute';
+                          list.children[i].style.top = items[i - 1].top + 'px';
+                          list.children[i].style.left = '0px';
+                          list.children[i].style.right = '0px';
                         }
                       });
       }.bind(this),
       countItems: function() {
         return self.props.length;
-      },
+      }
     };
   }
 
@@ -44,10 +44,10 @@ class LazyList extends React.Component {
 
   render() {
     return (
-      <ons-list {...this.props} ref="list"
-        class="list" style={{position: 'relative', height: this.state.height}}
+      <ons-list {...this.props} ref='list'
+        class='list' style={{position: 'relative', height: this.state.height}}
         >
-        <ons-lazy-repeat ref="lazyRepeat" />
+        <ons-lazy-repeat ref='lazyRepeat' />
         {this.state.children}
        </ons-list>
     );
@@ -57,7 +57,7 @@ class LazyList extends React.Component {
 LazyList.propTypes = {
   length: React.PropTypes.number.isRequired,
   renderRow: React.PropTypes.func.isRequired,
-  calculateItemHeight: React.PropTypes.func.isRequired,
+  calculateItemHeight: React.PropTypes.func.isRequired
 };
 
 export default LazyList;

@@ -4,7 +4,9 @@ class Tabbar extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {activeIndex: props.initialIndex || 0 };
+    this.state = {
+      activeIndex: props.initialIndex || 0
+    };
   }
 
   componentDidMount() {
@@ -34,11 +36,11 @@ class Tabbar extends React.Component {
     const tabs = this.props.renderTabs(this.state.activeIndex, this);
 
     return (
-      <ons-tabbar {...this.props} ref="tabbar" activeIndex={this.state.activeIndex} _compiled="true">
-        <div no-status-bar-fill className="ons-tab-bar__content tab-bar__content">
+      <ons-tabbar {...this.props} ref='tabbar' activeIndex={this.state.activeIndex} _compiled='true'>
+        <div no-status-bar-fill className='ons-tab-bar__content tab-bar__content'>
           {tabs.map((tab) => tab.content)}
         </div>
-        <div className="tab-bar ons-tab-bar__footer ons-tabbar-inner">
+        <div className='tab-bar ons-tab-bar__footer ons-tabbar-inner'>
           {tabs.map((tab) => tab.tab)}
         </div>
       </ons-tabbar>
@@ -49,6 +51,6 @@ class Tabbar extends React.Component {
 Tabbar.propTypes = {
   initialIndex: React.PropTypes.number.isRequired,
   renderTabs: React.PropTypes.func.isRequired
-}
+};
 
 export {Tabbar};

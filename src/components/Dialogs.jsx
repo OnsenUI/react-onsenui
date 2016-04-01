@@ -21,8 +21,7 @@ class BaseDialog extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-
-    if (newProps.isOpen != this.props.isOpen) {
+    if (newProps.isOpen !== this.props.isOpen) {
       this.animateShow = true;
     }
     this.renderPortal(newProps);
@@ -65,15 +64,14 @@ class BaseDialog extends React.Component {
 
 BaseDialog.propTypes = {
   onCancel: React.PropTypes.func.isRequired,
-  isOpen: React.PropTypes.bool.isRequired,
-}
+  isOpen: React.PropTypes.bool.isRequired
+};
 
 class Dialog extends BaseDialog {
   _getDomNodeName() {
     return 'ons-dialog';
   }
 }
-
 
 class AlertDialog extends BaseDialog {
   _getDomNodeName() {
@@ -88,14 +86,14 @@ class Popover extends BaseDialog {
 
   show() {
     var target = this.props.getTarget();
-    target = ReactDOM.findDOMNode(target);
+    // target = ReactDOM.findDOMNode(target);
     return this.node.firstChild.show(target);
   }
 }
 
 Popover.propTypes = {
   ...BaseDialog.propTypes,
-  getTarget: React.PropTypes.func.isRequired,
-}
+  getTarget: React.PropTypes.func.isRequired
+};
 
 export {AlertDialog, Dialog, Popover};

@@ -4,7 +4,9 @@
   "description": "React extension for Onsen UI",
   "main": "dist/index.js",
   "scripts": {
-    "build": "rollup -c",
+    "build": "npm run lint && rollup -c",
+    "lint": "eslint --ext .js,.jsx src",
+    "lint-fix": "eslint --ext .js,.jsx src --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,6 +28,10 @@
     "babel-plugin-transform-object-rest-spread": "^6.6.5",
     "babel-plugin-transform-react-jsx": "^6.7.4",
     "babel-preset-es2015-rollup": "^1.1.1",
+    "eslint": "^2.5.3",
+    "eslint-plugin-promise": "^1.1.0",
+    "eslint-plugin-react": "^4.2.3",
+    "eslint-plugin-standard": "^1.3.2",
     "react": "^0.14.8",
     "react-dom": "^0.14.8",
     "rollup": "^0.25.7",

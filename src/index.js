@@ -27,7 +27,7 @@ import {
   TabActive,
   TabInactive,
   Toolbar,
-  ToolbarButton,
+  ToolbarButton
 } from './components/SimpleWrapper.jsx';
 
 export {

@@ -1,15 +1,11 @@
 import React from 'react';
 
 class List extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     var pages = this.props.dataSource.map((data, idx) => this.props.renderRow(data, idx));
 
     return (
-      <ons-list {...this.props} ref="list">
+      <ons-list {...this.props} ref='list'>
         {this.props.renderHeader()}
         {pages}
         {this.props.renderFooter()}
@@ -24,7 +20,7 @@ List.defaultProps = {
 };
 
 List.propTypes = {
-  dataSource: React.PropTypes.array.isRequired,
+  dataSource: React.PropTypes.array.isRequired
 };
 
 export default List;

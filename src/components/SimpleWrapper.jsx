@@ -11,7 +11,7 @@ var createSimpleWrapperClass = function(domName) {
 
       return React.createElement(domName, others, this.props.children);
     }
-  }
+  };
 };
 
 var BackButton = createSimpleWrapperClass('ons-back-button');
@@ -53,5 +53,5 @@ export {
   TabActive,
   TabInactive,
   Toolbar,
-  ToolbarButton,
+  ToolbarButton
 };

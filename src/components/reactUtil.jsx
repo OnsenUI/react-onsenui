@@ -1,17 +1,17 @@
-import React from 'react';
+import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server';
 
 var reactUtil = {};
 
-reactUtil.rendersToPage =  function(obj) {
-   var htmlString = ReactDOMServer.renderToStaticMarkup(obj);
-   return htmlString.startsWith('<ons-page');
+reactUtil.rendersToPage = function(obj) {
+  var htmlString = ReactDOMServer.renderToStaticMarkup(obj);
+  return htmlString.startsWith('<ons-page');
 };
 
-reactUtil.rendersTo =  function(obj, str) {
+reactUtil.rendersTo = function(obj, str) {
   var htmlString = ReactDOMServer.renderToStaticMarkup(obj);
   return htmlString.startsWith(str);
-}
+};
 
 reactUtil.rendersToToolbar = function(obj) {
   var htmlString = ReactDOMServer.renderToStaticMarkup(obj);

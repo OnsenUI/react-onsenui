@@ -14,7 +14,7 @@ class Switch extends React.Component {
     var {checked, ...other} = this.props;
 
     return (
-      <ons-switch ref="switch" checked={checked ? '' : null} {...other} />
+      <ons-switch ref='switch' checked={checked ? '' : null} {...other} />
     );
   }
 };
