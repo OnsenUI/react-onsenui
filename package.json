@@ -1,10 +1,11 @@
 {
   "name": "react-onsenui",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "React extension for Onsen UI",
   "main": "dist/index.js",
   "scripts": {
     "build": "npm run lint && rollup -c",
+    "release": "npm run build && npm publish",
     "lint": "eslint --ext .js,.jsx src",
     "lint-fix": "eslint --ext .js,.jsx src --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
