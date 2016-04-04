@@ -21,7 +21,7 @@ export default class extends React.Component {
 
   render() {
     return (
-      <Page lmodifier={this.state.modifier}>
+      <Page modifier={this.state.modifier}>
         <MyToolbar title="Page" />
 
         <p>
