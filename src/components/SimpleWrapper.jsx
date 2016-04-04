@@ -23,7 +23,6 @@ var CarouselItem = createSimpleWrapperClass('ons-carousel-item');
 var Fab = createSimpleWrapperClass('ons-fab');
 var Icon = createSimpleWrapperClass('ons-icon');
 var ListHeader = createSimpleWrapperClass('ons-list-header');
-var ListItem = createSimpleWrapperClass('ons-list-item');
 var Ripple = createSimpleWrapperClass('ons-ripple');
 var Scroller = createSimpleWrapperClass('ons-scroller');
 var SpeedDial = createSimpleWrapperClass('ons-speed-dial');
@@ -44,7 +43,6 @@ export {
   Fab,
   Icon,
   ListHeader,
-  ListItem,
   Ripple,
   Scroller,
   SpeedDial,

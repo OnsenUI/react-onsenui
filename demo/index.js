@@ -12,6 +12,7 @@ import {
 } from 'react-onsenui';
 
 import PageExample from './examples/Page';
+import ListExample from './examples/List';
 
 class Examples extends React.Component {
   constructor(props) {
@@ -21,6 +22,10 @@ class Examples extends React.Component {
       {
         title: 'Page',
         component: PageExample
+      },
+      {
+        title: 'List',
+        component: ListExample
       }
     ];
   }

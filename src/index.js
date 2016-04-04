@@ -2,6 +2,7 @@ import {Dialog, AlertDialog, Popover} from './components/Dialogs.jsx';
 import Input from './components/Input.jsx';
 import LazyList from './components/LazyList.jsx';
 import List from './components/List.jsx';
+import ListItem from './components/ListItem.jsx';
 import Navigator from './components/Navigator.jsx';
 import Page from './components/Page.jsx';
 import PullHook from './components/PullHook.jsx';
@@ -18,7 +19,6 @@ import {
   Fab,
   Icon,
   ListHeader,
-  ListItem,
   Ripple,
   Scroller,
   SpeedDial,

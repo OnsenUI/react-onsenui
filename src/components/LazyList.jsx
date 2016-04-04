@@ -1,5 +1,5 @@
 import React from 'react';
-import {ListItem} from './SimpleWrapper.jsx';
+import ListItem from './ListItem.jsx';
 
 class LazyList extends React.Component {
   componentDidMount() {
