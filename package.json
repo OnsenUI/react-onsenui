@@ -5,7 +5,7 @@
   "main": "dist/react-onsenui.js",
   "scripts": {
     "build": "npm run lint && rollup -c",
-    "release": "npm run build && npm publish",
+    "prepublish": "npm run build",
     "lint": "eslint --ext .js,.jsx src",
     "lint-fix": "eslint --ext .js,.jsx src --fix",
     "watch": "nodemon -x \"npm run build\" --watch src -e jsx",
