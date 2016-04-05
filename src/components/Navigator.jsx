@@ -49,10 +49,12 @@ class Navigator extends React.Component {
   }
 
   popPage(options = {}) {
-    return new Promise((resolve) => {
-      this.routes.pop();
-      this.refs.navi._popPage(options, this.update.bind(this), this.pages).then(resolve);
-    });
+    return this.refs.navi._popPage(options, this.update.bind(this), this.pages)
+      .then(
+        () => {
+          this.routes.pop();
+        }
+      );
   }
 
   componentDidMount() {
