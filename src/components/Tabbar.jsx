@@ -13,7 +13,7 @@ class Tabbar extends React.Component {
     const node = this.refs.tabbar;
     CustomElements.upgrade(node);
     node.setActiveTab(this.state.activeIndex);
-    node.addEventListener('prechange', this.handleChange);
+    node.addEventListener('prechange', this.handleChange.bind(this));
   }
 
   componentWillUnmount() {

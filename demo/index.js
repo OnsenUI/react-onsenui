@@ -13,6 +13,7 @@ import {
 
 import PageExample from './examples/Page';
 import ListExample from './examples/List';
+import TabbarExample from './examples/Tabbar';
 
 class Examples extends React.Component {
   constructor(props) {
@@ -26,6 +27,10 @@ class Examples extends React.Component {
       {
         title: 'List',
         component: ListExample
+      },
+      {
+        title: 'Tabbar',
+        component: TabbarExample
       }
     ];
   }
