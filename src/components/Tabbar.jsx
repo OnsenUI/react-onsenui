@@ -53,4 +53,8 @@ Tabbar.propTypes = {
   renderTabs: React.PropTypes.func.isRequired
 };
 
+Tabbar.defaultProps = {
+  initialIndex: 0
+};
+
 export {Tabbar};
