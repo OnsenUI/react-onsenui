@@ -1,0 +1,3 @@
+[submodule "OnsenUI"]
+	path = OnsenUI
+	url = https://github.com/OnsenUI/OnsenUI.git
