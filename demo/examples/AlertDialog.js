@@ -12,7 +12,6 @@ export default class extends React.Component {
   }
 
   handleClick() {
-    console.log(this);
     this.setState({
       isOpen: true
     });
