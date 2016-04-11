@@ -29,7 +29,7 @@ export default {
     'react-dom': 'ReactDOM',
     'react-dom/server': 'ReactDOMServer'
   },
-  format: 'cjs',
+  format: 'umd',
   moduleName: 'Ons',
   banner: `/*! ${pkg.name} v${pkg.version} - ${new Date()} */`,
   sourceMap: true
