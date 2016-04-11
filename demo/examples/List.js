@@ -6,7 +6,8 @@ import {
   ListItem,
   Toolbar,
   ToolbarButton,
-  BackButton
+  BackButton,
+  Button
 } from 'react-onsenui';
 
 export default class extends React.Component {
@@ -19,7 +20,27 @@ export default class extends React.Component {
   }
 
   reverseData() {
-    this.setState({data: this.state.data.reverse()});
+    this.setState({
+      data: this.state.data.reverse()
+    });
+  }
+
+  remove(idx) {
+    const data = this.state.data;
+    data.splice(idx, 1);
+
+    this.setState({
+      data: data
+    });
+  }
+
+  add() {
+    const data = this.state.data;
+    data.push(data.length);
+
+    this.setState({
+      data: data
+    });
   }
 
   render() {
@@ -35,9 +56,15 @@ export default class extends React.Component {
 
         <List
           dataSource={this.state.data}
-          renderRow={(row) => <ListItem key={row}>
-            {row}
-          </ListItem>}
+          renderRow={(row, idx) => (
+            <ListItem modifier={idx === this.state.data.length - 1 ? 'longdivider' : null}>
+              {row}
+              <Button modifier="quiet" onClick={this.remove.bind(this, idx)}>Remove</Button>
+            </ListItem>
+          )}
+          renderFooter={() => (
+            <ListItem><Button modifier="quiet" onClick={this.add.bind(this)}>Add more</Button></ListItem>
+          )}
         />
       </Page>
     );
