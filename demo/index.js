@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import ons from 'onsenui';
+import ons from '../OnsenUI/build/js/onsenui.js';
 
 import {
   Page,
