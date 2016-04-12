@@ -1,7 +1,35 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 var createSimpleWrapperClass = function(domName) {
   return class SimpleClass extends React.Component {
+
+    constructor(props) {
+      super(props);
+      this.updateClasses = this.updateClasses.bind(this);
+    }
+
+    updateClasses() {
+      var node = ReactDOM.findDOMNode(this);
+
+      if (this.props.className) {
+        if (this.lastClass) {
+          node.className = node.className.replace(this.lastClass, '');
+        }
+
+        this.lastClass = ' ' + this.props.className;
+        node.className += this.lastClass;
+      }
+    }
+
+    componentDidMount() {
+      this.updateClasses();
+    }
+
+    componentDidUpdate() {
+      this.updateClasses();
+    }
+
     render() {
       var {disabled, ...others} = this.props;
 

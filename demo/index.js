@@ -8,7 +8,8 @@ import {
   Navigator,
   Toolbar,
   List,
-  ListItem
+  ListItem,
+  Button
 } from 'react-onsenui';
 
 import PageExample from './examples/Page';
@@ -20,6 +21,8 @@ import SplitterExample from './examples/Splitter';
 class Examples extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {class: 'test'};
 
     this.examples = [
       {
@@ -56,7 +59,7 @@ class Examples extends React.Component {
 
   render() {
     return (
-      <Page>
+      <Page style={{background: 'green'}}>
         <Toolbar>
           <div className="center">
             Example
@@ -69,6 +72,7 @@ class Examples extends React.Component {
             <ListItem key={example.title} onClick={this.goto.bind(this, example)}>{example.title}</ListItem>
           )}
         />
+        <Button className={this.state.class} onClick={() => this.setState({class : 'test2'})} > Click Me </Button>
       </Page>
     );
   }
