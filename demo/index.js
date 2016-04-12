@@ -15,6 +15,7 @@ import PageExample from './examples/Page';
 import ListExample from './examples/List';
 import TabbarExample from './examples/Tabbar';
 import AlertDialogExample from './examples/AlertDialog';
+import SplitterExample from './examples/Splitter';
 
 class Examples extends React.Component {
   constructor(props) {
@@ -36,6 +37,10 @@ class Examples extends React.Component {
       {
         title: 'Alert dialog',
         component: AlertDialogExample
+      },
+      {
+        title: 'Splitter',
+        component: SplitterExample 
       }
     ];
   }

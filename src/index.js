@@ -8,6 +8,7 @@ import Page from './components/Page.jsx';
 import PullHook from './components/PullHook.jsx';
 import Switch from './components/Switch.jsx';
 import {Tabbar} from './components/Tabbar.jsx';
+import {Splitter, SplitterSide, SplitterContent} from './components/Splitter.jsx';
 
 import {
   BackButton,
@@ -31,34 +32,37 @@ import {
 } from './components/SimpleWrapper.jsx';
 
 export {
-  Dialog,
   AlertDialog,
-  Popover,
-  Input,
+  BackButton,
+  BottomToolbar,
+  Button,
+  Carousel,
+  CarouselCover,
+  CarouselItem,
+  Dialog,
   Fab,
+  Icon,
+  Input,
   LazyList,
   List,
+  ListHeader,
+  ListItem,
   Navigator,
   Page,
+  Popover,
   PullHook,
+  Ripple,
+  Scroller,
   SpeedDial,
   SpeedDialItem,
+  Splitter,
+  SplitterContent,
+  SplitterSide,
   Switch,
   Tab,
-  Tabbar,
-  Button,
-  Toolbar,
-  BackButton,
-  Ripple,
-  Carousel,
-  CarouselItem,
-  CarouselCover,
-  ToolbarButton,
-  BottomToolbar,
-  ListItem,
-  ListHeader,
-  Icon,
-  Scroller,
   TabActive,
-  TabInactive
+  TabInactive,
+  Tabbar,
+  Toolbar,
+  ToolbarButton
 };

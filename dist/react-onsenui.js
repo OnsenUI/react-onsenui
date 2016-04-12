@@ -1,4 +1,4 @@
-/*! react-onsenui v0.0.18 - Mon Apr 11 2016 15:01:02 GMT+0900 (JST) */
+/*! react-onsenui v0.0.18 - Tue Apr 12 2016 12:55:47 GMT+0900 (JST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom'), require('react-dom/server')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom', 'react-dom/server'], factory) :
@@ -288,12 +288,6 @@
     value: React.PropTypes.string
   };
 
-  var SLOTS = ['left', 'center', 'right'];
-
-  var hasClass = function hasClass(className, cls) {
-    return (' ' + className + ' ').indexOf(cls) > -1;
-  };
-
   var _class = function (_React$Component) {
     babelHelpers.inherits(_class, _React$Component);
 
@@ -303,40 +297,22 @@
     }
 
     babelHelpers.createClass(_class, [{
+      key: 'componentDidMount',
+      value: function componentDidMount() {
+        this.node = ReactDOM.findDOMNode(this);
+      }
+    }, {
+      key: 'componentDidUpdate',
+      value: function componentDidUpdate() {
+        this.node._compile();
+      }
+    }, {
       key: 'render',
       value: function render() {
-        var children = [];
-        var sections = {};
-
-        React.Children.forEach(this.props.children, function (child) {
-          var hasProps = child.hasOwnProperty('props');
-
-          var idx = SLOTS.map(function (slot) {
-            return hasProps && hasClass(child.props.className, slot);
-          }).indexOf(true);
-
-          if (idx > -1) {
-            var slot = SLOTS[idx];
-            sections[slot] = child;
-          } else {
-            children.push(child);
-          }
-        });
-
-        SLOTS.forEach(function (slot) {
-          sections[slot] = sections[slot] || React.createElement(
-            'div',
-            { key: slot, className: slot },
-            slot === 'center' ? children : null
-          );
-        });
-
         return React.createElement(
           'ons-list-item',
           this.props,
-          SLOTS.map(function (slot) {
-            return sections[slot];
-          })
+          this.props.children
         );
       }
     }]);
@@ -837,6 +813,88 @@
     initialIndex: 0
   };
 
+  var Splitter = function (_React$Component) {
+    babelHelpers.inherits(Splitter, _React$Component);
+
+    function Splitter() {
+      babelHelpers.classCallCheck(this, Splitter);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Splitter).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(Splitter, [{
+      key: 'render',
+      value: function render() {
+        return React.createElement(
+          'ons-splitter',
+          null,
+          this.props.children
+        );
+      }
+    }]);
+    return Splitter;
+  }(React.Component);
+
+  var SplitterSide = function (_React$Component2) {
+    babelHelpers.inherits(SplitterSide, _React$Component2);
+
+    function SplitterSide() {
+      babelHelpers.classCallCheck(this, SplitterSide);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(SplitterSide).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(SplitterSide, [{
+      key: 'render',
+      value: function render() {
+        var props = Object.assign({}, this.props);
+
+        props.collapse = this.props.isCollapsed ? 'collapse' : 'false';
+        props.swipeable = this.props.isSwipeable ? 'swipeable' : 'false';
+
+        if (this.props.width) {
+          props.width = this.props.width + 'px';
+        }
+
+        return React.createElement(
+          'ons-splitter-side',
+          props,
+          this.props.children
+        );
+      }
+    }]);
+    return SplitterSide;
+  }(React.Component);
+
+  var SplitterContent = function (_React$Component3) {
+    babelHelpers.inherits(SplitterContent, _React$Component3);
+
+    function SplitterContent() {
+      babelHelpers.classCallCheck(this, SplitterContent);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(SplitterContent).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(SplitterContent, [{
+      key: 'render',
+      value: function render() {
+        var props = Object.assign({}, this.props);
+
+        return React.createElement(
+          'ons-splitter-content',
+          props,
+          this.props.children
+        );
+      }
+    }]);
+    return SplitterContent;
+  }(React.Component);
+
+  SplitterSide.propTypes = {
+    isCollapsed: React.PropTypes.bool.isRequired,
+    isSwipable: React.PropTypes.bool,
+    // value out of left, right ...
+    side: React.PropTypes.string,
+    width: React.PropTypes.number
+  };
+
   var createSimpleWrapperClass = function createSimpleWrapperClass(domName) {
     return function (_React$Component) {
       babelHelpers.inherits(SimpleClass, _React$Component);
@@ -884,36 +942,39 @@
   var Toolbar = createSimpleWrapperClass('ons-toolbar');
   var ToolbarButton = createSimpleWrapperClass('ons-toolbar-button');
 
-  exports.Dialog = Dialog;
   exports.AlertDialog = AlertDialog;
-  exports.Popover = Popover;
-  exports.Input = Input;
+  exports.BackButton = BackButton;
+  exports.BottomToolbar = BottomToolbar;
+  exports.Button = Button;
+  exports.Carousel = Carousel;
+  exports.CarouselCover = CarouselCover;
+  exports.CarouselItem = CarouselItem;
+  exports.Dialog = Dialog;
   exports.Fab = Fab;
+  exports.Icon = Icon;
+  exports.Input = Input;
   exports.LazyList = LazyList;
   exports.List = List;
+  exports.ListHeader = ListHeader;
+  exports.ListItem = _class;
   exports.Navigator = Navigator;
   exports.Page = Page;
+  exports.Popover = Popover;
   exports.PullHook = PullHook;
+  exports.Ripple = Ripple;
+  exports.Scroller = Scroller;
   exports.SpeedDial = SpeedDial;
   exports.SpeedDialItem = SpeedDialItem;
+  exports.Splitter = Splitter;
+  exports.SplitterContent = SplitterContent;
+  exports.SplitterSide = SplitterSide;
   exports.Switch = Switch;
   exports.Tab = Tab;
-  exports.Tabbar = Tabbar;
-  exports.Button = Button;
-  exports.Toolbar = Toolbar;
-  exports.BackButton = BackButton;
-  exports.Ripple = Ripple;
-  exports.Carousel = Carousel;
-  exports.CarouselItem = CarouselItem;
-  exports.CarouselCover = CarouselCover;
-  exports.ToolbarButton = ToolbarButton;
-  exports.BottomToolbar = BottomToolbar;
-  exports.ListItem = _class;
-  exports.ListHeader = ListHeader;
-  exports.Icon = Icon;
-  exports.Scroller = Scroller;
   exports.TabActive = TabActive;
   exports.TabInactive = TabInactive;
+  exports.Tabbar = Tabbar;
+  exports.Toolbar = Toolbar;
+  exports.ToolbarButton = ToolbarButton;
 
 }));
 //# sourceMappingURL=react-onsenui.js.map
