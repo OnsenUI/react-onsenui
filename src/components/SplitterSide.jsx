@@ -44,6 +44,8 @@ SplitterSide.propTypes = {
   isCollapsed: React.PropTypes.bool.isRequired,
   isSwipable: React.PropTypes.bool,
   isOpen: React.PropTypes.bool,
+  onOpen: React.PropTypes.func,
+  onClose: React.PropTypes.func,
   // value out of left, right ...
   side: React.PropTypes.string,
   width: React.PropTypes.number
