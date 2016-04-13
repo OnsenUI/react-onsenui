@@ -1,20 +1,20 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
+import SimpleWrapper from './SimpleWrapper.jsx';
 
-export default class extends React.Component {
+class ListItem extends SimpleWrapper {
+  _getDomNodeName() {
+    return 'ons-list-item';
+  }
+
   componentDidMount() {
+    super.componentDidMount();
     this.node = ReactDOM.findDOMNode(this);
   }
 
   componentDidUpdate() {
-    this.node._compile();
-  }
-
-  render() {
-    return (
-      <ons-list-item {...this.props}>
-        {this.props.children}
-      </ons-list-item>
-    );
+    super.componentDidUpdate();
+    this.res.node._compile();
   }
 };
+
+export default ListItem;
