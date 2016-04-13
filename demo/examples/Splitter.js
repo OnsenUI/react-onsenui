@@ -1,16 +1,13 @@
 import React from 'react';
 
 import {
-  Splitter, 
-  SplitterSide, 
-  SplitterContent, 
-  Tabbar, 
-  Tab, 
-  Page, 
-  Toolbar, 
+  Splitter,
+  SplitterSide,
+  SplitterContent,
+  Page,
+  Toolbar,
   ToolbarButton,
-  Button, 
-  BackButton
+  Button
 } from 'react-onsenui';
 
 export default class extends React.Component {
@@ -19,14 +16,47 @@ export default class extends React.Component {
     this.state = {
       showLeft: false,
       showRight: false,
+      openLeft: false,
+      openRight: false,
     };
-
   }
+
+  handleLeftClose() {
+    this.setState({
+      openLeft: false
+    });
+  }
+
+  handleLeftOpen() {
+    this.setState({
+      openLeft: true
+    });
+  }
+
+  handleRightClose() {
+    this.setState({
+      openRight: false
+    });
+  }
+
+  handleRightOpen() {
+    this.setState({
+      openRight: true
+    });
+  }
+
   render() {
     return (
       <Page>
         <Splitter>
-          <SplitterSide side="left" width={200} isCollapsed={!this.state.showLeft} isSwipeable={true}>
+          <SplitterSide
+            side="left"
+            width={200}
+            isCollapsed={!this.state.showLeft}
+            isOpen={this.state.openLeft}
+            onClose={this.handleLeftClose.bind(this)}
+            onOpen={this.handleLeftOpen.bind(this)}
+            isSwipeable={true}>
             <Page>
               <Toolbar>
                 <div className="center">content</div>
@@ -45,17 +75,35 @@ export default class extends React.Component {
                   >toggle left menu 2</Button>
               </p>
               <p>
-                <Button 
+                <Button
                   onClick={() => this.setState({showRight: !this.state.showRight })} > toggle right menu</Button> </p>
+
+              <p>
+                <Button
+                  onClick={() => this.setState({openLeft: true})}>
+                  Open left menu
+                </Button>
+              </p>
+
+              <p>
+                <Button
+                  onClick={() => this.setState({openRight: true})}>
+                  Open right menu
+                </Button>
+              </p>
             </Page>
           </SplitterContent>
 
-          <SplitterSide side="right" width={300} isCollapsed={!this.state.showRight} isSwipeable={true}  threhold-ratio-should-open="0.4">
+          <SplitterSide
+            side="right"
+            width={300}
+            isCollapsed={!this.state.showRight}
+            isOpen={this.state.openRight}
+            onClose={this.handleRightClose.bind(this)}
+            onOpen={this.handleRightOpen.bind(this)}
+            isSwipeable={true}>
             <Page>
               <Toolbar>
-                <div className="left">
-                  <ToolbarButton onClick={() => this.setState({showRight: false })} > Close </ToolbarButton>
-                </div>
                 <div className="center">ons-splitter-side</div>
               </Toolbar>
             </Page>
