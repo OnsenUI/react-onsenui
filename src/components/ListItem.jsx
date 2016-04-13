@@ -13,7 +13,7 @@ class ListItem extends SimpleWrapper {
 
   componentDidUpdate() {
     super.componentDidUpdate();
-    this.res.node._compile();
+    this.node._compile();
   }
 };
 
