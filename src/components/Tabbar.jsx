@@ -57,4 +57,4 @@ Tabbar.defaultProps = {
   initialIndex: 0
 };
 
-export {Tabbar};
+export default Tabbar;

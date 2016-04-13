@@ -1,4 +1,4 @@
-/*! react-onsenui v0.0.18 - Tue Apr 12 2016 12:55:47 GMT+0900 (JST) */
+/*! react-onsenui v0.0.18 - Wed Apr 13 2016 12:50:19 GMT+0900 (JST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom'), require('react-dom/server')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom', 'react-dom/server'], factory) :
@@ -175,6 +175,210 @@
     isOpen: React.PropTypes.bool.isRequired
   };
 
+  var AlertDialog = function (_BaseDialog) {
+    babelHelpers.inherits(AlertDialog, _BaseDialog);
+
+    function AlertDialog() {
+      babelHelpers.classCallCheck(this, AlertDialog);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(AlertDialog).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(AlertDialog, [{
+      key: '_getDomNodeName',
+      value: function _getDomNodeName() {
+        return 'ons-alert-dialog';
+      }
+    }]);
+    return AlertDialog;
+  }(BaseDialog);
+
+  AlertDialog.propTypes = {
+    onCancel: React.PropTypes.func.isRequired,
+    isOpen: React.PropTypes.bool.isRequired
+  };
+
+  var BasicComponent = function (_React$Component) {
+    babelHelpers.inherits(BasicComponent, _React$Component);
+
+    function BasicComponent(props) {
+      babelHelpers.classCallCheck(this, BasicComponent);
+
+      var _this = babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(BasicComponent).call(this, props));
+
+      _this.updateClasses = _this.updateClasses.bind(_this);
+      return _this;
+    }
+
+    babelHelpers.createClass(BasicComponent, [{
+      key: 'updateClasses',
+      value: function updateClasses() {
+        var node = ReactDOM.findDOMNode(this);
+
+        if (this.props.className) {
+          if (this.lastClass) {
+            node.className = node.className.replace(this.lastClass, '');
+          }
+
+          this.lastClass = ' ' + this.props.className;
+          node.className += this.lastClass;
+        }
+      }
+    }, {
+      key: 'componentDidMount',
+      value: function componentDidMount() {
+        this.updateClasses();
+      }
+    }, {
+      key: 'componentDidUpdate',
+      value: function componentDidUpdate() {
+        this.updateClasses();
+      }
+    }]);
+    return BasicComponent;
+  }(React.Component);
+
+  var SimpleWrapper = function (_BasicComponent) {
+    babelHelpers.inherits(SimpleWrapper, _BasicComponent);
+
+    function SimpleWrapper() {
+      babelHelpers.classCallCheck(this, SimpleWrapper);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(SimpleWrapper).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(SimpleWrapper, [{
+      key: 'render',
+      value: function render() {
+        var _props = this.props;
+        var disabled = _props.disabled;
+        var others = babelHelpers.objectWithoutProperties(_props, ['disabled']);
+
+
+        if (disabled) {
+          others.disabled = 'disabled';
+        }
+
+        return React.createElement(this._getDomNodeName(), others, this.props.children);
+      }
+    }]);
+    return SimpleWrapper;
+  }(BasicComponent);
+
+  ;
+
+  var BackButton = function (_SimpleWrapper) {
+    babelHelpers.inherits(BackButton, _SimpleWrapper);
+
+    function BackButton() {
+      babelHelpers.classCallCheck(this, BackButton);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(BackButton).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(BackButton, [{
+      key: '_getDomNodeName',
+      value: function _getDomNodeName() {
+        return 'ons-back-button';
+      }
+    }]);
+    return BackButton;
+  }(SimpleWrapper);
+
+  ;
+
+  var BottomToolbar = function (_SimpleWrapper) {
+    babelHelpers.inherits(BottomToolbar, _SimpleWrapper);
+
+    function BottomToolbar() {
+      babelHelpers.classCallCheck(this, BottomToolbar);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(BottomToolbar).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(BottomToolbar, [{
+      key: '_getDomNodeName',
+      value: function _getDomNodeName() {
+        return 'ons-buttom-toolbar';
+      }
+    }]);
+    return BottomToolbar;
+  }(SimpleWrapper);
+
+  ;
+
+  var Button = function (_SimpleWrapper) {
+    babelHelpers.inherits(Button, _SimpleWrapper);
+
+    function Button() {
+      babelHelpers.classCallCheck(this, Button);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Button).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(Button, [{
+      key: '_getDomNodeName',
+      value: function _getDomNodeName() {
+        return 'ons-button';
+      }
+    }]);
+    return Button;
+  }(SimpleWrapper);
+
+  ;
+
+  var Carousel = function (_SimpleWrapper) {
+    babelHelpers.inherits(Carousel, _SimpleWrapper);
+
+    function Carousel() {
+      babelHelpers.classCallCheck(this, Carousel);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Carousel).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(Carousel, [{
+      key: '_getDomNodeName',
+      value: function _getDomNodeName() {
+        return 'ons-carousel';
+      }
+    }]);
+    return Carousel;
+  }(SimpleWrapper);
+
+  ;
+
+  var CarouselCover = function (_SimpleWrapper) {
+    babelHelpers.inherits(CarouselCover, _SimpleWrapper);
+
+    function CarouselCover() {
+      babelHelpers.classCallCheck(this, CarouselCover);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(CarouselCover).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(CarouselCover, [{
+      key: '_getDomNodeName',
+      value: function _getDomNodeName() {
+        return 'ons-carousel-cover';
+      }
+    }]);
+    return CarouselCover;
+  }(SimpleWrapper);
+
+  ;
+
+  var CarouselItem = function (_SimpleWrapper) {
+    babelHelpers.inherits(CarouselItem, _SimpleWrapper);
+
+    function CarouselItem() {
+      babelHelpers.classCallCheck(this, CarouselItem);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(CarouselItem).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(CarouselItem, [{
+      key: '_getDomNodeName',
+      value: function _getDomNodeName() {
+        return 'ons-carousel-item';
+      }
+    }]);
+    return CarouselItem;
+  }(SimpleWrapper);
+
+  ;
+
   var Dialog = function (_BaseDialog) {
     babelHelpers.inherits(Dialog, _BaseDialog);
 
@@ -192,50 +396,48 @@
     return Dialog;
   }(BaseDialog);
 
-  var AlertDialog = function (_BaseDialog2) {
-    babelHelpers.inherits(AlertDialog, _BaseDialog2);
+  Dialog.propTypes = {
+    onCancel: React.PropTypes.func.isRequired,
+    isOpen: React.PropTypes.bool.isRequired
+  };
 
-    function AlertDialog() {
-      babelHelpers.classCallCheck(this, AlertDialog);
-      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(AlertDialog).apply(this, arguments));
+  var Fab = function (_SimpleWrapper) {
+    babelHelpers.inherits(Fab, _SimpleWrapper);
+
+    function Fab() {
+      babelHelpers.classCallCheck(this, Fab);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Fab).apply(this, arguments));
     }
 
-    babelHelpers.createClass(AlertDialog, [{
+    babelHelpers.createClass(Fab, [{
       key: '_getDomNodeName',
       value: function _getDomNodeName() {
-        return 'ons-alert-dialog';
+        return 'ons-fab';
       }
     }]);
-    return AlertDialog;
-  }(BaseDialog);
+    return Fab;
+  }(SimpleWrapper);
 
-  var Popover = function (_BaseDialog3) {
-    babelHelpers.inherits(Popover, _BaseDialog3);
+  ;
 
-    function Popover() {
-      babelHelpers.classCallCheck(this, Popover);
-      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Popover).apply(this, arguments));
+  var Icon = function (_SimpleWrapper) {
+    babelHelpers.inherits(Icon, _SimpleWrapper);
+
+    function Icon() {
+      babelHelpers.classCallCheck(this, Icon);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Icon).apply(this, arguments));
     }
 
-    babelHelpers.createClass(Popover, [{
+    babelHelpers.createClass(Icon, [{
       key: '_getDomNodeName',
       value: function _getDomNodeName() {
-        return 'ons-popover';
-      }
-    }, {
-      key: 'show',
-      value: function show() {
-        var target = this.props.getTarget();
-        // target = ReactDOM.findDOMNode(target);
-        return this.node.firstChild.show(target);
+        return 'ons-icon';
       }
     }]);
-    return Popover;
-  }(BaseDialog);
+    return Icon;
+  }(SimpleWrapper);
 
-  Popover.propTypes = babelHelpers.extends({}, BaseDialog.propTypes, {
-    getTarget: React.PropTypes.func.isRequired
-  });
+  ;
 
   var EVENT_TYPES = ['change', 'input'];
 
@@ -437,6 +639,25 @@
     dataSource: React.PropTypes.array.isRequired
   };
 
+  var ListHeader = function (_SimpleWrapper) {
+    babelHelpers.inherits(ListHeader, _SimpleWrapper);
+
+    function ListHeader() {
+      babelHelpers.classCallCheck(this, ListHeader);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(ListHeader).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(ListHeader, [{
+      key: '_getDomNodeName',
+      value: function _getDomNodeName() {
+        return 'ons-list-header';
+      }
+    }]);
+    return ListHeader;
+  }(SimpleWrapper);
+
+  ;
+
   var Navigator = function (_React$Component) {
     babelHelpers.inherits(Navigator, _React$Component);
 
@@ -603,6 +824,10 @@
 
   reactUtil.templateMap = {};
 
+  /**
+   * Should be used as root component of each page. The content inside page component is scrollable.
+  */
+
   var Page = function (_React$Component) {
     babelHelpers.inherits(Page, _React$Component);
 
@@ -662,6 +887,55 @@
 
   ;
 
+  Page.propTypes = {
+    /**
+      * The children is provided for all components in React. These children define
+    */
+    children: React.PropTypes.node,
+    /**
+      * The ref attribute is provided for all components in React. The attribute is callback will be executed immediately after the component is mounted.
+    */
+    ref: React.PropTypes.func,
+    /**
+      * The style attribute is provided for all components in React. The attribute is an object. For reference look at https://facebook.github.io/react/tips/inline-styles.html.
+    */
+    style: React.PropTypes.object,
+    /**
+      * The className attribute is provided for all components in React. It defines the classes for a component.  For reference look at https://facebook.github.io/react/tips/inline-styles.html.
+    */
+    className: React.PropTypes.string
+  };
+
+  var Popover = function (_BaseDialog) {
+    babelHelpers.inherits(Popover, _BaseDialog);
+
+    function Popover() {
+      babelHelpers.classCallCheck(this, Popover);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Popover).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(Popover, [{
+      key: '_getDomNodeName',
+      value: function _getDomNodeName() {
+        return 'ons-popover';
+      }
+    }, {
+      key: 'show',
+      value: function show() {
+        var target = this.props.getTarget();
+        // target = ReactDOM.findDOMNode(target);
+        return this.node.firstChild.show(target);
+      }
+    }]);
+    return Popover;
+  }(BaseDialog);
+
+  Popover.propTypes = {
+    onCancel: React.PropTypes.func.isRequired,
+    isOpen: React.PropTypes.bool.isRequired,
+    getTarget: React.PropTypes.func.isRequired
+  };
+
   var PullHook = function (_React$Component) {
     babelHelpers.inherits(PullHook, _React$Component);
 
@@ -692,6 +966,158 @@
     }]);
     return PullHook;
   }(React.Component);
+
+  var Ripple = function (_SimpleWrapper) {
+    babelHelpers.inherits(Ripple, _SimpleWrapper);
+
+    function Ripple() {
+      babelHelpers.classCallCheck(this, Ripple);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Ripple).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(Ripple, [{
+      key: '_getDomNodeName',
+      value: function _getDomNodeName() {
+        return 'ons-ripple';
+      }
+    }]);
+    return Ripple;
+  }(SimpleWrapper);
+
+  ;
+
+  var Scroller = function (_SimpleWrapper) {
+    babelHelpers.inherits(Scroller, _SimpleWrapper);
+
+    function Scroller() {
+      babelHelpers.classCallCheck(this, Scroller);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Scroller).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(Scroller, [{
+      key: '_getDomNodeName',
+      value: function _getDomNodeName() {
+        return 'ons-scroller';
+      }
+    }]);
+    return Scroller;
+  }(SimpleWrapper);
+
+  ;
+
+  var SpeedDial = function (_SimpleWrapper) {
+    babelHelpers.inherits(SpeedDial, _SimpleWrapper);
+
+    function SpeedDial() {
+      babelHelpers.classCallCheck(this, SpeedDial);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(SpeedDial).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(SpeedDial, [{
+      key: '_getDomNodeName',
+      value: function _getDomNodeName() {
+        return 'ons-speed-dial';
+      }
+    }]);
+    return SpeedDial;
+  }(SimpleWrapper);
+
+  ;
+
+  var SpeedDialItem = function (_SimpleWrapper) {
+    babelHelpers.inherits(SpeedDialItem, _SimpleWrapper);
+
+    function SpeedDialItem() {
+      babelHelpers.classCallCheck(this, SpeedDialItem);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(SpeedDialItem).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(SpeedDialItem, [{
+      key: '_getDomNodeName',
+      value: function _getDomNodeName() {
+        return 'ons-speed-dial-item';
+      }
+    }]);
+    return SpeedDialItem;
+  }(SimpleWrapper);
+
+  ;
+
+  var Splitter = function (_SimpleWrapper) {
+    babelHelpers.inherits(Splitter, _SimpleWrapper);
+
+    function Splitter() {
+      babelHelpers.classCallCheck(this, Splitter);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Splitter).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(Splitter, [{
+      key: '_getDomNodeName',
+      value: function _getDomNodeName() {
+        return 'ons-splitter';
+      }
+    }]);
+    return Splitter;
+  }(SimpleWrapper);
+
+  ;
+
+  var SplitterContent = function (_SimpleWrapper) {
+    babelHelpers.inherits(SplitterContent, _SimpleWrapper);
+
+    function SplitterContent() {
+      babelHelpers.classCallCheck(this, SplitterContent);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(SplitterContent).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(SplitterContent, [{
+      key: '_getDomNodeName',
+      value: function _getDomNodeName() {
+        return 'ons-splitter-content';
+      }
+    }]);
+    return SplitterContent;
+  }(SimpleWrapper);
+
+  ;
+
+  var SplitterSide = function (_React$Component) {
+    babelHelpers.inherits(SplitterSide, _React$Component);
+
+    function SplitterSide() {
+      babelHelpers.classCallCheck(this, SplitterSide);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(SplitterSide).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(SplitterSide, [{
+      key: 'render',
+      value: function render() {
+        var props = Object.assign({}, this.props);
+
+        props.collapse = this.props.isCollapsed ? 'collapse' : 'false';
+        props.swipeable = this.props.isSwipeable ? 'swipeable' : 'false';
+
+        if (this.props.width) {
+          props.width = this.props.width + 'px';
+        }
+
+        return React.createElement(
+          'ons-splitter-side',
+          props,
+          this.props.children
+        );
+      }
+    }]);
+    return SplitterSide;
+  }(React.Component);
+
+  SplitterSide.propTypes = {
+    isCollapsed: React.PropTypes.bool.isRequired,
+    isSwipable: React.PropTypes.bool,
+    // value out of left, right ...
+    side: React.PropTypes.string,
+    width: React.PropTypes.number
+  };
 
   var Switch = function (_React$Component) {
     babelHelpers.inherits(Switch, _React$Component);
@@ -731,6 +1157,63 @@
     onChange: React.PropTypes.func,
     checked: React.PropTypes.bool
   };
+
+  var Tab = function (_SimpleWrapper) {
+    babelHelpers.inherits(Tab, _SimpleWrapper);
+
+    function Tab() {
+      babelHelpers.classCallCheck(this, Tab);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Tab).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(Tab, [{
+      key: '_getDomNodeName',
+      value: function _getDomNodeName() {
+        return 'ons-tab';
+      }
+    }]);
+    return Tab;
+  }(SimpleWrapper);
+
+  ;
+
+  var TabActive = function (_SimpleWrapper) {
+    babelHelpers.inherits(TabActive, _SimpleWrapper);
+
+    function TabActive() {
+      babelHelpers.classCallCheck(this, TabActive);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(TabActive).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(TabActive, [{
+      key: '_getDomNodeName',
+      value: function _getDomNodeName() {
+        return 'ons-tab-active';
+      }
+    }]);
+    return TabActive;
+  }(SimpleWrapper);
+
+  ;
+
+  var TabInactive = function (_SimpleWrapper) {
+    babelHelpers.inherits(TabInactive, _SimpleWrapper);
+
+    function TabInactive() {
+      babelHelpers.classCallCheck(this, TabInactive);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(TabInactive).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(TabInactive, [{
+      key: '_getDomNodeName',
+      value: function _getDomNodeName() {
+        return 'ons-tab-inactive';
+      }
+    }]);
+    return TabInactive;
+  }(SimpleWrapper);
+
+  ;
 
   var Tabbar = function (_React$Component) {
     babelHelpers.inherits(Tabbar, _React$Component);
@@ -813,134 +1296,43 @@
     initialIndex: 0
   };
 
-  var Splitter = function (_React$Component) {
-    babelHelpers.inherits(Splitter, _React$Component);
+  var Toolbar = function (_SimpleWrapper) {
+    babelHelpers.inherits(Toolbar, _SimpleWrapper);
 
-    function Splitter() {
-      babelHelpers.classCallCheck(this, Splitter);
-      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Splitter).apply(this, arguments));
+    function Toolbar() {
+      babelHelpers.classCallCheck(this, Toolbar);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Toolbar).apply(this, arguments));
     }
 
-    babelHelpers.createClass(Splitter, [{
-      key: 'render',
-      value: function render() {
-        return React.createElement(
-          'ons-splitter',
-          null,
-          this.props.children
-        );
+    babelHelpers.createClass(Toolbar, [{
+      key: '_getDomNodeName',
+      value: function _getDomNodeName() {
+        return 'ons-toolbar';
       }
     }]);
-    return Splitter;
-  }(React.Component);
+    return Toolbar;
+  }(SimpleWrapper);
 
-  var SplitterSide = function (_React$Component2) {
-    babelHelpers.inherits(SplitterSide, _React$Component2);
+  ;
 
-    function SplitterSide() {
-      babelHelpers.classCallCheck(this, SplitterSide);
-      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(SplitterSide).apply(this, arguments));
+  var ToolbarButton = function (_SimpleWrapper) {
+    babelHelpers.inherits(ToolbarButton, _SimpleWrapper);
+
+    function ToolbarButton() {
+      babelHelpers.classCallCheck(this, ToolbarButton);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(ToolbarButton).apply(this, arguments));
     }
 
-    babelHelpers.createClass(SplitterSide, [{
-      key: 'render',
-      value: function render() {
-        var props = Object.assign({}, this.props);
-
-        props.collapse = this.props.isCollapsed ? 'collapse' : 'false';
-        props.swipeable = this.props.isSwipeable ? 'swipeable' : 'false';
-
-        if (this.props.width) {
-          props.width = this.props.width + 'px';
-        }
-
-        return React.createElement(
-          'ons-splitter-side',
-          props,
-          this.props.children
-        );
+    babelHelpers.createClass(ToolbarButton, [{
+      key: '_getDomNodeName',
+      value: function _getDomNodeName() {
+        return 'ons-toolbar-button';
       }
     }]);
-    return SplitterSide;
-  }(React.Component);
+    return ToolbarButton;
+  }(SimpleWrapper);
 
-  var SplitterContent = function (_React$Component3) {
-    babelHelpers.inherits(SplitterContent, _React$Component3);
-
-    function SplitterContent() {
-      babelHelpers.classCallCheck(this, SplitterContent);
-      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(SplitterContent).apply(this, arguments));
-    }
-
-    babelHelpers.createClass(SplitterContent, [{
-      key: 'render',
-      value: function render() {
-        var props = Object.assign({}, this.props);
-
-        return React.createElement(
-          'ons-splitter-content',
-          props,
-          this.props.children
-        );
-      }
-    }]);
-    return SplitterContent;
-  }(React.Component);
-
-  SplitterSide.propTypes = {
-    isCollapsed: React.PropTypes.bool.isRequired,
-    isSwipable: React.PropTypes.bool,
-    // value out of left, right ...
-    side: React.PropTypes.string,
-    width: React.PropTypes.number
-  };
-
-  var createSimpleWrapperClass = function createSimpleWrapperClass(domName) {
-    return function (_React$Component) {
-      babelHelpers.inherits(SimpleClass, _React$Component);
-
-      function SimpleClass() {
-        babelHelpers.classCallCheck(this, SimpleClass);
-        return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(SimpleClass).apply(this, arguments));
-      }
-
-      babelHelpers.createClass(SimpleClass, [{
-        key: 'render',
-        value: function render() {
-          var _props = this.props;
-          var disabled = _props.disabled;
-          var others = babelHelpers.objectWithoutProperties(_props, ['disabled']);
-
-
-          if (disabled) {
-            others.disabled = 'disabled';
-          }
-
-          return React.createElement(domName, others, this.props.children);
-        }
-      }]);
-      return SimpleClass;
-    }(React.Component);
-  };
-
-  var BackButton = createSimpleWrapperClass('ons-back-button');
-  var BottomToolbar = createSimpleWrapperClass('ons-buttom-toolbar');
-  var Button = createSimpleWrapperClass('ons-button');
-  var Carousel = createSimpleWrapperClass('ons-carousel');
-  var CarouselCover = createSimpleWrapperClass('ons-carousel-cover');
-  var CarouselItem = createSimpleWrapperClass('ons-carousel-item');
-  var Fab = createSimpleWrapperClass('ons-fab');
-  var Icon = createSimpleWrapperClass('ons-icon');
-  var ListHeader = createSimpleWrapperClass('ons-list-header');
-  var Ripple = createSimpleWrapperClass('ons-ripple');
-  var Scroller = createSimpleWrapperClass('ons-scroller');
-  var SpeedDial = createSimpleWrapperClass('ons-speed-dial');
-  var SpeedDialItem = createSimpleWrapperClass('ons-speed-dial-item');
-  var Tab = createSimpleWrapperClass('ons-tab');
-  var TabActive = createSimpleWrapperClass('ons-tab-active');
-  var TabInactive = createSimpleWrapperClass('ons-tab-inactive');
-  var Toolbar = createSimpleWrapperClass('ons-toolbar');
-  var ToolbarButton = createSimpleWrapperClass('ons-toolbar-button');
+  ;
 
   exports.AlertDialog = AlertDialog;
   exports.BackButton = BackButton;
