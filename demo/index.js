@@ -72,7 +72,6 @@ class Examples extends React.Component {
             <ListItem key={example.title} onClick={this.goto.bind(this, example)}>{example.title}</ListItem>
           )}
         />
-        <Button className={this.state.class} onClick={() => this.setState({class : 'test2'})} > Click Me </Button>
       </Page>
     );
   }
