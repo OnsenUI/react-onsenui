@@ -1,6 +1,7 @@
 import React from 'react';
+import BasicComponent from './BasicComponent.jsx';
 
-class Tabbar extends React.Component {
+class Tabbar extends BasicComponent {
 
   constructor(props) {
     super(props);
@@ -10,6 +11,7 @@ class Tabbar extends React.Component {
   }
 
   componentDidMount() {
+    super.componentDidMount();
     const node = this.refs.tabbar;
     CustomElements.upgrade(node);
     node.setActiveTab(this.state.activeIndex);

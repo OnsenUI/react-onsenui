@@ -1,8 +1,10 @@
 import React from 'react';
 import ListItem from './ListItem.jsx';
+import BasicComponent from './BasicComponent.jsx';
 
-class LazyList extends React.Component {
+class LazyList extends BasicComponent {
   componentDidMount() {
+    super.componentDidMount();
     var self = this;
     CustomElements.upgrade(this.refs.lazyRepeat);
 

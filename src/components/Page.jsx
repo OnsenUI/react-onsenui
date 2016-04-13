@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reactUtil from './reactUtil.jsx';
+import BasicComponent from './BasicComponent.jsx';
 
 /**
  * Should be used as root component of each page. The content inside page component is scrollable.
 */
-class Page extends React.Component {
+class Page extends BasicComponent {
   componentDidMount() {
+    super.componentDidMount();
     var node = ReactDOM.findDOMNode(this);
     CustomElements.upgrade(node);
   }

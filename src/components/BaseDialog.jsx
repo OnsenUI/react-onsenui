@@ -6,6 +6,19 @@ class BaseDialog extends React.Component {
     this.node.firstChild.show();
   }
 
+  updateClasses() {
+    var node = this.node.firstChild;
+
+    if (this.props.className) {
+      if (this.lastClass) {
+        node.className = node.className.replace(this.lastClass, '');
+      }
+
+      this.lastClass = ' ' + this.props.className;
+      node.className += this.lastClass;
+    }
+  }
+
   hide() {
     this.node.firstChild.hide();
   }
@@ -42,6 +55,7 @@ class BaseDialog extends React.Component {
     } else {
       this.hide();
     }
+    this.updateClasses();
   }
 
   _getDomNodeName() {

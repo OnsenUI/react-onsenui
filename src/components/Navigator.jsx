@@ -1,6 +1,7 @@
 import React from 'react';
+import BasicComponent from './BasicComponent.jsx';
 
-class Navigator extends React.Component {
+class Navigator extends BasicComponent {
   constructor(props) {
     super(props);
     this.pages = [];

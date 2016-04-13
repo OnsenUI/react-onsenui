@@ -1,6 +1,7 @@
 import React from 'react';
+import BasicComponent from './BasicComponent.jsx';
 
-class List extends React.Component {
+class List extends BasicComponent {
   render() {
     var pages = this.props.dataSource.map((data, idx) => this.props.renderRow(data, idx));
 

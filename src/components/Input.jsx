@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import BasicComponent from './BasicComponent.jsx';
 
 const EVENT_TYPES = ['change', 'input'];
 
-class Input extends React.Component {
+class Input extends BasicComponent {
   componentDidMount() {
+    super.componentDidMount();
     var node = ReactDOM.findDOMNode(this);
 
     EVENT_TYPES.forEach((eventType) => {

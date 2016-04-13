@@ -1,8 +1,9 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
+import BasicComponent from './BasicComponent.jsx';
 
-class PullHook extends React.Component {
+class PullHook extends BasicComponent {
   componentDidMount() {
+    super.componentDidMount();
     var node = ReactDOM.findDOMNode(this);
     node.addEventListener('changestate', this.props.onChange);
     CustomElements.upgrade(this.refs.pullHook);

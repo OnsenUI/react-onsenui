@@ -1,8 +1,10 @@
 import React from 'react';
+import BasicComponent from './BasicComponent.jsx';
 
-class Switch extends React.Component {
+class Switch extends BasicComponent {
 
   componentDidMount() {
+    super.componentDidMount();
     this.refs.switch.addEventListener('change', this.props.onChange);
   }
 

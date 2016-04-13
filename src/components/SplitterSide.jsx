@@ -1,6 +1,7 @@
 import React from 'react';
+import BasicComponent from './BasicComponent.jsx';
 
-class SplitterSide extends React.Component {
+class SplitterSide extends BasicComponent {
   render() {
     var props = Object.assign({}, this.props);
 
@@ -15,7 +16,6 @@ class SplitterSide extends React.Component {
       <ons-splitter-side {...props} >
         {this.props.children}
       </ons-splitter-side>
-
     );
   }
 }
