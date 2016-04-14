@@ -1,6 +1,35 @@
 import React from 'react';
 import BasicComponent from './BasicComponent.jsx';
 
+/**
+ * @original ons-navigator
+ * @category navigation
+ * @description
+ * [en]This is the main component for navigation. [/en]
+ * [jp] どうしよう[/jp]
+ * @example
+ * class App extends React.Component {
+ *  renderScene(route, navigator) {
+ *     const props = route.props || {};
+ *     props.navigator = navigator;
+ *     return React.createElement(route.component, route.props);
+ *  }
+ *
+ *  render() {
+ *   return (
+ *     <Navigator
+ *       renderScene={this.renderScene}
+ *       initialRoute={{
+ *         component: Examples,
+ *         props: {
+ *           key: 'examples'
+ *         }
+ *       }}
+ *     />
+ *   );
+ *  }
+ *}
+ */
 class Navigator extends BasicComponent {
   constructor(props) {
     super(props);
@@ -14,6 +43,19 @@ class Navigator extends BasicComponent {
     });
   }
 
+  /**
+   * @method resetPage
+   * @signature resetPage(route, options = {})
+   * @param {Object} [route]
+   *   [en] The route that the page should be reset to.[/en]
+   *   [ja] どうしよう [/ja]
+   * @return {Promise}
+   *   [en]Promise which resolves to the revealed page.[/en]
+   *   [ja]明らかにしたページを解決するPromiseを返します。[/ja]
+   * @description
+   *   [en]Rests the current page[/en]
+   *   [ja]どうしよう[/ja]
+   */
   resetPage(route, options = {}) {
     return this.resetPageStack([route], options);
   }
