@@ -44,7 +44,7 @@ class Navigator extends BasicComponent {
    *   [en]Promise which resolves to the revealed page.[/en]
    *   [ja]明らかにしたページを解決するPromiseを返します。[/ja]
    * @description
-   *   [en]Rests the current page[/en]
+   *   [en]Resets the current page[/en]
    *   [ja]どうしよう[/ja]
    */
   resetPage(route, options = {}) {
@@ -61,8 +61,8 @@ class Navigator extends BasicComponent {
    *   [en]Promise which resolves to the revealed page.[/en]
    *   [ja]明らかにしたページを解決するPromiseを返します。[/ja]
    * @description
-   *   [en]Rests the current page[/en]
-   *   [ja]どうしよう[/ja]
+   *   [en] Resets the navigator to the current page stack[/en]
+   *   [ja] どうしよう[/ja]
    */
   resetPageStack(routes, options = {}) {
     return new Promise((resolve) => {
@@ -85,16 +85,16 @@ class Navigator extends BasicComponent {
 
   /**
    * @method pushPage
-   * @reset pushPage(route, options = {})
+   * @signature pushPage(route, options = {})
    * @param {Array} [routes]
    *   [en] The routes that the navigator should push to.[/en]
    *   [ja] どうしよう [/ja]
    * @return {Promise}
-   *   [en]Promise which resolves to the revealed page.[/en]
-   *   [ja]明らかにしたページを解決するPromiseを返します。[/ja]
+   *   [en] Promise which resolves to the revealed page.[/en]
+   *   [ja] 明らかにしたページを解決するPromiseを返します。[/ja]
    * @description
-   *   [en]Pushes a page to the page stack[/en]
-   *   [ja]どうしよう[/ja]
+   *   [en] Pushes a page to the page stack[/en]
+   *   [ja] どうしよう[/ja]
    */
   pushPage(route, options = {}) {
     return new Promise((resolve) => {
@@ -112,11 +112,11 @@ class Navigator extends BasicComponent {
    * @method popPage
    * @reset popPage(route, options = {})
    * @return {Promise}
-   *   [en]Promise which resolves to the revealed page.[/en]
-   *   [ja]明らかにしたページを解決するPromiseを返します。[/ja]
+   *   [en] Promise which resolves to the revealed page.[/en]
+   *   [ja] 明らかにしたページを解決するPromiseを返します。[/ja]
    * @description
-   *   [en]Pops a page out of the page stack[/en]
-   *   [ja]どうしよう[/ja]
+   *   [en] Pops a page out of the page stack[/en]
+   *   [ja] どうしよう[/ja]
    */
   popPage(options = {}) {
     return this.refs.navi._popPage(options, this.update.bind(this), this.pages)
