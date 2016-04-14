@@ -2,15 +2,35 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import reactUtil from './reactUtil.jsx';
 import BasicComponent from './BasicComponent.jsx';
-
 /**
- * Should be used as root component of each page. The content inside page component is scrollable.
-*/
+ * @original ons-page
+ * @category page
+ * @description
+ * [en] This component is handling the entire page.  THe content can be scrolled. [/en]
+ * [jp] どうしよう[/jp]
+ * @example
+  <Page>
+    <div> Page content </div>
+  </Page>
+ */
 class Page extends BasicComponent {
+
   componentDidMount() {
     super.componentDidMount();
     var node = ReactDOM.findDOMNode(this);
     CustomElements.upgrade(node);
+    node.addEventListener('init', this.props.onInit);
+    node.addEventListener('show', this.props.onShow);
+    node.addEventListener('hide', this.props.onHide);
+    node.addEventListener('destroy', this.props.onDestroy);
+  }
+
+  componentWillUnmount() {
+    var node = ReactDOM.findDOMNode(this);
+    node.removeEventListener('init', this.props.onInit);
+    node.removeEventListener('show', this.props.onShow);
+    node.removeEventListener('hide', this.props.onHide);
+    node.removeEventListener('destroy', this.props.onDestroy);
   }
 
   render() {
@@ -43,22 +63,80 @@ class Page extends BasicComponent {
 };
 
 Page.propTypes = {
+  // #<{(|*
+  //   * The children is provided for all components in React. These children define
+  // |)}>#
+  // children: React.PropTypes.node,
+  // #<{(|*
+  //   * The ref attribute is provided for all components in React. The attribute is callback will be executed immediately after the component is mounted.
+  // |)}>#
+  // ref: React.PropTypes.func,
+  // #<{(|*
+  //   * The style attribute is provided for all components in React. The attribute is an object. For reference look at https://facebook.github.io/react/tips/inline-styles.html.
+  // |)}>#
+  // style: React.PropTypes.object,
+  // #<{(|*
+  //   * The className attribute is provided for all components in React. It defines the classes for a component.  For reference look at https://facebook.github.io/react/tips/inline-styles.html.
+  // |)}>#
+  // className: React.PropTypes.string,
   /**
-    * The children is provided for all components in React. These children define
-  */
-  children: React.PropTypes.node,
+   * @name modifier
+   * @type string
+   * @description
+   *  [en]
+   *  Specify modifier name to specify custom styles. Optional.
+   *  [/en]
+   *  [jp] どうしよう[/jp]
+   */
+  modifier: React.PropTypes.string,
+
   /**
-    * The ref attribute is provided for all components in React. The attribute is callback will be executed immediately after the component is mounted.
-  */
-  ref: React.PropTypes.func,
+   * @name onInit
+   * @type function
+   * @required false
+   * @description
+   *  [en]
+   *  	Fired right after the page is attached.
+   *  [/en]
+   *  [jp] どうしよう[/jp]
+   */
+  onInit: React.PropTypes.func,
+
   /**
-    * The style attribute is provided for all components in React. The attribute is an object. For reference look at https://facebook.github.io/react/tips/inline-styles.html.
-  */
-  style: React.PropTypes.object,
+   * @name onShow
+   * @type function
+   * @required false
+   * @description
+   *  [en]
+   *  Called Fired right after the page is shown.
+   *  [/en]
+   *  [jp] どうしよう[/jp]
+   */
+  onShow: React.PropTypes.func,
+
   /**
-    * The className attribute is provided for all components in React. It defines the classes for a component.  For reference look at https://facebook.github.io/react/tips/inline-styles.html.
-  */
-  className: React.PropTypes.string
+   * @name onHide
+   * @type function
+   * @required false
+   * @description
+   *  [en]
+   *  Called after the page is hidden.
+   *  [/en]
+   *  [jp] どうしよう[/jp]
+   */
+  onHide: React.PropTypes.func,
+
+  /**
+   * @name onDestroy
+   * @type function
+   * @required false
+   * @description
+   *  [en]
+   *  Called after the page is destroyed.
+   *  [/en]
+   *  [jp] どうしよう[/jp]
+   */
+  onDestroy: React.PropTypes.func
 };
 
 export default Page;
