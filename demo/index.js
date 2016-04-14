@@ -78,7 +78,7 @@ class Examples extends React.Component {
 }
 
 class App extends React.Component {
-  renderScene(route, navigator) {
+  renderPage(route, navigator) {
     const props = route.props || {};
     props.navigator = navigator;
 
@@ -88,7 +88,7 @@ class App extends React.Component {
   render() {
     return (
       <Navigator
-        renderScene={this.renderScene}
+        renderPage={this.renderPage}
         initialRoute={{
           component: Examples,
           props: {

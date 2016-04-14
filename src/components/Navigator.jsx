@@ -5,11 +5,11 @@ import BasicComponent from './BasicComponent.jsx';
  * @original ons-navigator
  * @category navigation
  * @description
- * [en]This is the main component for navigation. [/en]
+ * [en] This component is responsible for page transitioning and managing the pages of your OnsenUI application. In order to manage to display the pages, the  navigator needs to define the `renderPage` method, that takes an route and a navigator and  converts it to an page.  [/en]
  * [jp] どうしよう[/jp]
  * @example
   <Navigator
-    renderScene={(route, navigator) =>
+    renderPage={(route, navigator) =>
      <MyPage
        title={route.title}
        onPop={() => navigator.popPage()}
@@ -67,17 +67,17 @@ class Navigator extends BasicComponent {
   resetPageStack(routes, options = {}) {
     return new Promise((resolve) => {
       var lastRoute = routes[routes.length - 1];
-      var newPage = this.props.renderScene(lastRoute, this);
+      var newPage = this.props.renderPage(lastRoute, this);
       this.routes.push(lastRoute);
 
       this.refs.navi._pushPage(options, this.update.bind(this), this.pages, newPage).then(() => {
         this.routes = routes;
 
-        var renderScene = (route) => {
-          this.props.renderScene(route, this);
+        var renderPage = (route) => {
+          this.props.renderPage(route, this);
         };
 
-        this.pages = routes.map(renderScene);
+        this.pages = routes.map(renderPage);
         this.update().then(resolve);
       });
     });
@@ -98,7 +98,7 @@ class Navigator extends BasicComponent {
    */
   pushPage(route, options = {}) {
     return new Promise((resolve) => {
-      var newPage = this.props.renderScene(route, navigator);
+      var newPage = this.props.renderPage(route, navigator);
 
       this.routes.push(route);
       this.refs.navi._pushPage(options,
@@ -143,7 +143,7 @@ class Navigator extends BasicComponent {
     }
 
     this.pages = this.routes.map(
-      (route) => this.props.renderScene(route, this)
+      (route) => this.props.renderPage(route, this)
     );
     this.setState({});
   }
@@ -152,7 +152,7 @@ class Navigator extends BasicComponent {
     // render the last two pages
     for (var index = this.pages.length - 1;
          index >= this.pages.length - 2 && index >= 0; index--) {
-      this.pages[index] = this.props.renderScene(this.routes[index], this);
+      this.pages[index] = this.props.renderPage(this.routes[index], this);
     }
 
     return (
@@ -165,7 +165,7 @@ class Navigator extends BasicComponent {
 
 Navigator.propTypes = {
   /**
-   * @name renderScene
+   * @name renderPage
    * @type function
    * @required true
    * @defaultValue null
@@ -173,7 +173,7 @@ Navigator.propTypes = {
    *  [en] This function takes the current route object as a parameter and  creates returns a react componen.[/en]
    *  [jp] どうしよう[/jp]
    */
-  renderScene: React.PropTypes.func.isRequired,
+  renderPage: React.PropTypes.func.isRequired,
   /**
    * @name initialRouteStack
    * @type array
@@ -181,7 +181,7 @@ Navigator.propTypes = {
    * @defaultValue null
    * @description
    *  [en] This array contains the initial routes from the navigator,
-   *  which will be used to render the initial pages in the renderScene method.
+   *  which will be used to render the initial pages in the renderPage method.
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
@@ -195,7 +195,7 @@ Navigator.propTypes = {
    * @description
    *  [en] This array contains the initial route of the navigator,
    *  which will be used to render the initial pages in the
-   *  renderScene method.
+   *  renderPage method.
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
