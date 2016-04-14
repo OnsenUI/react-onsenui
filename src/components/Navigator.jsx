@@ -130,14 +130,14 @@ class Navigator extends BasicComponent {
   componentDidMount() {
     this.refs.navi.popPage = this.popPage.bind(this);
 
-    if (this.props.initialRoute && this.props.initialRoutes) {
+    if (this.props.initialRoute && this.props.initialRouteStack) {
       throw new Error('In Navigator either initalRoute or initalRoutes can be set');
     }
 
     if (this.props.initialRoute) {
       this.routes = [this.props.initialRoute];
-    } else if (this.props.initialRoutes) {
-      this.routes = this.props.initialRoutes;
+    } else if (this.props.initialRouteStack) {
+      this.routes = this.props.initialRouteStack;
     } else {
       this.routes = [];
     }
@@ -175,7 +175,7 @@ Navigator.propTypes = {
    */
   renderScene: React.PropTypes.func.isRequired,
   /**
-   * @name initialRoutes
+   * @name initialRouteStack
    * @type array
    * @required false
    * @defaultValue null
@@ -185,7 +185,7 @@ Navigator.propTypes = {
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  initialRoutes: React.PropTypes.array,
+  initialRouteStack: React.PropTypes.array,
 
   /**
    * @name initialRoute
