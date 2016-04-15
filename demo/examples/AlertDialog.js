@@ -39,7 +39,7 @@ export default class extends React.Component {
           <Button onClick={this.handleClick.bind(this)}>Show dialog</Button>
         </p>
 
-        <AlertDialog isOpen={this.state.isOpen} onCancel={this.handleCancel.bind(this)} cancelable>
+        <AlertDialog isOpen={this.state.isOpen} onCancel={this.handleCancel.bind(this)} isCancelable={false} >
           <div className="alert-dialog-title">Warning!</div>
           <div className="alert-dialog-content">
             An error has occurred!

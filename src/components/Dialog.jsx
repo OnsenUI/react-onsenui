@@ -9,7 +9,8 @@ class Dialog extends BaseDialog {
 
 Dialog.propTypes = {
   onCancel: React.PropTypes.func.isRequired,
-  isOpen: React.PropTypes.bool.isRequired
+  isOpen: React.PropTypes.bool.isRequired,
+  isCancelable: React.PropTypes.bool
 };
 
 export default Dialog;

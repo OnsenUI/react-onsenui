@@ -14,9 +14,10 @@ class Popover extends BaseDialog {
 }
 
 Popover.propTypes = {
-  onCancel: React.PropTypes.func.isRequired,
+  onCancel: React.PropTypes.func,
   isOpen: React.PropTypes.bool.isRequired,
-  getTarget: React.PropTypes.func.isRequired
+  getTarget: React.PropTypes.func.isRequired,
+  isCancelable: React.PropTypes.bool
 };
 
 export default Popover;
