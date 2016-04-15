@@ -68,6 +68,10 @@ class BaseDialog extends React.Component {
       newProps = {...newProps, cancelable: true};
     }
 
+    if (newProps.isDisabled) {
+      newProps = {...newProps, disabled: true};
+    }
+
     var element = React.createElement(this._getDomNodeName(), newProps);
     ReactDOM.render(element, this.node, this._update.bind(this));
   }
@@ -84,11 +88,13 @@ class BaseDialog extends React.Component {
 BaseDialog.propTypes = {
   onCancel: React.PropTypes.func,
   isOpen: React.PropTypes.bool.isRequired,
-  isCancelable: React.PropTypes.bool
+  isCancelable: React.PropTypes.bool,
+  isDisabled: React.PropTypes.bool
 };
 
 BaseDialog.defaultProps = {
-  isCancelable: true
+  isCancelable: true,
+  isDisabled: false
 };
 
 export default BaseDialog;
