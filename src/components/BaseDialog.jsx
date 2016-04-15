@@ -72,6 +72,17 @@ class BaseDialog extends React.Component {
       newProps = {...newProps, disabled: true};
     }
 
+    if (newProps.maskColor) {
+      newProps = {...newProps, 'mask-color': newProps.maskColor};
+    }
+
+    if (newProps.animationOptions) {
+      var keys = Object.keys(newProps.animationOptions);
+      var innerString = keys.map((key) => key + ': "' + newProps.animationOptions[key] + '"');
+      var val = '{' + innerString.join(',') + '}';
+      newProps = {...newProps, 'animation-options': val};
+    }
+
     var element = React.createElement(this._getDomNodeName(), newProps);
     ReactDOM.render(element, this.node, this._update.bind(this));
   }
@@ -89,7 +100,10 @@ BaseDialog.propTypes = {
   onCancel: React.PropTypes.func,
   isOpen: React.PropTypes.bool.isRequired,
   isCancelable: React.PropTypes.bool,
-  isDisabled: React.PropTypes.bool
+  isDisabled: React.PropTypes.bool,
+  animation: React.PropTypes.string,
+  maskColor: React.PropTypes.string,
+  animationOptions: React.PropTypes.object
 };
 
 BaseDialog.defaultProps = {

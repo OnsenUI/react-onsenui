@@ -33,7 +33,11 @@ AlertDialog.propTypes = {
   onCancel: React.PropTypes.func,
   isOpen: React.PropTypes.bool.isRequired,
   isCancelable: React.PropTypes.bool,
-  isDisabled: React.PropTypes.bool
+  isDisabled: React.PropTypes.bool,
+  animation: React.PropTypes.string,
+  modifier: React.PropTypes.string,
+  maskColor: React.PropTypes.string,
+  animationOptions: React.PropTypes.object
 };
 
 export default AlertDialog;
