@@ -45,12 +45,12 @@ export default class extends React.Component {
             An error has occurred!
           </div>
           <div className="alert-dialog-footer">
-            <button onClick={this.handleCancel.bind(this)} className="alert-dialog-button">
+            <Button onClick={this.handleCancel.bind(this)} className="alert-dialog-button">
               Cancel
-            </button>
-            <button onClick={this.handleCancel.bind(this)} className="alert-dialog-button">
+            </Button>
+            <Button onClick={this.handleCancel.bind(this)} className="alert-dialog-button">
               Ok
-            </button>
+            </Button>
           </div>
         </AlertDialog>
       </Page>
