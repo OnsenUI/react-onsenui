@@ -20,7 +20,12 @@ Popover.propTypes = {
   isCancelable: React.PropTypes.bool,
   animation: React.PropTypes.string,
   maskColor: React.PropTypes.string,
-  animationOptions: React.PropTypes.object
+  animationOptions: React.PropTypes.object,
+  onPreShow: React.PropTypes.func,
+  onPostShow: React.PropTypes.func,
+  onPreHide: React.PropTypes.func,
+  onPostHide: React.PropTypes.func
+
 };
 
 export default Popover;

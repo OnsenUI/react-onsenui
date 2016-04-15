@@ -27,9 +27,11 @@ class BaseDialog extends React.Component {
     this.node = document.createElement('div');
     document.body.appendChild(this.node);
 
-    this.node.addEventListener('cancel', () => {
-      this.props.onCancel();
-    });
+    this.node.addEventListener('cancel', this.props.onCancel);
+    this.node.addEventListener('preshow', this.props.onPreShow);
+    this.node.addEventListener('postshow', this.props.onPostShow);
+    this.node.addEventListener('prehide', this.props.onPreHide);
+    this.node.addEventListener('posthide', this.props.onPostHide);
     this.renderPortal(this.props);
   }
 
@@ -41,6 +43,12 @@ class BaseDialog extends React.Component {
   }
 
   componentWillUnmount() {
+    this.node.removeEventListener('cancel', this.props.onCancel);
+    this.node.removeEventListener('preshow', this.props.onPreShow);
+    this.node.removeEventListener('postshow', this.props.onPostShow);
+    this.node.removeEventListener('prehide', this.props.onPreHide);
+    this.node.removeEventListener('posthide', this.props.onPostHide);
+
     ReactDOM.unmountComponentAtNode(this.node);
     document.body.removeChild(this.node);
   }
@@ -103,7 +111,11 @@ BaseDialog.propTypes = {
   isDisabled: React.PropTypes.bool,
   animation: React.PropTypes.string,
   maskColor: React.PropTypes.string,
-  animationOptions: React.PropTypes.object
+  animationOptions: React.PropTypes.object,
+  onPreShow: React.PropTypes.func,
+  onPostShow: React.PropTypes.func,
+  onPreHide: React.PropTypes.func,
+  onPostHide: React.PropTypes.func
 };
 
 BaseDialog.defaultProps = {
