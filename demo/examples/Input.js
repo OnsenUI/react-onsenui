@@ -16,11 +16,43 @@ export default class extends React.Component {
     super(props);
 
     this.state = {
+<<<<<<< HEAD
       data: [1, 2, 3, 4, 5, 6],
       text: 'te'
     };
   }
 
+=======
+      data: [1, 2, 3, 4, 5, 6]
+    };
+  }
+
+  reverseData() {
+    this.setState({
+      data: this.state.data.reverse()
+    });
+  }
+
+  remove(idx) {
+    const data = this.state.data;
+    data.splice(idx, 1);
+
+    this.setState({
+      data: data
+    });
+  }
+
+  add() {
+    const data = this.state.data;
+    data.push(data.length);
+
+    this.setState({
+      data: data,
+      text: ''
+    });
+  }
+
+>>>>>>> ecc16ef2b258df0e1eb3671bafb4f71c1ddfed30
   render() {
     return (
       <Page>
@@ -34,8 +66,7 @@ export default class extends React.Component {
         <div> Please enter a text </div>
         <p>
           <Input value={this.state.text} onChange={(event) => {
-            this.setState({text: event.target.value})} } modifier='material' float placeholder="Username"
-            ></Input>
+            this.setState({text: event.target.value})} } modifier='material' float placeholder="Username" ></Input>
           <div> Text : {this.state.text} </div>
         </p>
       </Page>
