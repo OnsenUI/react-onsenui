@@ -17,6 +17,7 @@ import ListExample from './examples/List';
 import TabbarExample from './examples/Tabbar';
 import AlertDialogExample from './examples/AlertDialog';
 import SplitterExample from './examples/Splitter';
+import InputExample from './examples/Input';
 
 class Examples extends React.Component {
   constructor(props) {
@@ -43,7 +44,11 @@ class Examples extends React.Component {
       },
       {
         title: 'Splitter',
-        component: SplitterExample 
+        component: SplitterExample
+      },
+      {
+        title: 'Input',
+        component: InputExample
       }
     ];
   }
