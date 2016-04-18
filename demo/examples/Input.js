@@ -16,14 +16,8 @@ export default class extends React.Component {
     super(props);
 
     this.state = {
-<<<<<<< HEAD
       data: [1, 2, 3, 4, 5, 6],
       text: 'te'
-    };
-  }
-
-=======
-      data: [1, 2, 3, 4, 5, 6]
     };
   }
 
@@ -52,7 +46,6 @@ export default class extends React.Component {
     });
   }
 
->>>>>>> ecc16ef2b258df0e1eb3671bafb4f71c1ddfed30
   render() {
     return (
       <Page>
