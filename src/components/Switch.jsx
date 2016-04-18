@@ -13,8 +13,11 @@ class Switch extends BasicComponent {
   }
 
   render() {
-    var {checked, ...other} = this.props;
+    var {checked, inputID, ...other} = this.props;
 
+    if (inputID) {
+      other['input-id'] = inputID;
+    }
     return (
       <ons-switch ref='switch' checked={checked ? '' : null} {...other} />
     );
@@ -23,7 +26,9 @@ class Switch extends BasicComponent {
 
 Switch.propTypes = {
   onChange: React.PropTypes.func,
-  checked: React.PropTypes.bool
+  checked: React.PropTypes.bool,
+  disabled: React.PropTypes.bool,
+  inputID: React.PropTypes.string
 };
 
 export default Switch;
