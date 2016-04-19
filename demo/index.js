@@ -9,7 +9,8 @@ import {
   Toolbar,
   List,
   ListItem,
-  Button
+  Button,
+  Icon
 } from 'react-onsenui';
 
 import PageExample from './examples/Page';
@@ -18,6 +19,7 @@ import TabbarExample from './examples/Tabbar';
 import AlertDialogExample from './examples/AlertDialog';
 import SplitterExample from './examples/Splitter';
 import InputExample from './examples/Input';
+import IconExample from './examples/Icon';
 
 class Examples extends React.Component {
   constructor(props) {
@@ -29,6 +31,10 @@ class Examples extends React.Component {
       {
         title: 'Page',
         component: PageExample
+      },
+      {
+        title: 'Icon',
+        component: IconExample
       },
       {
         title: 'List',
@@ -70,6 +76,7 @@ class Examples extends React.Component {
             Example
           </div>
         </Toolbar>
+
 
         <List
           dataSource={this.examples}

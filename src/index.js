@@ -18,7 +18,6 @@ import Page from './components/Page.jsx';
 import Popover from './components/Popover.jsx';
 import PullHook from './components/PullHook.jsx';
 import Ripple from './components/Ripple.jsx';
-import Scroller from './components/Scroller.jsx';
 import SpeedDial from './components/SpeedDial.jsx';
 import SpeedDialItem from './components/SpeedDialItem.jsx';
 import Splitter from './components/Splitter.jsx';
@@ -53,7 +52,6 @@ export {
   Popover,
   PullHook,
   Ripple,
-  Scroller,
   SpeedDial,
   SpeedDialItem,
   Splitter,
