@@ -1,0 +1,1 @@
+{"description":"","methods":[],"props":{"dataSource":{"type":{"name":"array"},"required":true,"description":""},"renderHeader":{"defaultValue":{"value":"() => null","computed":false}},"renderFooter":{"defaultValue":{"value":"() => null","computed":false}}}}

@@ -1,0 +1,1 @@
+{"description":"I'm a toolbar!","methods":[{"name":"_getDomNodeName","docblock":null,"modifiers":[],"params":[],"returns":null}],"props":{"modifier":{"type":{"name":"string"},"required":false,"description":"@name modifier\n@type string\n@description\n [en]\n Specify modifier name to specify custom styles. Optional.\n [/en]\n [jp] どうしよう[/jp]"}}}

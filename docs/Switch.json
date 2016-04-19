@@ -1,0 +1,1 @@
+{"description":"","methods":[],"props":{"onChange":{"type":{"name":"func"},"required":false,"description":""},"checked":{"type":{"name":"bool"},"required":false,"description":""},"disabled":{"type":{"name":"bool"},"required":false,"description":""},"inputID":{"type":{"name":"string"},"required":false,"description":""}}}
