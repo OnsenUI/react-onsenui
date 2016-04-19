@@ -43,18 +43,24 @@ export default class extends React.Component {
           <p> Button standard </p>
           <ons-icon
             modifier={this.state.modifier}
-            icon='ion-edit, material:md-edit' size='20, material:20px' />
+            fixed-width='false'
+            icon='ion-edit, material:md-edit' size='20px, material:20px' />
           <p> Button standard2</p>
+          {[0, 90, 180, 270].map(  (val) =>
+
           <Icon
             modifier={this.state.modifier}
+            fixedWidth={true}
+            rotate={val}
             size={{
               default: 20,
               material: 18
             }}
             icon={{
-              default: 'ion-edit',
+              default: 'shield',
               material: 'md-edit'
             }}/>
+          )}
         </div>
       </Page>
     );

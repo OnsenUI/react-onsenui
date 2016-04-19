@@ -17,10 +17,14 @@ class Icon extends SimpleWrapper {
     return 'ons-icon';
   }
   render() {
-    var {icon, size, fixedWidth, ...others} = this.props;
+    var {icon, size, spin, fixedWidth, ...others} = this.props;
 
     if (fixedWidth) {
       others['fixed-width'] = true;
+    }
+
+    if (spin) {
+      others['spin'] = true;
     }
 
     if (icon) {
@@ -57,10 +61,9 @@ Icon.propTypes = {
     React.PropTypes.number,
     React.PropTypes.objectOf(React.PropTypes.number)
   ]),
-  rotate: React.PropTypes.number,
-  flip: React.PropTypes.string,
+  rotate: React.PropTypes.oneOf([0, 90, 180, 270]),
   fixedWidth: React.PropTypes.bool,
-  spin: React.PropTypes.string
+  spin: React.PropTypes.bool
 
 };
 
