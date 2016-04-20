@@ -1,5 +1,4 @@
 import React from 'react';
-import ListItem from './ListItem.jsx';
 import BasicComponent from './BasicComponent.jsx';
 
 class LazyList extends BasicComponent {
@@ -14,11 +13,8 @@ class LazyList extends BasicComponent {
       },
       _render: function(items, newHeight) {
         var createElement = function({index: index, top: top}) {
-          return (
-          <ListItem key={index} class='list__item' _compiled>
-            {self.props.renderRow(index)}
-          </ListItem>
-        ); };
+          return self.props.renderRow(index);
+        };
 
         var el = items.map(createElement);
         self.setState({children: el, height: newHeight},

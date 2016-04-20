@@ -2,6 +2,7 @@ import React from 'react';
 
 import {
   Page,
+  BackButton,
   ListItem,
   LazyList,
   Toolbar
@@ -10,15 +11,18 @@ import {
 export default class extends React.Component {
 
   renderRow(index) {
-    return <ListItem key={index}>
-      {'Item ' + (index + 1)}
-    </ListItem>;
+    return (
+      <ListItem key={index}>
+        {'Item ' + (index + 1)}
+      </ListItem>
+    )
   }
 
   render() {
     return (
       <Page>
         <Toolbar>
+          <div className='left'><BackButton>Back</BackButton></div>
           <div className='center'>Lazy Repeat</div>
         </Toolbar>
 
