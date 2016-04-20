@@ -15,6 +15,7 @@ import {
 
 import PageExample from './examples/Page';
 import ListExample from './examples/List';
+import LazyListExample from './examples/LazyList';
 import TabbarExample from './examples/Tabbar';
 import AlertDialogExample from './examples/AlertDialog';
 import SplitterExample from './examples/Splitter';
@@ -41,6 +42,10 @@ class Examples extends React.Component {
         component: ListExample
       },
       {
+        title: 'Lazy List',
+        component: LazyListExample
+      },
+      {
         title: 'Tabbar',
         component: TabbarExample
       },
@@ -55,8 +60,8 @@ class Examples extends React.Component {
       {
         title: 'Input',
         component: InputExample
-      }
-    ];
+      },
+          ];
   }
 
   goto(example) {
@@ -110,6 +115,40 @@ class App extends React.Component {
       />
     );
   }
+}
+
+
+class MyPage extends React.Component {
+
+    constructor(props) {
+        super(props);
+        console.log('Page Constructor called');
+    }
+
+    render() {
+        console.log('Page Render called');
+        return (
+            <Page>
+                <TestComponent/>
+            </Page>
+        );
+    }
+}
+
+export default class TestComponent extends React.Component {
+
+    constructor(props) {
+        super(props);
+        console.log('Test Constructor called');
+    }
+
+    render() {
+        console.log('Test render called');
+        return (
+            <p>test</p>
+        );
+    }
+
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
