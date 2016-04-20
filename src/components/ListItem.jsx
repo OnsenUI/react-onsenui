@@ -1,4 +1,5 @@
 import ReactDOM from 'react-dom';
+import React from 'react';
 import SimpleWrapper from './SimpleWrapper.jsx';
 
 class ListItem extends SimpleWrapper {
@@ -15,6 +16,10 @@ class ListItem extends SimpleWrapper {
     super.componentDidUpdate();
     this.node._compile();
   }
+};
+
+ListItem.propTypes = {
+  modifier: React.PropTypes.string
 };
 
 export default ListItem;
