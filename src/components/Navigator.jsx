@@ -110,7 +110,7 @@ class Navigator extends BasicComponent {
 
   /**
    * @method popPage
-   * @reset popPage(route, options = {})
+   * @signature popPage(route, options = {})
    * @return {Promise}
    *   [en] Promise which resolves to the revealed page.[/en]
    *   [ja] 明らかにしたページを解決するPromiseを返します。[/ja]
