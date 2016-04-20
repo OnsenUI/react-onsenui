@@ -15,13 +15,16 @@ class List extends BasicComponent {
   }
 }
 
+List.propTypes = {
+  modifier: React.PropTypes.string,
+  dataSource: React.PropTypes.array.isRequired,
+  renderHeader: React.PropTypes.func,
+  renderFooter: React.PropTypes.func
+};
+
 List.defaultProps = {
   renderHeader: () => null,
   renderFooter: () => null
-};
-
-List.propTypes = {
-  dataSource: React.PropTypes.array.isRequired
 };
 
 export default List;
