@@ -21,6 +21,7 @@ import AlertDialogExample from './examples/AlertDialog';
 import SplitterExample from './examples/Splitter';
 import InputExample from './examples/Input';
 import IconExample from './examples/Icon';
+import RippleExample from './examples/Ripple';
 
 class Examples extends React.Component {
   constructor(props) {
@@ -33,6 +34,11 @@ class Examples extends React.Component {
         title: 'Page',
         component: PageExample
       },
+      {
+        title: 'Ripple',
+        component: RippleExample
+      },
+
       {
         title: 'Icon',
         component: IconExample
