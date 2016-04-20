@@ -55,7 +55,8 @@ class LazyList extends BasicComponent {
 LazyList.propTypes = {
   length: React.PropTypes.number.isRequired,
   renderRow: React.PropTypes.func.isRequired,
-  calculateItemHeight: React.PropTypes.func.isRequired
+  calculateItemHeight: React.PropTypes.func.isRequired,
+  modifier: React.PropTypes.string
 };
 
 export default LazyList;
