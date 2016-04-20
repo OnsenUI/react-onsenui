@@ -28,14 +28,14 @@ export default class extends React.Component {
       this.setState({
         showMaterial: true,
         btnText: 'Switch to default design',
-        modifier: 'material',
+        modifier: 'material'
       });
     }
   }
 
   render() {
     return (
-      <Page modifier={this.state.modifier}>
+      <Page modifier={this.state.modifier} renderToolbar={() => <MyToolbar modifier={this.state.modifier} title='Icon' />} >
         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
           <p> </p>
           <Button modifier={this.state.modifier} onClick={this.changeModifier} > {this.state.btnText} </Button>
@@ -46,7 +46,7 @@ export default class extends React.Component {
             fixed-width='false'
             icon='ion-edit, material:md-edit' size='20px, material:20px' />
           <p> Button standard2</p>
-          {[0, 90, 180, 270].map(  (val) =>
+          {[0, 90, 180, 270].map((val) =>
 
           <Icon
             modifier={this.state.modifier}

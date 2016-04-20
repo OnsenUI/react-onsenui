@@ -1,5 +1,7 @@
 import React from 'react';
 
+import MyToolbar from './MyToolbar';
+
 import {
   Page,
   BackButton,
@@ -15,17 +17,12 @@ export default class extends React.Component {
       <ListItem key={index}>
         {'Item ' + (index + 1)}
       </ListItem>
-    )
+    );
   }
 
   render() {
     return (
-      <Page>
-        <Toolbar>
-          <div className='left'><BackButton>Back</BackButton></div>
-          <div className='center'>Lazy Repeat</div>
-        </Toolbar>
-
+      <Page renderToolbar={() => <MyToolbar title='LazyList' />} >
         <div style={{height: 100}}>
           <LazyList
             length={1000}

@@ -10,6 +10,8 @@ import {
   Button
 } from 'react-onsenui';
 
+import MyToolbar from './MyToolbar';
+
 export default class extends React.Component {
   constructor(props) {
     super(props)
@@ -47,7 +49,7 @@ export default class extends React.Component {
 
   render() {
     return (
-      <Page>
+      <Page renderToolbar={() => <MyToolbar title="Splitter" />} >
         <Splitter>
           <SplitterSide
             side="left"

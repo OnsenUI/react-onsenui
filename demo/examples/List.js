@@ -1,9 +1,11 @@
 import React from 'react';
+import MyToolbar from './MyToolbar';
 
 import {
   Page,
   List,
   ListItem,
+  ListHeader,
   Toolbar,
   ToolbarButton,
   BackButton,
@@ -45,17 +47,10 @@ export default class extends React.Component {
 
   render() {
     return (
-      <Page>
-        <Toolbar>
-          <div className="left"><BackButton>Back</BackButton></div>
-          <div className="center">List</div>
-          <div className="right">
-            <ToolbarButton onClick={this.reverseData.bind(this)}>FLIP</ToolbarButton>
-          </div>
-        </Toolbar>
-
+      <Page renderToolbar={() => <MyToolbar title='List' />} >
         <List
           dataSource={this.state.data}
+          renderHeader={() => <ListHeader style={{fontSize: 15}} className="testClass"> Header Text </ListHeader> }
           renderRow={(row, idx) => (
             <ListItem modifier={idx === this.state.data.length - 1 ? 'longdivider' : null}>
               {row}

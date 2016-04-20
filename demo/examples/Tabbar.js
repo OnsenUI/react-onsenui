@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {Tabbar, Tab, Page, Toolbar, Button, BackButton} from 'react-onsenui';
+import {Tabbar, Tab, Page, Button} from 'react-onsenui';
+import MyToolbar from './MyToolbar';
 
 class TabPage extends React.Component {
   switchTab() {
@@ -10,12 +11,7 @@ class TabPage extends React.Component {
 
   render() {
     return (
-      <Page>
-        <Toolbar>
-          <div className="left"><BackButton>Back</BackButton></div>
-          <div className="center">{this.props.title}</div>
-        </Toolbar>
-
+      <Page renderToolbar={() => <MyToolbar title={this.props.title} />} >
         {this.props.active ?
           <p>This is the <strong>{this.props.title}</strong> page.</p> : null}
 
@@ -43,6 +39,7 @@ export default class extends React.Component {
     return (
       <Page>
         <Tabbar
+          position='top'
           renderTabs={this.renderTabs}
         />
       </Page>

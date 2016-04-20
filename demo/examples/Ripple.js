@@ -11,7 +11,9 @@ export default class extends React.Component {
 
   render() {
     return (
-      <Page>
+      <Page
+        renderToolbar={() => <MyToolbar title="Page" />}
+        >
           <div style={
             {width: 100,
               height: 100,

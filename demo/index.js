@@ -66,8 +66,7 @@ class Examples extends React.Component {
       {
         title: 'Input',
         component: InputExample
-      },
-          ];
+      }];
   }
 
   goto(example) {
@@ -81,13 +80,9 @@ class Examples extends React.Component {
 
   render() {
     return (
-      <Page style={{background: 'green'}}>
-        <Toolbar>
-          <div className="center">
-            Example
-          </div>
-        </Toolbar>
-
+      <Page style={{background: 'green'}}
+        renderToolbar={() => <Toolbar> <div className="center"> Up Toolbar </div> </Toolbar>}
+        >
 
         <List
           dataSource={this.examples}

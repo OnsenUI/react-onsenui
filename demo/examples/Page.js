@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Page} from 'react-onsenui';
+import {Page, Button} from 'react-onsenui';
 
 import MyToolbar from './MyToolbar';
 
@@ -21,14 +21,14 @@ export default class extends React.Component {
 
   render() {
     return (
-      <Page modifier={this.state.modifier}>
-        <MyToolbar title="Page" />
-
+      <Page
+        renderToolbar={() => <MyToolbar title='Page' />}
+        modifier={this.state.modifier} >
         <p>
           This is a page!
         </p>
         <p>
-          <button onClick={this.toggleModifier.bind(this)}>Switch modifier</button>
+          <Button modifier={this.state.modifier} onClick={this.toggleModifier.bind(this)}>Switch modifier</Button>
         </p>
       </Page>
     );

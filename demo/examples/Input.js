@@ -2,14 +2,13 @@ import React from 'react';
 
 import {
   Page,
-  List,
-  ListItem,
   Toolbar,
   ToolbarButton,
   BackButton,
-  Button,
   Input
 } from 'react-onsenui';
+
+import MyToolbar from './MyToolbar';
 
 export default class extends React.Component {
   constructor(props) {
@@ -48,20 +47,22 @@ export default class extends React.Component {
 
   render() {
     return (
-      <Page>
-        <Toolbar>
-          <div className="left"><BackButton>Back</BackButton></div>
-          <div className="center">List</div>
-          <div className="right">
+      <Page
+        renderToolbar = { () => <Toolbar>
+          <div className='left'><BackButton>Back</BackButton></div>
+          <div className='center'>Input</div>
+          <div className='right'>
             <ToolbarButton >FLIP</ToolbarButton>
           </div>
         </Toolbar>
-        <div> Please enter a text </div>
+        }
+        >
         <p>
-          <Input value={this.state.text} onChange={(event) => {
-            this.setState({text: event.target.value})} } modifier='material' float placeholder="Username" ></Input>
-          <div> Text : {this.state.text} </div>
+        Please enter a text
         </p>
+          <Input value={this.state.text} onChange={(event) => {
+            this.setState({text: event.target.value})} } modifier='material' placeholder='Username'></Input>
+          <div> Text : {this.state.text} </div>
       </Page>
     );
   }

@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import reactUtil from './reactUtil.jsx';
 import BasicComponent from './BasicComponent.jsx';
 /**
  * @original ons-page
@@ -34,26 +33,16 @@ class Page extends BasicComponent {
   }
 
   render() {
-    var toolbar;
-    var modal;
-    var otherChildren = [];
+    const toolbar = this.props.renderToolbar(this);
 
-    React.Children.forEach(this.props.children, (child) => {
-      if (child == null) return;
-      if (reactUtil.rendersToToolbar(child)) {
-        toolbar = child;
-      } else if (reactUtil.rendersToModal(child)) {
-        modal = child;
-      } else {
-        otherChildren.push(child);
-      }
-    });
+    // TODO MODAL
+    const modal = null;
 
     return <ons-page {...this.props} _compiled='true' >
         {toolbar}
         <div className='page__background'> </div>
         <div className='page__content'>
-          {otherChildren}
+          {this.props.children}
         </div>
         <div className='page__extra' style={{zIndex: 10001}}>
           {modal}
@@ -73,6 +62,17 @@ Page.propTypes = {
    *  [jp] どうしよう[/jp]
    */
   modifier: React.PropTypes.string,
+
+  /**
+   * @name renderToolbar
+   * @type function
+   * @required false
+   * @defaultValue null
+   * @description
+   *  [en] This function takes the current route object as a parameter and  creates returns a react componen.[/en]
+   *  [jp] どうしよう[/jp]
+   */
+  renderToolbar: React.PropTypes.func,
 
   /**
    * @name onInit
@@ -121,6 +121,10 @@ Page.propTypes = {
    *  [jp] どうしよう[/jp]
    */
   onDestroy: React.PropTypes.func
+};
+
+Page.defaultProps = {
+  renderToolbar: () => null
 };
 
 export default Page;
