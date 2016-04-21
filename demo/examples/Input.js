@@ -60,7 +60,7 @@ export default class extends React.Component {
         <p>
         Please enter a text
         </p>
-          <Input value={this.state.text} onChange={(event) => {
+          <Input value={this.state.text} float onChange={(event) => {
             this.setState({text: event.target.value})} } modifier='material' placeholder='Username'></Input>
           <div> Text : {this.state.text} </div>
       </Page>

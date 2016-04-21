@@ -64,6 +64,10 @@ class Examples extends React.Component {
         component: SplitterExample
       },
       {
+        title: 'Splitter',
+        component: SplitterExample
+      },
+      {
         title: 'Input',
         component: InputExample
       }];
@@ -86,6 +90,9 @@ class Examples extends React.Component {
 
         <List
           dataSource={this.examples}
+          renderHeader={ () =>
+            <ListItem lockOnDrag  style={{background: 'green'}} tappable tap-background-color='red'> HEADER </ListItem>
+          }
           renderRow={(example) => (
             <ListItem key={example.title} onClick={this.goto.bind(this, example)}>{example.title}</ListItem>
           )}
