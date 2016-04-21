@@ -39,7 +39,7 @@ class Icon extends SimpleWrapper {
 
     if (size) {
       if ((typeof size) === 'number') {
-        others.size = size;
+        others.size = `${size}px`;
       } else {
         let keys = Object.keys(size).filter((a) => a !== 'default');
         let innerString = keys.map((key) => key + ':' + size[key] + 'px');

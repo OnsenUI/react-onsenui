@@ -9,7 +9,9 @@ import {
   Toolbar,
   List,
   ListItem,
-  Button,
+  SpeedDial,
+  SpeedDialItem,
+  Ripple,
   Icon
 } from 'react-onsenui';
 
@@ -22,6 +24,7 @@ import SplitterExample from './examples/Splitter';
 import InputExample from './examples/Input';
 import IconExample from './examples/Icon';
 import RippleExample from './examples/Ripple';
+import SpeedDialExample from './examples/SpeedDial';
 
 class Examples extends React.Component {
   constructor(props) {
@@ -30,6 +33,10 @@ class Examples extends React.Component {
     this.state = {class: 'test'};
 
     this.examples = [
+      {
+        title: 'SpeedDial',
+        component: SpeedDialExample
+      },
       {
         title: 'Page',
         component: PageExample
@@ -64,10 +71,6 @@ class Examples extends React.Component {
         component: SplitterExample
       },
       {
-        title: 'Splitter',
-        component: SplitterExample
-      },
-      {
         title: 'Input',
         component: InputExample
       }];
@@ -87,6 +90,7 @@ class Examples extends React.Component {
       <Page style={{background: 'green'}}
         renderToolbar={() => <Toolbar> <div className="center"> Up Toolbar </div> </Toolbar>}
         >
+
 
         <List
           dataSource={this.examples}

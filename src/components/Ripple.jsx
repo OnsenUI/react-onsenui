@@ -20,7 +20,7 @@ class Ripple extends SimpleWrapper {
 
 Ripple.propTypes = {
   color: React.PropTypes.string,
-  background: React.PropTypes.background,
+  background: React.PropTypes.string,
   disabled: React.PropTypes.bool
 };
 

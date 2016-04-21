@@ -1,11 +1,7 @@
 TODO
-LazyList.jsx
 Carousel.jsx
 CarouselCover.jsx
 CarouselItem.jsx
-List.jsx
-ListItem.jsx
-Navigator.jsx
 PullHook.jsx
 SpeedDial.jsx
 SpeedDialItem.jsx
@@ -15,5 +11,7 @@ SplitterSide.jsx
 Tab.jsx
 Tabbar.jsx
 
-MODEL?
-IMPROVE Page ReactUtil
+MODEL????
+ons-progress-bar???
+ons-progress-circular???
+ons-range ???
