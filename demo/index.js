@@ -25,6 +25,7 @@ import InputExample from './examples/Input';
 import IconExample from './examples/Icon';
 import RippleExample from './examples/Ripple';
 import SpeedDialExample from './examples/SpeedDial';
+import PullHookExample from './examples/PullHook';
 
 class Examples extends React.Component {
   constructor(props) {
@@ -37,6 +38,11 @@ class Examples extends React.Component {
         title: 'SpeedDial',
         component: SpeedDialExample
       },
+      {
+        title: 'PullHook',
+        component: PullHookExample
+      },
+
       {
         title: 'Page',
         component: PageExample

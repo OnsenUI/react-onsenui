@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom';
 import BasicComponent from './BasicComponent.jsx';
+import React from 'react';
 
 class PullHook extends BasicComponent {
   componentDidMount() {
@@ -16,8 +17,35 @@ class PullHook extends BasicComponent {
   }
 
   render() {
-    return <ons-pull-hook ref='pullHook' {...this.props} />;
+    var {disabled, thresholdHeight, fixedContent, height, ...others} = this.props;
+
+    if (disabled) {
+      others.disabled = true;
+    }
+
+    if (height) {
+      others.height = `${height}px`;
+    }
+
+    if (thresholdHeight) {
+      others['threshold-height'] = `${thresholdHeight}px`;
+    }
+
+    if (fixedContent) {
+      others['fixed-content'] = true;
+    }
+
+    return <ons-pull-hook ref='pullHook' {...others} />;
   }
 }
+
+PullHook.propTypes = {
+  onChange: React.PropTypes.func,
+  onLoad: React.PropTypes.func,
+  disabled: React.PropTypes.bool,
+  height: React.PropTypes.number,
+  thresholdHeight: React.PropTypes.number,
+  fixedContent: React.PropTypes.bool
+};
 
 export default PullHook;
