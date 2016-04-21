@@ -9,14 +9,13 @@ export default class extends React.Component {
     super(props);
 
     this.state = {
-      modifier: 'material'
+      modifier: 'material',
     };
   }
-
   render() {
     return (
       <Page>
-        <SpeedDial onClick={() => console.log('test1')} position='left bottom'>
+            <SpeedDial disabled={false} direction='right' onClick={() => console.log('test1')} position='left bottom'>
           <Fab> <Icon
             icon='fa-twitter'
             size={26}

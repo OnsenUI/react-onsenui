@@ -74,6 +74,10 @@ class Examples extends React.Component {
         title: 'Input',
         component: InputExample
       }];
+
+      // setTimeout(() => {
+      //   this.goto(this.examples[0]);
+      // }, 0);
   }
 
   goto(example) {

@@ -1,5 +1,6 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
 import ReactDOM from 'react-dom';
+import React from 'react';
 
 class SpeedDialItem extends SimpleWrapper {
   _getDomNodeName() {
@@ -17,6 +18,10 @@ class SpeedDialItem extends SimpleWrapper {
     var node = ReactDOM.findDOMNode(this);
     node.removeEventListener('click', this.props.onClick);
   }
+};
+
+SpeedDialItem.propTypes = {
+  modifier: React.PropTypes.string
 };
 
 export default SpeedDialItem;
