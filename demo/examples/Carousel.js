@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import MyToolbar from './MyToolbar';
 
 import {
   Page,
@@ -21,17 +22,11 @@ export default class extends React.Component {
   }
   render() {
     return (
-      <Page>
-        <Toolbar>
-          <div className='left'><ons-back-button>Back</ons-back-button></div>
-          <div className='center'>Fullscreen</div>
-        </Toolbar>
-
+      <Page renderToolbar={() => <MyToolbar title='Fullscreen' />}>
         <Carousel
           onPostChange={() => console.log('onPostChange')}
           onOverscroll={() => console.log('onOverscroll')}
           onRefresh={() => console.log('onRefresh')}
-
           ref='carousel' swipeable overscrollable autoScroll fullscreen autoScrollRatio={0.2}>
           <CarouselItem style={{backgroundColor: 'gray'}}>
             <div className='item-label'>GRAY</div>
