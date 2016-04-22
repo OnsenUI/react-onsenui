@@ -1,5 +1,6 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 class Carousel extends SimpleWrapper {
   constructor(props) {
@@ -34,6 +35,22 @@ class Carousel extends SimpleWrapper {
     return 'ons-carousel';
   }
 
+  componentDidMount() {
+    super.componentDidMount();
+    var node = ReactDOM.findDOMNode(this);
+    CustomElements.upgrade(node);
+    node.addEventListener('postchange', this.props.onPostChange);
+    node.addEventListener('refresh', this.props.onRefresh);
+    node.addEventListener('overscroll', this.props.onOverscroll);
+  }
+
+  componentWillUnmount() {
+    var node = ReactDOM.findDOMNode(this);
+    node.removeEventListener('postchange', this.props.onPostChange);
+    node.removeEventListener('refresh', this.props.onRefresh);
+    node.removeEventListener('overscroll', this.props.onOverscroll);
+  }
+
   render() {
     // var {fullscreen, itemWidth, overscrollable, centered} = this.props;
 
@@ -66,7 +83,10 @@ Carousel.propTypes = {
   swipeable: React.PropTypes.bool,
   disabled: React.PropTypes.bool,
   initialIndex: React.PropTypes.number,
-  autoRefresh: React.PropTypes.bool
+  autoRefresh: React.PropTypes.bool,
+  onPostChange: React.PropTypes.func,
+  onRefresh: React.PropTypes.func,
+  onOverscroll: React.PropTypes.func
   // TODO animation options
 };
 
