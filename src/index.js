@@ -3,7 +3,6 @@ import BackButton from './components/BackButton.jsx';
 import BottomToolbar from './components/BottomToolbar.jsx';
 import Button from './components/Button.jsx';
 import Carousel from './components/Carousel.jsx';
-import CarouselCover from './components/CarouselCover.jsx';
 import CarouselItem from './components/CarouselItem.jsx';
 import Dialog from './components/Dialog.jsx';
 import Fab from './components/Fab.jsx';
@@ -37,7 +36,6 @@ export {
   BottomToolbar,
   Button,
   Carousel,
-  CarouselCover,
   CarouselItem,
   Dialog,
   Fab,
