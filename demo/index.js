@@ -9,10 +9,11 @@ import {
   Toolbar,
   List,
   ListItem,
-  SpeedDial,
-  SpeedDialItem,
   Ripple,
-  Icon
+  Carousel,
+  CarouselItem,
+  BottomToolbar,
+  ToolbarButton,
 } from 'react-onsenui';
 
 import PageExample from './examples/Page';
@@ -26,6 +27,7 @@ import IconExample from './examples/Icon';
 import RippleExample from './examples/Ripple';
 import SpeedDialExample from './examples/SpeedDial';
 import PullHookExample from './examples/PullHook';
+import CarouselExample from './examples/Carousel';
 
 class Examples extends React.Component {
   constructor(props) {
@@ -37,6 +39,10 @@ class Examples extends React.Component {
       {
         title: 'SpeedDial',
         component: SpeedDialExample
+      },
+      {
+        title: 'Carousel',
+        component: CarouselExample
       },
       {
         title: 'PullHook',
@@ -98,14 +104,11 @@ class Examples extends React.Component {
   render() {
     return (
       <Page style={{background: 'green'}}
-        renderToolbar={() => <Toolbar> <div className="center"> Up Toolbar </div> </Toolbar>}
-        >
-
-
+        renderToolbar={() => <Toolbar> <div className='center'> Up Toolbar </div> </Toolbar>} >
         <List
           dataSource={this.examples}
           renderHeader={ () =>
-            <ListItem lockOnDrag  style={{background: 'green'}} tappable tap-background-color='red'> HEADER </ListItem>
+            <ListItem lockOnDrag style={{background: 'green'}} tappable tap-background-color='red'> HEADER </ListItem>
           }
           renderRow={(example) => (
             <ListItem key={example.title} onClick={this.goto.bind(this, example)}>{example.title}</ListItem>
@@ -138,7 +141,5 @@ class App extends React.Component {
     );
   }
 }
-
-
 
 ReactDOM.render(<App />, document.getElementById('app'));
