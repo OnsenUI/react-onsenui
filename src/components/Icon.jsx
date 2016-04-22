@@ -1,6 +1,5 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 /**
  * @original ons-page
@@ -19,15 +18,6 @@ class Icon extends SimpleWrapper {
     return 'ons-icon';
   }
 
-  componentDidUpdate() {
-    super.componentDidUpdate();
-    var node = ReactDOM.findDOMNode(this);
-
-    if (!this.props.spin && node.hasAttribute('spin')) {
-      node.removeAttribute('spin');
-    }
-  }
-
   render() {
     var {icon, size, spin, fixedWidth, ...others} = this.props;
 
@@ -35,9 +25,7 @@ class Icon extends SimpleWrapper {
       others['fixed-width'] = true;
     }
 
-    if (spin) {
-      others['spin'] = true;
-    }
+    others['spin'] = spin ? true : null;
 
     if (icon) {
       if ((typeof icon) === 'string') {
