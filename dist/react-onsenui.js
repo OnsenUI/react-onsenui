@@ -1,13 +1,12 @@
-/*! react-onsenui v0.0.18 - Wed Apr 13 2016 12:50:19 GMT+0900 (JST) */
+/*! react-onsenui v0.0.19 - Fri Apr 22 2016 19:38:30 GMT+0900 (JST) */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom'), require('react-dom/server')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom', 'react-dom/server'], factory) :
-  (factory((global.Ons = global.Ons || {}),global.React,global.ReactDOM,global.ReactDOMServer));
-}(this, function (exports,React,ReactDOM,ReactDOMServer) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom'], factory) :
+  (factory((global.Ons = global.Ons || {}),global.React,global.ReactDOM));
+}(this, function (exports,React,ReactDOM) { 'use strict';
 
   React = 'default' in React ? React['default'] : React;
   ReactDOM = 'default' in ReactDOM ? ReactDOM['default'] : ReactDOM;
-  ReactDOMServer = 'default' in ReactDOMServer ? ReactDOMServer['default'] : ReactDOMServer;
 
   var babelHelpers = {};
 
@@ -47,6 +46,31 @@
     }
 
     return target;
+  };
+
+  babelHelpers.get = function get(object, property, receiver) {
+    if (object === null) object = Function.prototype;
+    var desc = Object.getOwnPropertyDescriptor(object, property);
+
+    if (desc === undefined) {
+      var parent = Object.getPrototypeOf(object);
+
+      if (parent === null) {
+        return undefined;
+      } else {
+        return get(parent, property, receiver);
+      }
+    } else if ("value" in desc) {
+      return desc.value;
+    } else {
+      var getter = desc.get;
+
+      if (getter === undefined) {
+        return undefined;
+      }
+
+      return getter.call(receiver);
+    }
   };
 
   babelHelpers.inherits = function (subClass, superClass) {
@@ -101,6 +125,20 @@
         this.node.firstChild.show();
       }
     }, {
+      key: 'updateClasses',
+      value: function updateClasses() {
+        var node = this.node.firstChild;
+
+        if (this.props.className) {
+          if (this.lastClass) {
+            node.className = node.className.replace(this.lastClass, '');
+          }
+
+          this.lastClass = ' ' + this.props.className;
+          node.className += this.lastClass;
+        }
+      }
+    }, {
       key: 'hide',
       value: function hide() {
         this.node.firstChild.hide();
@@ -108,14 +146,14 @@
     }, {
       key: 'componentDidMount',
       value: function componentDidMount() {
-        var _this2 = this;
-
         this.node = document.createElement('div');
         document.body.appendChild(this.node);
 
-        this.node.addEventListener('cancel', function () {
-          _this2.props.onCancel();
-        });
+        this.node.addEventListener('cancel', this.props.onCancel);
+        this.node.addEventListener('preshow', this.props.onPreShow);
+        this.node.addEventListener('postshow', this.props.onPostShow);
+        this.node.addEventListener('prehide', this.props.onPreHide);
+        this.node.addEventListener('posthide', this.props.onPostHide);
         this.renderPortal(this.props);
       }
     }, {
@@ -129,6 +167,12 @@
     }, {
       key: 'componentWillUnmount',
       value: function componentWillUnmount() {
+        this.node.removeEventListener('cancel', this.props.onCancel);
+        this.node.removeEventListener('preshow', this.props.onPreShow);
+        this.node.removeEventListener('postshow', this.props.onPostShow);
+        this.node.removeEventListener('prehide', this.props.onPreHide);
+        this.node.removeEventListener('posthide', this.props.onPostHide);
+
         ReactDOM.unmountComponentAtNode(this.node);
         document.body.removeChild(this.node);
       }
@@ -144,6 +188,7 @@
         } else {
           this.hide();
         }
+        this.updateClasses();
       }
     }, {
       key: '_getDomNodeName',
@@ -153,7 +198,29 @@
     }, {
       key: 'renderPortal',
       value: function renderPortal(props) {
-        var element = React.createElement(this._getDomNodeName(), props);
+        var newProps = props || {};
+        if (newProps.isCancelable) {
+          newProps = babelHelpers.extends({}, newProps, { cancelable: true });
+        }
+
+        if (newProps.isDisabled) {
+          newProps = babelHelpers.extends({}, newProps, { disabled: true });
+        }
+
+        if (newProps.maskColor) {
+          newProps = babelHelpers.extends({}, newProps, { 'mask-color': newProps.maskColor });
+        }
+
+        if (newProps.animationOptions) {
+          var keys = Object.keys(newProps.animationOptions);
+          var innerString = keys.map(function (key) {
+            return key + ': "' + newProps.animationOptions[key] + '"';
+          });
+          var val = '{' + innerString.join(',') + '}';
+          newProps = babelHelpers.extends({}, newProps, { 'animation-options': val });
+        }
+
+        var element = React.createElement(this._getDomNodeName(), newProps);
         ReactDOM.render(element, this.node, this._update.bind(this));
       }
     }, {
@@ -171,9 +238,46 @@
   }(React.Component);
 
   BaseDialog.propTypes = {
-    onCancel: React.PropTypes.func.isRequired,
-    isOpen: React.PropTypes.bool.isRequired
+    onCancel: React.PropTypes.func,
+    isOpen: React.PropTypes.bool.isRequired,
+    isCancelable: React.PropTypes.bool,
+    isDisabled: React.PropTypes.bool,
+    animation: React.PropTypes.string,
+    maskColor: React.PropTypes.string,
+    animationOptions: React.PropTypes.object,
+    onPreShow: React.PropTypes.func,
+    onPostShow: React.PropTypes.func,
+    onPreHide: React.PropTypes.func,
+    onPostHide: React.PropTypes.func
   };
+
+  BaseDialog.defaultProps = {
+    isCancelable: true,
+    isDisabled: false
+  };
+
+  /**
+   * @original ons-alert-dialog
+   * @category dialog
+   * @description
+   * [en] Alert dialog that is displayed on top of the current screen. [/en]
+   * [jp] どうしよう[/jp]
+   * @example
+     <AlertDialog isOpen={this.state.isOpen} onCancel={this.handleCancel.bind(this)} cancelable>
+       <div className="alert-dialog-title">Warning!</div>
+       <div className="alert-dialog-content">
+         An error has occurred!
+       </div>
+       <div className="alert-dialog-footer">
+         <Button onClick={this.handleCancel.bind(this)} className="alert-dialog-button">
+           Cancel
+         </Button>
+         <Button onClick={this.handleCancel.bind(this)} className="alert-dialog-button">
+           Ok
+         </Button>
+       </div>
+     </AlertDialog>
+   */
 
   var AlertDialog = function (_BaseDialog) {
     babelHelpers.inherits(AlertDialog, _BaseDialog);
@@ -193,8 +297,18 @@
   }(BaseDialog);
 
   AlertDialog.propTypes = {
-    onCancel: React.PropTypes.func.isRequired,
-    isOpen: React.PropTypes.bool.isRequired
+    onCancel: React.PropTypes.func,
+    isOpen: React.PropTypes.bool.isRequired,
+    isCancelable: React.PropTypes.bool,
+    isDisabled: React.PropTypes.bool,
+    animation: React.PropTypes.string,
+    modifier: React.PropTypes.string,
+    maskColor: React.PropTypes.string,
+    animationOptions: React.PropTypes.object,
+    onPreShow: React.PropTypes.func,
+    onPostShow: React.PropTypes.func,
+    onPreHide: React.PropTypes.func,
+    onPostHide: React.PropTypes.func
   };
 
   var BasicComponent = function (_React$Component) {
@@ -250,11 +364,16 @@
       value: function render() {
         var _props = this.props;
         var disabled = _props.disabled;
-        var others = babelHelpers.objectWithoutProperties(_props, ['disabled']);
+        var ripple = _props.ripple;
+        var others = babelHelpers.objectWithoutProperties(_props, ['disabled', 'ripple']);
 
 
         if (disabled) {
           others.disabled = 'disabled';
+        }
+
+        if (ripple) {
+          others.ripple = true;
         }
 
         return React.createElement(this._getDomNodeName(), others, this.props.children);
@@ -264,6 +383,16 @@
   }(BasicComponent);
 
   ;
+
+  /**
+   * @original ons-back-button
+   * @category page
+   * @description
+   * [en] Back button component for Toolbar. It enables to automatically to pop the top pae of the navigator. When only presented with one page, the button is hidden automatically.  [/en]
+   * [jp] どうしよう[/jp]
+   * @example
+    <BackButton> Back </BackButton>
+   */
 
   var BackButton = function (_SimpleWrapper) {
     babelHelpers.inherits(BackButton, _SimpleWrapper);
@@ -303,6 +432,10 @@
 
   ;
 
+  BottomToolbar.propTypes = {
+    modifier: React.PropTypes.string
+  };
+
   var Button = function (_SimpleWrapper) {
     babelHelpers.inherits(Button, _SimpleWrapper);
 
@@ -322,18 +455,99 @@
 
   ;
 
+  Button.propTypes = {
+    modifier: React.PropTypes.string,
+    disabled: React.PropTypes.bool,
+    ripple: React.PropTypes.bool,
+    onClick: React.PropTypes.func
+  };
+
   var Carousel = function (_SimpleWrapper) {
     babelHelpers.inherits(Carousel, _SimpleWrapper);
 
-    function Carousel() {
+    function Carousel(props) {
       babelHelpers.classCallCheck(this, Carousel);
-      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Carousel).apply(this, arguments));
+
+      var _this = babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Carousel).call(this, props));
+
+      _this.convert = _this.convert.bind(_this);
+      _this.sizeConverter = _this.sizeConverter.bind(_this);
+      return _this;
     }
 
     babelHelpers.createClass(Carousel, [{
+      key: 'convert',
+      value: function convert(dict, name) {
+        var additionalDict = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+
+        var fun = additionalDict.fun ? additionalDict.fun : function (x) {
+          return x;
+        };
+        var newName = additionalDict.newName ? additionalDict.newName : name;
+
+        var val = dict[name];
+        if (val) {
+          if (newName !== name) {
+            delete dict[name];
+          }
+          dict[newName] = fun(val);
+        }
+        return dict;
+      }
+    }, {
+      key: 'sizeConverter',
+      value: function sizeConverter(item) {
+        if (typeof item === 'number') {
+          return item + 'px';
+        } else {
+          return item;
+        }
+      }
+    }, {
       key: '_getDomNodeName',
       value: function _getDomNodeName() {
         return 'ons-carousel';
+      }
+    }, {
+      key: 'componentDidMount',
+      value: function componentDidMount() {
+        babelHelpers.get(Object.getPrototypeOf(Carousel.prototype), 'componentDidMount', this).call(this);
+        var node = ReactDOM.findDOMNode(this);
+        CustomElements.upgrade(node);
+        node.addEventListener('postchange', this.props.onPostChange);
+        node.addEventListener('refresh', this.props.onRefresh);
+        node.addEventListener('overscroll', this.props.onOverscroll);
+      }
+    }, {
+      key: 'componentWillUnmount',
+      value: function componentWillUnmount() {
+        var node = ReactDOM.findDOMNode(this);
+        node.removeEventListener('postchange', this.props.onPostChange);
+        node.removeEventListener('refresh', this.props.onRefresh);
+        node.removeEventListener('overscroll', this.props.onOverscroll);
+      }
+    }, {
+      key: 'render',
+      value: function render() {
+        var _this2 = this;
+
+        // var {fullscreen, itemWidth, overscrollable, centered} = this.props;
+
+        var others = babelHelpers.objectWithoutProperties(this.props, []);
+
+
+        ['fullscreen', 'swipeable', 'disabled', 'centered', 'overscrollable', 'centered'].forEach(function (el) {
+          _this2.convert(others, el);
+        });
+
+        this.convert(others, 'itemWidth', { fun: this.sizeConverter, newName: 'item-width' });
+        this.convert(others, 'itemHeight', { fun: this.sizeConverter, newName: 'item-height' });
+        this.convert(others, 'autoScroll', { newName: 'auto-scroll' });
+        this.convert(others, 'autoRefresh', { newName: 'auto-refresh' });
+        this.convert(others, 'autoScrollRatio', { newName: 'auto-scroll-ratio' });
+        this.convert(others, 'initialIndex', { newName: 'initial-index' });
+
+        return React.createElement(this._getDomNodeName(), others, this.props.children);
       }
     }]);
     return Carousel;
@@ -341,24 +555,24 @@
 
   ;
 
-  var CarouselCover = function (_SimpleWrapper) {
-    babelHelpers.inherits(CarouselCover, _SimpleWrapper);
-
-    function CarouselCover() {
-      babelHelpers.classCallCheck(this, CarouselCover);
-      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(CarouselCover).apply(this, arguments));
-    }
-
-    babelHelpers.createClass(CarouselCover, [{
-      key: '_getDomNodeName',
-      value: function _getDomNodeName() {
-        return 'ons-carousel-cover';
-      }
-    }]);
-    return CarouselCover;
-  }(SimpleWrapper);
-
-  ;
+  Carousel.propTypes = {
+    direction: React.PropTypes.oneOf(['horizontal', 'vertical']),
+    fullscreen: React.PropTypes.bool,
+    overscrollable: React.PropTypes.bool,
+    centered: React.PropTypes.bool,
+    itemWidth: React.PropTypes.oneOf(React.PropTypes.string, React.PropTypes.string),
+    itemHeight: React.PropTypes.oneOf(React.PropTypes.string, React.PropTypes.string),
+    autoScroll: React.PropTypes.bool,
+    autoScrollRatio: React.PropTypes.number,
+    swipeable: React.PropTypes.bool,
+    disabled: React.PropTypes.bool,
+    initialIndex: React.PropTypes.number,
+    autoRefresh: React.PropTypes.bool,
+    onPostChange: React.PropTypes.func,
+    onRefresh: React.PropTypes.func,
+    onOverscroll: React.PropTypes.func
+    // TODO animation options
+  };
 
   var CarouselItem = function (_SimpleWrapper) {
     babelHelpers.inherits(CarouselItem, _SimpleWrapper);
@@ -379,6 +593,19 @@
 
   ;
 
+  CarouselItem.propTypes = {
+    /**
+     * @name modifier
+     * @type string
+     * @description
+     *  [en]
+     *  Specify modifier name to specify custom styles. Optional.
+     *  [/en]
+     *  [jp] どうしよう[/jp]
+     */
+    modifier: React.PropTypes.string
+  };
+
   var Dialog = function (_BaseDialog) {
     babelHelpers.inherits(Dialog, _BaseDialog);
 
@@ -397,8 +624,18 @@
   }(BaseDialog);
 
   Dialog.propTypes = {
-    onCancel: React.PropTypes.func.isRequired,
-    isOpen: React.PropTypes.bool.isRequired
+    onCancel: React.PropTypes.func,
+    isOpen: React.PropTypes.bool.isRequired,
+    isCancelable: React.PropTypes.bool,
+    isDisabled: React.PropTypes.bool,
+    animation: React.PropTypes.string,
+    modifier: React.PropTypes.string,
+    maskColor: React.PropTypes.string,
+    animationOptions: React.PropTypes.object,
+    onPreShow: React.PropTypes.func,
+    onPostShow: React.PropTypes.func,
+    onPreHide: React.PropTypes.func,
+    onPostHide: React.PropTypes.func
   };
 
   var Fab = function (_SimpleWrapper) {
@@ -420,6 +657,27 @@
 
   ;
 
+  Fab.propTypes = {
+    modifier: React.PropTypes.string,
+    ripple: React.PropTypes.bool,
+    position: React.PropTypes.string,
+    disabled: React.PropTypes.string,
+    onClick: React.PropTypes.func
+  };
+
+  /**
+   * @original ons-page
+   * @category page
+   * @description
+   * [en] Displays an icon. [/en]
+   * [jp] どうしよう[/jp]
+   * @example
+    <Icon
+      size={{default: 32, material: 40}}
+      icon={{default: 'ion-navicon', material: 'md-menu'}}
+    />
+  /> */
+
   var Icon = function (_SimpleWrapper) {
     babelHelpers.inherits(Icon, _SimpleWrapper);
 
@@ -433,16 +691,72 @@
       value: function _getDomNodeName() {
         return 'ons-icon';
       }
+    }, {
+      key: 'render',
+      value: function render() {
+        var _props = this.props;
+        var icon = _props.icon;
+        var size = _props.size;
+        var spin = _props.spin;
+        var fixedWidth = _props.fixedWidth;
+        var others = babelHelpers.objectWithoutProperties(_props, ['icon', 'size', 'spin', 'fixedWidth']);
+
+
+        if (fixedWidth) {
+          others['fixed-width'] = true;
+        }
+
+        others['spin'] = spin ? true : null;
+
+        if (icon) {
+          if (typeof icon === 'string') {
+            others.icon = icon;
+          } else {
+            var keys = Object.keys(icon).filter(function (a) {
+              return a !== 'default';
+            });
+            var innerString = keys.map(function (key) {
+              return key + ':' + icon[key] + '';
+            });
+            others.icon = icon.default + ', ' + innerString.join(',');
+          }
+        }
+
+        if (size) {
+          if (typeof size === 'number') {
+            others.size = size + 'px';
+          } else {
+            var _keys = Object.keys(size).filter(function (a) {
+              return a !== 'default';
+            });
+            var _innerString = _keys.map(function (key) {
+              return key + ':' + size[key] + 'px';
+            });
+            others.size = size.default + 'px, ' + _innerString.join(',');
+          }
+        }
+        return React.createElement(this._getDomNodeName(), others, this.props.children);
+      }
     }]);
     return Icon;
   }(SimpleWrapper);
 
   ;
 
+  Icon.propTypes = {
+    modifier: React.PropTypes.string,
+    icon: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.objectOf(React.PropTypes.string)]),
+    size: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.objectOf(React.PropTypes.number)]),
+    rotate: React.PropTypes.oneOf([0, 90, 180, 270]),
+    fixedWidth: React.PropTypes.bool,
+    spin: React.PropTypes.bool
+
+  };
+
   var EVENT_TYPES = ['change', 'input'];
 
-  var Input = function (_React$Component) {
-    babelHelpers.inherits(Input, _React$Component);
+  var Input = function (_BasicComponent) {
+    babelHelpers.inherits(Input, _BasicComponent);
 
     function Input() {
       babelHelpers.classCallCheck(this, Input);
@@ -454,6 +768,7 @@
       value: function componentDidMount() {
         var _this2 = this;
 
+        babelHelpers.get(Object.getPrototypeOf(Input.prototype), 'componentDidMount', this).call(this);
         var node = ReactDOM.findDOMNode(this);
 
         EVENT_TYPES.forEach(function (eventType) {
@@ -478,54 +793,29 @@
         var checked = _props.checked;
         var other = babelHelpers.objectWithoutProperties(_props, ['checked']);
 
+        other['input-id'] = this.props.inputID;
 
         return React.createElement('ons-input', babelHelpers.extends({ checked: checked ? '' : null }, other));
       }
     }]);
     return Input;
-  }(React.Component);
+  }(BasicComponent);
 
   Input.propTypes = {
     onChange: React.PropTypes.func,
-    value: React.PropTypes.string
+    value: React.PropTypes.string,
+    placeholder: React.PropTypes.string,
+    type: React.PropTypes.string,
+    inputID: React.PropTypes.string,
+    'float': React.PropTypes.bool
   };
 
-  var _class = function (_React$Component) {
-    babelHelpers.inherits(_class, _React$Component);
-
-    function _class() {
-      babelHelpers.classCallCheck(this, _class);
-      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(_class).apply(this, arguments));
-    }
-
-    babelHelpers.createClass(_class, [{
-      key: 'componentDidMount',
-      value: function componentDidMount() {
-        this.node = ReactDOM.findDOMNode(this);
-      }
-    }, {
-      key: 'componentDidUpdate',
-      value: function componentDidUpdate() {
-        this.node._compile();
-      }
-    }, {
-      key: 'render',
-      value: function render() {
-        return React.createElement(
-          'ons-list-item',
-          this.props,
-          this.props.children
-        );
-      }
-    }]);
-    return _class;
-  }(React.Component);
-
-  var LazyList = function (_React$Component) {
-    babelHelpers.inherits(LazyList, _React$Component);
+  var LazyList = function (_BasicComponent) {
+    babelHelpers.inherits(LazyList, _BasicComponent);
     babelHelpers.createClass(LazyList, [{
       key: 'componentDidMount',
       value: function componentDidMount() {
+        babelHelpers.get(Object.getPrototypeOf(LazyList.prototype), 'componentDidMount', this).call(this);
         var self = this;
         CustomElements.upgrade(this.refs.lazyRepeat);
 
@@ -540,11 +830,7 @@
               var index = _ref.index;
               var top = _ref.top;
 
-              return React.createElement(
-                _class,
-                { key: index, 'class': 'list__item', _compiled: true },
-                self.props.renderRow(index)
-              );
+              return self.props.renderRow(index);
             };
 
             var el = items.map(createElement);
@@ -589,16 +875,17 @@
       }
     }]);
     return LazyList;
-  }(React.Component);
+  }(BasicComponent);
 
   LazyList.propTypes = {
     length: React.PropTypes.number.isRequired,
     renderRow: React.PropTypes.func.isRequired,
-    calculateItemHeight: React.PropTypes.func.isRequired
+    calculateItemHeight: React.PropTypes.func.isRequired,
+    modifier: React.PropTypes.string
   };
 
-  var List = function (_React$Component) {
-    babelHelpers.inherits(List, _React$Component);
+  var List = function (_BasicComponent) {
+    babelHelpers.inherits(List, _BasicComponent);
 
     function List() {
       babelHelpers.classCallCheck(this, List);
@@ -624,7 +911,14 @@
       }
     }]);
     return List;
-  }(React.Component);
+  }(BasicComponent);
+
+  List.propTypes = {
+    modifier: React.PropTypes.string,
+    dataSource: React.PropTypes.array.isRequired,
+    renderHeader: React.PropTypes.func,
+    renderFooter: React.PropTypes.func
+  };
 
   List.defaultProps = {
     renderHeader: function renderHeader() {
@@ -635,9 +929,23 @@
     }
   };
 
-  List.propTypes = {
-    dataSource: React.PropTypes.array.isRequired
-  };
+  /**
+   * @original ons-list-header
+   * @category list
+   * @description
+   * [en] Header element for list items. Must be put inside ons-list component.
+   [/en]
+   * [jp] どうしよう[/jp]
+   * @example
+     <List
+       dataSource={this.state.data}
+       renderHeader={() =>
+          <ListHeader style={{fontSize: 15}} className="testClass"> Header Text </ListHeader> }
+      renderRow={(row, idx) => (
+        <ListItem > {row} </ListItem>
+      )}
+    />
+   */
 
   var ListHeader = function (_SimpleWrapper) {
     babelHelpers.inherits(ListHeader, _SimpleWrapper);
@@ -658,8 +966,104 @@
 
   ;
 
-  var Navigator = function (_React$Component) {
-    babelHelpers.inherits(Navigator, _React$Component);
+  ListHeader.propTypes = {
+    /**
+     * @name modifier
+     * @type string
+     * @description
+     *  [en]
+     *  Specify modifier name to specify custom styles. Optional.
+     *  [/en]
+     *  [jp] どうしよう[/jp]
+     */
+    modifier: React.PropTypes.string
+  };
+
+  var ListItem = function (_SimpleWrapper) {
+    babelHelpers.inherits(ListItem, _SimpleWrapper);
+
+    function ListItem() {
+      babelHelpers.classCallCheck(this, ListItem);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(ListItem).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(ListItem, [{
+      key: '_getDomNodeName',
+      value: function _getDomNodeName() {
+        return 'ons-list-item';
+      }
+    }, {
+      key: 'componentDidMount',
+      value: function componentDidMount() {
+        babelHelpers.get(Object.getPrototypeOf(ListItem.prototype), 'componentDidMount', this).call(this);
+        this.node = ReactDOM.findDOMNode(this);
+      }
+    }, {
+      key: 'componentDidUpdate',
+      value: function componentDidUpdate() {
+        babelHelpers.get(Object.getPrototypeOf(ListItem.prototype), 'componentDidUpdate', this).call(this);
+        this.node._compile();
+      }
+    }, {
+      key: 'render',
+      value: function render() {
+        var _props = this.props;
+        var lockOnDrag = _props.lockOnDrag;
+        var tapBackgroundColor = _props.tapBackgroundColor;
+        var tappable = _props.tappable;
+        var others = babelHelpers.objectWithoutProperties(_props, ['lockOnDrag', 'tapBackgroundColor', 'tappable']);
+
+
+        if (tappable) {
+          others.tappable = true;
+        }
+
+        if (tapBackgroundColor) {
+          others['tap-background-color'] = tapBackgroundColor;
+        }
+
+        if (lockOnDrag) {
+          others['lock-on-drag'] = lockOnDrag;
+        }
+
+        return React.createElement(this._getDomNodeName(), others, this.props.children);
+      }
+    }]);
+    return ListItem;
+  }(SimpleWrapper);
+
+  ;
+
+  ListItem.propTypes = {
+    modifier: React.PropTypes.string,
+    tappable: React.PropTypes.bool,
+    tapBackgroundColor: React.PropTypes.string,
+    lockOnDrag: React.PropTypes.bool
+  };
+
+  /**
+   * @original ons-navigator
+   * @category navigation
+   * @description
+   * [en] This component is responsible for page transitioning and managing the pages of your OnsenUI application. In order to manage to display the pages, the  navigator needs to define the `renderPage` method, that takes an route and a navigator and  converts it to an page.  [/en]
+   * [jp] どうしよう[/jp]
+   * @example
+    <Navigator
+      renderPage={(route, navigator) =>
+       <MyPage
+         title={route.title}
+         onPop={() => navigator.popPage()}
+         />
+      }
+      initialRoute={{
+          title: 'First Page'
+      }} />
+     }
+   }
+   */
+
+  var Navigator = function (_BasicComponent) {
+    babelHelpers.inherits(Navigator, _BasicComponent);
 
     function Navigator(props) {
       babelHelpers.classCallCheck(this, Navigator);
@@ -680,6 +1084,21 @@
           _this2.setState({}, resolve);
         });
       }
+
+      /**
+       * @method resetPage
+       * @signature resetPage(route, options = {})
+       * @param {Object} [route]
+       *   [en] The route that the page should be reset to.[/en]
+       *   [ja] どうしよう [/ja]
+       * @return {Promise}
+       *   [en]Promise which resolves to the revealed page.[/en]
+       *   [ja]明らかにしたページを解決するPromiseを返します。[/ja]
+       * @description
+       *   [en]Resets the current page[/en]
+       *   [ja]どうしよう[/ja]
+       */
+
     }, {
       key: 'resetPage',
       value: function resetPage(route) {
@@ -687,6 +1106,21 @@
 
         return this.resetPageStack([route], options);
       }
+
+      /**
+       * @method resetPageStack
+       * @signature resetPageStack(route, options = {})
+       * @param {Array} [routes]
+       *   [en] The routes that the navigator should be reset to.[/en]
+       *   [ja] どうしよう [/ja]
+       * @return {Promise}
+       *   [en]Promise which resolves to the revealed page.[/en]
+       *   [ja]明らかにしたページを解決するPromiseを返します。[/ja]
+       * @description
+       *   [en] Resets the navigator to the current page stack[/en]
+       *   [ja] どうしよう[/ja]
+       */
+
     }, {
       key: 'resetPageStack',
       value: function resetPageStack(routes) {
@@ -696,21 +1130,36 @@
 
         return new Promise(function (resolve) {
           var lastRoute = routes[routes.length - 1];
-          var newPage = _this3.props.renderScene(lastRoute, _this3);
+          var newPage = _this3.props.renderPage(lastRoute, _this3);
           _this3.routes.push(lastRoute);
 
           _this3.refs.navi._pushPage(options, _this3.update.bind(_this3), _this3.pages, newPage).then(function () {
             _this3.routes = routes;
 
-            var renderScene = function renderScene(route) {
-              _this3.props.renderScene(route, _this3);
+            var renderPage = function renderPage(route) {
+              _this3.props.renderPage(route, _this3);
             };
 
-            _this3.pages = routes.map(renderScene);
+            _this3.pages = routes.map(renderPage);
             _this3.update().then(resolve);
           });
         });
       }
+
+      /**
+       * @method pushPage
+       * @signature pushPage(route, options = {})
+       * @param {Array} [routes]
+       *   [en] The routes that the navigator should push to.[/en]
+       *   [ja] どうしよう [/ja]
+       * @return {Promise}
+       *   [en] Promise which resolves to the revealed page.[/en]
+       *   [ja] 明らかにしたページを解決するPromiseを返します。[/ja]
+       * @description
+       *   [en] Pushes a page to the page stack[/en]
+       *   [ja] どうしよう[/ja]
+       */
+
     }, {
       key: 'pushPage',
       value: function pushPage(route) {
@@ -719,12 +1168,24 @@
         var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
         return new Promise(function (resolve) {
-          var newPage = _this4.props.renderScene(route, navigator);
+          var newPage = _this4.props.renderPage(route, navigator);
 
           _this4.routes.push(route);
           _this4.refs.navi._pushPage(options, _this4.update.bind(_this4), _this4.pages, newPage).then(resolve);
         });
       }
+
+      /**
+       * @method popPage
+       * @signature popPage(route, options = {})
+       * @return {Promise}
+       *   [en] Promise which resolves to the revealed page.[/en]
+       *   [ja] 明らかにしたページを解決するPromiseを返します。[/ja]
+       * @description
+       *   [en] Pops a page out of the page stack[/en]
+       *   [ja] どうしよう[/ja]
+       */
+
     }, {
       key: 'popPage',
       value: function popPage() {
@@ -743,20 +1204,20 @@
 
         this.refs.navi.popPage = this.popPage.bind(this);
 
-        if (this.props.initialRoute && this.props.initialRoutes) {
+        if (this.props.initialRoute && this.props.initialRouteStack) {
           throw new Error('In Navigator either initalRoute or initalRoutes can be set');
         }
 
         if (this.props.initialRoute) {
           this.routes = [this.props.initialRoute];
-        } else if (this.props.initialRoutes) {
-          this.routes = this.props.initialRoutes;
+        } else if (this.props.initialRouteStack) {
+          this.routes = this.props.initialRouteStack;
         } else {
           this.routes = [];
         }
 
         this.pages = this.routes.map(function (route) {
-          return _this6.props.renderScene(route, _this6);
+          return _this6.props.renderPage(route, _this6);
         });
         this.setState({});
       }
@@ -765,7 +1226,7 @@
       value: function render() {
         // render the last two pages
         for (var index = this.pages.length - 1; index >= this.pages.length - 2 && index >= 0; index--) {
-          this.pages[index] = this.props.renderScene(this.routes[index], this);
+          this.pages[index] = this.props.renderPage(this.routes[index], this);
         }
 
         return React.createElement(
@@ -776,60 +1237,61 @@
       }
     }]);
     return Navigator;
-  }(React.Component);
+  }(BasicComponent);
 
   Navigator.propTypes = {
-    renderScene: React.PropTypes.func.isRequired,
-    initialRoutes: React.PropTypes.array,
+    /**
+     * @name renderPage
+     * @type function
+     * @required true
+     * @defaultValue null
+     * @description
+     *  [en] This function takes the current route object as a parameter and  creates returns a react componen.[/en]
+     *  [jp] どうしよう[/jp]
+     */
+    renderPage: React.PropTypes.func.isRequired,
+    /**
+     * @name initialRouteStack
+     * @type array
+     * @required false
+     * @defaultValue null
+     * @description
+     *  [en] This array contains the initial routes from the navigator,
+     *  which will be used to render the initial pages in the renderPage method.
+     *  [/en]
+     *  [jp] どうしよう[/jp]
+     */
+    initialRouteStack: React.PropTypes.array,
+
+    /**
+     * @name initialRoute
+     * @type object
+     * @required false
+     * @defaultValue null
+     * @description
+     *  [en] This array contains the initial route of the navigator,
+     *  which will be used to render the initial pages in the
+     *  renderPage method.
+     *  [/en]
+     *  [jp] どうしよう[/jp]
+     */
     initialRoute: React.PropTypes.object
   };
 
-  var reactUtil = {};
-
-  reactUtil.rendersToPage = function (obj) {
-    var htmlString = ReactDOMServer.renderToStaticMarkup(obj);
-    return htmlString.startsWith('<ons-page');
-  };
-
-  reactUtil.rendersTo = function (obj, str) {
-    var htmlString = ReactDOMServer.renderToStaticMarkup(obj);
-    return htmlString.startsWith(str);
-  };
-
-  reactUtil.rendersToToolbar = function (obj) {
-    var htmlString = ReactDOMServer.renderToStaticMarkup(obj);
-    return htmlString.startsWith('<ons-toolbar');
-  };
-
-  reactUtil.rendersToModal = function (obj) {
-    var htmlString = ReactDOMServer.renderToStaticMarkup(obj);
-    return htmlString.startsWith('<ons-modal');
-  };
-
-  reactUtil.lastChild = function (el) {
-    return el.children[el.children.length - 1];
-  };
-
-  reactUtil.createCustomDialog = function (component) {
-    var body = document.body;
-    var container = document.createElement('div');
-    body.appendChild(container);
-
-    return new Promise(function (resolve) {
-      ReactDOM.render(component, container, function () {
-        resolve(container.firstChild);
-      });
-    });
-  };
-
-  reactUtil.templateMap = {};
-
   /**
-   * Should be used as root component of each page. The content inside page component is scrollable.
-  */
+   * @original ons-page
+   * @category page
+   * @description
+   * [en] This component is handling the entire page.  THe content can be scrolled. [/en]
+   * [jp] どうしよう[/jp]
+   * @example
+    <Page>
+      <div> Page content </div>
+    </Page>
+   */
 
-  var Page = function (_React$Component) {
-    babelHelpers.inherits(Page, _React$Component);
+  var Page = function (_BasicComponent) {
+    babelHelpers.inherits(Page, _BasicComponent);
 
     function Page() {
       babelHelpers.classCallCheck(this, Page);
@@ -839,26 +1301,30 @@
     babelHelpers.createClass(Page, [{
       key: 'componentDidMount',
       value: function componentDidMount() {
+        babelHelpers.get(Object.getPrototypeOf(Page.prototype), 'componentDidMount', this).call(this);
         var node = ReactDOM.findDOMNode(this);
         CustomElements.upgrade(node);
+        node.addEventListener('init', this.props.onInit);
+        node.addEventListener('show', this.props.onShow);
+        node.addEventListener('hide', this.props.onHide);
+        node.addEventListener('destroy', this.props.onDestroy);
+      }
+    }, {
+      key: 'componentWillUnmount',
+      value: function componentWillUnmount() {
+        var node = ReactDOM.findDOMNode(this);
+        node.removeEventListener('init', this.props.onInit);
+        node.removeEventListener('show', this.props.onShow);
+        node.removeEventListener('hide', this.props.onHide);
+        node.removeEventListener('destroy', this.props.onDestroy);
       }
     }, {
       key: 'render',
       value: function render() {
-        var toolbar;
-        var modal;
-        var otherChildren = [];
+        var toolbar = this.props.renderToolbar(this);
 
-        React.Children.forEach(this.props.children, function (child) {
-          if (child == null) return;
-          if (reactUtil.rendersToToolbar(child)) {
-            toolbar = child;
-          } else if (reactUtil.rendersToModal(child)) {
-            modal = child;
-          } else {
-            otherChildren.push(child);
-          }
-        });
+        // TODO MODAL
+        var modal = null;
 
         return React.createElement(
           'ons-page',
@@ -872,7 +1338,7 @@
           React.createElement(
             'div',
             { className: 'page__content' },
-            otherChildren
+            this.props.children
           ),
           React.createElement(
             'div',
@@ -883,27 +1349,86 @@
       }
     }]);
     return Page;
-  }(React.Component);
+  }(BasicComponent);
 
   ;
 
   Page.propTypes = {
     /**
-      * The children is provided for all components in React. These children define
-    */
-    children: React.PropTypes.node,
+     * @name modifier
+     * @type string
+     * @description
+     *  [en]
+     *  Specify modifier name to specify custom styles. Optional.
+     *  [/en]
+     *  [jp] どうしよう[/jp]
+     */
+    modifier: React.PropTypes.string,
+
     /**
-      * The ref attribute is provided for all components in React. The attribute is callback will be executed immediately after the component is mounted.
-    */
-    ref: React.PropTypes.func,
+     * @name renderToolbar
+     * @type function
+     * @required false
+     * @defaultValue null
+     * @description
+     *  [en] This function takes the current route object as a parameter and  creates returns a react componen.[/en]
+     *  [jp] どうしよう[/jp]
+     */
+    renderToolbar: React.PropTypes.func,
+
     /**
-      * The style attribute is provided for all components in React. The attribute is an object. For reference look at https://facebook.github.io/react/tips/inline-styles.html.
-    */
-    style: React.PropTypes.object,
+     * @name onInit
+     * @type function
+     * @required false
+     * @description
+     *  [en]
+     *  	Fired right after the page is attached.
+     *  [/en]
+     *  [jp] どうしよう[/jp]
+     */
+    onInit: React.PropTypes.func,
+
     /**
-      * The className attribute is provided for all components in React. It defines the classes for a component.  For reference look at https://facebook.github.io/react/tips/inline-styles.html.
-    */
-    className: React.PropTypes.string
+     * @name onShow
+     * @type function
+     * @required false
+     * @description
+     *  [en]
+     *  Called Fired right after the page is shown.
+     *  [/en]
+     *  [jp] どうしよう[/jp]
+     */
+    onShow: React.PropTypes.func,
+
+    /**
+     * @name onHide
+     * @type function
+     * @required false
+     * @description
+     *  [en]
+     *  Called after the page is hidden.
+     *  [/en]
+     *  [jp] どうしよう[/jp]
+     */
+    onHide: React.PropTypes.func,
+
+    /**
+     * @name onDestroy
+     * @type function
+     * @required false
+     * @description
+     *  [en]
+     *  Called after the page is destroyed.
+     *  [/en]
+     *  [jp] どうしよう[/jp]
+     */
+    onDestroy: React.PropTypes.func
+  };
+
+  Page.defaultProps = {
+    renderToolbar: function renderToolbar() {
+      return null;
+    }
   };
 
   var Popover = function (_BaseDialog) {
@@ -931,13 +1456,22 @@
   }(BaseDialog);
 
   Popover.propTypes = {
-    onCancel: React.PropTypes.func.isRequired,
+    onCancel: React.PropTypes.func,
     isOpen: React.PropTypes.bool.isRequired,
-    getTarget: React.PropTypes.func.isRequired
+    getTarget: React.PropTypes.func.isRequired,
+    isCancelable: React.PropTypes.bool,
+    animation: React.PropTypes.string,
+    maskColor: React.PropTypes.string,
+    animationOptions: React.PropTypes.object,
+    onPreShow: React.PropTypes.func,
+    onPostShow: React.PropTypes.func,
+    onPreHide: React.PropTypes.func,
+    onPostHide: React.PropTypes.func
+
   };
 
-  var PullHook = function (_React$Component) {
-    babelHelpers.inherits(PullHook, _React$Component);
+  var PullHook = function (_BasicComponent) {
+    babelHelpers.inherits(PullHook, _BasicComponent);
 
     function PullHook() {
       babelHelpers.classCallCheck(this, PullHook);
@@ -947,6 +1481,7 @@
     babelHelpers.createClass(PullHook, [{
       key: 'componentDidMount',
       value: function componentDidMount() {
+        babelHelpers.get(Object.getPrototypeOf(PullHook.prototype), 'componentDidMount', this).call(this);
         var node = ReactDOM.findDOMNode(this);
         node.addEventListener('changestate', this.props.onChange);
         CustomElements.upgrade(this.refs.pullHook);
@@ -961,11 +1496,56 @@
     }, {
       key: 'render',
       value: function render() {
-        return React.createElement('ons-pull-hook', babelHelpers.extends({ ref: 'pullHook' }, this.props));
+        var _props = this.props;
+        var disabled = _props.disabled;
+        var thresholdHeight = _props.thresholdHeight;
+        var fixedContent = _props.fixedContent;
+        var height = _props.height;
+        var others = babelHelpers.objectWithoutProperties(_props, ['disabled', 'thresholdHeight', 'fixedContent', 'height']);
+
+
+        if (disabled) {
+          others.disabled = true;
+        }
+
+        if (height) {
+          others.height = height + 'px';
+        }
+
+        if (thresholdHeight) {
+          others['threshold-height'] = thresholdHeight + 'px';
+        }
+
+        if (fixedContent) {
+          others['fixed-content'] = true;
+        }
+
+        return React.createElement('ons-pull-hook', babelHelpers.extends({ ref: 'pullHook' }, others));
       }
     }]);
     return PullHook;
-  }(React.Component);
+  }(BasicComponent);
+
+  PullHook.propTypes = {
+    onChange: React.PropTypes.func,
+    onLoad: React.PropTypes.func,
+    disabled: React.PropTypes.bool,
+    height: React.PropTypes.number,
+    thresholdHeight: React.PropTypes.number,
+    fixedContent: React.PropTypes.bool
+  };
+
+  /**
+   * @original ons-ripple-
+   * @category form
+   * @description
+   * [en] Adds a Material Design "ripple" effect to an element.  [/en]
+   * [jp] どうしよう[/jp]
+   * @example
+     <div className='myList'>
+       <Ripple color='red' />
+     </div>
+   */
 
   var Ripple = function (_SimpleWrapper) {
     babelHelpers.inherits(Ripple, _SimpleWrapper);
@@ -986,24 +1566,11 @@
 
   ;
 
-  var Scroller = function (_SimpleWrapper) {
-    babelHelpers.inherits(Scroller, _SimpleWrapper);
-
-    function Scroller() {
-      babelHelpers.classCallCheck(this, Scroller);
-      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Scroller).apply(this, arguments));
-    }
-
-    babelHelpers.createClass(Scroller, [{
-      key: '_getDomNodeName',
-      value: function _getDomNodeName() {
-        return 'ons-scroller';
-      }
-    }]);
-    return Scroller;
-  }(SimpleWrapper);
-
-  ;
+  Ripple.propTypes = {
+    color: React.PropTypes.string,
+    background: React.PropTypes.string,
+    disabled: React.PropTypes.bool
+  };
 
   var SpeedDial = function (_SimpleWrapper) {
     babelHelpers.inherits(SpeedDial, _SimpleWrapper);
@@ -1024,6 +1591,13 @@
 
   ;
 
+  SpeedDial.propTypes = {
+    modifier: React.PropTypes.string,
+    position: React.PropTypes.string,
+    direction: React.PropTypes.oneOf(['up', 'down', 'left', 'right']),
+    disabled: React.PropTypes.bool
+  };
+
   var SpeedDialItem = function (_SimpleWrapper) {
     babelHelpers.inherits(SpeedDialItem, _SimpleWrapper);
 
@@ -1037,11 +1611,29 @@
       value: function _getDomNodeName() {
         return 'ons-speed-dial-item';
       }
+    }, {
+      key: 'componentDidMount',
+      value: function componentDidMount() {
+        babelHelpers.get(Object.getPrototypeOf(SpeedDialItem.prototype), 'componentDidMount', this).call(this);
+        var node = ReactDOM.findDOMNode(this);
+        CustomElements.upgrade(node);
+        node.addEventListener('click', this.props.onClick);
+      }
+    }, {
+      key: 'componentWillUnmount',
+      value: function componentWillUnmount() {
+        var node = ReactDOM.findDOMNode(this);
+        node.removeEventListener('click', this.props.onClick);
+      }
     }]);
     return SpeedDialItem;
   }(SimpleWrapper);
 
   ;
+
+  SpeedDialItem.propTypes = {
+    modifier: React.PropTypes.string
+  };
 
   var Splitter = function (_SimpleWrapper) {
     babelHelpers.inherits(Splitter, _SimpleWrapper);
@@ -1081,8 +1673,8 @@
 
   ;
 
-  var SplitterSide = function (_React$Component) {
-    babelHelpers.inherits(SplitterSide, _React$Component);
+  var SplitterSide = function (_BasicComponent) {
+    babelHelpers.inherits(SplitterSide, _BasicComponent);
 
     function SplitterSide() {
       babelHelpers.classCallCheck(this, SplitterSide);
@@ -1092,7 +1684,8 @@
     babelHelpers.createClass(SplitterSide, [{
       key: 'render',
       value: function render() {
-        var props = Object.assign({}, this.props);
+        var props = babelHelpers.objectWithoutProperties(this.props, []);
+
 
         props.collapse = this.props.isCollapsed ? 'collapse' : 'false';
         props.swipeable = this.props.isSwipeable ? 'swipeable' : 'false';
@@ -1107,20 +1700,47 @@
           this.props.children
         );
       }
+    }, {
+      key: 'componentDidMount',
+      value: function componentDidMount() {
+        babelHelpers.get(Object.getPrototypeOf(SplitterSide.prototype), 'componentDidMount', this).call(this);
+        this.node = ReactDOM.findDOMNode(this);
+
+        this.node.addEventListener('postopen', this.props.onOpen);
+        this.node.addEventListener('postclose', this.props.onClose);
+      }
+    }, {
+      key: 'componentWillUnmount',
+      value: function componentWillUnmount() {
+        this.node.removeEventListener('postopen', this.props.onOpen);
+        this.node.removeEventListener('postclose', this.props.onClose);
+      }
+    }, {
+      key: 'componentWillReceiveProps',
+      value: function componentWillReceiveProps(newProps) {
+        if (newProps.isOpen) {
+          this.node.open();
+        } else {
+          this.node.close();
+        }
+      }
     }]);
     return SplitterSide;
-  }(React.Component);
+  }(BasicComponent);
 
   SplitterSide.propTypes = {
     isCollapsed: React.PropTypes.bool.isRequired,
     isSwipable: React.PropTypes.bool,
+    isOpen: React.PropTypes.bool,
+    onOpen: React.PropTypes.func,
+    onClose: React.PropTypes.func,
     // value out of left, right ...
     side: React.PropTypes.string,
     width: React.PropTypes.number
   };
 
-  var Switch = function (_React$Component) {
-    babelHelpers.inherits(Switch, _React$Component);
+  var Switch = function (_BasicComponent) {
+    babelHelpers.inherits(Switch, _BasicComponent);
 
     function Switch() {
       babelHelpers.classCallCheck(this, Switch);
@@ -1130,6 +1750,7 @@
     babelHelpers.createClass(Switch, [{
       key: 'componentDidMount',
       value: function componentDidMount() {
+        babelHelpers.get(Object.getPrototypeOf(Switch.prototype), 'componentDidMount', this).call(this);
         this.refs.switch.addEventListener('change', this.props.onChange);
       }
     }, {
@@ -1142,20 +1763,26 @@
       value: function render() {
         var _props = this.props;
         var checked = _props.checked;
-        var other = babelHelpers.objectWithoutProperties(_props, ['checked']);
+        var inputID = _props.inputID;
+        var other = babelHelpers.objectWithoutProperties(_props, ['checked', 'inputID']);
 
 
+        if (inputID) {
+          other['input-id'] = inputID;
+        }
         return React.createElement('ons-switch', babelHelpers.extends({ ref: 'switch', checked: checked ? '' : null }, other));
       }
     }]);
     return Switch;
-  }(React.Component);
+  }(BasicComponent);
 
   ;
 
   Switch.propTypes = {
     onChange: React.PropTypes.func,
-    checked: React.PropTypes.bool
+    checked: React.PropTypes.bool,
+    disabled: React.PropTypes.bool,
+    inputID: React.PropTypes.string
   };
 
   var Tab = function (_SimpleWrapper) {
@@ -1215,8 +1842,8 @@
 
   ;
 
-  var Tabbar = function (_React$Component) {
-    babelHelpers.inherits(Tabbar, _React$Component);
+  var Tabbar = function (_BasicComponent) {
+    babelHelpers.inherits(Tabbar, _BasicComponent);
 
     function Tabbar(props) {
       babelHelpers.classCallCheck(this, Tabbar);
@@ -1232,6 +1859,7 @@
     babelHelpers.createClass(Tabbar, [{
       key: 'componentDidMount',
       value: function componentDidMount() {
+        babelHelpers.get(Object.getPrototypeOf(Tabbar.prototype), 'componentDidMount', this).call(this);
         var node = this.refs.tabbar;
         CustomElements.upgrade(node);
         node.setActiveTab(this.state.activeIndex);
@@ -1267,14 +1895,14 @@
           babelHelpers.extends({}, this.props, { ref: 'tabbar', activeIndex: this.state.activeIndex, _compiled: 'true' }),
           React.createElement(
             'div',
-            { 'no-status-bar-fill': true, className: 'ons-tab-bar__content tab-bar__content' },
+            { 'no-status-bar-fill': true, className: 'ons-tab-bar__content tab-bar__content' + (this.props.position === 'top' ? ' tab-bar--top__content' : '') },
             tabs.map(function (tab) {
               return tab.content;
             })
           ),
           React.createElement(
             'div',
-            { className: 'tab-bar ons-tab-bar__footer ons-tabbar-inner' },
+            { className: 'tab-bar ons-tab-bar__footer ons-tabbar-inner' + (this.props.position === 'top' ? ' tab-bar--top' : '') },
             tabs.map(function (tab) {
               return tab.tab;
             })
@@ -1283,7 +1911,7 @@
       }
     }]);
     return Tabbar;
-  }(React.Component);
+  }(BasicComponent);
 
   ;
 
@@ -1295,6 +1923,10 @@
   Tabbar.defaultProps = {
     initialIndex: 0
   };
+
+  /**
+   * I'm a toolbar!
+   */
 
   var Toolbar = function (_SimpleWrapper) {
     babelHelpers.inherits(Toolbar, _SimpleWrapper);
@@ -1314,6 +1946,19 @@
   }(SimpleWrapper);
 
   ;
+
+  Toolbar.propTypes = {
+    /**
+     * @name modifier
+     * @type string
+     * @description
+     *  [en]
+     *  Specify modifier name to specify custom styles. Optional.
+     *  [/en]
+     *  [jp] どうしよう[/jp]
+     */
+    modifier: React.PropTypes.string
+  };
 
   var ToolbarButton = function (_SimpleWrapper) {
     babelHelpers.inherits(ToolbarButton, _SimpleWrapper);
@@ -1339,7 +1984,6 @@
   exports.BottomToolbar = BottomToolbar;
   exports.Button = Button;
   exports.Carousel = Carousel;
-  exports.CarouselCover = CarouselCover;
   exports.CarouselItem = CarouselItem;
   exports.Dialog = Dialog;
   exports.Fab = Fab;
@@ -1348,13 +1992,12 @@
   exports.LazyList = LazyList;
   exports.List = List;
   exports.ListHeader = ListHeader;
-  exports.ListItem = _class;
+  exports.ListItem = ListItem;
   exports.Navigator = Navigator;
   exports.Page = Page;
   exports.Popover = Popover;
   exports.PullHook = PullHook;
   exports.Ripple = Ripple;
-  exports.Scroller = Scroller;
   exports.SpeedDial = SpeedDial;
   exports.SpeedDialItem = SpeedDialItem;
   exports.Splitter = Splitter;
