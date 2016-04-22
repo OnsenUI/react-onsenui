@@ -140,37 +140,5 @@ class App extends React.Component {
 }
 
 
-class MyPage extends React.Component {
-
-    constructor(props) {
-        super(props);
-        console.log('Page Constructor called');
-    }
-
-    render() {
-        console.log('Page Render called');
-        return (
-            <Page>
-                <TestComponent/>
-            </Page>
-        );
-    }
-}
-
-export default class TestComponent extends React.Component {
-
-    constructor(props) {
-        super(props);
-        console.log('Test Constructor called');
-    }
-
-    render() {
-        console.log('Test render called');
-        return (
-            <p>test</p>
-        );
-    }
-
-}
 
 ReactDOM.render(<App />, document.getElementById('app'));
