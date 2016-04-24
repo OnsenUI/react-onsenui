@@ -1,6 +1,6 @@
 {
   "name": "react-onsenui",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "React extension for Onsen UI",
   "main": "dist/react-onsenui.js",
   "scripts": {
