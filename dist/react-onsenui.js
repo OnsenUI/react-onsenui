@@ -1,4 +1,4 @@
-/*! react-onsenui v0.0.19 - Fri Apr 22 2016 19:40:01 GMT+0900 (JST) */
+/*! react-onsenui v0.0.20 - Sun Apr 24 2016 20:38:58 GMT+0900 (JST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom'], factory) :
@@ -793,7 +793,7 @@
         var checked = _props.checked;
         var other = babelHelpers.objectWithoutProperties(_props, ['checked']);
 
-        other['input-id'] = this.props.inputID;
+        other['input-id'] = this.props.inputId;
 
         return React.createElement('ons-input', babelHelpers.extends({ checked: checked ? '' : null }, other));
       }
@@ -806,7 +806,7 @@
     value: React.PropTypes.string,
     placeholder: React.PropTypes.string,
     type: React.PropTypes.string,
-    inputID: React.PropTypes.string,
+    inputId: React.PropTypes.string,
     'float': React.PropTypes.bool
   };
 
@@ -1763,12 +1763,12 @@
       value: function render() {
         var _props = this.props;
         var checked = _props.checked;
-        var inputID = _props.inputID;
-        var other = babelHelpers.objectWithoutProperties(_props, ['checked', 'inputID']);
+        var inputId = _props.inputId;
+        var other = babelHelpers.objectWithoutProperties(_props, ['checked', 'inputId']);
 
 
-        if (inputID) {
-          other['input-id'] = inputID;
+        if (inputId) {
+          other['input-id'] = inputId;
         }
         return React.createElement('ons-switch', babelHelpers.extends({ ref: 'switch', checked: checked ? '' : null }, other));
       }
@@ -1782,7 +1782,7 @@
     onChange: React.PropTypes.func,
     checked: React.PropTypes.bool,
     disabled: React.PropTypes.bool,
-    inputID: React.PropTypes.string
+    inputId: React.PropTypes.string
   };
 
   var Tab = function (_SimpleWrapper) {
