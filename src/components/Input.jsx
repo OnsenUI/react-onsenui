@@ -24,7 +24,7 @@ class Input extends BasicComponent {
 
   render() {
     var {checked, ...other} = this.props;
-    other['input-id'] = this.props.inputID;
+    other['input-id'] = this.props.inputId;
 
     return (
       <ons-input checked={checked ? '' : null} {...other} />
@@ -37,7 +37,7 @@ Input.propTypes = {
   value: React.PropTypes.string,
   placeholder: React.PropTypes.string,
   type: React.PropTypes.string,
-  inputID: React.PropTypes.string,
+  inputId: React.PropTypes.string,
   'float': React.PropTypes.bool
 };
 
