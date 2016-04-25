@@ -1,36 +1,9 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Util from './Util.js';
 
 class Carousel extends SimpleWrapper {
-  constructor(props) {
-    super(props);
-    this.convert = this.convert.bind(this);
-    this.sizeConverter = this.sizeConverter.bind(this);
-  }
-
-  convert(dict, name, additionalDict = {}) {
-    const fun = additionalDict.fun ? additionalDict.fun : (x) => x;
-    const newName = additionalDict.newName ? additionalDict.newName : name;
-
-    var val = dict[name];
-    if (val) {
-      if (newName !== name) {
-        delete dict[name];
-      }
-      dict[newName] = fun(val);
-    }
-    return dict;
-  }
-
-  sizeConverter(item) {
-    if (typeof (item) === 'number') {
-      return `${item}px`;
-    } else {
-      return item;
-    }
-  }
-
   _getDomNodeName() {
     return 'ons-carousel';
   }
@@ -52,20 +25,19 @@ class Carousel extends SimpleWrapper {
   }
 
   render() {
-    // var {fullscreen, itemWidth, overscrollable, centered} = this.props;
-
     var {...others} = this.props;
 
     ['fullscreen', 'swipeable', 'disabled', 'centered', 'overscrollable', 'centered'].forEach((el) => {
-      this.convert(others, el);
+      Util.convert(others, el);
     });
 
-    this.convert(others, 'itemWidth', {fun: this.sizeConverter, newName: 'item-width'});
-    this.convert(others, 'itemHeight', {fun: this.sizeConverter, newName: 'item-height'});
-    this.convert(others, 'autoScroll', {newName: 'auto-scroll'});
-    this.convert(others, 'autoRefresh', {newName: 'auto-refresh'});
-    this.convert(others, 'autoScrollRatio', {newName: 'auto-scroll-ratio'});
-    this.convert(others, 'initialIndex', {newName: 'initial-index'});
+    Util.convert(others, 'itemWidth', {fun: Util.sizeConverter, newName: 'item-width'});
+    Util.convert(others, 'itemHeight', {fun: Util.sizeConverter, newName: 'item-height'});
+    Util.convert(others, 'autoScroll', {newName: 'auto-scroll'});
+    Util.convert(others, 'autoRefresh', {newName: 'auto-refresh'});
+    Util.convert(others, 'autoScrollRatio', {newName: 'auto-scroll-ratio'});
+    Util.convert(others, 'initialIndex', {newName: 'initial-index'});
+    Util.convert(others, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
 
     return React.createElement(this._getDomNodeName(), others, this.props.children);
   }
@@ -86,8 +58,8 @@ Carousel.propTypes = {
   autoRefresh: React.PropTypes.bool,
   onPostChange: React.PropTypes.func,
   onRefresh: React.PropTypes.func,
-  onOverscroll: React.PropTypes.func
-  // TODO animation options
+  onOverscroll: React.PropTypes.func,
+  animationOptions: React.PropTypes.object
 };
 
 export default Carousel;

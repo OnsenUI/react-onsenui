@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Util from './Util.js';
 
 class BaseDialog extends React.Component {
   show() {
@@ -85,9 +86,7 @@ class BaseDialog extends React.Component {
     }
 
     if (newProps.animationOptions) {
-      var keys = Object.keys(newProps.animationOptions);
-      var innerString = keys.map((key) => key + ': "' + newProps.animationOptions[key] + '"');
-      var val = '{' + innerString.join(',') + '}';
+      var val = Util.animationOptionsConverter(newProps.animationOptions);
       newProps = {...newProps, 'animation-options': val};
     }
 

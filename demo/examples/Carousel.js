@@ -24,6 +24,11 @@ export default class extends React.Component {
     return (
       <Page renderToolbar={() => <MyToolbar title='Fullscreen' />}>
         <Carousel
+          animationOptions={{
+            duration: 1.0,
+            delay: 0.3,
+            timing: 'ease-in'
+          }}
           onPostChange={() => console.log('onPostChange')}
           onOverscroll={() => console.log('onOverscroll')}
           onRefresh={() => console.log('onRefresh')}
