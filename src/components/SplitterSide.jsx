@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import BasicComponent from './BasicComponent.jsx';
+import Util from './Util.js';
 
 class SplitterSide extends BasicComponent {
   render() {
@@ -9,9 +10,13 @@ class SplitterSide extends BasicComponent {
     props.collapse = this.props.isCollapsed ? 'collapse' : 'false';
     props.swipeable = this.props.isSwipeable ? 'swipeable' : 'false';
 
-    if (this.props.width) {
-      props.width = this.props.width + 'px';
-    }
+    Util.convert(props, 'width', {fun: Util.sizeConverter});
+    Util.convert(props, 'animation');
+    Util.convert(props, 'side');
+    Util.convert(props, 'mode');
+    Util.convert(props, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
+    Util.convert(props, 'openThreshold', {newName: 'open-threshold'});
+    Util.convert(props, 'SwipeTargetWidth', {fun: Util.sizeConverter, newName: 'swipe-target-width'});
 
     return (
       <ons-splitter-side {...props} >
@@ -26,11 +31,17 @@ class SplitterSide extends BasicComponent {
 
     this.node.addEventListener('postopen', this.props.onOpen);
     this.node.addEventListener('postclose', this.props.onClose);
+    this.node.addEventListener('preopen', this.props.onPreOpen);
+    this.node.addEventListener('preclose', this.props.onPreClose);
+    this.node.addEventListener('modechange', this.props.onModeChange);
   }
 
   componentWillUnmount() {
     this.node.removeEventListener('postopen', this.props.onOpen);
     this.node.removeEventListener('postclose', this.props.onClose);
+    this.node.removeEventListener('preopen', this.props.onPreOpen);
+    this.node.removeEventListener('preclose', this.props.onPreClose);
+    this.node.removeEventListener('modechange', this.props.onModeChange);
   }
 
   componentWillReceiveProps(newProps) {
@@ -49,8 +60,15 @@ SplitterSide.propTypes = {
   onOpen: React.PropTypes.func,
   onClose: React.PropTypes.func,
   // value out of left, right ...
-  side: React.PropTypes.string,
-  width: React.PropTypes.number
+  side: React.PropTypes.oneOf(['left', 'right']),
+  width: React.PropTypes.number,
+  animation: React.PropTypes.string,
+  animationOptions: React.PropTypes.object,
+  openThreshold: React.PropTypes.number,
+  mode: React.PropTypes.oneOf(['collapse', 'split']),
+  onPreOpen: React.PropTypes.func,
+  onPreClose: React.PropTypes.func,
+  onModeChange: React.PropTypes.func
 };
 
 export default SplitterSide;
