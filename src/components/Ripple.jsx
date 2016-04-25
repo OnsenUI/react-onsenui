@@ -2,7 +2,7 @@ import SimpleWrapper from './SimpleWrapper.jsx';
 import React from 'react';
 
 /**
- * @original ons-ripple-
+ * @original ons-ripple
  * @category form
  * @description
  * [en] Adds a Material Design "ripple" effect to an element.  [/en]
