@@ -41,6 +41,10 @@ class Examples extends React.Component {
         component: TabbarExample
       },
       {
+        title: 'Splitter',
+        component: SplitterExample
+      },
+      {
         title: 'SpeedDial',
         component: SpeedDialExample
       },
@@ -74,13 +78,9 @@ class Examples extends React.Component {
         title: 'Lazy List',
         component: LazyListExample
       },
-            {
+      {
         title: 'Alert dialog',
         component: AlertDialogExample
-      },
-      {
-        title: 'Splitter',
-        component: SplitterExample
       },
       {
         title: 'Input',
