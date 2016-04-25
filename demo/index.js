@@ -37,6 +37,10 @@ class Examples extends React.Component {
 
     this.examples = [
       {
+        title: 'Tabbar',
+        component: TabbarExample
+      },
+      {
         title: 'SpeedDial',
         component: SpeedDialExample
       },
@@ -70,11 +74,7 @@ class Examples extends React.Component {
         title: 'Lazy List',
         component: LazyListExample
       },
-      {
-        title: 'Tabbar',
-        component: TabbarExample
-      },
-      {
+            {
         title: 'Alert dialog',
         component: AlertDialogExample
       },
