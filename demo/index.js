@@ -23,6 +23,7 @@ import RippleExample from './examples/Ripple';
 import SpeedDialExample from './examples/SpeedDial';
 import PullHookExample from './examples/PullHook';
 import CarouselExample from './examples/Carousel';
+import PopoverExample from './examples/Popover';
 
 class Examples extends React.Component {
   constructor(props) {
@@ -31,6 +32,10 @@ class Examples extends React.Component {
     this.state = {class: 'test'};
 
     this.examples = [
+      {
+        title: 'Popover',
+        component: PopoverExample
+      },
       {
         title: 'Tabbar',
         component: TabbarExample
