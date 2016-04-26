@@ -13,7 +13,6 @@ import React from 'react';
       <div className="center">{this.props.title}</div>
    </Toolbar>
  */
-
 class BackButton extends SimpleWrapper {
   _getDomNodeName() {
     return 'ons-back-button';

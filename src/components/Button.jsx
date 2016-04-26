@@ -1,5 +1,6 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
 import React from 'react';
+
 /**
  * @original ons-button
  * @category page
@@ -12,7 +13,6 @@ import React from 'react';
  *   Tap Me
  * </Button>
  */
-
 class Button extends SimpleWrapper {
   _getDomNodeName() {
     return 'ons-button';
