@@ -1,19 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import ons from '../OnsenUI/build/js/onsenui.js';
+import '../OnsenUI/build/js/onsenui.js';
 
 import {
   Page,
   Navigator,
   Toolbar,
   List,
-  ListItem,
-  Ripple,
-  Carousel,
-  CarouselItem,
-  BottomToolbar,
-  ToolbarButton,
+  ListItem
 } from 'react-onsenui';
 
 import PageExample from './examples/Page';
