@@ -3,7 +3,7 @@ import BasicComponent from './BasicComponent.jsx';
 
 /**
  * @original ons-switch
- * @category switch
+ * @category input
  * @description
  * [en]   Switch component. The switch can be toggled both by dragging and tapping.
  *     Will automatically displays a Material Design switch on Android devices.
