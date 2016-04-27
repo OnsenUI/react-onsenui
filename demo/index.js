@@ -25,6 +25,7 @@ import PullHookExample from './examples/PullHook';
 import CarouselExample from './examples/Carousel';
 import PopoverExample from './examples/Popover';
 import DialogExample from './examples/Dialog';
+import SwitchExample from './examples/Switch';
 
 class Examples extends React.Component {
   constructor(props) {
@@ -33,6 +34,10 @@ class Examples extends React.Component {
     this.state = {class: 'test'};
 
     this.examples = [
+      {
+        title: 'Switch',
+        component: SwitchExample
+      },
       {
         title: 'Dialog',
         component: DialogExample
