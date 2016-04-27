@@ -26,6 +26,7 @@ import CarouselExample from './examples/Carousel';
 import PopoverExample from './examples/Popover';
 import DialogExample from './examples/Dialog';
 import SwitchExample from './examples/Switch';
+import ProgressBarExample from './examples/ProgressBar';
 
 class Examples extends React.Component {
   constructor(props) {
@@ -38,6 +39,11 @@ class Examples extends React.Component {
         title: 'Switch',
         component: SwitchExample
       },
+      {
+        title: 'ProgressBar',
+        component: ProgressBarExample
+      },
+
       {
         title: 'Dialog',
         component: DialogExample

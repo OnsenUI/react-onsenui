@@ -15,6 +15,7 @@ import ListItem from './components/ListItem.jsx';
 import Navigator from './components/Navigator.jsx';
 import Page from './components/Page.jsx';
 import Popover from './components/Popover.jsx';
+import ProgressBar from './components/ProgressBar.jsx';
 import PullHook from './components/PullHook.jsx';
 import Ripple from './components/Ripple.jsx';
 import SpeedDial from './components/SpeedDial.jsx';
@@ -48,6 +49,7 @@ export {
   Navigator,
   Page,
   Popover,
+  ProgressBar,
   PullHook,
   Ripple,
   SpeedDial,
