@@ -9,11 +9,15 @@ import React from 'react';
  [/en]
  * [jp][/jp]
  * @example
- * <Button modifier="large--cta">
- *   Tap Me
- * </Button>
- */
+   <Dialog onCancel={this.onCancel}
+     isOpen={this.props.isOpen}
+     style={{height: 250}}  cancelable>
+     <Page>
+       Page Content
+     </Page>
+    </Dialog>
 
+ */
 class Dialog extends BaseDialog {
   _getDomNodeName() {
     return 'ons-dialog';
@@ -155,7 +159,6 @@ Dialog.propTypes = {
    *  [jp][/jp]
    */
   onPostHide: React.PropTypes.func
-
 };
 
 export default Dialog;
