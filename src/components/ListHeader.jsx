@@ -18,7 +18,6 @@ import React from 'react';
     )}
   />
  */
-
 class ListHeader extends SimpleWrapper {
   _getDomNodeName() {
     return 'ons-list-header';

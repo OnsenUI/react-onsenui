@@ -16,7 +16,6 @@ import SimpleWrapper from './SimpleWrapper.jsx';
      </TabInActive>
    </Tab>
  */
-
 class TabActive extends SimpleWrapper {
   _getDomNodeName() {
     return 'ons-tab-active';

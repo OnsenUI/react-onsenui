@@ -17,7 +17,6 @@ import SimpleWrapper from './SimpleWrapper.jsx';
  *   <div className="right">Right</div>
  * </ListItem>
  */
-
 class ListItem extends SimpleWrapper {
   _getDomNodeName() {
     return 'ons-list-item';

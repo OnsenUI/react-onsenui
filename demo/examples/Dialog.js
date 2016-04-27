@@ -4,7 +4,9 @@ import {
   Page,
   Button,
   Toolbar,
-  Dialog
+  Dialog,
+  Navigator,
+  Input
 } from 'react-onsenui';
 
 import ons from '../../OnsenUI/build/js/onsenui.js';
@@ -95,7 +97,7 @@ class MyDialog extends React.Component {
         initialRoute={{comp: FirstPage, props: {
           pushPage: this.pushPage, onNameChanged: this.onNameChanged }}}
         renderPage={this.renderPage}>
-              </Navigator>
+       </Navigator>
     </Dialog>
     );
   }
@@ -145,7 +147,7 @@ export default class extends React.Component {
     <Page>
       <div style={{textAlign: 'center'}}>
         <h1>Page Content</h1>
-        <Button onClick={this.hello}> Hello </Button>
+        <Button onClick={this.showAlert2}> Hello </Button>
         <Button onClick={this.showAlert}> Show Alert </Button>
         <div> Name : {this.state.name} </div>
         <div> Description : {this.state.description} </div>

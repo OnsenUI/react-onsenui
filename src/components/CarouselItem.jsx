@@ -1,6 +1,23 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
 import React from 'react';
 
+/**
+ * @original ons-carousel-item
+ * @category carousel
+ * @description
+ * [en] Carousel item component. Used as a child of the `<ons-carousel>` element.
+ [/en]
+ * [jp][/jp]
+ * @example
+*  <Carousel swipeable overscrollable autoScroll fullscreen >
+     <CarouselItem style={{backgroundColor: 'gray'}}>
+       <div className='item-label'>GRAY</div>
+     </CarouselItem>
+     <CarouselItem style={{backgroundColor: '#085078'}}>
+       <div className='item-label'>BLUE</div>
+     </CarouselItem>
+   </Carousel>
+ */
 class CarouselItem extends SimpleWrapper {
   _getDomNodeName() {
     return 'ons-carousel-item';
