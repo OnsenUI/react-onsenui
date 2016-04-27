@@ -50,7 +50,16 @@ Button.propTypes = {
    *  [/en]
    *  [jp] [/jp]
    */
-  ripple: React.PropTypes.bool
+  ripple: React.PropTypes.bool,
+
+  /**
+   * @name onClick
+   * @type function
+   * @description
+   *  [en] This function will be called ones the button is clicked. [/en]
+   *  [jp] [/jp]
+   */
+  onClick: React.PropTypes.func
 };
 
 export default Button;
