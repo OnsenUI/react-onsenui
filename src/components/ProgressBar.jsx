@@ -52,7 +52,7 @@ ProgressBar.propTypes = {
 
   /**
    * @name secondaryValue
-   * @type number
+   * @type bool
    * @description
    *  [en]
    *  Current secondary progress. Should be a value between 0 and 100.
