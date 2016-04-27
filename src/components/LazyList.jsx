@@ -3,7 +3,7 @@ import BasicComponent from './BasicComponent.jsx';
 
 /**
  * @original ons-lazy-repeat
- * @category list
+ * @category lazy-list
  * @description
  * [en] Using this component a list with millions of items can be rendered without a drop in performance.
  *     It does that by "lazily" loading elements into the DOM when they come into view and

@@ -6,7 +6,7 @@ const EVENT_TYPES = ['change', 'input'];
 
 /**
  * @original ons-input
- * @category form
+ * @category input
  * @description
  * [en]
  * An input element. The `type` attribute can be used to change the input type. All text input types as well as `checkbox` and `radio` are supported. The component will automatically render as a Material Design input on Android devices. Most attributes that can be used for a normal `<input>` element can also be used on the `<ons-input>` element..

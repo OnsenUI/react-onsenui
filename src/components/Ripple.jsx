@@ -3,7 +3,7 @@ import React from 'react';
 
 /**
  * @original ons-ripple
- * @category form
+ * @category ripple
  * @description
  * [en] Adds a Material Design "ripple" effect to an element.  [/en]
  * [jp][/jp]
