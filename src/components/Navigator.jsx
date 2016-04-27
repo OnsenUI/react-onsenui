@@ -3,7 +3,7 @@ import BasicComponent from './BasicComponent.jsx';
 
 /**
  * @original ons-navigator
- * @category navigation
+ * @category navigator
  * @description
  * [en] This component is responsible for page transitioning and managing the pages of your OnsenUI application. In order to manage to display the pages, the  navigator needs to define the `renderPage` method, that takes an route and a navigator and  converts it to an page.  [/en]
  * [jp] どうしよう[/jp]
