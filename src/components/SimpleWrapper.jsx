@@ -1,17 +1,13 @@
 import React from 'react';
 import BasicComponent from './BasicComponent.jsx';
+import Util from './Util.js';
 
 class SimpleWrapper extends BasicComponent {
   render() {
-    var {disabled, ripple, ...others} = this.props;
+    var {...others} = this.props;
 
-    if (disabled) {
-      others.disabled = 'disabled';
-    }
-
-    if (ripple) {
-      others.ripple = true;
-    }
+    Util.convert(others, 'disabled');
+    Util.convert(others, 'ripple');
 
     return React.createElement(this._getDomNodeName(), others, this.props.children);
   }

@@ -1,6 +1,44 @@
 import React from 'react';
 import BasicComponent from './BasicComponent.jsx';
 
+/**
+ * @original ons-lazy-repeat
+ * @category list
+ * @description
+ * [en] Using this component a list with millions of items can be rendered without a drop in performance.
+ *     It does that by "lazily" loading elements into the DOM when they come into view and
+ *     removing items from the DOM when they are not visible.
+ [/en]
+ * [jp][/jp]
+ * @example
+ *
+  renderRow(index) {
+    return (
+      <ListItem key={index}>
+        {'Item ' + (index + 1)}
+      </ListItem>
+    );
+  }
+
+  render() {
+    return (
+      <Page renderToolbar={() => <MyToolbar title='LazyList' />} >
+        <div style={{height: 100}}>
+          <LazyList
+            length={1000}
+            renderRow={() =>
+              <ListItem key={index}>
+                {'Item ' + (index + 1)}
+              </ListItem>
+            }
+            calculateItemHeight={() => 44}
+          />
+        </div>
+      </Page>
+    );
+  }
+}
+ */
 class LazyList extends BasicComponent {
   componentDidMount() {
     super.componentDidMount();
@@ -53,10 +91,42 @@ class LazyList extends BasicComponent {
 }
 
 LazyList.propTypes = {
+  /**
+   * @name modifier
+   * @type string
+   * @required false
+   * @description
+   *  [en]The appearance of the lazy list.[/en]
+   *  [jp] [/jp]
+   */
+  modifier: React.PropTypes.string,
+
+  /**
+   * @name length
+   * @type number
+   * @description
+   *  [en]The length of the list.[/en]
+   *  [jp] [/jp]
+   */
   length: React.PropTypes.number.isRequired,
+
+  /**
+   * @name renderRow
+   * @type function
+   * @description
+   *  [en] A function given the index of the to display row, renders it.[/en]
+   *  [jp] [/jp]
+   */
   renderRow: React.PropTypes.func.isRequired,
-  calculateItemHeight: React.PropTypes.func.isRequired,
-  modifier: React.PropTypes.string
+
+  /**
+   * @name calculateItemHeight
+   * @type function
+   * @description
+   *  [en] A function given the index of the to row, returns the height of it.[/en]
+   *  [jp] [/jp]
+   */
+  calculateItemHeight: React.PropTypes.func.isRequired
 };
 
 export default LazyList;

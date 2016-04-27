@@ -7,7 +7,7 @@ import React from 'react';
  * @description
  * [en] Header element for list items. Must be put inside ons-list component.
  [/en]
- * [jp] どうしよう[/jp]
+ * [jp][/jp]
  * @example
    <List
      dataSource={this.state.data}
@@ -18,7 +18,6 @@ import React from 'react';
     )}
   />
  */
-
 class ListHeader extends SimpleWrapper {
   _getDomNodeName() {
     return 'ons-list-header';
@@ -33,7 +32,7 @@ ListHeader.propTypes = {
    *  [en]
    *  Specify modifier name to specify custom styles. Optional.
    *  [/en]
-   *  [jp] どうしよう[/jp]
+   *  [jp][/jp]
    */
   modifier: React.PropTypes.string
 };

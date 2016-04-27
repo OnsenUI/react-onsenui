@@ -1,6 +1,17 @@
 import React from 'react';
 import BasicComponent from './BasicComponent.jsx';
 
+/**
+ * @original ons-switch
+ * @category form
+ * @description
+ * [en]   Switch component. The switch can be toggled both by dragging and tapping.
+ *     Will automatically displays a Material Design switch on Android devices.
+ [/en]
+ * [jp][/jp]
+ * @example
+ * <Switch checked={this.state.checked} onChange={this.onChange} />
+ */
 class Switch extends BasicComponent {
 
   componentDidMount() {
@@ -25,9 +36,40 @@ class Switch extends BasicComponent {
 };
 
 Switch.propTypes = {
+    /**
+   * @name onChange
+   * @type function
+   * @description
+   *  [en] Called when the value of the switch changes (checked/unchecked) [/en]
+   *  [jp] [/jp]
+   */
   onChange: React.PropTypes.func,
+
+  /**
+   * @name checked
+   * @type bool
+   * @description
+   *  [en] Whether the switch is checked.[/en]
+   *  [jp] [/jp]
+   */
   checked: React.PropTypes.bool,
+
+  /**
+   * @name disabled
+   * @type bool
+   * @description
+   *  [en] If set, the switch is disabled.[/en]
+   *  [jp] [/jp]
+   */
   disabled: React.PropTypes.bool,
+
+  /**
+   * @name inputId
+   * @type bool
+   * @description
+   *  [en] Specify the `id` attribute of the inner `<input>` element. This is useful when using `<label for="...">` elements.[/en]
+   *  [jp] [/jp]
+   */
   inputId: React.PropTypes.string
 };
 

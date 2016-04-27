@@ -1,5 +1,38 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
 
+/**
+ * @original ons-splitter
+ * @category splitter
+ * @description
+ * [en]  A component that enables responsive layout by implementing both a two-column layout and a sliding menu layout.
+ *
+ *    It can be configured to automatically expand into a column layout on large screens and collapse the menu on smaller screens. When the menu is collapsed the user can open it by swiping.
+ [/en]
+ * [jp] どうしよう[/jp]
+ * @example
+  <Splitter>
+    <SplitterSide
+      side="left"
+      width={200}
+      isSwipeable={true}>
+      <Page> Page Left </Page>
+    </SplitterSide>
+    <SplitterContent>
+      <Page> Page Content </Page>
+    </SplitterContent>
+    <SplitterSide
+      side="right"
+      width={300}
+      isCollapsed={!this.state.showRight}
+      isOpen={this.state.openRight}
+      onClose={this.handleRightClose.bind(this)}
+      onOpen={this.handleRightOpen.bind(this)}
+      isSwipeable={true}>
+      <Page> Page Right </Page>
+    </SplitterSide>
+  </Splitter>
+        */
+
 class Splitter extends SimpleWrapper {
   _getDomNodeName() {
     return 'ons-splitter';

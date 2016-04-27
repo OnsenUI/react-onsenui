@@ -1,6 +1,26 @@
 import React from 'react';
 import BasicComponent from './BasicComponent.jsx';
 
+/**
+ * @original ons-list
+ * @category list
+ * @description
+ *   [en]
+ *     Component for representing a list. It takes an array called datasrouce and calls renderRow(row, index) for every row.  Furthermore, the header and the footer can be specified with `renderRow` and `renderHeader` respectivly. [/en]
+ * [jp][/jp]
+ * @example
+  <List
+    dataSource={['Row 1', 'Row 2']}
+    renderHeader={this.renderHeader}
+    renderRow={(row, idx) => (
+      <ListItem modifier={idx === this.state.data.length - 1 ? 'longdivider' : null}>
+      {row}
+  <Button modifier="quiet" onClick={this.remove.bind(this, idx)}>Remove</Button>
+  </ListItem>
+  )}
+  renderFooter={this.renderFooter}
+  />
+ */
 class List extends BasicComponent {
   render() {
     var pages = this.props.dataSource.map((data, idx) => this.props.renderRow(data, idx));
@@ -16,9 +36,60 @@ class List extends BasicComponent {
 }
 
 List.propTypes = {
+  /**
+   * @name modifier
+   * @type string
+   * @description
+   *  [en]
+   *  Specify modifier name to specify custom styles.
+   *  [/en]
+   *  [jp] どうしよう[/jp]
+   */
   modifier: React.PropTypes.string,
+
+   /**
+   * @name dataSource
+   * @type string
+   * @description
+   *  [en]
+   *  Specify modifier name to specify custom styles.
+   *  [/en]
+   *  [jp] どうしよう[/jp]
+   */
   dataSource: React.PropTypes.array.isRequired,
+
+   /**
+   * @name renderRow
+   * @type function
+   * @description
+   *  [en]
+   *  Function to specify the rendering function for every element in
+   *  in the dataSouce.
+   *  [/en]
+   *  [jp] どうしよう[/jp]
+   */
+  renderRow: React.PropTypes.func.isRequired,
+
+   /**
+   * @name renderHeader
+   * @type function
+   * @description
+   *  [en]
+   *  Function to specify the rendering function for the header
+   *  [/en]
+   *  [jp] どうしよう[/jp]
+   */
   renderHeader: React.PropTypes.func,
+
+   /**
+   * @name renderFooter
+   * @type function
+   * @description
+   *  [en]
+   *  Function to specify the rendering function for the footer
+   *  [/en]
+   *  [jp] どうしよう[/jp]
+   */
   renderFooter: React.PropTypes.func
 };
 
