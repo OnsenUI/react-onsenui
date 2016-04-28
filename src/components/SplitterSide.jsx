@@ -48,7 +48,7 @@ class SplitterSide extends BasicComponent {
     Util.convert(props, 'mode');
     Util.convert(props, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
     Util.convert(props, 'openThreshold', {newName: 'open-threshold'});
-    Util.convert(props, 'SwipeTargetWidth', {fun: Util.sizeConverter, newName: 'swipe-target-width'});
+    Util.convert(props, 'swipeTargetWidth', {fun: Util.sizeConverter, newName: 'swipe-target-width'});
 
     return (
       <ons-splitter-side {...props} >
@@ -139,6 +139,15 @@ SplitterSide.propTypes = {
    *  [jp] [/jp]
    */
   side: React.PropTypes.oneOf(['left', 'right']),
+
+  /**
+   * @name swipeTargetWidth
+   * @type number
+   * @description
+   *  [en]Specifies the width of the menu with a number (for pixels) or a string (e.g. "20%" for percentage).[/en]
+   *  [jp] [/jp]
+   */
+  swipeTargetWidth: React.PropTypes.number,
 
   /**
    * @name width
