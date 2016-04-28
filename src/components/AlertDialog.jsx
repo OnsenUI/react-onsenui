@@ -5,7 +5,6 @@ import React from 'react';
  * @original ons-alert-dialog
  * @category dialog
  * @description
- * @description
  *   [en]
  *     Alert dialog that is displayed on top of the current screen. Useful for displaying questions, warnings or error messages to the user. The title, content and buttons can be easily customized and it will automatically switch style based on the platform.
  *
