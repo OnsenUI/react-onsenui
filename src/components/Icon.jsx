@@ -69,7 +69,7 @@ Icon.propTypes = {
 
   /**
    * @name icon
-   * @type object or string
+   * @type 'object or string'
    * @description
    *  [en] can be either a string or an object. If it is an string, it is set to an specific icon like 'ions-navicon'. If it is an object, it represents a dictionary of the icons depending on the modifier e.g.   `{{default: 'ion-navicon', material: 'md-menu'}}` [/en]
    *  [jp] [/jp]
@@ -81,7 +81,7 @@ Icon.propTypes = {
 
   /**
    * @name size
-   * @type object or number
+   * @type 'object or number'
    * @description
    *  [en] can be either a number or an object. If it is an number, it  specifies the icon size with a number in pixels. If it is an object, it represents a dictionary of the icon sizes depending on the modifier e.g.   `{{default: 20, material: 18}}` [/en]
    *  [jp] [/jp]
