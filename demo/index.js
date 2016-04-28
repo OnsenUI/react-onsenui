@@ -8,7 +8,8 @@ import {
   Navigator,
   Toolbar,
   List,
-  ListItem
+  ListItem,
+  Range
 } from 'react-onsenui';
 
 import PageExample from './examples/Page';
@@ -27,6 +28,7 @@ import PopoverExample from './examples/Popover';
 import DialogExample from './examples/Dialog';
 import SwitchExample from './examples/Switch';
 import ProgressBarExample from './examples/ProgressBar';
+import RangeExample from './examples/Range';
 
 class Examples extends React.Component {
   constructor(props) {
@@ -38,6 +40,10 @@ class Examples extends React.Component {
       {
         title: 'Switch',
         component: SwitchExample
+      },
+      {
+        title: 'RangeExample',
+        component: RangeExample
       },
       {
         title: 'ProgressBar',
