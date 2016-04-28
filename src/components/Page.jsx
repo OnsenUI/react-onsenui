@@ -21,7 +21,6 @@ class Page extends BasicComponent {
     node.addEventListener('init', this.props.onInit);
     node.addEventListener('show', this.props.onShow);
     node.addEventListener('hide', this.props.onHide);
-    node.addEventListener('destroy', this.props.onDestroy);
   }
 
   componentWillUnmount() {
@@ -29,7 +28,6 @@ class Page extends BasicComponent {
     node.removeEventListener('init', this.props.onInit);
     node.removeEventListener('show', this.props.onShow);
     node.removeEventListener('hide', this.props.onHide);
-    node.removeEventListener('destroy', this.props.onDestroy);
   }
 
   render() {
@@ -108,19 +106,7 @@ Page.propTypes = {
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  onHide: React.PropTypes.func,
-
-  /**
-   * @name onDestroy
-   * @type function
-   * @required false
-   * @description
-   *  [en]
-   *  Called after the page is destroyed.
-   *  [/en]
-   *  [jp] どうしよう[/jp]
-   */
-  onDestroy: React.PropTypes.func
+  onHide: React.PropTypes.func
 };
 
 Page.defaultProps = {
