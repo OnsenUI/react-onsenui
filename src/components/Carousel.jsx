@@ -40,6 +40,13 @@ class Carousel extends SimpleWrapper {
     node.addEventListener('overscroll', this.props.onOverscroll);
   }
 
+  componentWillReceiveProps(props) {
+    var node = ReactDOM.findDOMNode(this);
+    if (this.props.index !== props.index) {
+      node.setActiveIndex(props.index, props.animationOptions);
+    }
+  }
+
   componentWillUnmount() {
     var node = ReactDOM.findDOMNode(this);
     node.removeEventListener('postchange', this.props.onPostChange);
