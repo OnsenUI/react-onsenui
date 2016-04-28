@@ -9,6 +9,8 @@ import {
   Input
 } from 'react-onsenui';
 
+import MyToolbar from './MyToolbar';
+
 import ons from '../../OnsenUI/build/js/onsenui.js';
 
 class MyPage2 extends React.Component {
@@ -101,7 +103,6 @@ class MyDialog extends React.Component {
     </Dialog>
     );
   }
-
 };
 
 export default class extends React.Component {
@@ -144,7 +145,8 @@ export default class extends React.Component {
 
   render() {
     return (
-    <Page>
+      <Page
+        renderToolbar={() => <MyToolbar title='Dialog' />}>
       <div style={{textAlign: 'center'}}>
         <h1>Page Content</h1>
         <Button onClick={this.showAlert2}> Hello </Button>

@@ -16,6 +16,7 @@ import Navigator from './components/Navigator.jsx';
 import Page from './components/Page.jsx';
 import Popover from './components/Popover.jsx';
 import ProgressBar from './components/ProgressBar.jsx';
+import ProgressCircular from './components/ProgressCircular.jsx';
 import PullHook from './components/PullHook.jsx';
 import Range from './components/Range.jsx';
 import Ripple from './components/Ripple.jsx';
@@ -51,6 +52,7 @@ export {
   Page,
   Popover,
   ProgressBar,
+  ProgressCircular,
   PullHook,
   Range,
   Ripple,

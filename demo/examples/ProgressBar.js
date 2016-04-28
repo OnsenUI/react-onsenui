@@ -2,7 +2,8 @@ import React from 'react';
 
 import {
   Page,
-  ProgressBar
+  ProgressBar,
+  ProgressCircular
 } from 'react-onsenui';
 
 import MyToolbar from './MyToolbar';
@@ -26,7 +27,7 @@ export default class extends React.Component {
       let val = this.state.value + 5;
       if (val > 100) val -= 100;
       this.setState({value: val}, this.increaseTime);
-    }, 200);
+    }, 500);
   }
 
   render() {
@@ -34,12 +35,20 @@ export default class extends React.Component {
       <Page
         renderToolbar={() => <MyToolbar title='ProgresBar' />}
         modifier={this.state.modifier} >
+        <br />
         <p>
-          Loading Example ...
-          <ProgressBar value={this.state.value} secondaryValue={this.state.secondValue} />
+          Progress Bar:
+        </p>
+          <ProgressBar value={this.state.value} />
           <ProgressBar value={55} secondaryValue={87} />
           <ProgressBar indeterminate />
+        <br />
+        <p>
+          Circular Progress Bar:
         </p>
+          <ProgressCircular value={this.state.value} />
+          <ProgressCircular value={55} secondaryValue={87} />
+          <ProgressCircular indeterminate />
       </Page>
     );
   }

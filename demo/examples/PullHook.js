@@ -9,6 +9,8 @@ import {
   ListItem
 } from 'react-onsenui';
 
+import MyToolbar from './MyToolbar.js';
+
 class MyPullHook extends React.Component {
   constructor(props) {
     super(props);
@@ -68,7 +70,8 @@ export default class extends React.Component {
 
   render() {
     return (
-      <Page >
+      <Page
+        renderToolbar={() => <MyToolbar title='Dialog' />}>
         <MyPullHook />
 
         <Toolbar>
