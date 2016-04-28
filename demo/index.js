@@ -38,6 +38,10 @@ class Examples extends React.Component {
 
     this.examples = [
       {
+        title: 'Carousel',
+        component: CarouselExample
+      },
+      {
         title: 'Switch',
         component: SwitchExample
       },
@@ -71,11 +75,7 @@ class Examples extends React.Component {
         title: 'SpeedDial',
         component: SpeedDialExample
       },
-      {
-        title: 'Carousel',
-        component: CarouselExample
-      },
-      {
+            {
         title: 'PullHook',
         component: PullHookExample
       },

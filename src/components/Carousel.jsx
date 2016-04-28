@@ -59,7 +59,7 @@ class Carousel extends SimpleWrapper {
     Util.convert(others, 'autoScroll', {newName: 'auto-scroll'});
     Util.convert(others, 'autoRefresh', {newName: 'auto-refresh'});
     Util.convert(others, 'autoScrollRatio', {newName: 'auto-scroll-ratio'});
-    Util.convert(others, 'initialIndex', {newName: 'initial-index'});
+    Util.convert(others, 'index', {newName: 'initial-index'});
     Util.convert(others, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
 
     return React.createElement(this._getDomNodeName(), others, this.props.children);
@@ -160,13 +160,13 @@ Carousel.propTypes = {
   disabled: React.PropTypes.bool,
 
   /**
-   * @name initialIndex
+   * @name index
    * @type number
    * @description
-   *  [en]Specify the index of the ons-carousel-item to show initially. Default is 0.[/en]
+   *  [en]Specify the index of the ons-carousel-item to show. Default is 0.[/en]
    *  [jp] [/jp]
    */
-  initialIndex: React.PropTypes.number,
+  index: React.PropTypes.number,
 
   /**
    * @name autoRefresh
