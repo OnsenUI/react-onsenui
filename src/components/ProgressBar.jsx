@@ -21,7 +21,7 @@ class ProgressBar extends SimpleWrapper {
     var {...others} = this.props;
 
     Util.convert(others, 'indeterminate');
-    Util.convert(others, 'secondaryValue', {fun: Util.sizeConverter, newName: 'secondary-value'});
+    Util.convert(others, 'secondaryValue', {newName: 'secondary-value'});
 
     return React.createElement(this._getDomNodeName(), others, this.props.children);
   }
@@ -59,7 +59,7 @@ ProgressBar.propTypes = {
    *  [/en]
    *  [jp] [/jp]
    */
-  secondaryValue: React.PropTypes.bool,
+  secondaryValue: React.PropTypes.number,
 
   /**
    * @name intermediate
