@@ -39,6 +39,7 @@ export default class extends React.Component {
     return (
       <Page>
         <Tabbar
+          initialIndex={1}
           onPreChange={() => console.log('preChange')}
           onPostChange={() => console.log('postChange')}
           onReactive={() => console.log('postChange')}

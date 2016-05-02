@@ -46,7 +46,6 @@ class Tabbar extends BasicComponent {
     super.componentDidMount();
     const node = this.refs.tabbar;
     CustomElements.upgrade(node);
-    node.setActiveTab(this.state.activeIndex);
     node.addEventListener('prechange', this.handleChange.bind(this));
     node.addEventListener('prechange', this.props.onPreChange);
     node.addEventListener('postchange', this.props.onPostChange);
