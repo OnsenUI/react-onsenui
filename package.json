@@ -19,7 +19,14 @@
   "keywords": [
     "react",
     "react-component",
-    "cordova"
+    "phonegap",
+    "cordova",
+    "hybrid",
+    "app",
+    "mobile",
+    "ui",
+    "onsen",
+    "onsenui"
   ],
   "author": "Onsen UI Team <team@monaca.io>",
   "license": "Apache-2.0",
