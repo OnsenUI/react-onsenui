@@ -23,11 +23,15 @@ export default class extends React.Component {
   }
 
   increaseTime() {
-    setTimeout(() => {
+    this.timeout = setTimeout(() => {
       let val = this.state.value + 5;
       if (val > 100) val -= 100;
       this.setState({value: val}, this.increaseTime);
     }, 500);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timeout);
   }
 
   render() {
