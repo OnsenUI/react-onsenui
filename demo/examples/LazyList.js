@@ -1,6 +1,7 @@
 import React from 'react';
 
 import MyToolbar from './MyToolbar';
+import ons from '../../OnsenUI/build/js/onsenui.js';
 
 import {
   Page,
@@ -27,7 +28,7 @@ export default class extends React.Component {
           <LazyList
             length={1000}
             renderRow={this.renderRow}
-            calculateItemHeight={() => 44}
+            calculateItemHeight={() => ons.platform.isAndroid() ? 76 : 45}
           />
         </div>
       </Page>
