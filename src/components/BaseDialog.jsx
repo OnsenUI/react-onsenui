@@ -52,19 +52,17 @@ class BaseDialog extends React.Component {
 
     ReactDOM.unmountComponentAtNode(this.node);
     document.body.removeChild(this.node);
-
-    clearTimeout(this.timeout);
   }
 
   _update() {
     CustomElements.upgrade(this.node.firstChild);
     if (this.props.isOpen) {
       if (this.animateShow) {
-        this.timeout = setTimeout(() => this.show(), 100);
+        this.show();
       }
       this.animateShow = false;
     } else {
-      this.timeout = setTimeout(() => this.hide(), 100);
+      this.hide();
     }
     this.updateClasses();
   }
