@@ -1,4 +1,4 @@
-/*! react-onsenui v0.1.0 - Thu Apr 28 2016 22:59:53 GMT+0900 (JST) */
+/*! react-onsenui v0.1.1 - Tue May 03 2016 15:10:38 GMT+0900 (JST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom'], factory) :
@@ -211,18 +211,26 @@
 
         ReactDOM.unmountComponentAtNode(this.node);
         document.body.removeChild(this.node);
+
+        clearTimeout(this.timeout);
       }
     }, {
       key: '_update',
       value: function _update() {
+        var _this2 = this;
+
         CustomElements.upgrade(this.node.firstChild);
         if (this.props.isOpen) {
           if (this.animateShow) {
-            this.show();
+            this.timeout = setTimeout(function () {
+              return _this2.show();
+            }, 100);
           }
           this.animateShow = false;
         } else {
-          this.hide();
+          this.timeout = setTimeout(function () {
+            return _this2.hide();
+          }, 100);
         }
         this.updateClasses();
       }
@@ -2563,7 +2571,7 @@
 
 
         Util.convert(others, 'indeterminate');
-        Util.convert(others, 'secondaryValue', { fun: Util.sizeConverter, newName: 'secondary-value' });
+        Util.convert(others, 'secondaryValue', { newName: 'secondary-value' });
 
         return React.createElement(this._getDomNodeName(), others, this.props.children);
       }
@@ -2604,7 +2612,7 @@
      *  [/en]
      *  [jp] [/jp]
      */
-    secondaryValue: React.PropTypes.bool,
+    secondaryValue: React.PropTypes.number,
 
     /**
      * @name intermediate
@@ -2628,15 +2636,15 @@
    *<ProgressCircular indeterminate />
    */
 
-  var ProgressBarCircular = function (_SimpleWrapper) {
-    babelHelpers.inherits(ProgressBarCircular, _SimpleWrapper);
+  var ProgressCircular = function (_SimpleWrapper) {
+    babelHelpers.inherits(ProgressCircular, _SimpleWrapper);
 
-    function ProgressBarCircular() {
-      babelHelpers.classCallCheck(this, ProgressBarCircular);
-      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(ProgressBarCircular).apply(this, arguments));
+    function ProgressCircular() {
+      babelHelpers.classCallCheck(this, ProgressCircular);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(ProgressCircular).apply(this, arguments));
     }
 
-    babelHelpers.createClass(ProgressBarCircular, [{
+    babelHelpers.createClass(ProgressCircular, [{
       key: '_getDomNodeName',
       value: function _getDomNodeName() {
         return 'ons-progress-circular';
@@ -2648,17 +2656,17 @@
 
 
         Util.convert(others, 'indeterminate');
-        Util.convert(others, 'secondaryValue', { fun: Util.sizeConverter, newName: 'secondary-value' });
+        Util.convert(others, 'secondaryValue', { newName: 'secondary-value' });
 
         return React.createElement(this._getDomNodeName(), others, this.props.children);
       }
     }]);
-    return ProgressBarCircular;
+    return ProgressCircular;
   }(SimpleWrapper);
 
   ;
 
-  ProgressBarCircular.propTypes = {
+  ProgressCircular.propTypes = {
     /**
      * @name modifier
      * @type string
@@ -2689,7 +2697,7 @@
      *  [/en]
      *  [jp] [/jp]
      */
-    secondaryValue: React.PropTypes.bool,
+    secondaryValue: React.PropTypes.number,
 
     /**
      * @name intermediate
@@ -3433,7 +3441,7 @@
      *  [en]Specifies the width of the menu with a number (for pixels) or a string (e.g. "20%" for percentage).[/en]
      *  [jp] [/jp]
      */
-    width: React.PropTypes.oneOf(React.PropTypes.number, React.PropTypes.string),
+    width: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
 
     /**
      * @name animation
@@ -3747,7 +3755,6 @@
         babelHelpers.get(Object.getPrototypeOf(Tabbar.prototype), 'componentDidMount', this).call(this);
         var node = this.refs.tabbar;
         CustomElements.upgrade(node);
-        node.setActiveTab(this.state.activeIndex);
         node.addEventListener('prechange', this.handleChange.bind(this));
         node.addEventListener('prechange', this.props.onPreChange);
         node.addEventListener('postchange', this.props.onPostChange);
@@ -4074,7 +4081,7 @@
   exports.Page = Page;
   exports.Popover = Popover;
   exports.ProgressBar = ProgressBar;
-  exports.ProgressCircular = ProgressBarCircular;
+  exports.ProgressCircular = ProgressCircular;
   exports.PullHook = PullHook;
   exports.Range = Range;
   exports.Ripple = Ripple;

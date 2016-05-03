@@ -15,34 +15,8 @@ export default class extends React.Component {
     super(props);
 
     this.state = {
-      data: [1, 2, 3, 4, 5, 6],
-      text: 'te'
+      text: 'text'
     };
-  }
-
-  reverseData() {
-    this.setState({
-      data: this.state.data.reverse()
-    });
-  }
-
-  remove(idx) {
-    const data = this.state.data;
-    data.splice(idx, 1);
-
-    this.setState({
-      data: data
-    });
-  }
-
-  add() {
-    const data = this.state.data;
-    data.push(data.length);
-
-    this.setState({
-      data: data,
-      text: ''
-    });
   }
 
   render() {
@@ -51,9 +25,6 @@ export default class extends React.Component {
         renderToolbar = { () => <Toolbar>
           <div className='left'><BackButton>Back</BackButton></div>
           <div className='center'>Input</div>
-          <div className='right'>
-            <ToolbarButton >FLIP</ToolbarButton>
-          </div>
         </Toolbar>
         }
         >
