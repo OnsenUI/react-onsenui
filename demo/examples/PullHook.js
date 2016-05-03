@@ -62,12 +62,6 @@ export default class extends React.Component {
     };
   }
 
-  toggleModifier() {
-    this.setState({
-      modifier: this.state.modifier === 'material' ? '' : 'material'
-    });
-  }
-
   render() {
     return (
       <Page
