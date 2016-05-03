@@ -1,4 +1,4 @@
-/*! react-onsenui v0.1.1 - Tue May 03 2016 15:10:38 GMT+0900 (JST) */
+/*! react-onsenui v0.2.0 - Tue May 03 2016 18:23:56 GMT+0900 (JST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom'], factory) :
@@ -211,26 +211,18 @@
 
         ReactDOM.unmountComponentAtNode(this.node);
         document.body.removeChild(this.node);
-
-        clearTimeout(this.timeout);
       }
     }, {
       key: '_update',
       value: function _update() {
-        var _this2 = this;
-
         CustomElements.upgrade(this.node.firstChild);
         if (this.props.isOpen) {
           if (this.animateShow) {
-            this.timeout = setTimeout(function () {
-              return _this2.show();
-            }, 100);
+            this.show();
           }
           this.animateShow = false;
         } else {
-          this.timeout = setTimeout(function () {
-            return _this2.hide();
-          }, 100);
+          this.hide();
         }
         this.updateClasses();
       }
