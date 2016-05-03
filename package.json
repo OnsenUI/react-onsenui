@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/argelius/react-onsenui.git"
+    "url": "git+https://github.com/OnsenUI/react-onsenui.git"
   },
   "keywords": [
     "react",
@@ -31,9 +31,9 @@
   "author": "Onsen UI Team <team@monaca.io>",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/argelius/react-onsenui/issues"
+    "url": "https://github.com/OnsenUI/react-onsenui/issues"
   },
-  "homepage": "https://onsen.io/2/",
+  "homepage": "https://onsen.io/v2/",
   "devDependencies": {
     "aliasify": "^1.9.0",
     "babel-plugin-transform-object-rest-spread": "^6.6.5",
