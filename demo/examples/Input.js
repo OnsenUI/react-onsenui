@@ -15,8 +15,29 @@ export default class extends React.Component {
     super(props);
 
     this.state = {
-      text: 'text'
+      text: 'text',
+      selected: [1],
+      selected2: 1
     };
+  }
+
+  handleCheckbox(idx, event) {
+    const selected = this.state.selected;
+
+    if (event.target.checked && selected.indexOf(idx) < 0) {
+      selected.push(idx);
+    }
+    else if(!event.target.checked) {
+      selected.splice(selected.indexOf(idx), 1);
+    }
+
+    this.setState({selected: selected});
+  }
+
+  handleRadio(idx, event) {
+    if (event.target.checked) {
+      this.setState({selected2: idx});
+    }
   }
 
   render() {
@@ -34,6 +55,33 @@ export default class extends React.Component {
           <Input value={this.state.text} float onChange={(event) => {
             this.setState({text: event.target.value})} } modifier='material' placeholder='Username'></Input>
           <div> Text : {this.state.text} </div>
+
+        <h2>Checkboxes</h2>
+
+        {
+          [0, 1, 2].map((idx) => (
+            <Input
+              type='checkbox'
+              onChange={this.handleCheckbox.bind(this, idx)}
+              checked={this.state.selected.indexOf(idx) >= 0}
+            />
+          ))
+        }
+        <p>Selected: [{this.state.selected.join(', ')}]</p>
+
+        <h2>Radio buttons</h2>
+
+        {
+          [0, 1, 2].map((idx) => (
+            <Input
+              type='radio'
+              onChange={this.handleRadio.bind(this, idx)}
+              checked={idx === this.state.selected2}
+            />
+          ))
+        }
+
+        <p>Selected: {this.state.selected2}</p>
       </Page>
     );
   }
