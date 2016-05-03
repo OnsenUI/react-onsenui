@@ -156,7 +156,7 @@ SplitterSide.propTypes = {
    *  [en]Specifies the width of the menu with a number (for pixels) or a string (e.g. "20%" for percentage).[/en]
    *  [jp] [/jp]
    */
-  width: React.PropTypes.oneOf(React.PropTypes.number, React.PropTypes.string),
+  width: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
 
   /**
    * @name animation
