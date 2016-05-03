@@ -1,6 +1,6 @@
 {
   "name": "react-onsenui",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "React extension for Onsen UI",
   "main": "dist/react-onsenui.js",
   "scripts": {
@@ -33,7 +33,7 @@
   "bugs": {
     "url": "https://github.com/argelius/react-onsenui/issues"
   },
-  "homepage": "https://github.com/argelius/react-onsenui#readme",
+  "homepage": "https://onsen.io/2/",
   "devDependencies": {
     "aliasify": "^1.9.0",
     "babel-plugin-transform-object-rest-spread": "^6.6.5",
@@ -57,5 +57,10 @@
     "rollup-plugin-node-resolve": "^1.5.0",
     "rollup-plugin-replace": "^1.1.0",
     "watchify": "^3.7.0"
+  },
+  "peerDependencies": {
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
+    "onsenui": "2.0.0-rc.3"
   }
 }
