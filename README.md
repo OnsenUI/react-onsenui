@@ -18,7 +18,7 @@ You need to install `react`, `react-dom`, `onsenui` and `react-onsenui`. You pro
 
 Now you can import the necessary libraries in your code:
 
-```js
+```jsx
 var React = require('react');
 var ReactDOM = require('react-dom');
 
