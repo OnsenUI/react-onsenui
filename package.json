@@ -8,8 +8,9 @@
     "prepublish": "npm run build",
     "lint": "eslint --ext .js,.jsx src",
     "lint-fix": "eslint --ext .js,.jsx src --fix",
+    "watch-onsenui": "nodemon -x \"npm run build\" --watch OnsenUI/build/js/onsenui.js",
     "watch": "nodemon -x \"npm run build\" --watch src -e jsx",
-    "dev": "npm run watch & watchify -vd -t [ babelify --presets es2015,react --ignore OnsenUI/build/js/onsenui.js ] -t [ aliasify --aliases [ --react-onsenui=./dist/react-onsenui.js ] ] -e demo/index.js -o demo/bundle.js & http-server . -c 1",
+    "dev": "npm run watch & npm run watch-onsenui & watchify -vd -t [ babelify --presets es2015,react --ignore OnsenUI/build/js/onsenui.js ] -t [ aliasify --aliases [ --react-onsenui=./dist/react-onsenui.js ] ] -e demo/index.js -o demo/bundle.js & http-server . -c 1",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
