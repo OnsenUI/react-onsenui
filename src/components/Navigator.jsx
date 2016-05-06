@@ -112,7 +112,12 @@ class Navigator extends BasicComponent {
       this.refs.navi._pushPage(options,
                                this.update.bind(this),
                                this.pages,
-                               newPage).then(resolve);
+                               newPage).then(resolve)
+                               .catch((error) => {
+                                 this.routes.pop();
+                                 this.pages.pop();
+                                 throw error;
+                               });
     });
   }
 
