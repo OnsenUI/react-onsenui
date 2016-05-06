@@ -72,23 +72,12 @@ class BaseDialog extends React.Component {
   }
 
   renderPortal(props) {
-    var newProps = props || {};
-    if (newProps.isCancelable) {
-      newProps = {...newProps, cancelable: true};
-    }
+    var {...newProps} = props;
 
-    if (newProps.isDisabled) {
-      newProps = {...newProps, disabled: true};
-    }
-
-    if (newProps.maskColor) {
-      newProps = {...newProps, 'mask-color': newProps.maskColor};
-    }
-
-    if (newProps.animationOptions) {
-      var val = Util.animationOptionsConverter(newProps.animationOptions);
-      newProps = {...newProps, 'animation-options': val};
-    }
+    Util.convert(newProps, 'isCancelable', {newName: 'cancelable'});
+    Util.convert(newProps, 'isDisabled', {newName: 'disabled'});
+    Util.convert(newProps, 'maskColor', {newName: 'mask-color'});
+    Util.convert(newProps, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
 
     var element = React.createElement(this._getDomNodeName(), newProps);
     ReactDOM.render(element, this.node, this._update.bind(this));

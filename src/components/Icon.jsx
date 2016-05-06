@@ -1,5 +1,6 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
 import React from 'react';
+import Util from './Util.js';
 
 /**
  * @original ons-icon
@@ -24,13 +25,10 @@ class Icon extends SimpleWrapper {
   }
 
   render() {
-    var {icon, size, spin, fixedWidth, ...others} = this.props;
+    var {icon, size, ...others} = this.props;
 
-    if (fixedWidth) {
-      others['fixed-width'] = true;
-    }
-
-    others['spin'] = spin ? true : null;
+    Util.convert(others, 'fixedWidth', {newName: 'fixed-width'});
+    Util.convert(others, 'spin');
 
     if (icon) {
       if ((typeof icon) === 'string') {
@@ -51,6 +49,7 @@ class Icon extends SimpleWrapper {
         others.size = size.default + 'px, ' + innerString.join(',');
       }
     }
+
     return React.createElement(this._getDomNodeName(), others, this.props.children);
   }
 
