@@ -11,7 +11,7 @@
     "watch-onsenui": "nodemon -x \"npm run build\" --watch OnsenUI/build/js/onsenui.js",
     "watch": "nodemon -x \"npm run build\" --watch src -e jsx",
     "dev": "npm run watch & npm run watch-onsenui & watchify -vd -t [ babelify --presets es2015,react --ignore OnsenUI/build/js/onsenui.js ] -t [ aliasify --aliases [ --react-onsenui=./dist/react-onsenui.js ] ] -e demo/index.js -o demo/bundle.js & http-server . -c 1",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "karma start"
   },
   "repository": {
     "type": "git",
@@ -63,5 +63,20 @@
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "onsenui": "2.0.0-rc.4"
+  },
+  "dependencies": {
+    "babel-loader": "^6.2.4",
+    "chai": "^3.5.0",
+    "expect": "^1.20.1",
+    "karma": "^0.13.22",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-cli": "^1.0.0",
+    "karma-mocha": "^1.0.1",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^1.7.0",
+    "mocha": "^2.4.5",
+    "react-dom": "^15.0.2",
+    "webpack": "^1.13.0"
   }
 }
