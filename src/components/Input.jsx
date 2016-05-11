@@ -56,7 +56,7 @@ Input.propTypes = {
    * @type string
    * @required false
    * @description
-   *  [en]The appearance of the button.[/en]
+   *  [en]The appearance of the input.[/en]
    *  [jp] [/jp]
    */
   modifier: React.PropTypes.string,
@@ -66,7 +66,7 @@ Input.propTypes = {
    * @type bool
    * @description
    *  [en]
-   *  Specifies whether the button is disabled.
+   *  Specifies whether the input is disabled.
    *  [/en]
    *  [jp] [/jp]
    */
