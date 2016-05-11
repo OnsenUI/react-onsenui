@@ -1,4 +1,4 @@
-/*! react-onsenui v0.2.1 - Wed May 11 2016 12:43:01 GMT+0900 (JST) */
+/*! react-onsenui v0.2.1 - Wed May 11 2016 17:51:33 GMT+0900 (JST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom'], factory) :
@@ -1546,16 +1546,26 @@
 
   var LazyList = function (_BasicComponent) {
     babelHelpers.inherits(LazyList, _BasicComponent);
+
+    function LazyList(props) {
+      babelHelpers.classCallCheck(this, LazyList);
+
+      var _this = babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(LazyList).call(this, props));
+
+      _this.state = { children: [] };
+      _this.update = _this.update.bind(_this);
+      return _this;
+    }
+
     babelHelpers.createClass(LazyList, [{
-      key: 'componentDidMount',
-      value: function componentDidMount() {
-        babelHelpers.get(Object.getPrototypeOf(LazyList.prototype), 'componentDidMount', this).call(this);
+      key: 'update',
+      value: function update(props) {
         var self = this;
         CustomElements.upgrade(this.refs.lazyRepeat);
 
         this.refs.lazyRepeat.delegate = {
           calculateItemHeight: function calculateItemHeight(index) {
-            return self.props.calculateItemHeight(index);
+            return props.calculateItemHeight(index);
           },
           _render: function (items, newHeight) {
             var _this2 = this;
@@ -1564,7 +1574,7 @@
               var index = _ref.index;
               var top = _ref.top;
 
-              return self.props.renderRow(index);
+              return props.renderRow(index);
             };
 
             var el = items.map(createElement);
@@ -1580,22 +1590,23 @@
             });
           }.bind(this),
           countItems: function countItems() {
-            return self.props.length;
+            return props.length;
           }
         };
       }
-    }]);
-
-    function LazyList(props) {
-      babelHelpers.classCallCheck(this, LazyList);
-
-      var _this = babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(LazyList).call(this, props));
-
-      _this.state = { children: [] };
-      return _this;
-    }
-
-    babelHelpers.createClass(LazyList, [{
+    }, {
+      key: 'componentWillReceiveProps',
+      value: function componentWillReceiveProps(newProps) {
+        var helpProps = babelHelpers.extends({}, this.props, newProps);
+        this.update(helpProps);
+      }
+    }, {
+      key: 'componentDidMount',
+      value: function componentDidMount() {
+        babelHelpers.get(Object.getPrototypeOf(LazyList.prototype), 'componentDidMount', this).call(this);
+        this.update(this.props);
+      }
+    }, {
       key: 'render',
       value: function render() {
         return React.createElement(
@@ -3662,10 +3673,10 @@
    * <Tab>
    *   <TabActive>
          HOME
-       </TabInActive>
-       <TabInActive>
+       </TabInactive>
+       <TabInactive>
          home
-       </TabInActive>
+       </TabInactive>
      </Tab>
    */
 
