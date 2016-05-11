@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import BasicComponent from './BasicComponent.jsx';
+import Util from './Util.js';
 
 const EVENT_TYPES = ['change', 'input'];
 
@@ -41,6 +42,8 @@ class Input extends BasicComponent {
     var {checked, ...other} = this.props;
     other['input-id'] = this.props.inputId;
 
+    Util.convert(other, 'disabled');
+
     return (
       <ons-input checked={checked ? '' : null} {...other} />
     );
@@ -57,6 +60,17 @@ Input.propTypes = {
    *  [jp] [/jp]
    */
   modifier: React.PropTypes.string,
+
+  /**
+   * @name disabled
+   * @type bool
+   * @description
+   *  [en]
+   *  Specifies whether the button is disabled.
+   *  [/en]
+   *  [jp] [/jp]
+   */
+  disabled: React.PropTypes.bool,
 
   /**
    * @name onChange
