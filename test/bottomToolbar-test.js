@@ -2,14 +2,14 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Page} from '../dist/react-onsenui.js';
+import {BottomToolbar} from '../dist/react-onsenui.js';
 import TestUtils from 'react/lib/ReactTestUtils';
 
 import rendersToComponent from './testUtil.js';
 
-describe('Page', function() {
+describe('B', function() {
   rendersToComponent(
-    <Page> Hello </Page>,
-    'ons-page'
+    <BottomToolbar />,
+    'ons-bottom-toolbar'
   );
 });

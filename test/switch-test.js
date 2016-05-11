@@ -2,14 +2,13 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Page} from '../dist/react-onsenui.js';
+import {Switch} from '../dist/react-onsenui.js';
 import TestUtils from 'react/lib/ReactTestUtils';
-
 import rendersToComponent from './testUtil.js';
 
-describe('Page', function() {
+describe('Switch', function() {
   rendersToComponent(
-    <Page> Hello </Page>,
-    'ons-page'
+    <Switch />,
+    'ons-switch'
   );
 });

@@ -2,14 +2,14 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Page} from '../dist/react-onsenui.js';
+import {BackButton} from '../dist/react-onsenui.js';
 import TestUtils from 'react/lib/ReactTestUtils';
 
 import rendersToComponent from './testUtil.js';
 
-describe('Page', function() {
+describe('BackButon', function() {
   rendersToComponent(
-    <Page> Hello </Page>,
-    'ons-page'
+    <BackButton />,
+    'ons-back-button'
   );
 });

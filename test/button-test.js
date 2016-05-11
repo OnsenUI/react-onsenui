@@ -2,14 +2,14 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Page} from '../dist/react-onsenui.js';
+import {Button} from '../dist/react-onsenui.js';
 import TestUtils from 'react/lib/ReactTestUtils';
 
 import rendersToComponent from './testUtil.js';
 
-describe('Page', function() {
+describe('Button', function() {
   rendersToComponent(
-    <Page> Hello </Page>,
-    'ons-page'
+    <Button />,
+    'ons-button'
   );
 });

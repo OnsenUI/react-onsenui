@@ -2,14 +2,14 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Page} from '../dist/react-onsenui.js';
+import {ProgressBar} from '../dist/react-onsenui.js';
 import TestUtils from 'react/lib/ReactTestUtils';
 
 import rendersToComponent from './testUtil.js';
 
-describe('Page', function() {
+describe('ProgressBar', function() {
   rendersToComponent(
-    <Page> Hello </Page>,
-    'ons-page'
+    <ProgressBar />,
+    'ons-progress-bar'
   );
 });

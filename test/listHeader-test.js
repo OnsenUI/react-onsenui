@@ -2,14 +2,13 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Page} from '../dist/react-onsenui.js';
+import {ListHeader} from '../dist/react-onsenui.js';
 import TestUtils from 'react/lib/ReactTestUtils';
-
 import rendersToComponent from './testUtil.js';
 
-describe('Page', function() {
+describe('ListHeader', function() {
   rendersToComponent(
-    <Page> Hello </Page>,
-    'ons-page'
+    <ListHeader dataSource={[]} />,
+    'ons-list-header'
   );
 });

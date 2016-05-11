@@ -2,14 +2,13 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Page} from '../dist/react-onsenui.js';
+import {Carousel} from '../dist/react-onsenui.js';
 import TestUtils from 'react/lib/ReactTestUtils';
-
 import rendersToComponent from './testUtil.js';
 
-describe('Page', function() {
+describe('Carousel', function() {
   rendersToComponent(
-    <Page> Hello </Page>,
-    'ons-page'
+    <Carousel />,
+    'ons-carousel'
   );
 });
