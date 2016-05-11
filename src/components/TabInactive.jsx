@@ -10,10 +10,10 @@ import SimpleWrapper from './SimpleWrapper.jsx';
  * <Tab>
  *   <TabActive>
        HOME
-     </TabInActive>
-     <TabInActive>
+     </TabInactive>
+     <TabInactive>
        home
-     </TabInActive>
+     </TabInactive>
    </Tab>
  */
 class TabInactive extends SimpleWrapper {

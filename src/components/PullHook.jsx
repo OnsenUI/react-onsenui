@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom';
 import BasicComponent from './BasicComponent.jsx';
 import React from 'react';
+import Util from './Util.js';
 
 /**
  * @original ons-pull-hook
@@ -46,23 +47,15 @@ class PullHook extends BasicComponent {
   }
 
   render() {
-    var {disabled, thresholdHeight, fixedContent, height, ...others} = this.props;
+    var {...others} = this.props;
 
-    if (disabled) {
-      others.disabled = true;
-    }
+    ['disabled'].forEach((el) => {
+      Util.convert(others, el);
+    });
 
-    if (height) {
-      others.height = `${height}px`;
-    }
-
-    if (thresholdHeight) {
-      others['threshold-height'] = `${thresholdHeight}px`;
-    }
-
-    if (fixedContent) {
-      others['fixed-content'] = true;
-    }
+    Util.convert(others, 'height', {fun: Util.sizeConverter});
+    Util.convert(others, 'thresholdHeight', {fun: Util.sizeConverter, newName: 'threshold-height'});
+    Util.convert(others, 'fixedContent', {newName: 'fixed-content'});
 
     return <ons-pull-hook ref='pullHook' {...others} />;
   }

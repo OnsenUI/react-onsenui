@@ -7,6 +7,10 @@ export default {
     }
   },
 
+  numberConverter(item) {
+    return `${item}px`;
+  },
+
   animationOptionsConverter(options) {
     var keys = Object.keys(options);
     var innerString = keys.map((key) => key + ': "' + options[key] + '"');

@@ -1,5 +1,6 @@
 import React from 'react';
 import BasicComponent from './BasicComponent.jsx';
+import Util from './Util.js';
 
 /**
  * @original ons-navigator
@@ -112,7 +113,12 @@ class Navigator extends BasicComponent {
       this.refs.navi._pushPage(options,
                                this.update.bind(this),
                                this.pages,
-                               newPage).then(resolve);
+                               newPage).then(resolve)
+                               .catch((error) => {
+                                 this.routes.pop();
+                                 this.pages.pop();
+                                 throw error;
+                               });
     });
   }
 
@@ -171,8 +177,11 @@ class Navigator extends BasicComponent {
       this.pages[index] = this.props.renderPage(this.routes[index], this);
     }
 
+    var {...others} = this.props;
+    Util.convert(others, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
+
     return (
-      <ons-navigator {...this.props} ref='navi'>
+      <ons-navigator {...others} ref='navi'>
         {this.pages}
       </ons-navigator>
     );
@@ -215,7 +224,27 @@ Navigator.propTypes = {
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  initialRoute: React.PropTypes.object
+  initialRoute: React.PropTypes.object,
+
+  /**
+   * @property animation
+   * @type {String}
+   * @description
+   *   [en]
+   *     Animation name. Available animations are `"slide"`, `"lift"`, `"fade"` and `"none"`.
+   *     These are platform based animations. For fixed animations, add `"-ios"` or `"-md"` suffix to the animation name. E.g. `"lift-ios"`, `"lift-md"`. Defaults values are `"slide-ios"` and `"fade-md"`.
+   *   [/en]
+   */
+  animation: React.PropTypes.string,
+
+  /**
+   * @name animationOptions
+   * @type object
+   * @description
+   *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
+   *  [jp] [/jp]
+   */
+  animationOptions: React.PropTypes.object
 };
 
 export default Navigator;

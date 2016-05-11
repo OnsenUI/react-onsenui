@@ -40,18 +40,23 @@ import BasicComponent from './BasicComponent.jsx';
 }
  */
 class LazyList extends BasicComponent {
-  componentDidMount() {
-    super.componentDidMount();
+  constructor(props) {
+    super(props);
+    this.state = {children: []};
+    this.update = this.update.bind(this);
+  }
+
+  update(props) {
     var self = this;
     CustomElements.upgrade(this.refs.lazyRepeat);
 
     this.refs.lazyRepeat.delegate = {
       calculateItemHeight: function(index) {
-        return self.props.calculateItemHeight(index);
+        return props.calculateItemHeight(index);
       },
       _render: function(items, newHeight) {
         var createElement = function({index: index, top: top}) {
-          return self.props.renderRow(index);
+          return props.renderRow(index);
         };
 
         var el = items.map(createElement);
@@ -68,14 +73,22 @@ class LazyList extends BasicComponent {
                       });
       }.bind(this),
       countItems: function() {
-        return self.props.length;
+        return props.length;
       }
     };
   }
 
-  constructor(props) {
-    super(props);
-    this.state = {children: []};
+  componentWillReceiveProps(newProps) {
+    var helpProps = {
+      ...this.props,
+      ...newProps
+    };
+    this.update(helpProps);
+  }
+
+  componentDidMount() {
+    super.componentDidMount();
+    this.update(this.props);
   }
 
   render() {

@@ -12,7 +12,7 @@ import React from 'react';
  */
 class BottomToolbar extends SimpleWrapper {
   _getDomNodeName() {
-    return 'ons-buttom-toolbar';
+    return 'ons-bottom-toolbar';
   }
 };
 
