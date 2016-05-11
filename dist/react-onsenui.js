@@ -1,4 +1,4 @@
-/*! react-onsenui v0.2.1 - Tue May 03 2016 19:05:27 GMT+0900 (JST) */
+/*! react-onsenui v0.2.1 - Wed May 11 2016 12:43:01 GMT+0900 (JST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom'], factory) :
@@ -119,6 +119,9 @@
         return item;
       }
     },
+    numberConverter: function numberConverter(item) {
+      return item + 'px';
+    },
     animationOptionsConverter: function animationOptionsConverter(options) {
       var keys = Object.keys(options);
       var innerString = keys.map(function (key) {
@@ -234,23 +237,13 @@
     }, {
       key: 'renderPortal',
       value: function renderPortal(props) {
-        var newProps = props || {};
-        if (newProps.isCancelable) {
-          newProps = babelHelpers.extends({}, newProps, { cancelable: true });
-        }
+        var newProps = babelHelpers.objectWithoutProperties(props, []);
 
-        if (newProps.isDisabled) {
-          newProps = babelHelpers.extends({}, newProps, { disabled: true });
-        }
 
-        if (newProps.maskColor) {
-          newProps = babelHelpers.extends({}, newProps, { 'mask-color': newProps.maskColor });
-        }
-
-        if (newProps.animationOptions) {
-          var val = Util.animationOptionsConverter(newProps.animationOptions);
-          newProps = babelHelpers.extends({}, newProps, { 'animation-options': val });
-        }
+        Util.convert(newProps, 'isCancelable', { newName: 'cancelable' });
+        Util.convert(newProps, 'isDisabled', { newName: 'disabled' });
+        Util.convert(newProps, 'maskColor', { newName: 'mask-color' });
+        Util.convert(newProps, 'animationOptions', { fun: Util.animationOptionsConverter, newName: 'animation-options' });
 
         var element = React.createElement(this._getDomNodeName(), newProps);
         ReactDOM.render(element, this.node, this._update.bind(this));
@@ -599,7 +592,7 @@
     babelHelpers.createClass(BottomToolbar, [{
       key: '_getDomNodeName',
       value: function _getDomNodeName() {
-        return 'ons-buttom-toolbar';
+        return 'ons-bottom-toolbar';
       }
     }]);
     return BottomToolbar;
@@ -1280,16 +1273,11 @@
         var _props = this.props;
         var icon = _props.icon;
         var size = _props.size;
-        var spin = _props.spin;
-        var fixedWidth = _props.fixedWidth;
-        var others = babelHelpers.objectWithoutProperties(_props, ['icon', 'size', 'spin', 'fixedWidth']);
+        var others = babelHelpers.objectWithoutProperties(_props, ['icon', 'size']);
 
 
-        if (fixedWidth) {
-          others['fixed-width'] = true;
-        }
-
-        others['spin'] = spin ? true : null;
+        Util.convert(others, 'fixedWidth', { newName: 'fixed-width' });
+        Util.convert(others, 'spin');
 
         if (icon) {
           if (typeof icon === 'string') {
@@ -1318,6 +1306,7 @@
             others.size = size.default + 'px, ' + _innerString.join(',');
           }
         }
+
         return React.createElement(this._getDomNodeName(), others, this.props.children);
       }
     }]);
@@ -1872,24 +1861,12 @@
     }, {
       key: 'render',
       value: function render() {
-        var _props = this.props;
-        var lockOnDrag = _props.lockOnDrag;
-        var tapBackgroundColor = _props.tapBackgroundColor;
-        var tappable = _props.tappable;
-        var others = babelHelpers.objectWithoutProperties(_props, ['lockOnDrag', 'tapBackgroundColor', 'tappable']);
+        var others = babelHelpers.objectWithoutProperties(this.props, []);
 
 
-        if (tappable) {
-          others.tappable = true;
-        }
-
-        if (tapBackgroundColor) {
-          others['tap-background-color'] = tapBackgroundColor;
-        }
-
-        if (lockOnDrag) {
-          others['lock-on-drag'] = lockOnDrag;
-        }
+        Util.convert(others, 'tappable');
+        Util.convert(others, 'tapBackgroundColor', { newName: 'tab-background-color' });
+        Util.convert(others, 'lockOnDrag', { newName: 'lock-on-drag' });
 
         return React.createElement(this._getDomNodeName(), others, this.props.children);
       }
@@ -2080,7 +2057,11 @@
           var newPage = _this4.props.renderPage(route, navigator);
 
           _this4.routes.push(route);
-          _this4.refs.navi._pushPage(options, _this4.update.bind(_this4), _this4.pages, newPage).then(resolve);
+          _this4.refs.navi._pushPage(options, _this4.update.bind(_this4), _this4.pages, newPage).then(resolve).catch(function (error) {
+            _this4.routes.pop();
+            _this4.pages.pop();
+            throw error;
+          });
         });
       }
     }, {
@@ -2142,9 +2123,13 @@
           this.pages[index] = this.props.renderPage(this.routes[index], this);
         }
 
+        var others = babelHelpers.objectWithoutProperties(this.props, []);
+
+        Util.convert(others, 'animationOptions', { fun: Util.animationOptionsConverter, newName: 'animation-options' });
+
         return React.createElement(
           'ons-navigator',
-          babelHelpers.extends({}, this.props, { ref: 'navi' }),
+          babelHelpers.extends({}, others, { ref: 'navi' }),
           this.pages
         );
       }
@@ -2193,7 +2178,27 @@
      *  [/en]
      *  [jp] どうしよう[/jp]
      */
-    initialRoute: React.PropTypes.object
+    initialRoute: React.PropTypes.object,
+
+    /**
+     * @property animation
+     * @type {String}
+     * @description
+     *   [en]
+     *     Animation name. Available animations are `"slide"`, `"lift"`, `"fade"` and `"none"`.
+     *     These are platform based animations. For fixed animations, add `"-ios"` or `"-md"` suffix to the animation name. E.g. `"lift-ios"`, `"lift-md"`. Defaults values are `"slide-ios"` and `"fade-md"`.
+     *   [/en]
+     */
+    animation: React.PropTypes.string,
+
+    /**
+     * @name animationOptions
+     * @type object
+     * @description
+     *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
+     *  [jp] [/jp]
+     */
+    animationOptions: React.PropTypes.object
   };
 
   /**
@@ -2757,29 +2762,16 @@
     }, {
       key: 'render',
       value: function render() {
-        var _props = this.props;
-        var disabled = _props.disabled;
-        var thresholdHeight = _props.thresholdHeight;
-        var fixedContent = _props.fixedContent;
-        var height = _props.height;
-        var others = babelHelpers.objectWithoutProperties(_props, ['disabled', 'thresholdHeight', 'fixedContent', 'height']);
+        var others = babelHelpers.objectWithoutProperties(this.props, []);
 
 
-        if (disabled) {
-          others.disabled = true;
-        }
+        ['disabled'].forEach(function (el) {
+          Util.convert(others, el);
+        });
 
-        if (height) {
-          others.height = height + 'px';
-        }
-
-        if (thresholdHeight) {
-          others['threshold-height'] = thresholdHeight + 'px';
-        }
-
-        if (fixedContent) {
-          others['fixed-content'] = true;
-        }
+        Util.convert(others, 'height', { fun: Util.sizeConverter });
+        Util.convert(others, 'thresholdHeight', { fun: Util.sizeConverter, newName: 'threshold-height' });
+        Util.convert(others, 'fixedContent', { newName: 'fixed-content' });
 
         return React.createElement('ons-pull-hook', babelHelpers.extends({ ref: 'pullHook' }, others));
       }
