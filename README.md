@@ -1,14 +1,12 @@
 # React Components for Onsen UI
 
+**Make beautiful high performance hybrid mobile apps using HTML5, CSS and JavaScript. Includes Material Design for Android and flat design for iOS. Features bindings for React.js.**
+
 [Onsen UI](https://onsen.io/2/) is a UI component library for hybrid mobile apps. It provides components for navigation, forms, tabs, Material Design, infinite lists and much more. 
 
 It can be used to build hybrid apps with [Cordova](https://cordova.apache.org/) and [PhoneGap](http://phonegap.com/) but can also run in the browser.
 
-To learn how to use these components, please refer to [the documentation](https://onsen.io/v2/docs/guide/react/index.html).
-
-You can also check out our [kitchensink example](https://github.com/OnsenUI/react-onsenui-kitchensink) to learn how to use this.
-
-Or you can [click here](http://onsenui.github.io/react-onsenui-kitchensink/demo.html) for a quick demo.
+To learn how to use these components, please refer to [the documentation](https://onsen.io/v2/docs/guide/react/index.html). You can also check out our [kitchensink example](https://github.com/OnsenUI/react-onsenui-kitchensink) to learn how to use this or you can [click here](http://onsenui.github.io/react-onsenui-kitchensink/demo.html) for a quick demo.
 
 The main [Onsen UI repo](https://github.com/OnsenUI/OnsenUI) contains the CSS and core JS library for these components. Please star it if you like it!
 
