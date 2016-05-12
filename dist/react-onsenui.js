@@ -1,4 +1,4 @@
-/*! react-onsenui v0.2.3 - Wed May 11 2016 17:58:59 GMT+0900 (JST) */
+/*! react-onsenui v0.2.5 - Thu May 12 2016 13:26:49 GMT+0900 (JST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom'], factory) :
@@ -487,6 +487,12 @@
           this.lastClass = ' ' + this.props.className;
           node.className += this.lastClass;
         }
+
+        if (!window._superSecretOns) {
+          throw new Error("react-onsenui requires `onsenui`, make sure you are loading it with `import onsenui` or `require('onsenui')` before using the components");
+        }
+
+        window._superSecretOns._autoStyle.prepare(node);
       }
     }, {
       key: 'componentDidMount',
@@ -977,6 +983,73 @@
   };
 
   /**
+   * @original ons-col
+   * @category grid
+   * @description
+   * [en]
+   * Represents a column in the grid system. Use with `<ons-row>` to layout components.
+   * [/en]
+   * [jp][/jp]
+   * <Row>
+   *   <Col width={50}>
+    *   <ons-icon icon="fa-twitter"></ons-icon>
+   *   </Col>
+   *   <Col>Text</Col>
+   * </Row>
+   */
+
+  var Col = function (_SimpleWrapper) {
+    babelHelpers.inherits(Col, _SimpleWrapper);
+
+    function Col() {
+      babelHelpers.classCallCheck(this, Col);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Col).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(Col, [{
+      key: '_getDomNodeName',
+      value: function _getDomNodeName() {
+        return 'ons-col';
+      }
+    }, {
+      key: 'render',
+      value: function render() {
+        var others = babelHelpers.objectWithoutProperties(this.props, []);
+
+
+        Util.convert(others, 'verticalAlign', { newName: 'vertical-align' });
+        Util.convert(others, 'width', { fun: Util.sizeConverter });
+
+        return React.createElement(this._getDomNodeName(), others, this.props.children);
+      }
+    }]);
+    return Col;
+  }(SimpleWrapper);
+
+  ;
+
+  Col.propTypes = {
+
+    /**
+    * @name verticalAlign
+    * @type {String}
+    * @description
+    *   [en]Short hand attribute for aligning vertically. Valid values are top, bottom, and center.[/en]
+    *   [ja][/ja]
+    */
+    verticalAlign: React.PropTypes.oneOf(['top', 'bottom', 'center']),
+
+    /**
+    * @name width
+    * @type {String}
+    * @description
+    *   [en]The width of the column. Valid values are css width values ("10%", 50).[/en]
+    *   [ja][/ja]
+    */
+    width: React.PropTypes.oneOf(React.PropTypes.string, React.PropTypes.string)
+  };
+
+  /**
    * @original ons-dialog
    * @category dialog
    * @description
@@ -1431,6 +1504,8 @@
 
         other['input-id'] = this.props.inputId;
 
+        Util.convert(other, 'disabled');
+
         return React.createElement('ons-input', babelHelpers.extends({ checked: checked ? '' : null }, other));
       }
     }]);
@@ -1443,10 +1518,21 @@
     * @type string
     * @required false
     * @description
-    *  [en]The appearance of the button.[/en]
+    *  [en]The appearance of the input.[/en]
     *  [jp] [/jp]
     */
     modifier: React.PropTypes.string,
+
+    /**
+     * @name disabled
+     * @type bool
+     * @description
+     *  [en]
+     *  Specifies whether the input is disabled.
+     *  [/en]
+     *  [jp] [/jp]
+     */
+    disabled: React.PropTypes.bool,
 
     /**
      * @name onChange
@@ -3013,6 +3099,64 @@
   };
 
   /**
+   * @original ons-row
+   * @category grid
+   * @description
+   * [en]
+   * Represents a row in the grid system. Use with `Col` to layout components.
+   * [/en]
+   * [jp][/jp]
+   * <Row>
+   *   <Col width={50}>
+    *   <ons-icon icon="fa-twitter"></ons-icon>
+   *   </Col>
+   *   <Col>Text</Col>
+   * </Row>
+   */
+
+  var Row = function (_SimpleWrapper) {
+    babelHelpers.inherits(Row, _SimpleWrapper);
+
+    function Row() {
+      babelHelpers.classCallCheck(this, Row);
+      return babelHelpers.possibleConstructorReturn(this, Object.getPrototypeOf(Row).apply(this, arguments));
+    }
+
+    babelHelpers.createClass(Row, [{
+      key: '_getDomNodeName',
+      value: function _getDomNodeName() {
+        return 'ons-row';
+      }
+    }, {
+      key: 'render',
+      value: function render() {
+        var others = babelHelpers.objectWithoutProperties(this.props, []);
+
+
+        Util.convert(others, 'verticalAlign', { newName: 'vertical-align' });
+
+        return React.createElement(this._getDomNodeName(), others, this.props.children);
+      }
+    }]);
+    return Row;
+  }(SimpleWrapper);
+
+  ;
+
+  Row.propTypes = {
+
+    /**
+    * @name verticalAlign
+    * @type {String}
+    * @description
+    *   [en]Short hand attribute for aligning vertically. Valid values are top, bottom, and center.[/en]
+    *   [ja][/ja]
+    */
+    verticalAlign: React.PropTypes.oneOf(['top', 'bottom', 'center'])
+
+  };
+
+  /**
    * @original ons-speed-dial
    * @category speed-dial
    * @description
@@ -4064,6 +4208,7 @@
   exports.Button = Button;
   exports.Carousel = Carousel;
   exports.CarouselItem = CarouselItem;
+  exports.Col = Col;
   exports.Dialog = Dialog;
   exports.Fab = Fab;
   exports.Icon = Icon;
@@ -4080,6 +4225,7 @@
   exports.PullHook = PullHook;
   exports.Range = Range;
   exports.Ripple = Ripple;
+  exports.Row = Row;
   exports.SpeedDial = SpeedDial;
   exports.SpeedDialItem = SpeedDialItem;
   exports.Splitter = Splitter;
