@@ -1,7 +1,7 @@
 {
   "name": "react-onsenui",
   "version": "0.2.5",
-  "description": "Onsen UI - React Components for Hybrid Cordova Apps with Material Design and iOS UI components",
+  "description": "Onsen UI - React Components for Hybrid Cordova/PhoneGap Apps with Material Design and iOS UI components",
   "main": "dist/react-onsenui.js",
   "scripts": {
     "build": "npm run lint && rollup -c",
