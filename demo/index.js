@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import '../OnsenUI/build/js/onsenui.js';
+// import '../OnsenUI/build/js/onsenui.js';
 
 import {
   Page,
@@ -128,7 +128,7 @@ class Examples extends React.Component {
     return (
       <Page style={{background: 'green'}}
         renderToolbar={() => <Toolbar> <div className='center'> Up Toolbar </div> </Toolbar>} >
-        <List
+        <List modifier='inset'
           dataSource={this.examples}
           renderHeader={ () =>
             <ListItem lockOnDrag style={{background: 'green'}} tappable tap-background-color='red'> HEADER </ListItem>

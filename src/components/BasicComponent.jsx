@@ -18,6 +18,12 @@ class BasicComponent extends React.Component {
       this.lastClass = ' ' + this.props.className;
       node.className += this.lastClass;
     }
+
+    if (!window._superSecretOns) {
+      throw new Error("react-onsenui requires `onsenui`, make sure you are loading it with `import onsenui` or `require('onsenui')` before using the components");
+    }
+
+    window._superSecretOns._autoStyle.prepare(node);
   }
 
   componentDidMount() {
