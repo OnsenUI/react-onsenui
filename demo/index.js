@@ -29,6 +29,7 @@ import DialogExample from './examples/Dialog';
 import SwitchExample from './examples/Switch';
 import ProgressBarExample from './examples/ProgressBar';
 import RangeExample from './examples/Range';
+import RowColumnExample from './examples/RowColumn';
 
 class Examples extends React.Component {
   constructor(props) {
@@ -37,6 +38,10 @@ class Examples extends React.Component {
     this.state = {class: 'test'};
 
     this.examples = [
+      {
+        title: 'Row & Column',
+        component: RowColumnExample
+      },
       {
         title: 'Carousel',
         component: CarouselExample
@@ -75,7 +80,7 @@ class Examples extends React.Component {
         title: 'SpeedDial',
         component: SpeedDialExample
       },
-            {
+      {
         title: 'PullHook',
         component: PullHookExample
       },

@@ -4,6 +4,7 @@ import BottomToolbar from './components/BottomToolbar.jsx';
 import Button from './components/Button.jsx';
 import Carousel from './components/Carousel.jsx';
 import CarouselItem from './components/CarouselItem.jsx';
+import Col from './components/Col.jsx';
 import Dialog from './components/Dialog.jsx';
 import Fab from './components/Fab.jsx';
 import Icon from './components/Icon.jsx';
@@ -20,6 +21,7 @@ import ProgressCircular from './components/ProgressCircular.jsx';
 import PullHook from './components/PullHook.jsx';
 import Range from './components/Range.jsx';
 import Ripple from './components/Ripple.jsx';
+import Row from './components/Row.jsx';
 import SpeedDial from './components/SpeedDial.jsx';
 import SpeedDialItem from './components/SpeedDialItem.jsx';
 import Splitter from './components/Splitter.jsx';
@@ -40,6 +42,7 @@ export {
   Button,
   Carousel,
   CarouselItem,
+  Col,
   Dialog,
   Fab,
   Icon,
@@ -56,6 +59,7 @@ export {
   PullHook,
   Range,
   Ripple,
+  Row,
   SpeedDial,
   SpeedDialItem,
   Splitter,
