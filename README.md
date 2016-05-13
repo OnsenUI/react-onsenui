@@ -1,6 +1,6 @@
-# React Components for Onsen UI
+# Onsen UI - React Components for Cordova/PhoneGap hybrid apps
 
-**Make beautiful high performance hybrid mobile apps using HTML5, CSS and JavaScript. Includes Material Design for Android and flat design for iOS. Features bindings for React.js.**
+**Make beautiful high performance hybrid mobile apps using HTML5, CSS and JavaScript. Includes Material Design for Android and flat design for iOS.**
 
 [Onsen UI](https://onsen.io/2/) is a UI component library for hybrid mobile apps. It provides components for navigation, forms, tabs, Material Design, infinite lists and much more. 
 
