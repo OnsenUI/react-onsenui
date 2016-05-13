@@ -11,17 +11,17 @@ import React from 'react';
  *
 <Page renderToolbar={() =>
    <Toolbar>
-     <div class="left">
+     <div className="left">
        <BackButton>
          Back
        </BackButton>
      </div>
-     <div class="center">
+     <div className="center">
        Title
      </div>
-     <div class="right">
+     <div className="right">
        <ToolbarButton>
-         <Icon icon="md-menu"></ons-icon>
+         <Icon icon="md-menu" />
        </ToolbarButton>
      </div>
    </Toolbar> } />
