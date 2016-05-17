@@ -1,4 +1,4 @@
-/*! react-onsenui v0.2.6 - Tue May 17 2016 14:39:04 GMT+0900 (JST) */
+/*! react-onsenui v0.2.7 - Tue May 17 2016 19:19:35 GMT+0900 (JST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom'], factory) :
@@ -537,7 +537,11 @@
    * @original ons-back-button
    * @category toolbar
    * @description
-   * [en] Back button component for Toolbar. It enables to automatically to pop the top page of the navigator. When only presented with one page, the button is hidden automatically.  [/en]
+   * [en]
+   *   Back button component for Toolbar. It enables to automatically to pop the top page of the navigator. When only presented with one page, the button is hidden automatically.
+   *
+   *   The default behavior can be overridden using the `onClick` prop.
+   * [/en]
    * [jp][/jp]
    * @example
    * <Toolbar modifier={this.props.modifier} >
@@ -559,6 +563,29 @@
       value: function _getDomNodeName() {
         return 'ons-back-button';
       }
+    }, {
+      key: '_updateOnClick',
+      value: function _updateOnClick(props) {
+        var node = ReactDOM.findDOMNode(this);
+
+        if (props.onClick) {
+          node.onClick = function () {
+            return null;
+          };
+        } else {
+          delete node.onClick;
+        }
+      }
+    }, {
+      key: 'componentDidMount',
+      value: function componentDidMount() {
+        this._updateOnClick(this.props);
+      }
+    }, {
+      key: 'componentWillReceiveProps',
+      value: function componentWillReceiveProps(props) {
+        this._updateOnClick(props);
+      }
     }]);
     return BackButton;
   }(SimpleWrapper);
@@ -571,10 +598,19 @@
      * @type string
      * @required false
      * @description
-     *  [en]The appearance of the dialog.[/en]
-     *  [jp] [/jp]
+     *  [en]The appearance of the back button.[/en]
+     *  [jp][/jp]
      */
-    modifier: React.PropTypes.string
+    modifier: React.PropTypes.string,
+
+    /**
+     * @name onClick
+     * @type function
+     * @description
+     *  [en]This function will be called ones the button is clicked. It overrides the default behavior of the back button.[/en]
+     *  [jp][/jp]
+     */
+    onClick: React.PropTypes.func
   };
 
   /**
@@ -1046,7 +1082,7 @@
     *   [en]The width of the column. Valid values are css width values ("10%", 50).[/en]
     *   [ja][/ja]
     */
-    width: React.PropTypes.oneOf(React.PropTypes.string, React.PropTypes.string)
+    width: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string])
   };
 
   /**
