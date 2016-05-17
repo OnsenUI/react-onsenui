@@ -51,7 +51,7 @@ Col.propTypes = {
   *   [en]The width of the column. Valid values are css width values ("10%", 50).[/en]
   *   [ja][/ja]
   */
-  width: React.PropTypes.oneOf(React.PropTypes.string, React.PropTypes.string)
+  width: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string])
 };
 
 export default Col;
