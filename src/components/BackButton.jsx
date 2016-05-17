@@ -1,5 +1,6 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 /**
  * @original ons-back-button
@@ -16,6 +17,24 @@ import React from 'react';
 class BackButton extends SimpleWrapper {
   _getDomNodeName() {
     return 'ons-back-button';
+  }
+
+  _updateOnClick(props) {
+    const node = ReactDOM.findDOMNode(this);
+
+    if (props.onClick) {
+      node.onClick = () => null;
+    } else {
+      delete node.onClick;
+    }
+  }
+
+  componentDidMount() {
+    this._updateOnClick(this.props);
+  }
+
+  componentWillReceiveProps(props) {
+    this._updateOnClick(props);
   }
 };
 
