@@ -1,4 +1,4 @@
-/*! react-onsenui v0.2.6 - Thu May 12 2016 23:18:52 GMT+0900 (JST) */
+/*! react-onsenui v0.2.6 - Tue May 17 2016 14:39:04 GMT+0900 (JST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom'], factory) :
@@ -3860,7 +3860,7 @@
             onPostChange={() => console.log('postChange')}
             onReactive={() => console.log('postChange')}
             position='bottom'
-            renderTabs={() => [
+            renderTabs={(activeIndex, tabbar) => [
               {
                 content: <TabPage title="Home" active={activeIndex === 0} tabbar={tabbar} />,
                 tab: <Tab label="Home" icon="md-home" />
@@ -4087,17 +4087,17 @@
    *
   <Page renderToolbar={() =>
      <Toolbar>
-       <div class="left">
+       <div className="left">
          <BackButton>
            Back
          </BackButton>
        </div>
-       <div class="center">
+       <div className="center">
          Title
        </div>
-       <div class="right">
+       <div className="right">
          <ToolbarButton>
-           <Icon icon="md-menu"></ons-icon>
+           <Icon icon="md-menu" />
          </ToolbarButton>
        </div>
      </Toolbar> } />

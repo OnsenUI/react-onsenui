@@ -19,7 +19,7 @@ import Util from './Util.js';
           onPostChange={() => console.log('postChange')}
           onReactive={() => console.log('postChange')}
           position='bottom'
-          renderTabs={() => [
+          renderTabs={(activeIndex, tabbar) => [
             {
               content: <TabPage title="Home" active={activeIndex === 0} tabbar={tabbar} />,
               tab: <Tab label="Home" icon="md-home" />

@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/react-onsenui.svg)](https://badge.fury.io/js/react-onsenui)
+
 # Onsen UI - React Components for Cordova/PhoneGap hybrid apps
 
 **Make beautiful high performance hybrid mobile apps using HTML5, CSS and JavaScript. Includes Material Design for Android and flat design for iOS.**
