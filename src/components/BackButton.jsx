@@ -6,7 +6,11 @@ import ReactDOM from 'react-dom';
  * @original ons-back-button
  * @category toolbar
  * @description
- * [en] Back button component for Toolbar. It enables to automatically to pop the top page of the navigator. When only presented with one page, the button is hidden automatically.  [/en]
+ * [en]
+ *   Back button component for Toolbar. It enables to automatically to pop the top page of the navigator. When only presented with one page, the button is hidden automatically.
+ *
+ *   The default behavior can be overridden using the `onClick` prop.
+ * [/en]
  * [jp][/jp]
  * @example
  * <Toolbar modifier={this.props.modifier} >
@@ -47,7 +51,16 @@ BackButton.propTypes = {
    *  [en]The appearance of the back button.[/en]
    *  [jp][/jp]
    */
-  modifier: React.PropTypes.string
+  modifier: React.PropTypes.string,
+
+  /**
+   * @name onClick
+   * @type function
+   * @description
+   *  [en]This function will be called ones the button is clicked. It overrides the default behavior of the back button.[/en]
+   *  [jp][/jp]
+   */
+  onClick: React.PropTypes.func
 };
 
 export default BackButton;
