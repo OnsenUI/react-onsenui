@@ -25,8 +25,8 @@ BackButton.propTypes = {
    * @type string
    * @required false
    * @description
-   *  [en]The appearance of the dialog.[/en]
-   *  [jp] [/jp]
+   *  [en]The appearance of the back button.[/en]
+   *  [jp][/jp]
    */
   modifier: React.PropTypes.string
 };
