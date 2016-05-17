@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// import '../OnsenUI/build/js/onsenui.js';
+import '../OnsenUI/build/js/onsenui.js';
 
 import {
   Page,
@@ -30,6 +30,7 @@ import SwitchExample from './examples/Switch';
 import ProgressBarExample from './examples/ProgressBar';
 import RangeExample from './examples/Range';
 import RowColumnExample from './examples/RowColumn';
+import BackButtonExample from './examples/BackButton';
 
 class Examples extends React.Component {
   constructor(props) {
@@ -38,6 +39,10 @@ class Examples extends React.Component {
     this.state = {class: 'test'};
 
     this.examples = [
+      {
+        title: 'Back button',
+        component: BackButtonExample
+      },
       {
         title: 'Row & Column',
         component: RowColumnExample
