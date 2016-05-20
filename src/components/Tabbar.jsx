@@ -9,28 +9,25 @@ import Util from './Util.js';
  * [en] Component to display a tabbar on either the top or the bottom of a page.
  * To define the tabs and the content the property renderTabs need to be implemented, that returns an array of tabs and their content. See the example for specifics. [/en]* [jp][/jp]
  * @example
- *   renderTabs(activeIndex, tabbar) {
-    return ;
-  }
 
-      <Page>
-        <Tabbar
-          onPreChange={() => console.log('preChange')}
-          onPostChange={() => console.log('postChange')}
-          onReactive={() => console.log('postChange')}
-          position='bottom'
-          renderTabs={(activeIndex, tabbar) => [
-            {
-              content: <TabPage title="Home" active={activeIndex === 0} tabbar={tabbar} />,
-              tab: <Tab label="Home" icon="md-home" />
-            },
-            {
-              content: <TabPage title="Settings" active={activeIndex === 1} tabbar={tabbar} />,
-              tab: <Tab label="Settings" icon="md-settings" />
-            }]
-          }
-        />
-      </Page>
+  <Page>
+    <Tabbar
+      onPreChange={() => console.log('preChange')}
+      onPostChange={() => console.log('postChange')}
+      onReactive={() => console.log('postChange')}
+      position='bottom'
+      renderTabs={(activeIndex, tabbar) => [
+        {
+          content: <TabPage title="Home" active={activeIndex === 0} tabbar={tabbar} />,
+          tab: <Tab label="Home" icon="md-home" />
+        },
+        {
+          content: <TabPage title="Settings" active={activeIndex === 1} tabbar={tabbar} />,
+          tab: <Tab label="Settings" icon="md-settings" />
+        }]
+      }
+    />
+  </Page>
  */
 
 class Tabbar extends BasicComponent {
