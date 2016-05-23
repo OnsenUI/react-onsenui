@@ -54,17 +54,29 @@ export default class extends React.Component {
         </p>
           <Input disabled={false} value={this.state.text} float onChange={(event) => {
             this.setState({text: event.target.value})} } modifier='material' placeholder='Username'></Input>
+
+          <input value={this.state.text} onChange={(event) => {
+            this.setState({text: event.target.value});
+          }} />
           <div> Text : {this.state.text} </div>
 
         <h2>Checkboxes</h2>
 
         {
           [0, 1, 2].map((idx) => (
-            <Input
-              type='checkbox'
-              onChange={this.handleCheckbox.bind(this, idx)}
-              checked={this.state.selected.indexOf(idx) >= 0}
-            />
+            <div>
+              <input
+                type='checkbox'
+                onChange={this.handleCheckbox.bind(this, idx)}
+                checked={this.state.selected.indexOf(idx) >= 0}
+              />
+
+              <Input
+                type='checkbox'
+                onChange={this.handleCheckbox.bind(this, idx)}
+                checked={this.state.selected.indexOf(idx) >= 0}
+              />
+            </div>
           ))
         }
         <p>Selected: [{this.state.selected.join(', ')}]</p>
@@ -73,11 +85,19 @@ export default class extends React.Component {
 
         {
           [0, 1, 2].map((idx) => (
-            <Input
-              type='radio'
-              onChange={this.handleRadio.bind(this, idx)}
-              checked={idx === this.state.selected2}
-            />
+            <div>
+              <input
+                type='radio'
+                onChange={this.handleRadio.bind(this, idx)}
+                checked={idx === this.state.selected2}
+              />
+
+              <Input
+                type='radio'
+                onChange={this.handleRadio.bind(this, idx)}
+                checked={idx === this.state.selected2}
+              />
+            </div>
           ))
         }
 
