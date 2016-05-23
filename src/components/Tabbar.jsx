@@ -5,6 +5,7 @@ import Util from './Util.js';
 /**
  * @original ons-tabbar
  * @category tabbar
+ * @tutorial react/Reference/tabbar
  * @description
  * [en] Component to display a tabbar on either the top or the bottom of a page.
  * To define the tabs and the content the property renderTabs need to be implemented, that returns an array of tabs and their content. See the example for specifics. [/en]* [jp][/jp]

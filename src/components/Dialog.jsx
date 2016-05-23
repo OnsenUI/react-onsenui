@@ -4,6 +4,7 @@ import React from 'react';
 /**
  * @original ons-dialog
  * @category dialog
+ * @tutorial react/Reference/dialog
  * @description
  * [en]  Dialog that is displayed on top of current screen. As opposed to the AlertDialog element, this component can contain any kind of content.  The dialog is useful for displaying menus, additional information or to ask the user to make a decision.  It will automatically be displayed as Material Design when running on an Android device.
  [/en]

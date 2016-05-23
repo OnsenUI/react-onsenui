@@ -6,6 +6,7 @@ import Util from './Util.js';
 /**
  * @original ons-carousel
  * @category carousel
+ * @tutorial react/Reference/carousel
  * @description
  * [en] Carousel component. A carousel can be used to display several items in the same space.
  *     The component supports displaying content both horizontally and vertically. The user can scroll through the items by dragging and it can also be controller programmatically.

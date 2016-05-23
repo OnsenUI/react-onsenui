@@ -4,6 +4,7 @@ import BasicComponent from './BasicComponent.jsx';
 /**
  * @original ons-page
  * @category page
+ * @tutorial react/Reference/page
  * @description
  * [en] This component is handling the entire page.  THe content can be scrolled. [/en]
  * [jp] どうしよう[/jp]

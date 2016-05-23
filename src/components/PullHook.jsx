@@ -6,6 +6,7 @@ import Util from './Util.js';
 /**
  * @original ons-pull-hook
  * @category pull-hook
+ * @tutorial react/Reference/pull-hook
  * @description
  * [en]  Component that adds **Pull to refresh** functionality to an `<ons-page>` element.
  *     It can be used to perform a task when the user pulls down at the top of the page. A common usage is to refresh the data displayed in a page.

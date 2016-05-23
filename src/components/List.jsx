@@ -4,6 +4,7 @@ import BasicComponent from './BasicComponent.jsx';
 /**
  * @original ons-list
  * @category list
+ * @tutorial react/Reference/list
  * @description
  *   [en]
  *     Component for representing a list. It takes an array called datasrouce and calls renderRow(row, index) for every row.  Furthermore, the header and the footer can be specified with `renderRow` and `renderHeader` respectivly. [/en]

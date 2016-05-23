@@ -4,12 +4,11 @@ import React from 'react';
 /**
  * @original ons-alert-dialog
  * @category dialog
+ * @tutorial react/Reference/dialog
  * @description
- *   [en]
- *     Alert dialog that is displayed on top of the current screen. Useful for displaying questions, warnings or error messages to the user. The title, content and buttons can be easily customized and it will automatically switch style based on the platform.
- *
- *     To use the element it can either be attached directly to the `<body>` element or dynamically created from a template using the `ons.createAlertDialog(template)` utility function and the `<ons-template>` tag.
- *   [/en]
+ * [en]
+ *   Alert dialog that is displayed on top of the current screen. Useful for displaying questions, warnings or error messages to the user. The title, content and buttons can be easily customized and it will automatically switch style based on the platform.
+ * [/en]
  * [jp][/jp]
  * @example
    <AlertDialog isOpen={this.state.isOpen} onCancel={this.handleCancel.bind(this)} cancelable>

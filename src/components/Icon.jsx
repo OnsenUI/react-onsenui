@@ -5,6 +5,7 @@ import Util from './Util.js';
 /**
  * @original ons-icon
  * @category icon
+ * @tutorial react/Reference/icon
  * @description
  * [en]
  * Displays an icon. The following icon suites are available:

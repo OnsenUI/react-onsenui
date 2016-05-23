@@ -5,6 +5,7 @@ import React from 'react';
 /**
  * @original ons-speed-dial-item
  * @category speed-dial
+ * @tutorial react/Reference/speed-dial
  * @description
  * [en] This component displays the child elements of the Material Design Speed dial component. [/en]
  * [jp][/jp]

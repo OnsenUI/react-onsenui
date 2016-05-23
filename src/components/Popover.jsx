@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 /**
  * @original ons-popover
  * @category popover
+ * @tutorial react/Reference/popover
  * @description
  *   [en]
  *     A component that displays a popover next to an element. The popover can be used to display extra information about a component or a tooltip.

@@ -4,6 +4,7 @@ import React from 'react';
 /**
  * @original ons-fab
  * @category fab
+ * @tutorial react/Reference/fab
  * @description
  * [en] The Floating action button is a circular button defined in the [Material Design specification](https://www.google.com/design/spec/components/buttons-floating-action-button.html). They are often used to promote the primary action of the app.
  *     It can be displayed either as an inline element or in one of the corners. Normally it will be positioned in the lower right corner of the screen.

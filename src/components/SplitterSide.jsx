@@ -6,6 +6,7 @@ import Util from './Util.js';
 /**
  * @original ons-splitter-side
  * @category splitter
+ * @tutorial react/Reference/splitter
  * @description
  * [en]  The SplitterContent  element is used as a child element of Splitter.
  *    It contains the main content of the page while SplitterSide contains the list.

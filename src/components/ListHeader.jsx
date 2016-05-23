@@ -4,6 +4,7 @@ import React from 'react';
 /**
  * @original ons-list-header
  * @category list
+ * @tutorial react/Reference/list
  * @description
  * [en] Header element for list items. Must be put inside ons-list component.
  [/en]

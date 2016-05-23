@@ -6,6 +6,7 @@ import Util from './Util.js';
 /**
  * @original ons-list-item
  * @category list
+ * @tutorial react/Reference/list
  * @description
  *   [en]
  *   Component that represents each item in the list. Must be put inside the `List` component. The list item is composed of three parts that are represented with the `left`, `center` and `right` classes. These classes can be used to ensure that the content of the list items is properly aligned.

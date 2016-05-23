@@ -5,11 +5,12 @@ import ReactDOM from 'react-dom';
 const EVENT_TYPES = ['change', 'input'];
 
 /**
- * @original ons-progress-bar
- * @progress
+ * @original ons-range
+ * @category input
+ * @tutorial react/Reference/input
  * @description
- * [en] Range input component.
- * Used to display a draggable slider. Works very similar to the `<Input type="range" />` element.
+ * [en]
+ *   Range input component.
  * [/en]
  * [jp][/jp]
  * @example

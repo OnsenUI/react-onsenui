@@ -4,8 +4,11 @@ import React from 'react';
 /**
  * @original ons-ripple
  * @category ripple
+ * @tutorial react/Reference/ripple
  * @description
- * [en] Adds a Material Design "ripple" effect to an element.  [/en]
+ * [en]
+ *   Adds a Material Design "ripple" effect to an element.
+ * [/en]
  * [jp][/jp]
  * @example
    <div className='myList'>

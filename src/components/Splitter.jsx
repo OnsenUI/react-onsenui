@@ -3,6 +3,7 @@ import SimpleWrapper from './SimpleWrapper.jsx';
 /**
  * @original ons-splitter
  * @category splitter
+ * @tutorial react/Reference/splitter
  * @description
  * [en]  A component that enables responsive layout by implementing both a two-column layout and a sliding menu layout.
  *

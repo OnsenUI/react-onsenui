@@ -4,6 +4,7 @@ import React from 'react';
 /**
  * @original ons-carousel-item
  * @category carousel
+ * @tutorial react/Reference/carousel
  * @description
  * [en] Carousel item component. Used as a child of the `<ons-carousel>` element.
  [/en]

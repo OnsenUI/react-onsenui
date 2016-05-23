@@ -4,6 +4,7 @@ import React from 'react';
 /**
  * @original ons-toolbar-button
  * @category toolbar
+ * @tutorial react/Reference/toolbar
  * @description
  *   [en]
  *   Button component for the Toolbar. Using this component gives a nice default style.
