@@ -1,6 +1,6 @@
 {
   "name": "react-onsenui",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "Onsen UI - React Components for Hybrid Cordova/PhoneGap Apps with Material Design and iOS UI components",
   "main": "dist/react-onsenui.js",
   "scripts": {
@@ -62,7 +62,7 @@
   "peerDependencies": {
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
-    "onsenui": "2.0.0-rc.5"
+    "onsenui": "2.0.0-rc.6"
   },
   "dependencies": {
     "babel-loader": "^6.2.4",
