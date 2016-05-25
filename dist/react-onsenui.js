@@ -1,4 +1,4 @@
-/*! react-onsenui v0.2.8 - Tue May 17 2016 22:34:57 GMT+0900 (JST) */
+/*! react-onsenui v0.2.9 - Wed May 25 2016 21:06:14 GMT+0900 (JST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom'], factory) :
@@ -284,12 +284,11 @@
   /**
    * @original ons-alert-dialog
    * @category dialog
+   * @tutorial react/Reference/dialog
    * @description
-   *   [en]
-   *     Alert dialog that is displayed on top of the current screen. Useful for displaying questions, warnings or error messages to the user. The title, content and buttons can be easily customized and it will automatically switch style based on the platform.
-   *
-   *     To use the element it can either be attached directly to the `<body>` element or dynamically created from a template using the `ons.createAlertDialog(template)` utility function and the `<ons-template>` tag.
-   *   [/en]
+   * [en]
+   *   Alert dialog that is displayed on top of the current screen. Useful for displaying questions, warnings or error messages to the user. The title, content and buttons can be easily customized and it will automatically switch style based on the platform.
+   * [/en]
    * [jp][/jp]
    * @example
      <AlertDialog isOpen={this.state.isOpen} onCancel={this.handleCancel.bind(this)} cancelable>
@@ -536,6 +535,7 @@
   /**
    * @original ons-back-button
    * @category toolbar
+   * @tutorial react/Reference/navigator
    * @description
    * [en]
    *   Back button component for Toolbar. It enables to automatically to pop the top page of the navigator. When only presented with one page, the button is hidden automatically.
@@ -658,8 +658,9 @@
   /**
    * @original ons-button
    * @category button
+   * @tutorial react/Reference/button
    * @description
-   * [en] Button component. If you want to place a button in a toolbar, use `<ons-toolbar-button>` or `<ons-back-button>` instead.   Will automatically display as a Material Design button with a ripple effect on Android.
+   * [en] Button component. If you want to place a button in a toolbar, use `ToolbarButton` or `BackButton` instead. Will automatically display as a Material Design button with a ripple effect on Android.
    [/en]
    * [jp][/jp]
    * @example
@@ -733,6 +734,7 @@
   /**
    * @original ons-carousel
    * @category carousel
+   * @tutorial react/Reference/carousel
    * @description
    * [en] Carousel component. A carousel can be used to display several items in the same space.
    *     The component supports displaying content both horizontally and vertically. The user can scroll through the items by dragging and it can also be controller programmatically.
@@ -971,6 +973,7 @@
   /**
    * @original ons-carousel-item
    * @category carousel
+   * @tutorial react/Reference/carousel
    * @description
    * [en] Carousel item component. Used as a child of the `<ons-carousel>` element.
    [/en]
@@ -1088,6 +1091,7 @@
   /**
    * @original ons-dialog
    * @category dialog
+   * @tutorial react/Reference/dialog
    * @description
    * [en]  Dialog that is displayed on top of current screen. As opposed to the AlertDialog element, this component can contain any kind of content.  The dialog is useful for displaying menus, additional information or to ask the user to make a decision.  It will automatically be displayed as Material Design when running on an Android device.
    [/en]
@@ -1260,6 +1264,7 @@
   /**
    * @original ons-fab
    * @category fab
+   * @tutorial react/Reference/fab
    * @description
    * [en] The Floating action button is a circular button defined in the [Material Design specification](https://www.google.com/design/spec/components/buttons-floating-action-button.html). They are often used to promote the primary action of the app.
    *     It can be displayed either as an inline element or in one of the corners. Normally it will be positioned in the lower right corner of the screen.
@@ -1348,6 +1353,7 @@
   /**
    * @original ons-icon
    * @category icon
+   * @tutorial react/Reference/icon
    * @description
    * [en]
    * Displays an icon. The following icon suites are available:
@@ -1487,6 +1493,7 @@
   /**
    * @original ons-input
    * @category input
+   * @tutorial react/Reference/input
    * @description
    * [en]
    * An input element. The `type` attribute can be used to change the input type. All text input types as well as `checkbox` and `radio` are supported. The component will automatically render as a Material Design input on Android devices. Most attributes that can be used for a normal `<input>` element can also be used on the `<ons-input>` element..
@@ -1530,6 +1537,19 @@
         EVENT_TYPES.forEach(function (eventType) {
           node.removeEventListener(eventType, _this3.props.onChange);
         });
+      }
+    }, {
+      key: 'componentWillReceiveProps',
+      value: function componentWillReceiveProps(props) {
+        var node = ReactDOM.findDOMNode(this);
+
+        if (typeof props.value !== 'undefined') {
+          node.value = props.value;
+        }
+
+        if (typeof props.checked !== 'undefined') {
+          node.checked = props.checked;
+        }
       }
     }, {
       key: 'render',
@@ -1630,6 +1650,7 @@
   /**
    * @original ons-lazy-repeat
    * @category lazy-list
+   * @tutorial react/Reference/lazy-list
    * @description
    * [en] Using this component a list with millions of items can be rendered without a drop in performance.
    *     It does that by "lazily" loading elements into the DOM when they come into view and
@@ -1786,6 +1807,7 @@
   /**
    * @original ons-list
    * @category list
+   * @tutorial react/Reference/list
    * @description
    *   [en]
    *     Component for representing a list. It takes an array called datasrouce and calls renderRow(row, index) for every row.  Furthermore, the header and the footer can be specified with `renderRow` and `renderHeader` respectivly. [/en]
@@ -1903,6 +1925,7 @@
   /**
    * @original ons-list-header
    * @category list
+   * @tutorial react/Reference/list
    * @description
    * [en] Header element for list items. Must be put inside ons-list component.
    [/en]
@@ -1953,6 +1976,7 @@
   /**
    * @original ons-list-item
    * @category list
+   * @tutorial react/Reference/list
    * @description
    *   [en]
    *   Component that represents each item in the list. Must be put inside the `List` component. The list item is composed of three parts that are represented with the `left`, `center` and `right` classes. These classes can be used to ensure that the content of the list items is properly aligned.
@@ -2055,6 +2079,7 @@
   /**
    * @original ons-navigator
    * @category navigator
+   * @tutorial react/Reference/navigator
    * @description
    * [en] This component is responsible for page transitioning and managing the pages of your OnsenUI application. In order to manage to display the pages, the  navigator needs to define the `renderPage` method, that takes an route and a navigator and  converts it to an page.  [/en]
    * [jp] どうしよう[/jp]
@@ -2337,6 +2362,7 @@
   /**
    * @original ons-page
    * @category page
+   * @tutorial react/Reference/page
    * @description
    * [en] This component is handling the entire page.  THe content can be scrolled. [/en]
    * [jp] どうしよう[/jp]
@@ -2476,6 +2502,7 @@
   /**
    * @original ons-popover
    * @category popover
+   * @tutorial react/Reference/popover
    * @description
    *   [en]
    *     A component that displays a popover next to an element. The popover can be used to display extra information about a component or a tooltip.
@@ -2673,6 +2700,7 @@
   /**
    * @original ons-progress-bar
    * @category progress
+   * @tutorial react/Reference/progress
    * @description
    * [en] The component is used to display a linear progress bar. It can either display a progress bar that shows the user how much of a task has been completed. In the case where the percentage is not known it can be used to display an animated progress bar so the user can see that an operation is in progress.  [/en]
    * [jp][/jp]
@@ -2757,6 +2785,7 @@
   /**
    * @original ons-progress-circular
    * @category progress
+   * @tutorial react/Reference/progress
    * @description
    * [en] This component displays a circular progress indicator. It can either be used to show how much of a task has been completed or to show a looping animation to indicate that an operation is currently running.
    * [/en]
@@ -2842,6 +2871,7 @@
   /**
    * @original ons-pull-hook
    * @category pull-hook
+   * @tutorial react/Reference/pull-hook
    * @description
    * [en]  Component that adds **Pull to refresh** functionality to an `<ons-page>` element.
    *     It can be used to perform a task when the user pulls down at the top of the page. A common usage is to refresh the data displayed in a page.
@@ -2973,11 +3003,12 @@
   var EVENT_TYPES$1 = ['change', 'input'];
 
   /**
-   * @original ons-progress-bar
-   * @progress
+   * @original ons-range
+   * @category input
+   * @tutorial react/Reference/input
    * @description
-   * [en] Range input component.
-   * Used to display a draggable slider. Works very similar to the `<Input type="range" />` element.
+   * [en]
+   *   Range input component.
    * [/en]
    * [jp][/jp]
    * @example
@@ -3073,8 +3104,11 @@
   /**
    * @original ons-ripple
    * @category ripple
+   * @tutorial react/Reference/ripple
    * @description
-   * [en] Adds a Material Design "ripple" effect to an element.  [/en]
+   * [en]
+   *   Adds a Material Design "ripple" effect to an element.
+   * [/en]
    * [jp][/jp]
    * @example
      <div className='myList'>
@@ -3195,6 +3229,7 @@
   /**
    * @original ons-speed-dial
    * @category speed-dial
+   * @tutorial react/Reference/speed-dial
    * @description
    * [en] Element that displays a Material Design Speed Dialog component. It is useful when there are more than one primary action that can be performed in a page.
    *  The Speed dial looks like a `Fab` element but will expand a menu when tapped.
@@ -3276,6 +3311,7 @@
   /**
    * @original ons-speed-dial-item
    * @category speed-dial
+   * @tutorial react/Reference/speed-dial
    * @description
    * [en] This component displays the child elements of the Material Design Speed dial component. [/en]
    * [jp][/jp]
@@ -3348,6 +3384,7 @@
   /**
    * @original ons-splitter
    * @category splitter
+   * @tutorial react/Reference/splitter
    * @description
    * [en]  A component that enables responsive layout by implementing both a two-column layout and a sliding menu layout.
    *
@@ -3400,6 +3437,7 @@
   /**
    * @original ons-splitter-content
    * @category splitter
+   * @tutorial react/Reference/splitter
    * @description
    * [en]  The SplitterContent  element is used as a child element of Splitter.
    *    It contains the main content of the page while SplitterSide contains the list.
@@ -3451,6 +3489,7 @@
   /**
    * @original ons-splitter-side
    * @category splitter
+   * @tutorial react/Reference/splitter
    * @description
    * [en]  The SplitterContent  element is used as a child element of Splitter.
    *    It contains the main content of the page while SplitterSide contains the list.
@@ -3689,6 +3728,7 @@
   /**
    * @original ons-switch
    * @category input
+   * @tutorial react/Reference/input
    * @description
    * [en]   Switch component. The switch can be toggled both by dragging and tapping.
    *     Will automatically displays a Material Design switch on Android devices.
@@ -3778,6 +3818,7 @@
   /**
    * @original ons-tab
    * @category tabbar
+   * @tutorial react/Reference/tabbar
    * @description
    * [en] Represents a tab inside tab bar.
    [/en]
@@ -3810,6 +3851,7 @@
   /**
    * @original ons-tab-active
    * @category tabbar
+   * @tutorial react/Reference/tabbar
    * @description
    * [en] Tab element for showing shown when the tab is active [/en]
    * [jp][/jp]
@@ -3846,6 +3888,7 @@
   /**
    * @original ons-tab-inactive
    * @category tabbar
+   * @tutorial react/Reference/tabbar
    * @description
    * [en] Tab element for showing shown when the tab is inactive [/en]
    * [jp][/jp]
@@ -3882,32 +3925,30 @@
   /**
    * @original ons-tabbar
    * @category tabbar
+   * @tutorial react/Reference/tabbar
    * @description
    * [en] Component to display a tabbar on either the top or the bottom of a page.
    * To define the tabs and the content the property renderTabs need to be implemented, that returns an array of tabs and their content. See the example for specifics. [/en]* [jp][/jp]
    * @example
-   *   renderTabs(activeIndex, tabbar) {
-      return ;
-    }
 
-        <Page>
-          <Tabbar
-            onPreChange={() => console.log('preChange')}
-            onPostChange={() => console.log('postChange')}
-            onReactive={() => console.log('postChange')}
-            position='bottom'
-            renderTabs={(activeIndex, tabbar) => [
-              {
-                content: <TabPage title="Home" active={activeIndex === 0} tabbar={tabbar} />,
-                tab: <Tab label="Home" icon="md-home" />
-              },
-              {
-                content: <TabPage title="Settings" active={activeIndex === 1} tabbar={tabbar} />,
-                tab: <Tab label="Settings" icon="md-settings" />
-              }]
-            }
-          />
-        </Page>
+    <Page>
+      <Tabbar
+        onPreChange={() => console.log('preChange')}
+        onPostChange={() => console.log('postChange')}
+        onReactive={() => console.log('postChange')}
+        position='bottom'
+        renderTabs={(activeIndex, tabbar) => [
+          {
+            content: <TabPage title="Home" active={activeIndex === 0} tabbar={tabbar} />,
+            tab: <Tab label="Home" icon="md-home" />
+          },
+          {
+            content: <TabPage title="Settings" active={activeIndex === 1} tabbar={tabbar} />,
+            tab: <Tab label="Settings" icon="md-settings" />
+          }]
+        }
+      />
+    </Page>
    */
 
   var Tabbar = function (_BasicComponent) {
@@ -4116,6 +4157,7 @@
   /**
    * @original ons-toolbar
    * @category toolbar
+   * @tutorial react/Reference/toolbar
    * @description
    * [en]  Toolbar component that can be used with navigation. Left, center and right container can be specified by class names.  This component will automatically displays as a Material Design toolbar when running on Android devices.
    * [jp] どうしよう[/jp]
@@ -4174,6 +4216,7 @@
   /**
    * @original ons-toolbar-button
    * @category toolbar
+   * @tutorial react/Reference/toolbar
    * @description
    *   [en]
    *   Button component for the Toolbar. Using this component gives a nice default style.
