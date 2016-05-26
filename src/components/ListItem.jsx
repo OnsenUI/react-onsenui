@@ -38,7 +38,7 @@ class ListItem extends SimpleWrapper {
     var {...others} = this.props;
 
     Util.convert(others, 'tappable');
-    Util.convert(others, 'tapBackgroundColor', {newName: 'tab-background-color'});
+    Util.convert(others, 'tapBackgroundColor', {newName: 'tap-background-color'});
     Util.convert(others, 'lockOnDrag', {newName: 'lock-on-drag'});
 
     return React.createElement(this._getDomNodeName(), others, this.props.children);
