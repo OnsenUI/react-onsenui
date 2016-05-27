@@ -7,7 +7,7 @@ import {
   Dialog,
   Navigator,
   Input
-} from 'react-onsenui';
+} from '../../src/index.js';
 
 import MyToolbar from './MyToolbar';
 

@@ -8,7 +8,7 @@ import {
   Toolbar,
   ToolbarButton,
   Button
-} from 'react-onsenui';
+} from '../../src/index.js';
 
 import MyToolbar from './MyToolbar';
 

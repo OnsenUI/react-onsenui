@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import '../OnsenUI/build/js/onsenui.js';
+
 import {
   Page,
   Navigator,
@@ -10,10 +12,8 @@ import {
   Range
 } from '../src/index.js';
 
-import ons from 'onsenui';
-
 import PageExample from './examples/Page';
-/*import ListExample from './examples/List';
+import ListExample from './examples/List';
 import LazyListExample from './examples/LazyList';
 import TabbarExample from './examples/Tabbar';
 import AlertDialogExample from './examples/AlertDialog';
@@ -31,21 +31,22 @@ import ProgressBarExample from './examples/ProgressBar';
 import RangeExample from './examples/Range';
 import RowColumnExample from './examples/RowColumn';
 import BackButtonExample from './examples/BackButton';
-*/
 
 class Examples extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {class: 'test'};
+    this.getExamples = this.getExamples.bind(this);
+  }
 
-    this.examples = [
+  getExamples() {
+   return [
       {
         title: 'Page',
         component: PageExample
       },
-
-      /*     {
+      {
         title: 'Back button',
         component: BackButtonExample
       },
@@ -119,12 +120,8 @@ class Examples extends React.Component {
       {
         title: 'Input',
         component: InputExample
-      }*/
+      }
     ];
-
-      // setTimeout(() => {
-      //   this.goto(this.examples[0]);
-      // }, 0);
   }
 
   goto(example) {
@@ -141,7 +138,7 @@ class Examples extends React.Component {
       <Page style={{background: 'green'}}
         renderToolbar={() => <Toolbar> <div className='center'> Up Toolbar </div> </Toolbar>} >
         <List modifier='inset'
-          dataSource={this.examples}
+          dataSource={this.getExamples()}
           renderHeader={ () =>
             <ListItem lockOnDrag style={{background: 'green'}} tappable tap-background-color='red'> HEADER </ListItem>
           }
