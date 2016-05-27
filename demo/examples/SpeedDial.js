@@ -8,7 +8,7 @@ import {
   SpeedDialItem,
   Toolbar,
   BackButton
-} from 'react-onsenui';
+} from '../../src/index.js';
 
 export default class extends React.Component {
   constructor(props) {

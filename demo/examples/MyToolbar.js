@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Toolbar, BackButton} from 'react-onsenui';
+import {Toolbar, BackButton} from '../../src/index.js';
 
 export default class extends React.Component {
   render() {

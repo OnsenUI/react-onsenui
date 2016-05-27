@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 
 import '../OnsenUI/build/js/onsenui.js';
 
+import '../OnsenUI/build/css/onsenui.css';
+import '../OnsenUI/build/css/onsen-css-components.css';
+
 import {
   Page,
   Navigator,
@@ -10,7 +13,7 @@ import {
   List,
   ListItem,
   Range
-} from 'react-onsenui';
+} from '../src/index.js';
 
 import PageExample from './examples/Page';
 import ListExample from './examples/List';
@@ -37,8 +40,15 @@ class Examples extends React.Component {
     super(props);
 
     this.state = {class: 'test'};
+    this.getExamples = this.getExamples.bind(this);
+  }
 
-    this.examples = [
+  getExamples() {
+   return [
+      {
+        title: 'Page',
+        component: PageExample
+      },
       {
         title: 'Back button',
         component: BackButtonExample
@@ -89,11 +99,6 @@ class Examples extends React.Component {
         title: 'PullHook',
         component: PullHookExample
       },
-
-      {
-        title: 'Page',
-        component: PageExample
-      },
       {
         title: 'Ripple',
         component: RippleExample
@@ -118,11 +123,8 @@ class Examples extends React.Component {
       {
         title: 'Input',
         component: InputExample
-      }];
-
-      // setTimeout(() => {
-      //   this.goto(this.examples[0]);
-      // }, 0);
+      }
+    ];
   }
 
   goto(example) {
@@ -139,7 +141,7 @@ class Examples extends React.Component {
       <Page style={{background: 'green'}}
         renderToolbar={() => <Toolbar> <div className='center'> Up Toolbar </div> </Toolbar>} >
         <List modifier='inset'
-          dataSource={this.examples}
+          dataSource={this.getExamples()}
           renderHeader={ () =>
             <ListItem lockOnDrag style={{background: 'green'}} tappable tap-background-color='red'> HEADER </ListItem>
           }

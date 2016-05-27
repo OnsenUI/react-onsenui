@@ -14,7 +14,7 @@ import {
   CarouselItem,
   BottomToolbar,
   ToolbarButton
-} from 'react-onsenui';
+} from '../../src/index.js';
 
 export default class extends React.Component {
   constructor(props) {

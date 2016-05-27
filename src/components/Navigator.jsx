@@ -67,7 +67,7 @@ class Navigator extends BasicComponent {
    *   [ja] どうしよう[/ja]
    */
   resetPageStack(routes, options = {}) {
-    if (this.isRunning) {
+    if (this.isRunning()) {
       return Promise.reject('Navigator is already running animation.');
     }
 
@@ -103,7 +103,7 @@ class Navigator extends BasicComponent {
    *   [ja] どうしよう[/ja]
    */
   pushPage(route, options = {}) {
-    if (this.refs.navi._isRunning) {
+    if (this.isRunning()) {
       return Promise.reject('Navigator is already running animation.');
     }
 
@@ -123,7 +123,7 @@ class Navigator extends BasicComponent {
     });
   }
 
-  get isRunning() {
+  isRunning() {
     return this.refs.navi._isRunning;
   }
 
@@ -138,7 +138,7 @@ class Navigator extends BasicComponent {
    *   [ja] どうしよう[/ja]
    */
   popPage(options = {}) {
-    if (this.isRunning) {
+    if (this.isRunning()) {
       return Promise.reject('Navigator is already running animation.');
     }
 
