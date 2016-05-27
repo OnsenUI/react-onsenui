@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 
 import '../OnsenUI/build/js/onsenui.js';
 
+import '../OnsenUI/build/css/onsenui.css';
+import '../OnsenUI/build/css/onsen-css-components.css';
+
 import {
   Page,
   Navigator,
