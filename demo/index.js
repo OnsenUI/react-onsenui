@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import '../OnsenUI/build/js/onsenui.js';
-
 import {
   Page,
   Navigator,
@@ -10,10 +8,12 @@ import {
   List,
   ListItem,
   Range
-} from 'react-onsenui';
+} from '../src/index.js';
+
+import ons from 'onsenui';
 
 import PageExample from './examples/Page';
-import ListExample from './examples/List';
+/*import ListExample from './examples/List';
 import LazyListExample from './examples/LazyList';
 import TabbarExample from './examples/Tabbar';
 import AlertDialogExample from './examples/AlertDialog';
@@ -31,6 +31,7 @@ import ProgressBarExample from './examples/ProgressBar';
 import RangeExample from './examples/Range';
 import RowColumnExample from './examples/RowColumn';
 import BackButtonExample from './examples/BackButton';
+*/
 
 class Examples extends React.Component {
   constructor(props) {
@@ -40,6 +41,11 @@ class Examples extends React.Component {
 
     this.examples = [
       {
+        title: 'Page',
+        component: PageExample
+      },
+
+      /*     {
         title: 'Back button',
         component: BackButtonExample
       },
@@ -89,11 +95,6 @@ class Examples extends React.Component {
         title: 'PullHook',
         component: PullHookExample
       },
-
-      {
-        title: 'Page',
-        component: PageExample
-      },
       {
         title: 'Ripple',
         component: RippleExample
@@ -118,7 +119,8 @@ class Examples extends React.Component {
       {
         title: 'Input',
         component: InputExample
-      }];
+      }*/
+    ];
 
       // setTimeout(() => {
       //   this.goto(this.examples[0]);
