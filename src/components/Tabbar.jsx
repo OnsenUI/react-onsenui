@@ -174,7 +174,7 @@ Tabbar.propTypes = {
   animationOptions: React.PropTypes.object,
 
   /**
-   * @name onPreChagne
+   * @name onPreChange
    * @type function
    * @description
    *  [en]Called just before the tab is changed.[/en]
@@ -192,7 +192,7 @@ Tabbar.propTypes = {
   onPostChange: React.PropTypes.func,
 
   /**
-   * @name onPostChange
+   * @name onReactive
    * @type function
    * @description
    *  [en]Called if the already open tab is tapped again.[/en]
