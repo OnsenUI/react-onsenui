@@ -1,5 +1,4 @@
 var webpack = require('webpack');
-var combineLoaders = require('webpack-combine-loaders');
 
 module.exports = {
   devtool: 'eval-source-map',

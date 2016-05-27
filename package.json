@@ -8,10 +8,7 @@
     "prepublish": "npm run build",
     "lint": "eslint --ext .js,.jsx src",
     "lint-fix": "eslint --ext .js,.jsx src --fix",
-    "watch-onsenui": "nodemon -x \"npm run build\" --watch OnsenUI/build/js/onsenui.js",
-    "watch": "nodemon -x \"npm run build\" --watch src -e jsx",
-    "dev": "npm run watch & npm run watch-onsenui & watchify -vd -t [ babelify --presets es2015,react --ignore OnsenUI/build/js/onsenui.js ] -t [ aliasify --aliases [ --react-onsenui=./dist/react-onsenui.js ] ] -e demo/index.js -o demo/bundle.js & http-server . -c 1",
-    "dev2": "webpack-dev-server --progress",
+    "dev": "webpack-dev-server --progress",
     "test": "karma start"
   },
   "repository": {
@@ -64,9 +61,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.7.0",
     "mocha": "^2.4.5",
-    "nodemon": "^1.9.1",
     "onsenui": "^2.0.0-rc.4",
-    "postcss-loader": "^0.9.1",
     "react": "^15.0.2",
     "react-docgen": "2.8.2",
     "react-dom": "^15.0.2",
@@ -78,9 +73,7 @@
     "rollup-plugin-node-resolve": "^1.5.0",
     "rollup-plugin-replace": "^1.1.0",
     "url-loader": "^0.5.7",
-    "watchify": "^3.7.0",
     "webpack": "^1.13.1",
-    "webpack-combine-loaders": "^2.0.0",
     "webpack-dev-server": "^1.14.1"
   },
   "peerDependencies": {
