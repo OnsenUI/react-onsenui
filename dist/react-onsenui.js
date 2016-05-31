@@ -1,4 +1,4 @@
-/*! react-onsenui v0.2.10 - Thu May 26 2016 15:19:38 GMT+0900 (JST) */
+/*! react-onsenui v0.2.10 - Tue May 31 2016 14:07:17 GMT+0900 (JST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom'], factory) :
@@ -2022,7 +2022,7 @@
 
 
         Util.convert(others, 'tappable');
-        Util.convert(others, 'tapBackgroundColor', { newName: 'tab-background-color' });
+        Util.convert(others, 'tapBackgroundColor', { newName: 'tap-background-color' });
         Util.convert(others, 'lockOnDrag', { newName: 'lock-on-drag' });
 
         return React.createElement(this._getDomNodeName(), others, this.props.children);
@@ -2164,7 +2164,7 @@
 
         var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
-        if (this.isRunning) {
+        if (this.isRunning()) {
           return Promise.reject('Navigator is already running animation.');
         }
 
@@ -2207,7 +2207,7 @@
 
         var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
-        if (this.refs.navi._isRunning) {
+        if (this.isRunning()) {
           return Promise.reject('Navigator is already running animation.');
         }
 
@@ -2223,8 +2223,41 @@
         });
       }
     }, {
-      key: 'popPage',
+      key: 'isRunning',
+      value: function isRunning() {
+        return this.refs.navi._isRunning;
+      }
 
+      /*
+       * @method replacePage
+       * @signature replacePage(page, [options])
+       * @return {Promise}
+       *   [en]Promise which resolves to the new page.[/en]
+       *   [ja]新しいページを解決するPromiseを返します。[/ja]
+       * @description
+       *   [en]Replaces the current top page with the specified one. Extends `pushPage()` parameters.[/en]
+       *   [ja]現在表示中のページをを指定したページに置き換えます。[/ja]
+       */
+
+    }, {
+      key: 'replacePage',
+      value: function replacePage(route) {
+        var _this5 = this;
+
+        var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+
+        if (this.isRunning()) {
+          return Promise.reject('Navigator is already running animation.');
+        }
+
+        this.pushPage(route, options).then(function () {
+          var pos = _this5.pages.length - 2;
+          _this5.pages.splice(pos, 1);
+          _this5.routes.splice(pos, 1);
+          _this5.refs.navi.topPage.updateBackButton(_this5.pages.length > 1);
+          _this5.forceUpdate();
+        });
+      }
 
       /**
        * @method popPage
@@ -2236,23 +2269,26 @@
        *   [en] Pops a page out of the page stack[/en]
        *   [ja] どうしよう[/ja]
        */
+
+    }, {
+      key: 'popPage',
       value: function popPage() {
-        var _this5 = this;
+        var _this6 = this;
 
         var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-        if (this.isRunning) {
+        if (this.isRunning()) {
           return Promise.reject('Navigator is already running animation.');
         }
 
         return this.refs.navi._popPage(options, this.update.bind(this), this.pages).then(function () {
-          _this5.routes.pop();
+          _this6.routes.pop();
         });
       }
     }, {
       key: 'componentDidMount',
       value: function componentDidMount() {
-        var _this6 = this;
+        var _this7 = this;
 
         this.refs.navi.popPage = this.popPage.bind(this);
 
@@ -2269,7 +2305,7 @@
         }
 
         this.pages = this.routes.map(function (route) {
-          return _this6.props.renderPage(route, _this6);
+          return _this7.props.renderPage(route, _this7);
         });
         this.setState({});
       }
@@ -2290,11 +2326,6 @@
           babelHelpers.extends({}, others, { ref: 'navi' }),
           this.pages
         );
-      }
-    }, {
-      key: 'isRunning',
-      get: function get() {
-        return this.refs.navi._isRunning;
       }
     }]);
     return Navigator;
@@ -4123,7 +4154,7 @@
     animationOptions: React.PropTypes.object,
 
     /**
-     * @name onPreChagne
+     * @name onPreChange
      * @type function
      * @description
      *  [en]Called just before the tab is changed.[/en]
@@ -4141,7 +4172,7 @@
     onPostChange: React.PropTypes.func,
 
     /**
-     * @name onPostChange
+     * @name onReactive
      * @type function
      * @description
      *  [en]Called if the already open tab is tapped again.[/en]

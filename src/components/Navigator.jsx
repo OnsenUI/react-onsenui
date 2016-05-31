@@ -127,6 +127,30 @@ class Navigator extends BasicComponent {
     return this.refs.navi._isRunning;
   }
 
+  /*
+   * @method replacePage
+   * @signature replacePage(page, [options])
+   * @return {Promise}
+   *   [en]Promise which resolves to the new page.[/en]
+   *   [ja]新しいページを解決するPromiseを返します。[/ja]
+   * @description
+   *   [en]Replaces the current top page with the specified one. Extends `pushPage()` parameters.[/en]
+   *   [ja]現在表示中のページをを指定したページに置き換えます。[/ja]
+   */
+  replacePage(route, options = {}) {
+    if (this.isRunning()) {
+      return Promise.reject('Navigator is already running animation.');
+    }
+
+    this.pushPage(route, options).then(() => {
+      const pos = this.pages.length - 2;
+      this.pages.splice(pos, 1);
+      this.routes.splice(pos, 1);
+      this.refs.navi.topPage.updateBackButton(this.pages.length > 1);
+      this.forceUpdate();
+    });
+  }
+
   /**
    * @method popPage
    * @signature popPage(route, options = {})
