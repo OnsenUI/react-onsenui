@@ -1,4 +1,4 @@
-/*! react-onsenui v0.2.12 - Tue May 31 2016 18:05:01 GMT+0900 (JST) */
+/*! react-onsenui v0.2.17 - Wed Jun 01 2016 13:14:33 GMT+0900 (JST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom'], factory) :
@@ -1629,8 +1629,8 @@
     type: React.PropTypes.string,
 
     /**
-     * @name type
-     * @type inputId
+     * @name inputId
+     * @type string
      * @description
      *  [en]  Specify the "id" attribute of the inner <input> element. This is useful when using <label for="..."> elements [/en]
      *  [jp][/jp]
@@ -1638,8 +1638,8 @@
     inputId: React.PropTypes.string,
 
     /**
-     * @name type
-     * @type inputId
+     * @name float
+     * @type bool
      * @description
      *  [en]  If this attribute is present, the placeholder will be animated in Material Design.  [/en]
      *  [jp][/jp]
