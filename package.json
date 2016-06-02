@@ -1,12 +1,13 @@
 {
   "name": "react-onsenui",
-  "version": "0.2.19",
+  "version": "0.2.20",
   "description": "Onsen UI - React Components for Hybrid Cordova/PhoneGap Apps with Material Design and iOS UI components",
   "main": "dist/react-onsenui.js",
   "scripts": {
     "build": "npm run lint && rollup -c",
-    "prepublish": "npm run build && git commit -m 'Update generated files.' dist && git push origin master",
-    "postpublish": "node githubRelease.js",
+    "prepublish": "npm run build",
+    "commit-dist": "git commit -m 'Update generated files.' dist && git push origin master",
+    "postpublish": "npm run commit-dist && npm run release-github",
     "release-github": "node githubRelease.js",
     "lint": "eslint --ext .js,.jsx src",
     "lint-fix": "eslint --ext .js,.jsx src --fix",
