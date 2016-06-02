@@ -5,7 +5,7 @@
   "main": "dist/react-onsenui.js",
   "scripts": {
     "build": "npm run lint && rollup -c",
-    "prepublish": "npm run build",
+    "prepublish": "npm run build && git commit -m 'Update generated files.' dist && git push origin master",
     "postpublish": "node githubRelease.js",
     "release-github": "node githubRelease.js",
     "lint": "eslint --ext .js,.jsx src",
