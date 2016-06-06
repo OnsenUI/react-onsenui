@@ -1,4 +1,4 @@
-/*! react-onsenui v0.2.21 - Thu Jun 02 2016 14:29:44 GMT+0900 (JST) */
+/*! react-onsenui v0.2.22 - Mon Jun 06 2016 17:48:49 GMT+0900 (JST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom'], factory) :
@@ -478,13 +478,14 @@
       value: function updateClasses() {
         var node = ReactDOM.findDOMNode(this);
 
-        if (this.props.className) {
+        if (typeof this.props.className !== 'undefined') {
           if (this.lastClass) {
-            node.className = node.className.replace(this.lastClass, '');
+            node.className = node.className.replace(this.lastClass, ' ');
           }
 
-          this.lastClass = ' ' + this.props.className;
-          node.className += this.lastClass;
+          this.lastClass = ' ' + this.props.className.trim();
+
+          node.className = node.className.trim() + this.lastClass;
         }
 
         if (!window._superSecretOns) {
