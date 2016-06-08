@@ -1,4 +1,4 @@
-/*! react-onsenui v0.2.12 - Tue May 31 2016 18:05:01 GMT+0900 (JST) */
+/*! react-onsenui v0.2.22 - Mon Jun 06 2016 17:48:49 GMT+0900 (JST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom'], factory) :
@@ -478,13 +478,14 @@
       value: function updateClasses() {
         var node = ReactDOM.findDOMNode(this);
 
-        if (this.props.className) {
+        if (typeof this.props.className !== 'undefined') {
           if (this.lastClass) {
-            node.className = node.className.replace(this.lastClass, '');
+            node.className = node.className.replace(this.lastClass, ' ');
           }
 
-          this.lastClass = ' ' + this.props.className;
-          node.className += this.lastClass;
+          this.lastClass = ' ' + this.props.className.trim();
+
+          node.className = node.className.trim() + this.lastClass;
         }
 
         if (!window._superSecretOns) {
@@ -1629,8 +1630,8 @@
     type: React.PropTypes.string,
 
     /**
-     * @name type
-     * @type inputId
+     * @name inputId
+     * @type string
      * @description
      *  [en]  Specify the "id" attribute of the inner <input> element. This is useful when using <label for="..."> elements [/en]
      *  [jp][/jp]
@@ -1638,8 +1639,8 @@
     inputId: React.PropTypes.string,
 
     /**
-     * @name type
-     * @type inputId
+     * @name float
+     * @type bool
      * @description
      *  [en]  If this attribute is present, the placeholder will be animated in Material Design.  [/en]
      *  [jp][/jp]
