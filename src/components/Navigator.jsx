@@ -197,12 +197,6 @@ class Navigator extends BasicComponent {
   }
 
   render() {
-    // render the next to last page
-    for (var index = this.pages.length - 3;
-         index >= this.pages.length - 2 && index >= 0; index--) {
-      this.pages[index] = this.props.renderPage(this.routes[index], this);
-    }
-
     var {...others} = this.props;
     Util.convert(others, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
 
