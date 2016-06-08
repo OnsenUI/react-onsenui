@@ -108,7 +108,7 @@ class Navigator extends BasicComponent {
     }
 
     return new Promise((resolve) => {
-      var newPage = this.props.renderPage(route, navigator);
+      var newPage = this.props.renderPage(route, this);
 
       this.routes.push(route);
       this.refs.navi._pushPage(options,
