@@ -31,6 +31,7 @@ class Navigator extends BasicComponent {
   }
 
   update(pages, obj) {
+    this.pages = pages || [];
     return new Promise((resolve) => {
       this.setState({}, resolve);
     });
@@ -80,11 +81,11 @@ class Navigator extends BasicComponent {
         this.routes = routes;
 
         var renderPage = (route) => {
-          this.props.renderPage(route, this);
+          return this.props.renderPage(route, this);
         };
 
         this.pages = routes.map(renderPage);
-        this.update().then(resolve);
+        this.update(this.pages).then(resolve);
       });
     });
   }
@@ -196,8 +197,8 @@ class Navigator extends BasicComponent {
   }
 
   render() {
-    // render the last two pages
-    for (var index = this.pages.length - 1;
+    // render the next to last page
+    for (var index = this.pages.length - 3;
          index >= this.pages.length - 2 && index >= 0; index--) {
       this.pages[index] = this.props.renderPage(this.routes[index], this);
     }
