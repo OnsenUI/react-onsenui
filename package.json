@@ -1,6 +1,6 @@
 {
   "name": "react-onsenui",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Onsen UI - React Components for Hybrid Cordova/PhoneGap Apps with Material Design and iOS UI components",
   "main": "dist/react-onsenui.js",
   "scripts": {
