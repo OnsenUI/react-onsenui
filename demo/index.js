@@ -29,6 +29,7 @@ import PullHookExample from './examples/PullHook';
 import CarouselExample from './examples/Carousel';
 import PopoverExample from './examples/Popover';
 import DialogExample from './examples/Dialog';
+import ModalExample from './examples/Modal';
 import SwitchExample from './examples/Switch';
 import ProgressBarExample from './examples/ProgressBar';
 import RangeExample from './examples/Range';
@@ -77,6 +78,10 @@ class Examples extends React.Component {
       {
         title: 'Dialog',
         component: DialogExample
+      },
+      {
+        title: 'Modal',
+        component: ModalExample
       },
 
       {

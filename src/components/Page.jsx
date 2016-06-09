@@ -34,8 +34,7 @@ class Page extends BasicComponent {
   render() {
     const toolbar = this.props.renderToolbar(this);
 
-    // TODO MODAL
-    const modal = null;
+    const modal = this.props.renderModal(this);
 
     return <ons-page {...this.props} _compiled='true' >
         {toolbar}
@@ -63,12 +62,22 @@ Page.propTypes = {
   modifier: React.PropTypes.string,
 
   /**
+   * @name renderModal
+   * @type function
+   * @required false
+   * @defaultValue null
+   * @description
+   *  [en] This function renders a modal that masks current screen.[/en]
+   */
+  renderModal: React.PropTypes.func,
+
+  /**
    * @name renderToolbar
    * @type function
    * @required false
    * @defaultValue null
    * @description
-   *  [en] This function takes the current route object as a parameter and  creates returns a react componen.[/en]
+   *  [en] This function takes the current route object as a parameter and  creates returns a react component.[/en]
    *  [jp] どうしよう[/jp]
    */
   renderToolbar: React.PropTypes.func,
@@ -110,8 +119,11 @@ Page.propTypes = {
   onHide: React.PropTypes.func
 };
 
+const NOOP = () => null;
+
 Page.defaultProps = {
-  renderToolbar: () => null
+  renderToolbar: NOOP,
+  renderModal: NOOP
 };
 
 export default Page;
