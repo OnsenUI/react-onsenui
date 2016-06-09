@@ -1,4 +1,4 @@
-/*! react-onsenui v0.3.0 - Thu Jun 09 2016 17:13:32 GMT+0900 (JST) */
+/*! react-onsenui v0.3.1 - Thu Jun 09 2016 19:50:00 GMT+0900 (JST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom'], factory) :
