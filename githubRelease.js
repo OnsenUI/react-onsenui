@@ -10,11 +10,11 @@ var github = new GitHubApi({version: '3.0.0'});
 
 var properties = [
   {
-    description: 'Github user name: ',
+    description: 'GitHub username',
     name: 'username'
   },
   {
-    description: 'Github password: ',
+    description: 'GitHub password',
     name: 'password',
     hidden: true
   }
