@@ -10,14 +10,14 @@ export default {
   entry: 'src/index.js',
   dest: 'dist/react-onsenui.js',
   plugins: [
+    babel({presets: ['es2015-rollup', 'react', 'stage-2']}),
     nodeResolve(),
     commonjs({
       'node_modules/react-dom/server.js': ['ReactDOMServer']
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify('production')
-    }),
-    babel({presets: ['es2015-rollup'], plugins: ['transform-react-jsx', 'transform-object-rest-spread']})
+    })
   ],
   external: [
     'react',
