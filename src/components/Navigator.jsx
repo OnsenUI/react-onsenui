@@ -31,6 +31,7 @@ class Navigator extends BasicComponent {
   }
 
   update(pages, obj) {
+    this.pages = pages || [];
     return new Promise((resolve) => {
       this.setState({}, resolve);
     });
@@ -80,11 +81,11 @@ class Navigator extends BasicComponent {
         this.routes = routes;
 
         var renderPage = (route) => {
-          this.props.renderPage(route, this);
+          return this.props.renderPage(route, this);
         };
 
         this.pages = routes.map(renderPage);
-        this.update().then(resolve);
+        this.update(this.pages).then(resolve);
       });
     });
   }
@@ -108,7 +109,7 @@ class Navigator extends BasicComponent {
     }
 
     return new Promise((resolve) => {
-      var newPage = this.props.renderPage(route, navigator);
+      var newPage = this.props.renderPage(route, this);
 
       this.routes.push(route);
       this.refs.navi._pushPage(options,
@@ -196,12 +197,6 @@ class Navigator extends BasicComponent {
   }
 
   render() {
-    // render the last two pages
-    for (var index = this.pages.length - 1;
-         index >= this.pages.length - 2 && index >= 0; index--) {
-      this.pages[index] = this.props.renderPage(this.routes[index], this);
-    }
-
     var {...others} = this.props;
     Util.convert(others, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
 
