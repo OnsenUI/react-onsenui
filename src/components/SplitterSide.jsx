@@ -41,7 +41,7 @@ class SplitterSide extends BasicComponent {
     var {...props} = this.props;
 
     props.collapse = this.props.isCollapsed ? 'collapse' : 'false';
-    props.swipeable = this.props.isSwipeable ? 'swipeable' : 'false';
+    props.swipeable = this.props.isSwipeable ? 'swipeable' : null;
 
     Util.convert(props, 'width', {fun: Util.sizeConverter});
     Util.convert(props, 'animation');
