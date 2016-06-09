@@ -1,4 +1,4 @@
-/*! react-onsenui v0.2.22 - Mon Jun 06 2016 17:48:49 GMT+0900 (JST) */
+/*! react-onsenui v0.3.0 - Thu Jun 09 2016 17:13:32 GMT+0900 (JST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom'], factory) :
@@ -2117,6 +2117,7 @@
       value: function update(pages, obj) {
         var _this2 = this;
 
+        this.pages = pages || [];
         return new Promise(function (resolve) {
           _this2.setState({}, resolve);
         });
@@ -2178,11 +2179,11 @@
             _this3.routes = routes;
 
             var renderPage = function renderPage(route) {
-              _this3.props.renderPage(route, _this3);
+              return _this3.props.renderPage(route, _this3);
             };
 
             _this3.pages = routes.map(renderPage);
-            _this3.update().then(resolve);
+            _this3.update(_this3.pages).then(resolve);
           });
         });
       }
@@ -2213,7 +2214,7 @@
         }
 
         return new Promise(function (resolve) {
-          var newPage = _this4.props.renderPage(route, navigator);
+          var newPage = _this4.props.renderPage(route, _this4);
 
           _this4.routes.push(route);
           _this4.refs.navi._pushPage(options, _this4.update.bind(_this4), _this4.pages, newPage).then(resolve).catch(function (error) {
@@ -2313,11 +2314,6 @@
     }, {
       key: 'render',
       value: function render() {
-        // render the last two pages
-        for (var index = this.pages.length - 1; index >= this.pages.length - 2 && index >= 0; index--) {
-          this.pages[index] = this.props.renderPage(this.routes[index], this);
-        }
-
         var others = babelHelpers.objectWithoutProperties(this.props, []);
 
         Util.convert(others, 'animationOptions', { fun: Util.animationOptionsConverter, newName: 'animation-options' });
