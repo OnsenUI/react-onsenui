@@ -52,6 +52,8 @@ export default class extends React.Component {
       <Modal
         visible={this.state.showModal}
         animation='fade'
+        onShow={() => console.log('modal shown')}
+        onHide={() => console.log('modal hidden')}
       >
         <Page renderToolbar={this.renderModalToolbar.bind(this)}>
           <p>
