@@ -17,6 +17,9 @@ export default {
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify('production')
+    }),
+    babel({
+      externalHelpers: true, presets: ['es2015-rollup'], plugins: ['transform-react-jsx', 'transform-object-rest-spread']
     })
   ],
   external: [

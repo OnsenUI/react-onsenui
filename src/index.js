@@ -14,6 +14,7 @@ import List from './components/List.jsx';
 import ListHeader from './components/ListHeader.jsx';
 import ListItem from './components/ListItem.jsx';
 import Navigator from './components/Navigator.jsx';
+import Modal from './components/Modal.jsx';
 import Page from './components/Page.jsx';
 import Popover from './components/Popover.jsx';
 import ProgressBar from './components/ProgressBar.jsx';
@@ -52,6 +53,7 @@ export {
   ListHeader,
   ListItem,
   Navigator,
+  Modal,
   Page,
   Popover,
   ProgressBar,

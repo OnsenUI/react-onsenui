@@ -1,4 +1,4 @@
-/*! react-onsenui v0.3.2 - Thu Jun 09 2016 20:27:35 GMT+0900 (JST) */
+/*! react-onsenui v0.3.2 - Thu Jun 09 2016 19:17:26 GMT+0200 (CEST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom'], factory) :
@@ -71,7 +71,7 @@
     };
   }();
 
-  var _extends = Object.assign || function (target) {
+  var extends = Object.assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
 
@@ -234,7 +234,6 @@
       key: 'renderPortal',
       value: function renderPortal(props) {
         var newProps = objectWithoutProperties(props, []);
-
 
         Util.convert(newProps, 'isCancelable', { newName: 'cancelable' });
         Util.convert(newProps, 'isDisabled', { newName: 'disabled' });
@@ -517,7 +516,6 @@
       value: function render() {
         var others = objectWithoutProperties(this.props, []);
 
-
         Util.convert(others, 'disabled');
         Util.convert(others, 'ripple');
 
@@ -797,7 +795,6 @@
       value: function render() {
         var others = objectWithoutProperties(this.props, []);
 
-
         ['fullscreen', 'swipeable', 'disabled', 'centered', 'overscrollable', 'centered'].forEach(function (el) {
           Util.convert(others, el);
         });
@@ -1051,7 +1048,6 @@
       key: 'render',
       value: function render() {
         var others = objectWithoutProperties(this.props, []);
-
 
         Util.convert(others, 'verticalAlign', { newName: 'vertical-align' });
         Util.convert(others, 'width', { fun: Util.sizeConverter });
@@ -1387,7 +1383,6 @@
         var size = _props.size;
         var others = objectWithoutProperties(_props, ['icon', 'size']);
 
-
         Util.convert(others, 'fixedWidth', { newName: 'fixed-width' });
         Util.convert(others, 'spin');
 
@@ -1559,7 +1554,7 @@
 
         Util.convert(other, 'disabled');
 
-        return React.createElement('ons-input', _extends({ checked: checked ? '' : null }, other));
+        return React.createElement('ons-input', extends({ checked: checked ? '' : null }, other));
       }
     }]);
     return Input;
@@ -1737,7 +1732,7 @@
     }, {
       key: 'componentWillReceiveProps',
       value: function componentWillReceiveProps(newProps) {
-        var helpProps = _extends({}, this.props, newProps);
+        var helpProps = extends({}, this.props, newProps);
         this.update(helpProps);
       }
     }, {
@@ -1749,14 +1744,9 @@
     }, {
       key: 'render',
       value: function render() {
-        return React.createElement(
-          'ons-list',
-          _extends({}, this.props, { ref: 'list',
-            'class': 'list', style: { position: 'relative', height: this.state.height }
-          }),
-          React.createElement('ons-lazy-repeat', { ref: 'lazyRepeat' }),
-          this.state.children
-        );
+        return React.createElement('ons-list', extends({}, this.props, { ref: 'list',
+          'class': 'list', style: { position: 'relative', height: this.state.height }
+        }), React.createElement('ons-lazy-repeat', { ref: 'lazyRepeat' }), this.state.children);
       }
     }]);
     return LazyList;
@@ -1840,13 +1830,7 @@
           return _this2.props.renderRow(data, idx);
         });
 
-        return React.createElement(
-          'ons-list',
-          _extends({}, this.props, { ref: 'list' }),
-          this.props.renderHeader(),
-          pages,
-          this.props.renderFooter()
-        );
+        return React.createElement('ons-list', extends({}, this.props, { ref: 'list' }), this.props.renderHeader(), pages, this.props.renderFooter());
       }
     }]);
     return List;
@@ -2016,7 +2000,6 @@
       key: 'render',
       value: function render() {
         var others = objectWithoutProperties(this.props, []);
-
 
         Util.convert(others, 'tappable');
         Util.convert(others, 'tapBackgroundColor', { newName: 'tap-background-color' });
@@ -2314,11 +2297,7 @@
 
         Util.convert(others, 'animationOptions', { fun: Util.animationOptionsConverter, newName: 'animation-options' });
 
-        return React.createElement(
-          'ons-navigator',
-          _extends({}, others, { ref: 'navi' }),
-          this.pages
-        );
+        return React.createElement('ons-navigator', extends({}, others, { ref: 'navi' }), this.pages);
       }
     }]);
     return Navigator;
@@ -2384,6 +2363,150 @@
   };
 
   /**
+   * @original ons-modal
+   * @category modal
+   * @tutorial react/Reference/modal
+   * @description
+   * [en]
+   *   A modal component covers the entire screen. Underlying components are not
+   *   subject to any events while the modal component is shown.
+   *
+   *   This component can be used to block user input while some operation is
+   *   running or to show some information to the user.
+   * [/en]
+   * [jp]
+   *   画面全体をマスクするモーダル用コンポーネントです。下側にあるコンポーネントは、
+   *   モーダルが表示されている間はイベント通知が行われません
+   * [/jp]
+   * @example
+    <Page
+      renderModal={() => (
+        <Modal visible={this.state.isLoading}>
+          Loading ...
+        </Modal>
+      )}>
+      <div> Page content </div>
+    </Page>
+   */
+
+  var Modal = function (_BasicComponent) {
+    inherits(Modal, _BasicComponent);
+
+    function Modal(props, context) {
+      classCallCheck(this, Modal);
+
+      var _this = possibleConstructorReturn(this, Object.getPrototypeOf(Modal).call(this, props, context));
+
+      _this.node = null;
+      return _this;
+    }
+
+    createClass(Modal, [{
+      key: 'componentDidMount',
+      value: function componentDidMount() {
+        get(Object.getPrototypeOf(Modal.prototype), 'componentDidMount', this).call(this);
+        this.node = ReactDOM.findDOMNode(this);
+        CustomElements.upgrade(this.node);
+      }
+    }, {
+      key: 'componentWillReceiveProps',
+      value: function componentWillReceiveProps(nextProps) {
+        if (nextProps.visible !== this.props.visible) {
+          var animationOptions = {
+            animation: nextProps.animation,
+            animationOptions: nextProps.animationOptions
+          };
+          // The resolve argument provided by show and hide promises is a reference
+          // to the internal ons-modal that should not be passed to the onShow and
+          // onHide hooks on the React component.
+          if (nextProps.visible) {
+            this.node.show(animationOptions).then(function () {
+              return nextProps.onShow && nextProps.onShow();
+            });
+          } else {
+            this.node.hide(animationOptions).then(function () {
+              return nextProps.onHide && nextProps.onHide();
+            });
+          }
+        }
+      }
+    }, {
+      key: 'componentWillUnmount',
+      value: function componentWillUnmount() {
+        this.node = null;
+      }
+    }, {
+      key: 'render',
+      value: function render() {
+        var others = objectWithoutProperties(this.props, []);
+
+        return React.createElement('ons-modal', extends({}, others, {
+          _compiled: 'true'
+        }), this.props.children);
+      }
+    }]);
+    return Modal;
+  }(BasicComponent);
+
+  ;
+
+  Modal.propTypes = {
+    /**
+     * @property animation
+     * @type {String}
+     * @description
+     *   [en]
+     *     Animation name. Available animations are `"slide"`, `"lift"`, `"fade"` and `"none"`.
+     *     These are platform based animations. For fixed animations, add `"-ios"` or `"-md"` suffix to the animation name. E.g. `"lift-ios"`, `"lift-md"`. Defaults values are `"slide-ios"` and `"fade-md"`.
+     *   [/en]
+     */
+    animation: React.PropTypes.oneOf(['none', 'fade']),
+
+    /**
+     * @name animationOptions
+     * @type object
+     * @description
+     *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
+     */
+    animationOptions: React.PropTypes.object,
+
+    /**
+     * @name onShow
+     * @type function
+     * @required false
+     * @description
+     *  [en]
+     *  Called Fired right after the modal is shown.
+     *  [/en]
+     */
+    onShow: React.PropTypes.func,
+
+    /**
+     * @name onHide
+     * @type function
+     * @required false
+     * @description
+     *  [en]
+     *  Called after the modal is hidden.
+     *  [/en]
+     */
+    onHide: React.PropTypes.func,
+
+    /**
+     * @name visible
+     * @type boolean
+     * @description
+     *  [en]When `true` the modal will show itself.[/en]
+     */
+    visible: React.PropTypes.bool
+  };
+
+  Modal.defaultProps = {
+    visible: false,
+    animation: 'none'
+  };
+
+  /**
    * @original ons-page
    * @category page
    * @tutorial react/Reference/page
@@ -2427,29 +2550,9 @@
       value: function render() {
         var toolbar = this.props.renderToolbar(this);
 
-        // TODO MODAL
-        var modal = null;
+        var modal = this.props.renderModal(this);
 
-        return React.createElement(
-          'ons-page',
-          _extends({}, this.props, { _compiled: 'true' }),
-          toolbar,
-          React.createElement(
-            'div',
-            { className: 'page__background' },
-            ' '
-          ),
-          React.createElement(
-            'div',
-            { className: 'page__content' },
-            this.props.children
-          ),
-          React.createElement(
-            'div',
-            { className: 'page__extra', style: { zIndex: 10001 } },
-            modal
-          )
-        );
+        return React.createElement('ons-page', extends({}, this.props, { _compiled: 'true' }), toolbar, React.createElement('div', { className: 'page__background' }, ' '), React.createElement('div', { className: 'page__content' }, this.props.children), React.createElement('div', { className: 'page__extra', style: { zIndex: 10001 } }, modal));
       }
     }]);
     return Page;
@@ -2470,12 +2573,22 @@
     modifier: React.PropTypes.string,
 
     /**
+     * @name renderModal
+     * @type function
+     * @required false
+     * @defaultValue null
+     * @description
+     *  [en] This function renders a modal that masks current screen.[/en]
+     */
+    renderModal: React.PropTypes.func,
+
+    /**
      * @name renderToolbar
      * @type function
      * @required false
      * @defaultValue null
      * @description
-     *  [en] This function takes the current route object as a parameter and  creates returns a react componen.[/en]
+     *  [en] This function takes the current route object as a parameter and  creates returns a react component.[/en]
      *  [jp] どうしよう[/jp]
      */
     renderToolbar: React.PropTypes.func,
@@ -2517,10 +2630,13 @@
     onHide: React.PropTypes.func
   };
 
+  var NOOP = function NOOP() {
+    return null;
+  };
+
   Page.defaultProps = {
-    renderToolbar: function renderToolbar() {
-      return null;
-    }
+    renderToolbar: NOOP,
+    renderModal: NOOP
   };
 
   /**
@@ -2751,7 +2867,6 @@
       value: function render() {
         var others = objectWithoutProperties(this.props, []);
 
-
         Util.convert(others, 'indeterminate');
         Util.convert(others, 'secondaryValue', { newName: 'secondary-value' });
 
@@ -2836,7 +2951,6 @@
       key: 'render',
       value: function render() {
         var others = objectWithoutProperties(this.props, []);
-
 
         Util.convert(others, 'indeterminate');
         Util.convert(others, 'secondaryValue', { newName: 'secondary-value' });
@@ -2951,7 +3065,6 @@
       value: function render() {
         var others = objectWithoutProperties(this.props, []);
 
-
         ['disabled'].forEach(function (el) {
           Util.convert(others, el);
         });
@@ -2960,7 +3073,7 @@
         Util.convert(others, 'thresholdHeight', { fun: Util.sizeConverter, newName: 'threshold-height' });
         Util.convert(others, 'fixedContent', { newName: 'fixed-content' });
 
-        return React.createElement('ons-pull-hook', _extends({ ref: 'pullHook' }, others));
+        return React.createElement('ons-pull-hook', extends({ ref: 'pullHook' }, others));
       }
     }]);
     return PullHook;
@@ -3225,7 +3338,6 @@
       key: 'render',
       value: function render() {
         var others = objectWithoutProperties(this.props, []);
-
 
         Util.convert(others, 'verticalAlign', { newName: 'vertical-align' });
 
@@ -3556,7 +3668,6 @@
       value: function render() {
         var props = objectWithoutProperties(this.props, []);
 
-
         props.collapse = this.props.isCollapsed ? 'collapse' : 'false';
         props.swipeable = this.props.isSwipeable ? 'swipeable' : 'false';
 
@@ -3568,11 +3679,7 @@
         Util.convert(props, 'openThreshold', { newName: 'open-threshold' });
         Util.convert(props, 'swipeTargetWidth', { fun: Util.sizeConverter, newName: 'swipe-target-width' });
 
-        return React.createElement(
-          'ons-splitter-side',
-          props,
-          this.props.children
-        );
+        return React.createElement('ons-splitter-side', props, this.props.children);
       }
     }, {
       key: 'componentDidMount',
@@ -3789,11 +3896,10 @@
         var inputId = _props.inputId;
         var other = objectWithoutProperties(_props, ['checked', 'inputId']);
 
-
         if (inputId) {
           other['input-id'] = inputId;
         }
-        return React.createElement('ons-switch', _extends({ ref: 'switch', checked: checked ? '' : null }, other));
+        return React.createElement('ons-switch', extends({ ref: 'switch', checked: checked ? '' : null }, other));
       }
     }]);
     return Switch;
@@ -4067,31 +4173,17 @@
 
         var others = objectWithoutProperties(this.props, []);
 
-
         ['animation'].forEach(function (el) {
           Util.convert(others, el);
         });
 
         Util.convert(others, 'animationOptions', { fun: Util.animationOptionsConverter, newName: 'animation-options' });
 
-        return React.createElement(
-          'ons-tabbar',
-          _extends({}, this.props, { ref: 'tabbar', activeIndex: this.state.activeIndex, _compiled: 'true' }),
-          React.createElement(
-            'div',
-            { 'no-status-bar-fill': true, className: 'ons-tab-bar__content tab-bar__content' + (this.props.position === 'top' ? ' tab-bar--top__content' : '') },
-            tabs.map(function (tab) {
-              return tab.content;
-            })
-          ),
-          React.createElement(
-            'div',
-            { className: 'tab-bar ons-tab-bar__footer ons-tabbar-inner' + (this.props.position === 'top' ? ' tab-bar--top' : '') },
-            tabs.map(function (tab) {
-              return tab.tab;
-            })
-          )
-        );
+        return React.createElement('ons-tabbar', extends({}, this.props, { ref: 'tabbar', activeIndex: this.state.activeIndex, _compiled: 'true' }), React.createElement('div', { 'no-status-bar-fill': true, className: 'ons-tab-bar__content tab-bar__content' + (this.props.position === 'top' ? ' tab-bar--top__content' : '') }, tabs.map(function (tab) {
+          return tab.content;
+        })), React.createElement('div', { className: 'tab-bar ons-tab-bar__footer ons-tabbar-inner' + (this.props.position === 'top' ? ' tab-bar--top' : '') }, tabs.map(function (tab) {
+          return tab.tab;
+        })));
       }
     }]);
     return Tabbar;
@@ -4321,6 +4413,7 @@
   exports.ListHeader = ListHeader;
   exports.ListItem = ListItem;
   exports.Navigator = Navigator;
+  exports.Modal = Modal;
   exports.Page = Page;
   exports.Popover = Popover;
   exports.ProgressBar = ProgressBar;

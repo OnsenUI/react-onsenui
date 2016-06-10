@@ -1,0 +1,133 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import BasicComponent from './BasicComponent.jsx';
+
+/**
+ * @original ons-modal
+ * @category modal
+ * @tutorial react/Reference/modal
+ * @description
+ * [en]
+ *   A modal component covers the entire screen. Underlying components are not
+ *   subject to any events while the modal component is shown.
+ *
+ *   This component can be used to block user input while some operation is
+ *   running or to show some information to the user.
+ * [/en]
+ * [jp]
+ *   画面全体をマスクするモーダル用コンポーネントです。下側にあるコンポーネントは、
+ *   モーダルが表示されている間はイベント通知が行われません
+ * [/jp]
+ * @example
+  <Page
+    renderModal={() => (
+      <Modal visible={this.state.isLoading}>
+        Loading ...
+      </Modal>
+    )}>
+    <div> Page content </div>
+  </Page>
+ */
+class Modal extends BasicComponent {
+  constructor(props, context) {
+    super(props, context);
+    this.node = null;
+  }
+
+  componentDidMount() {
+    super.componentDidMount();
+    this.node = ReactDOM.findDOMNode(this);
+    CustomElements.upgrade(this.node);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.visible !== this.props.visible) {
+      const animationOptions = {
+        animation: nextProps.animation,
+        animationOptions: nextProps.animationOptions
+      };
+      // The resolve argument provided by show and hide promises is a reference
+      // to the internal ons-modal that should not be passed to the onShow and
+      // onHide hooks on the React component.
+      if (nextProps.visible) {
+        this.node.show(animationOptions).then(() => nextProps.onShow && nextProps.onShow());
+      } else {
+        this.node.hide(animationOptions).then(() => nextProps.onHide && nextProps.onHide());
+      }
+    }
+  }
+
+  componentWillUnmount() {
+    this.node = null;
+  }
+
+  render() {
+    const {...others} = this.props;
+    return (
+      <ons-modal
+        {...others}
+        _compiled='true'
+      >
+        {this.props.children}
+      </ons-modal>
+    );
+  }
+};
+
+Modal.propTypes = {
+  /**
+   * @property animation
+   * @type {String}
+   * @description
+   *   [en]
+   *     Animation name. Available animations are `"slide"`, `"lift"`, `"fade"` and `"none"`.
+   *     These are platform based animations. For fixed animations, add `"-ios"` or `"-md"` suffix to the animation name. E.g. `"lift-ios"`, `"lift-md"`. Defaults values are `"slide-ios"` and `"fade-md"`.
+   *   [/en]
+   */
+  animation: React.PropTypes.oneOf(['none', 'fade']),
+
+  /**
+   * @name animationOptions
+   * @type object
+   * @description
+   *  [en]Specify the animation's duration, delay and timing. E.g.  `{duration: 0.2, delay: 0.4, timing: 'ease-in'}`.[/en]
+   */
+  animationOptions: React.PropTypes.object,
+
+  /**
+   * @name onShow
+   * @type function
+   * @required false
+   * @description
+   *  [en]
+   *  Called Fired right after the modal is shown.
+   *  [/en]
+   */
+  onShow: React.PropTypes.func,
+
+  /**
+   * @name onHide
+   * @type function
+   * @required false
+   * @description
+   *  [en]
+   *  Called after the modal is hidden.
+   *  [/en]
+   */
+  onHide: React.PropTypes.func,
+
+  /**
+   * @name visible
+   * @type boolean
+   * @description
+   *  [en]When `true` the modal will show itself.[/en]
+   */
+  visible: React.PropTypes.bool
+};
+
+Modal.defaultProps = {
+  visible: false,
+  animation: 'none'
+};
+
+export default Modal;
