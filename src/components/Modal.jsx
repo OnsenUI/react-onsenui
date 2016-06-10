@@ -21,7 +21,7 @@ import BasicComponent from './BasicComponent.jsx';
  * @example
   <Page
     renderModal={() => (
-      <Modal visible={this.state.isLoading}>
+      <Modal isOpen={this.state.isLoading}>
         Loading ...
       </Modal>
     )}>
@@ -41,7 +41,7 @@ class Modal extends BasicComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.visible !== this.props.visible) {
+    if (nextProps.isOpen !== this.props.isOpen) {
       const animationOptions = {
         animation: nextProps.animation,
         animationOptions: nextProps.animationOptions
@@ -49,7 +49,7 @@ class Modal extends BasicComponent {
       // The resolve argument provided by show and hide promises is a reference
       // to the internal ons-modal that should not be passed to the onShow and
       // onHide hooks on the React component.
-      if (nextProps.visible) {
+      if (nextProps.isOpen) {
         this.node.show(animationOptions).then(() => nextProps.onShow && nextProps.onShow());
       } else {
         this.node.hide(animationOptions).then(() => nextProps.onHide && nextProps.onHide());
@@ -117,16 +117,16 @@ Modal.propTypes = {
   onHide: React.PropTypes.func,
 
   /**
-   * @name visible
+   * @name isOpen
    * @type boolean
    * @description
    *  [en]When `true` the modal will show itself.[/en]
    */
-  visible: React.PropTypes.bool
+  isOpen: React.PropTypes.bool
 };
 
 Modal.defaultProps = {
-  visible: false,
+  isOpen: false,
   animation: 'none'
 };
 

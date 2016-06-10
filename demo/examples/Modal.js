@@ -50,12 +50,13 @@ export default class extends React.Component {
   renderModal() {
     return (
       <Modal
-        visible={this.state.showModal}
+        isOpen={this.state.showModal}
         animation='fade'
+        animationOptions={{duration: 2, delay: 0.2, timing: 'ease-in'}}
         onShow={() => console.log('modal shown')}
         onHide={() => console.log('modal hidden')}
       >
-        <Page renderToolbar={this.renderModalToolbar.bind(this)}>
+        <Page renderToolbar={this.renderModalToolbar.bind(this)} style={{backgroundColor: 'blue'}}>
           <p>
             I'm a modal page.
           </p>
