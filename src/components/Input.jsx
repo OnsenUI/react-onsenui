@@ -40,15 +40,6 @@ class Input extends BasicComponent {
   }
 
   componentWillReceiveProps(props) {
-    var node = ReactDOM.findDOMNode(this);
-
-    if (typeof props.value !== 'undefined') {
-      node.value = props.value;
-    }
-
-    if (typeof props.checked !== 'undefined') {
-      node.checked = props.checked;
-    }
   }
 
   render() {
