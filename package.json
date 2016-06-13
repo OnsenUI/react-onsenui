@@ -6,13 +6,14 @@
   "scripts": {
     "build": "npm run lint && rollup -c",
     "prepublish": "npm run build",
-    "commit-dist": "git commit -m 'Update generated files.' dist && git push origin master",
-    "postpublish": "npm run commit-dist && npm run release-github",
+    "commit-dist": "git commit -m 'Update generated files.' dist docs && git push origin master",
+    "postpublish": "npm run gen-docs && npm run commit-dist && npm run release-github",
     "release-github": "node githubRelease.js",
     "lint": "eslint --ext .js,.jsx src",
     "lint-fix": "eslint --ext .js,.jsx src --fix",
     "dev": "webpack-dev-server --progress",
-    "test": "karma start"
+    "test": "karma start",
+    "gen-docs": "node ./docgen.js"
   },
   "repository": {
     "type": "git",
@@ -51,6 +52,7 @@
     "eslint-plugin-react": "^5.1.1",
     "eslint-plugin-standard": "^1.3.2",
     "file-loader": "^0.8.5",
+    "filter-files": "^0.4.0",
     "github": "^1.1.2",
     "karma": "^0.13.22",
     "karma-chai": "^0.1.0",
