@@ -11,7 +11,7 @@
     "release-github": "node githubRelease.js",
     "lint": "eslint --ext .js,.jsx src",
     "lint-fix": "eslint --ext .js,.jsx src --fix",
-    "dev": "webpack-dev-server --progress",
+    "dev": "webpack-dev-server --progress --host 0.0.0.0",
     "test": "karma start",
     "gen-docs": "node ./docgen.js"
   },
