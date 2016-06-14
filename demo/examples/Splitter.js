@@ -54,7 +54,7 @@ export default class extends React.Component {
           <SplitterSide
             side="left"
             width={200}
-            collapse={!this.state.showLeft}
+            collapse='portrait'
             isOpen={this.state.openLeft}
             onClose={this.handleLeftClose.bind(this)}
             onOpen={this.handleLeftOpen.bind(this)}
