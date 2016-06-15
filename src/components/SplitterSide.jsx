@@ -43,8 +43,7 @@ class SplitterSide extends BasicComponent {
     props.swipeable = this.props.isSwipeable ? 'swipeable' : null;
 
     if (this.props.isCollapsed) {
-      console.error('The property `isCollapsed` is deprecated, please use `collapsed`, see https://onsen.io/v2/docs/react/SplitterSide.html.');
-      // props.collapse = this.props.isCollapsed ? 'collapse' : 'false';
+      console.error('The property `isCollapsed` is deprecated, please use `collapse`, see https://onsen.io/v2/docs/react/SplitterSide.html.');
       delete props['isCollapsed'];
     }
 
