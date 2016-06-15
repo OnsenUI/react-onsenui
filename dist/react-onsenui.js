@@ -1,4 +1,4 @@
-/*! react-onsenui v0.5.1 - Wed Jun 15 2016 18:20:32 GMT+0900 (JST) */
+/*! react-onsenui v0.5.2 - Wed Jun 15 2016 19:35:32 GMT+0900 (JST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom'], factory) :
@@ -3541,7 +3541,7 @@
       <SplitterSide
         side="right"
         width={300}
-        collapsed={!this.state.showRight}
+        collapse={!this.state.showRight}
         isOpen={this.state.openRight}
         onClose={this.handleRightClose.bind(this)}
         onOpen={this.handleRightOpen.bind(this)}
@@ -3593,7 +3593,7 @@
       <SplitterSide
         side="right"
         width={300}
-        collapsed={!this.state.showRight}
+        collapse={!this.state.showRight}
         isOpen={this.state.openRight}
         onClose={this.handleRightClose.bind(this)}
         onOpen={this.handleRightOpen.bind(this)}
@@ -3671,8 +3671,7 @@
         props.swipeable = this.props.isSwipeable ? 'swipeable' : null;
 
         if (this.props.isCollapsed) {
-          console.error('The property `isCollapsed` is deprecated, please use `collapsed`, see https://onsen.io/v2/docs/react/SplitterSide.html.');
-          // props.collapse = this.props.isCollapsed ? 'collapse' : 'false';
+          console.error('The property `isCollapsed` is deprecated, please use `collapse`, see https://onsen.io/v2/docs/react/SplitterSide.html.');
           delete props['isCollapsed'];
         }
 
