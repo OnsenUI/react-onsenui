@@ -114,13 +114,13 @@ SplitterSide.propTypes = {
   collapse: React.PropTypes.oneOfType([React.PropTypes.bool, React.PropTypes.string]),
 
   /**
-   * @name isSwipable
+   * @name isSwipeable
    * @type bool
    * @description
    *  [en]Ennable swipe interaction on collapse mode.[/en]
    *  [jp] [/jp]
    */
-  isSwipable: React.PropTypes.bool,
+  isSwipeable: React.PropTypes.bool,
 
   /**
    * @name isOpen
