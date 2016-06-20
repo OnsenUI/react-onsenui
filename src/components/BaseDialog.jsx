@@ -33,14 +33,13 @@ class BaseDialog extends React.Component {
     this.node.addEventListener('postshow', this.props.onPostShow);
     this.node.addEventListener('prehide', this.props.onPreHide);
     this.node.addEventListener('posthide', this.props.onPostHide);
-    this.renderPortal(this.props);
+
+    this.animateShow = true;
+    this.renderPortal(this.props, false);
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps.isOpen !== this.props.isOpen) {
-      this.animateShow = true;
-    }
-    this.renderPortal(newProps);
+    this.renderPortal(newProps, this.props.isOpen);
   }
 
   componentWillUnmount() {
@@ -54,13 +53,12 @@ class BaseDialog extends React.Component {
     document.body.removeChild(this.node);
   }
 
-  _update() {
+  _update(isShown) {
     CustomElements.upgrade(this.node.firstChild);
     if (this.props.isOpen) {
-      if (this.animateShow) {
+      if (!this.isShown) {
         this.show();
       }
-      this.animateShow = false;
     } else {
       this.hide();
     }
@@ -71,7 +69,7 @@ class BaseDialog extends React.Component {
     throw new Error('_getDomNodeName is not implemented');
   }
 
-  renderPortal(props) {
+  renderPortal(props, isShown) {
     var {...newProps} = props;
 
     Util.convert(newProps, 'isCancelable', {newName: 'cancelable'});
@@ -80,7 +78,7 @@ class BaseDialog extends React.Component {
     Util.convert(newProps, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
 
     var element = React.createElement(this._getDomNodeName(), newProps);
-    ReactDOM.render(element, this.node, this._update.bind(this));
+    ReactDOM.render(element, this.node, this._update.bind(this, isShown));
   }
 
   shouldComponentUpdate() {
