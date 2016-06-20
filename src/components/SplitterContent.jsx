@@ -22,7 +22,7 @@ import SimpleWrapper from './SimpleWrapper.jsx';
     <SplitterSide
       side="right"
       width={300}
-      isCollapsed={!this.state.showRight}
+      collapse={!this.state.showRight}
       isOpen={this.state.openRight}
       onClose={this.handleRightClose.bind(this)}
       onOpen={this.handleRightOpen.bind(this)}

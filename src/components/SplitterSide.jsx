@@ -26,7 +26,7 @@ import Util from './Util.js';
     <SplitterSide
       side="right"
       width={300}
-      isCollapsed={!this.state.showRight}
+      collapse={!this.state.showRight}
       isOpen={this.state.openRight}
       onClose={this.handleRightClose.bind(this)}
       onOpen={this.handleRightOpen.bind(this)}
@@ -40,8 +40,22 @@ class SplitterSide extends BasicComponent {
   render() {
     var {...props} = this.props;
 
-    props.collapse = this.props.isCollapsed ? 'collapse' : 'false';
     props.swipeable = this.props.isSwipeable ? 'swipeable' : null;
+
+    if (this.props.isCollapsed) {
+      console.error('The property `isCollapsed` is deprecated, please use `collapse`, see https://onsen.io/v2/docs/react/SplitterSide.html.');
+      delete props['isCollapsed'];
+    }
+
+    if (!props.collapse) props.collapse = null;
+
+    if (typeof props.collapse === 'boolean') {
+      if (props.collapse) {
+        props.collapse = 'collapse';
+      } else {
+        props.collapse = 'false';
+      }
+    }
 
     Util.convert(props, 'width', {fun: Util.sizeConverter});
     Util.convert(props, 'animation');
@@ -88,22 +102,25 @@ class SplitterSide extends BasicComponent {
 
 SplitterSide.propTypes = {
   /**
-   * @name isCollapsed
+   * @name collapse
    * @type bool
    * @description
-   *  [en]The appearance of the button.[/en]
+   *  [en] Specify the collapse behavior. Valid values are `"portrait"`, `"landscape"` or a media query.
+   *     The strings `"portrait"` and `"landscape"` means the view will collapse when device is in landscape or portrait orientation.
+   *     If the value is not defined, the view always be in `"collapse"` mode.
+[/en]
    *  [jp] [/jp]
    */
-  isCollapsed: React.PropTypes.bool.isRequired,
+  collapse: React.PropTypes.oneOfType([React.PropTypes.bool, React.PropTypes.string]),
 
   /**
-   * @name isSwipable
+   * @name isSwipeable
    * @type bool
    * @description
    *  [en]Ennable swipe interaction on collapse mode.[/en]
    *  [jp] [/jp]
    */
-  isSwipable: React.PropTypes.bool,
+  isSwipeable: React.PropTypes.bool,
 
   /**
    * @name isOpen
@@ -152,7 +169,7 @@ SplitterSide.propTypes = {
 
   /**
    * @name width
-   * @type  numebr
+   * @type  number
    * @description
    *  [en]Specifies the width of the menu with a number (for pixels) or a string (e.g. "20%" for percentage).[/en]
    *  [jp] [/jp]

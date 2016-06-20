@@ -6,7 +6,6 @@ import {
   SplitterContent,
   Page,
   Toolbar,
-  ToolbarButton,
   Button
 } from '../../src/index.js';
 
@@ -14,7 +13,7 @@ import MyToolbar from './MyToolbar';
 
 export default class extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       showLeft: false,
       showRight: false,
@@ -55,7 +54,7 @@ export default class extends React.Component {
           <SplitterSide
             side="left"
             width={200}
-            isCollapsed={!this.state.showLeft}
+            collapse={!this.state.showLeft}
             isOpen={this.state.openLeft}
             onClose={this.handleLeftClose.bind(this)}
             onOpen={this.handleLeftOpen.bind(this)}
@@ -108,7 +107,7 @@ export default class extends React.Component {
           <SplitterSide
             side="right"
             width={300}
-            isCollapsed={!this.state.showRight}
+            collapse={!this.state.showRight}
             isOpen={this.state.openRight}
             onClose={this.handleRightClose.bind(this)}
             onOpen={this.handleRightOpen.bind(this)}
