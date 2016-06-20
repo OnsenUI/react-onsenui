@@ -3,5 +3,5 @@ machine:
     version: 6.2.0
 dependencies:
   pre:
-    npm install -g npm;
-    cd OnsenUI; npm install; gulp build;
+    - npm install -g npm;
+    - cd OnsenUI; npm install; gulp build;
