@@ -75,6 +75,7 @@ class SplitterSide extends BasicComponent {
   componentDidMount() {
     super.componentDidMount();
     this.node = ReactDOM.findDOMNode(this);
+    this.componentWillReceiveProps(this.props);
 
     this.node.addEventListener('postopen', this.props.onOpen);
     this.node.addEventListener('postclose', this.props.onClose);
