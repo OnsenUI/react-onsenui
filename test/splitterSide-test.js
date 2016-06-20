@@ -9,7 +9,7 @@ import rendersToComponent from './testUtil.js';
 
 describe('SplitterSide', function() {
   rendersToComponent(
-    <SplitterSide isCollapsed={true} />,
+    <SplitterSide collapse={true} />,
     'ons-splitter-side'
   );
 });
