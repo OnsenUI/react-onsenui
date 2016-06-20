@@ -34,7 +34,6 @@ class BaseDialog extends React.Component {
     this.node.addEventListener('prehide', this.props.onPreHide);
     this.node.addEventListener('posthide', this.props.onPostHide);
 
-    this.animateShow = true;
     this.renderPortal(this.props, false);
   }
 
