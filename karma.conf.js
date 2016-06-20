@@ -6,10 +6,9 @@ module.exports = function(config) {
     singleRun: true, // just run once by default
     frameworks: [ 'mocha', 'chai' ], // use the mocha test framework
     files: [
-      'OnsenUI/build/js/onsenui.min.js',
-      'OnsenUI/core/test/setup.js',
-      'OnsenUI/build/css/onsenui.css',
-      'OnsenUI/build/css/onsen-css-components.css',
+      'node_modules/onsenui/js/onsenui.js',
+      'node_modules/onsenui/css/onsenui.css',
+      'node_modules/onsenui/css/onsen-css-components.css',
       'tests.webpack.js' // just load this file
     ],
     preprocessors: {
