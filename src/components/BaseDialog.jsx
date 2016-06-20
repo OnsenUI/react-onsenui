@@ -28,7 +28,7 @@ class BaseDialog extends React.Component {
     this.node = document.createElement('div');
     document.body.appendChild(this.node);
 
-    this.node.addEventListener('cancel', this.props.onCancel);
+    this.node.addEventListener('dialog-cancel', this.props.onCancel);
     this.node.addEventListener('preshow', this.props.onPreShow);
     this.node.addEventListener('postshow', this.props.onPostShow);
     this.node.addEventListener('prehide', this.props.onPreHide);
