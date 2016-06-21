@@ -122,6 +122,7 @@ export default class extends React.Component {
   }
 
   hide() {
+    console.log('call hide');
     this.setState({dialogOpen: false});
   }
 
