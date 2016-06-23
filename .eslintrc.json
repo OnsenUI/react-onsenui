@@ -42,7 +42,6 @@
     "handle-callback-err": [2, "^(err|error)$" ],
     "indent": [2, 2, { "SwitchCase": 1 }],
     "jsx-quotes": [2, "prefer-single"],
-    "react/jsx-uses-vars": 2,
     "key-spacing": [2, { "beforeColon": false, "afterColon": true }],
     "keyword-spacing": [2, { "before": true, "after": true }],
     "new-cap": [2, { "newIsCap": true, "capIsNew": false }],
@@ -139,7 +138,13 @@
     "standard/array-bracket-even-spacing": [2, "either"],
     "standard/computed-property-even-spacing": [2, "even"],
 
-    "promise/param-names": 2
+    "promise/param-names": 2,
+
+    // react rules
+    "react/jsx-uses-vars": 2,
+    "react/react-in-jsx-scope": 2,
+    "react/jsx-no-undef" : 2
+
   },
   "globals": {
     "CustomElements": false
