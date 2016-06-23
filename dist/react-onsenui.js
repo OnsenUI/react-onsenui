@@ -1,4 +1,4 @@
-/*! react-onsenui v0.5.4 - Mon Jun 20 2016 16:55:22 GMT+0900 (JST) */
+/*! react-onsenui v0.5.6 - Tue Jun 21 2016 19:04:50 GMT+0900 (JST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom'], factory) :
@@ -184,7 +184,7 @@
         this.node = document.createElement('div');
         document.body.appendChild(this.node);
 
-        this.node.addEventListener('cancel', this.props.onCancel);
+        this.node.addEventListener('dialog-cancel', this.props.onCancel);
         this.node.addEventListener('preshow', this.props.onPreShow);
         this.node.addEventListener('postshow', this.props.onPostShow);
         this.node.addEventListener('prehide', this.props.onPreHide);
