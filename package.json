@@ -54,7 +54,7 @@
     "file-loader": "^0.9.0",
     "filter-files": "^0.4.0",
     "github": "^1.2.1",
-    "karma": "^0.13.22",
+    "karma": "^1.0.0",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^1.0.1",
     "karma-mocha": "^1.0.1",
