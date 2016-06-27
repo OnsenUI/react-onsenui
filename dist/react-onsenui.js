@@ -1,4 +1,4 @@
-/*! react-onsenui v0.5.6 - Tue Jun 21 2016 19:04:50 GMT+0900 (JST) */
+/*! react-onsenui v0.5.7 - Mon Jun 27 2016 14:20:55 GMT+0900 (JST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom'], factory) :
@@ -1551,7 +1551,9 @@
 
         Util.convert(other, 'disabled');
 
-        return React.createElement('ons-input', _extends({ checked: checked ? '' : null }, other));
+        return React.createElement('ons-input', _extends({ checked: checked ? '' : null }, other, {
+          __self: this
+        }));
       }
     }]);
     return Input;
@@ -1742,8 +1744,10 @@
       key: 'render',
       value: function render() {
         return React.createElement('ons-list', _extends({}, this.props, { ref: 'list',
-          'class': 'list', style: { position: 'relative', height: this.state.height }
-        }), React.createElement('ons-lazy-repeat', { ref: 'lazyRepeat' }), this.state.children);
+          'class': 'list', style: { position: 'relative', height: this.state.height },
+          __self: this
+        }), React.createElement('ons-lazy-repeat', { ref: 'lazyRepeat', __self: this
+        }), this.state.children);
       }
     }]);
     return LazyList;
@@ -1827,7 +1831,8 @@
           return _this2.props.renderRow(data, idx);
         });
 
-        return React.createElement('ons-list', _extends({}, this.props, { ref: 'list' }), this.props.renderHeader(), pages, this.props.renderFooter());
+        return React.createElement('ons-list', _extends({}, this.props, { ref: 'list', __self: this
+        }), this.props.renderHeader(), pages, this.props.renderFooter());
       }
     }]);
     return List;
@@ -2294,7 +2299,8 @@
 
         Util.convert(others, 'animationOptions', { fun: Util.animationOptionsConverter, newName: 'animation-options' });
 
-        return React.createElement('ons-navigator', _extends({}, others, { ref: 'navi' }), this.pages);
+        return React.createElement('ons-navigator', _extends({}, others, { ref: 'navi', __self: this
+        }), this.pages);
       }
     }]);
     return Navigator;
@@ -2438,7 +2444,8 @@
         var others = objectWithoutProperties(this.props, []);
 
         return React.createElement('ons-modal', _extends({}, others, {
-          _compiled: 'true'
+          _compiled: 'true',
+          __self: this
         }), this.props.children);
       }
     }]);
@@ -2549,7 +2556,11 @@
 
         var modal = this.props.renderModal(this);
 
-        return React.createElement('ons-page', _extends({}, this.props, { _compiled: 'true' }), toolbar, React.createElement('div', { className: 'page__background' }, ' '), React.createElement('div', { className: 'page__content' }, this.props.children), React.createElement('div', { className: 'page__extra', style: { zIndex: 10001 } }, modal));
+        return React.createElement('ons-page', _extends({}, this.props, { _compiled: 'true', __self: this
+        }), toolbar, React.createElement('div', { className: 'page__background', __self: this
+        }, ' '), React.createElement('div', { className: 'page__content', __self: this
+        }, this.props.children), React.createElement('div', { className: 'page__extra', style: { zIndex: 10001 }, __self: this
+        }, modal));
       }
     }]);
     return Page;
@@ -3070,7 +3081,9 @@
         Util.convert(others, 'thresholdHeight', { fun: Util.sizeConverter, newName: 'threshold-height' });
         Util.convert(others, 'fixedContent', { newName: 'fixed-content' });
 
-        return React.createElement('ons-pull-hook', _extends({ ref: 'pullHook' }, others));
+        return React.createElement('ons-pull-hook', _extends({ ref: 'pullHook' }, others, {
+          __self: this
+        }));
       }
     }]);
     return PullHook;
@@ -3690,7 +3703,9 @@
         Util.convert(props, 'openThreshold', { newName: 'open-threshold' });
         Util.convert(props, 'swipeTargetWidth', { fun: Util.sizeConverter, newName: 'swipe-target-width' });
 
-        return React.createElement('ons-splitter-side', props, this.props.children);
+        return React.createElement('ons-splitter-side', _extends({}, props, {
+          __self: this
+        }), this.props.children);
       }
     }, {
       key: 'componentDidMount',
@@ -3914,7 +3929,9 @@
         if (inputId) {
           other['input-id'] = inputId;
         }
-        return React.createElement('ons-switch', _extends({ ref: 'switch', checked: checked ? '' : null }, other));
+        return React.createElement('ons-switch', _extends({ ref: 'switch', checked: checked ? '' : null }, other, {
+          __self: this
+        }));
       }
     }]);
     return Switch;
@@ -4194,9 +4211,12 @@
 
         Util.convert(others, 'animationOptions', { fun: Util.animationOptionsConverter, newName: 'animation-options' });
 
-        return React.createElement('ons-tabbar', _extends({}, this.props, { ref: 'tabbar', activeIndex: this.state.activeIndex, _compiled: 'true' }), React.createElement('div', { 'no-status-bar-fill': true, className: 'ons-tab-bar__content tab-bar__content' + (this.props.position === 'top' ? ' tab-bar--top__content' : '') }, tabs.map(function (tab) {
+        return React.createElement('ons-tabbar', _extends({}, this.props, { ref: 'tabbar', activeIndex: this.state.activeIndex, _compiled: 'true', __self: this
+        }), React.createElement('div', { 'no-status-bar-fill': true, className: 'ons-tab-bar__content tab-bar__content' + (this.props.position === 'top' ? ' tab-bar--top__content' : ''), __self: this
+        }, tabs.map(function (tab) {
           return tab.content;
-        })), React.createElement('div', { className: 'tab-bar ons-tab-bar__footer ons-tabbar-inner' + (this.props.position === 'top' ? ' tab-bar--top' : '') }, tabs.map(function (tab) {
+        })), React.createElement('div', { className: 'tab-bar ons-tab-bar__footer ons-tabbar-inner' + (this.props.position === 'top' ? ' tab-bar--top' : ''), __self: this
+        }, tabs.map(function (tab) {
           return tab.tab;
         })));
       }
