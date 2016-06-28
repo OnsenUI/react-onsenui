@@ -38,21 +38,24 @@ class Modal extends BasicComponent {
     super.componentDidMount();
     this.node = ReactDOM.findDOMNode(this);
     CustomElements.upgrade(this.node);
-    this.componentWillReceiveProps(this.props);
+
+    this._update(this.props, false);
   }
 
   componentWillReceiveProps(nextProps) {
+    this._update(nextProps, this.props.isOpen);
+  }
+
+  _update(props, isOpen) {
     const animationOptions = {
-      animation: nextProps.animation,
-      animationOptions: nextProps.animationOptions
+      animation: props.animation,
+      animationOptions: props.animationOptions
     };
-    // The resolve argument provided by show and hide promises is a reference
-    // to the internal ons-modal that should not be passed to the onShow and
-    // onHide hooks on the React component.
-    if (nextProps.isOpen) {
-      this.node.show(animationOptions).then(() => nextProps.onShow && nextProps.onShow());
+
+    if (props.isOpen && !isOpen) {
+      this.node.show(animationOptions).then(() => props.onShow && props.onShow());
     } else {
-      this.node.hide(animationOptions).then(() => nextProps.onHide && nextProps.onHide());
+      this.node.hide(animationOptions).then(() => props.onHide && props.onHide());
     }
   }
 
@@ -65,7 +68,6 @@ class Modal extends BasicComponent {
     return (
       <ons-modal
         {...others}
-        _compiled='true'
       >
         {this.props.children}
       </ons-modal>
