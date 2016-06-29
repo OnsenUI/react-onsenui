@@ -176,7 +176,13 @@ class Navigator extends BasicComponent {
   }
 
   componentDidMount() {
-    this.refs.navi.popPage = this.popPage.bind(this);
+    const node = this.refs.navi;
+    node.popPage = this.popPage.bind(this);
+
+    node.addEventListener('prepush', this.props.onPrePush);
+    node.addEventListener('postpush', this.props.onPostPush);
+    node.addEventListener('prepop', this.props.onPrePop);
+    node.addEventListener('postpop', this.props.onPostPop);
 
     if (this.props.initialRoute && this.props.initialRouteStack) {
       throw new Error('In Navigator either initalRoute or initalRoutes can be set');
@@ -194,6 +200,14 @@ class Navigator extends BasicComponent {
       (route) => this.props.renderPage(route, this)
     );
     this.setState({});
+  }
+
+  componentWillUnmount() {
+    const node = this.refs.navi;
+    node.removeEventListener('prepush', this.props.onPrePush);
+    node.removeEventListener('postpush', this.props.onPostPush);
+    node.removeEventListener('prepop', this.props.onPrePop);
+    node.removeEventListener('postpop', this.props.onPostPop);
   }
 
   render() {
@@ -245,6 +259,42 @@ Navigator.propTypes = {
    *  [jp] どうしよう[/jp]
    */
   initialRoute: React.PropTypes.object,
+
+  /**
+   * @name onPrePush
+   * @type function
+   * @required false
+   * @description
+   *  [en]Called just before a page is pushed.[/en]
+   */
+  onPrePush: React.PropTypes.func,
+
+  /**
+   * @name onPostPush
+   * @type function
+   * @required false
+   * @description
+   *  [en]Called just after a page is pushed.[/en]
+   */
+  onPostPush: React.PropTypes.func,
+
+  /**
+   * @name onPrePop
+   * @type function
+   * @required false
+   * @description
+   *  [en]Called just before a page is popped.[/en]
+   */
+  onPrePop: React.PropTypes.func,
+
+  /**
+   * @name onPostPop
+   * @type function
+   * @required false
+   * @description
+   *  [en]Called just after a page is popped.[/en]
+   */
+  onPostPop: React.PropTypes.func,
 
   /**
    * @property animation

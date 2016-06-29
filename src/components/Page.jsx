@@ -33,6 +33,7 @@ class Page extends BasicComponent {
 
   render() {
     const toolbar = this.props.renderToolbar(this);
+    const bottomToolbar = this.props.renderBottomToolbar(this);
 
     const modal = this.props.renderModal(this);
 
@@ -45,6 +46,7 @@ class Page extends BasicComponent {
         <div className='page__extra' style={{zIndex: 10001}}>
           {modal}
         </div>
+        {bottomToolbar}
       </ons-page>;
   }
 };
@@ -77,10 +79,20 @@ Page.propTypes = {
    * @required false
    * @defaultValue null
    * @description
-   *  [en] This function takes the current route object as a parameter and  creates returns a react component.[/en]
+   *  [en] This function renders the toolbar of the page.[/en]
    *  [jp] どうしよう[/jp]
    */
   renderToolbar: React.PropTypes.func,
+
+  /**
+   * @name renderBottomToolbar
+   * @type function
+   * @defaultValue null
+   * @description
+   *  [en] This function renders the bottom toolbar of the page.[/en]
+   *  [jp] どうしよう[/jp]
+   */
+  renderBottomToolbar: React.PropTypes.func,
 
   /**
    * @name onInit
@@ -123,6 +135,7 @@ const NOOP = () => null;
 
 Page.defaultProps = {
   renderToolbar: NOOP,
+  renderBottomToolbar: NOOP,
   renderModal: NOOP
 };
 

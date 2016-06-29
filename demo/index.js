@@ -11,8 +11,7 @@ import {
   Navigator,
   Toolbar,
   List,
-  ListItem,
-  Range
+  ListItem
 } from '../src/index.js';
 
 import PageExample from './examples/Page';
@@ -35,6 +34,7 @@ import ProgressBarExample from './examples/ProgressBar';
 import RangeExample from './examples/Range';
 import RowColumnExample from './examples/RowColumn';
 import BackButtonExample from './examples/BackButton';
+import BottomToolbarExample from './examples/BottomToolbar';
 
 class Examples extends React.Component {
   constructor(props) {
@@ -45,7 +45,11 @@ class Examples extends React.Component {
   }
 
   getExamples() {
-   return [
+    return [
+      {
+        title: 'Bottom Toolbar',
+        component: BottomToolbarExample,
+      },
       {
         title: 'Page',
         component: PageExample
@@ -144,10 +148,11 @@ class Examples extends React.Component {
   render() {
     return (
       <Page style={{background: 'green'}}
-        renderToolbar={() => <Toolbar> <div className='center'> Up Toolbar </div> </Toolbar>} >
+        renderToolbar={() => <Toolbar> <div className='center'> Up Toolbar </div> </Toolbar>}
+      >
         <List modifier='inset'
           dataSource={this.getExamples()}
-          renderHeader={ () =>
+          renderHeader={() =>
             <ListItem lockOnDrag style={{background: 'green'}} tappable tap-background-color='red'> HEADER </ListItem>
           }
           renderRow={(example) => (
@@ -171,6 +176,10 @@ class App extends React.Component {
     return (
       <Navigator
         renderPage={this.renderPage}
+        onPrePush={e => console.log('prepush', e)}
+        onPostPush={e => console.log('postpush', e)}
+        onPrePop={e => console.log('prepop', e)}
+        onPostPop={e => console.log('postpop', e)}
         initialRoute={{
           component: Examples,
           props: {
