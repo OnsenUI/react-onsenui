@@ -261,6 +261,42 @@ Navigator.propTypes = {
   initialRoute: React.PropTypes.object,
 
   /**
+   * @name onPrePush
+   * @type function
+   * @required false
+   * @description
+   *  [en]Called just before a page is pushed.[/en]
+   */
+  onPrePush: React.PropTypes.func,
+
+  /**
+   * @name onPostPush
+   * @type function
+   * @required false
+   * @description
+   *  [en]Called just after a page is pushed.[/en]
+   */
+  onPostPush: React.PropTypes.func,
+
+  /**
+   * @name onPrePop
+   * @type function
+   * @required false
+   * @description
+   *  [en]Called just before a page is popped.[/en]
+   */
+  onPrePop: React.PropTypes.func,
+
+  /**
+   * @name onPostPop
+   * @type function
+   * @required false
+   * @description
+   *  [en]Called just after a page is popped.[/en]
+   */
+  onPostPop: React.PropTypes.func,
+
+  /**
    * @property animation
    * @type {String}
    * @description
