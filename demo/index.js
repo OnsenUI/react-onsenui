@@ -34,6 +34,7 @@ import ProgressBarExample from './examples/ProgressBar';
 import RangeExample from './examples/Range';
 import RowColumnExample from './examples/RowColumn';
 import BackButtonExample from './examples/BackButton';
+import BottomToolbarExample from './examples/BottomToolbar';
 
 class Examples extends React.Component {
   constructor(props) {
@@ -45,6 +46,10 @@ class Examples extends React.Component {
 
   getExamples() {
     return [
+      {
+        title: 'Bottom Toolbar',
+        component: BottomToolbarExample,
+      },
       {
         title: 'Page',
         component: PageExample
