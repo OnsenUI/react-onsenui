@@ -19,7 +19,7 @@ import Util from './Util.js';
     size={{default: 32, material: 40}}
     icon={{default: 'ion-navicon', material: 'md-menu'}}
   />
-/> */
+*/
 class Icon extends SimpleWrapper {
   _getDomNodeName() {
     return 'ons-icon';
