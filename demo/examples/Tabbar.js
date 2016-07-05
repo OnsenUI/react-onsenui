@@ -4,33 +4,45 @@ import {Tabbar, Tab, Page, Button} from '../../src/index.js';
 import MyToolbar from './MyToolbar';
 
 class TabPage extends React.Component {
-  switchTab() {
-    const index = this.props.tabbar.getActiveTabIndex();
-    this.props.tabbar.setActiveTab((index + 1) % 2);
-  }
-
   render() {
     return (
       <Page renderToolbar={() => <MyToolbar title={this.props.title} />} >
-        {this.props.active ?
-          <p>This is the <strong>{this.props.title}</strong> page.</p> : null}
-
-        <Button onClick={this.switchTab.bind(this)}>Go to the other tab</Button>
+        {this.props.active
+          ? <p>This is the <strong>{this.props.title}</strong> page.</p>
+          : null}
+        <Button onClick={this.props.switchTab}>Go to the other tab</Button>
       </Page>
     );
   }
 }
 
 export default class extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      index: 0
+    };
+    this.renderTabs = this.renderTabs.bind(this);
+  }
+
   renderTabs(activeIndex, tabbar) {
+    console.log('index : ' , activeIndex);
     return [
       {
-        content: <TabPage title="Home" active={activeIndex === 0} tabbar={tabbar} />,
-        tab: <Tab label="Home" icon="md-home" />
+        content: <TabPage switchTab={() => { this.setState({index: 1}); }}
+        title='Home' active={activeIndex == 0} tabbar={tabbar} />,
+        tab: <Tab
+          onClick={() => console.log('click home')}
+          label='Home'
+          icon='md-home' />
       },
       {
-        content: <TabPage title="Settings" active={activeIndex === 1} tabbar={tabbar} />,
-        tab: <Tab label="Settings" icon="md-settings" />
+        content: <TabPage
+          switchTab={() => { this.setState({index: 0}); }}
+
+        title='Settings' active={activeIndex == 1} tabbar={tabbar} />,
+        tab: <Tab onClick={() => console.log('click setting')} label='Settings' icon='md-settings' />
       }
     ];
   }
@@ -39,8 +51,13 @@ export default class extends React.Component {
     return (
       <Page>
         <Tabbar
-          initialIndex={1}
-          onPreChange={() => console.log('preChange')}
+          index={this.state.index}
+          onPreChange={(event) =>
+            {
+              this.setState({index: event.index});
+              console.log('preChange', event.index);
+            }
+          }
           onPostChange={() => console.log('postChange')}
           onReactive={() => console.log('postChange')}
           position='bottom'
