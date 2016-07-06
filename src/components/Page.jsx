@@ -41,14 +41,14 @@ class Page extends BasicComponent {
     let backgroundModifierClass = null;
     let contentModifierClass = null;
     let extraModifierClass = null;
-    
+
     if (modifier) {
       const pageClass = `page--${modifier}`;
       backgroundModifierClass = `${pageClass}__background`;
       contentModifierClass = `${pageClass}__content`;
       extraModifierClass = `${pageClass}__extra`;
     }
-    
+
     return <ons-page {...this.props} _compiled='true'>
         {toolbar}
         <div className={`page__background ${backgroundModifierClass}`}> </div>
