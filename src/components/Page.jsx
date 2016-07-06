@@ -37,13 +37,25 @@ class Page extends BasicComponent {
 
     const modal = this.props.renderModal(this);
 
-    return <ons-page {...this.props} _compiled='true' >
+    const modifier = this.props.modifier;
+    let backgroundModifierClass = null;
+    let contentModifierClass = null;
+    let extraModifierClass = null;
+    
+    if (modifier) {
+      const pageClass = `page--${modifier}`;
+      backgroundModifierClass = `${pageClass}__background`;
+      contentModifierClass = `${pageClass}__content`;
+      extraModifierClass = `${pageClass}__extra`;
+    }
+    
+    return <ons-page {...this.props} _compiled='true'>
         {toolbar}
-        <div className='page__background'> </div>
-        <div className='page__content'>
+        <div className={`page__background ${backgroundModifierClass}`}> </div>
+        <div className={`page__content ${contentModifierClass}`}>
           {this.props.children}
         </div>
-        <div className='page__extra' style={{zIndex: 10001}}>
+        <div className={`page__extra ${extraModifierClass}`} style={{zIndex: 10001}}>
           {modal}
         </div>
         {bottomToolbar}
