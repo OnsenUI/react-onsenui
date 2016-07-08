@@ -37,7 +37,7 @@ class Page extends BasicComponent {
 
     const modal = this.props.renderModal(this);
 
-    return <ons-page {...this.props} _compiled='true' >
+    return <ons-page {...this.props} >
         {toolbar}
         <div className='page__background'> </div>
         <div className='page__content'>
