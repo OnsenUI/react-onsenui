@@ -9,7 +9,7 @@ import BasicComponent from './BasicComponent.jsx';
  * [en] This component is handling the entire page.  THe content can be scrolled. [/en]
  * [jp] どうしよう[/jp]
  * @example
-  <Page>
+  <Page contentStyle={{padding: 40}}>
     <div> Page content </div>
   </Page>
  */
@@ -34,13 +34,14 @@ class Page extends BasicComponent {
   render() {
     const toolbar = this.props.renderToolbar(this);
     const bottomToolbar = this.props.renderBottomToolbar(this);
-
     const modal = this.props.renderModal(this);
 
-    return <ons-page {...this.props} >
+    const {contentStyle, ...props} = this.props;
+
+    return <ons-page {...props} >
         {toolbar}
         <div className='page__background'> </div>
-        <div className='page__content'>
+        <div className='page__content' style={contentStyle}>
           {this.props.children}
         </div>
         <div className='page__extra' style={{zIndex: 10001}}>
@@ -52,6 +53,17 @@ class Page extends BasicComponent {
 };
 
 Page.propTypes = {
+
+  /**
+   * @name contentStyle
+   * @type Object
+   * @description
+   *  [en]
+   *  Specify the style of the page content. Optional.
+   *  [/en]
+   */
+  contentStyle: React.PropTypes.object,
+
   /**
    * @name modifier
    * @type string

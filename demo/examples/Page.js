@@ -39,6 +39,7 @@ export default class extends React.Component {
   render() {
     return (
       <Page
+        contentStyle={{padding: 40}}
         renderToolbar={() => <MyToolbar title='Page' />}
         modifier={this.state.modifier} >
         <p>
