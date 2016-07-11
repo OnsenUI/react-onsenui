@@ -45,7 +45,7 @@ module.exports = {
         loader: 'style!css'
       },
       { test: /\.js$|\.jsx$/,
-        exclude: [/node_modules/, /onsenui.js/],
+        exclude: [/node_modules/, /onsenui\.js/],
         loaders: [ 'react-hot',
           'babel?' + JSON.stringify({presets: ['stage-2', 'es2015', 'react']})
         ]
