@@ -23,6 +23,7 @@ import PullHook from './components/PullHook.jsx';
 import Range from './components/Range.jsx';
 import Ripple from './components/Ripple.jsx';
 import Row from './components/Row.jsx';
+import RouterNavigator from './components/RouterNavigator.jsx';
 import SpeedDial from './components/SpeedDial.jsx';
 import SpeedDialItem from './components/SpeedDialItem.jsx';
 import Splitter from './components/Splitter.jsx';
@@ -61,6 +62,7 @@ export {
   PullHook,
   Range,
   Ripple,
+  RouterNavigator,
   Row,
   SpeedDial,
   SpeedDialItem,
