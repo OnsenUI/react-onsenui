@@ -25,12 +25,14 @@ export default {
   external: [
     'react',
     'react-dom/server',
-    'react-dom'
+    'react-dom',
+    'onsenui'
   ],
   globals: {
     'react': 'React',
     'react-dom': 'ReactDOM',
-    'react-dom/server': 'ReactDOMServer'
+    'react-dom/server': 'ReactDOMServer',
+    'onsenui': 'ons'
   },
   format: 'umd',
   moduleName: 'Ons',
