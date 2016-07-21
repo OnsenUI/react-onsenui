@@ -38,6 +38,11 @@ class Range extends SimpleWrapper {
     });
   }
 
+  componentWillReceiveProps(props) {
+    const node = ReactDOM.findDOMNode(this);
+    node.value = props.value;
+  }
+
   _getDomNodeName() {
     return 'ons-range';
   }
