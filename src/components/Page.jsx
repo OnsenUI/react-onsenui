@@ -6,10 +6,19 @@ import BasicComponent from './BasicComponent.jsx';
  * @category page
  * @tutorial react/Reference/page
  * @description
- * [en] This component is handling the entire page.  THe content can be scrolled. [/en]
+ * [en]
+ *   This component is handling the entire page. The content can be scrolled.
+ *
+ *   To add fixed content that doesn't scroll with the page the `renderFixed` prop is used.
+ *
+ *   A page toolbar can be added with the `renderToolbar` prop.
+ * [/en]
  * [jp] どうしよう[/jp]
  * @example
-  <Page contentStyle={{padding: 40}}>
+  <Page
+    renderFixed={() => <Fab></Fab>}
+    renderToolbar={() => <Toolbar>...</Toolbar>}
+    contentStyle={{padding: 40}}>
     <div> Page content </div>
   </Page>
  */
