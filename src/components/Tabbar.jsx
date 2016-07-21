@@ -75,7 +75,7 @@ class Tabbar extends BasicComponent {
     Util.convert(others, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
 
     return (
-      <ons-tabbar {...this.props} ref='tabbar' activeIndex={this.props.index} _compiled='true'>
+      <ons-tabbar {...this.props} ref='tabbar' activeIndex={this.props.index}>
         <div no-status-bar-fill className={'ons-tab-bar__content tab-bar__content' + (this.props.position === 'top' ? ' tab-bar--top__content' : '')}>
           {this.tabPages}
         </div>
