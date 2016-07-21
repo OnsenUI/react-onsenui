@@ -35,6 +35,7 @@ class Page extends BasicComponent {
     const toolbar = this.props.renderToolbar(this);
     const bottomToolbar = this.props.renderBottomToolbar(this);
     const modal = this.props.renderModal(this);
+    const fixed = this.props.renderFixed(this);
 
     const {contentStyle, ...props} = this.props;
 
@@ -47,6 +48,7 @@ class Page extends BasicComponent {
         <div className='page__extra' style={{zIndex: 10001}}>
           {modal}
         </div>
+        {fixed}
         {bottomToolbar}
       </ons-page>;
   }
@@ -107,6 +109,16 @@ Page.propTypes = {
   renderBottomToolbar: React.PropTypes.func,
 
   /**
+   * @name renderFixed
+   * @type function
+   * @defaultValue null
+   * @description
+   *  [en] This function renders fixed content of the page. Can be used to render `Fab` or `SpeedDial` components as well as other components that don't scroll with the page.[/en]
+   *  [jp] どうしよう[/jp]
+   */
+  renderFixed: React.PropTypes.func,
+
+  /**
    * @name onInit
    * @type function
    * @required false
@@ -148,7 +160,8 @@ const NOOP = () => null;
 Page.defaultProps = {
   renderToolbar: NOOP,
   renderBottomToolbar: NOOP,
-  renderModal: NOOP
+  renderModal: NOOP,
+  renderFixed: NOOP
 };
 
 export default Page;

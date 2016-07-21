@@ -3,6 +3,7 @@ import React from 'react';
 import {
   Page,
   PullHook,
+  Fab,
   Icon,
   Toolbar,
   List,
@@ -65,7 +66,8 @@ export default class extends React.Component {
   render() {
     return (
       <Page
-        renderToolbar={() => <MyToolbar title='Dialog' />}>
+        renderToolbar={() => <MyToolbar title='Dialog' />}
+        renderFixed={() => <Fab position='bottom right'><Icon icon='md-plus' /></Fab>}>
         <MyPullHook />
 
         <Toolbar>
