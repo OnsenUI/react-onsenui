@@ -40,7 +40,7 @@ class Navigator extends BasicComponent {
   /**
    * @method resetPage
    * @signature resetPage(route, options = {})
-   * @param {Object} [route]
+   * @param {Object} route
    *   [en] The route that the page should be reset to.[/en]
    *   [ja] どうしよう [/ja]
    * @return {Promise}
@@ -57,7 +57,7 @@ class Navigator extends BasicComponent {
   /**
    * @method resetPageStack
    * @signature resetPageStack(route, options = {})
-   * @param {Array} [routes]
+   * @param {Array} routes
    *   [en] The routes that the navigator should be reset to.[/en]
    *   [ja] どうしよう [/ja]
    * @return {Promise}
@@ -93,8 +93,8 @@ class Navigator extends BasicComponent {
   /**
    * @method pushPage
    * @signature pushPage(route, options = {})
-   * @param {Array} [routes]
-   *   [en] The routes that the navigator should push to.[/en]
+   * @param {Object} route
+   *   [en] The route that the navigator should push to.[/en]
    *   [ja] どうしよう [/ja]
    * @return {Promise}
    *   [en] Promise which resolves to the revealed page.[/en]
@@ -130,7 +130,10 @@ class Navigator extends BasicComponent {
 
   /*
    * @method replacePage
-   * @signature replacePage(page, [options])
+   * @signature replacePage(route, [options])
+   * @param {Object} route
+   *   [en] The route that the navigator should replace the top page with.[/en]
+   *   [ja] どうしよう [/ja]
    * @return {Promise}
    *   [en]Promise which resolves to the new page.[/en]
    *   [ja]新しいページを解決するPromiseを返します。[/ja]
@@ -154,7 +157,7 @@ class Navigator extends BasicComponent {
 
   /**
    * @method popPage
-   * @signature popPage(route, options = {})
+   * @signature popPage(options = {})
    * @return {Promise}
    *   [en] Promise which resolves to the revealed page.[/en]
    *   [ja] 明らかにしたページを解決するPromiseを返します。[/ja]
