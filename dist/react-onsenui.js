@@ -1,4 +1,4 @@
-/*! react-onsenui v0.7.1 - Tue Jul 26 2016 12:34:39 GMT+0900 (JST) */
+/*! react-onsenui v0.7.2 - Tue Jul 26 2016 17:34:12 GMT+0900 (JST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom'), require('onsenui')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom', 'onsenui'], factory) :
@@ -4318,7 +4318,7 @@
 
         Util.convert(others, 'animationOptions', { fun: Util.animationOptionsConverter, newName: 'animation-options' });
 
-        return React.createElement('ons-tabbar', _extends({}, this.props, { ref: 'tabbar', activeIndex: this.props.index }), React.createElement('div', { 'no-status-bar-fill': true, className: 'ons-tab-bar__content tab-bar__content' + (this.props.position === 'top' ? ' tab-bar--top__content' : '') }, this.tabPages), React.createElement('div', { className: 'tab-bar ons-tab-bar__footer ons-tabbar-inner' + (this.props.position === 'top' ? ' tab-bar--top' : '') }, tabs.map(function (tab) {
+        return React.createElement('ons-tabbar', _extends({}, this.props, { ref: 'tabbar', activeIndex: this.props.index, _compiled: 'true' }), React.createElement('div', { 'no-status-bar-fill': true, className: 'ons-tab-bar__content tab-bar__content' + (this.props.position === 'top' ? ' tab-bar--top__content' : '') }, this.tabPages), React.createElement('div', { className: 'tab-bar ons-tab-bar__footer ons-tabbar-inner' + (this.props.position === 'top' ? ' tab-bar--top' : '') }, tabs.map(function (tab) {
           return tab.tab;
         })));
       }
