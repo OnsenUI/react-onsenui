@@ -28,6 +28,10 @@ class Navigator extends BasicComponent {
     super(props);
     this.pages = [];
     this.state = { };
+    this._prePush = this._prePush.bind(this);
+    this._postPush = this._postPush.bind(this);
+    this._prePop = this._prePop.bind(this);
+    this._postPop = this._postPop.bind(this);
   }
 
   update(pages, obj) {
@@ -170,6 +174,8 @@ class Navigator extends BasicComponent {
       return Promise.reject('Navigator is already running animation.');
     }
 
+    this.routesBeforePop = this.routes.slice();
+
     return this.refs.navi._popPage(options, this.update.bind(this), this.pages)
       .then(
         () => {
@@ -178,14 +184,50 @@ class Navigator extends BasicComponent {
       );
   }
 
+  _prePop(event) {
+    event.routes = {
+      poppingRoute: this.routesBeforePop[this.routesBeforePop.length - 1],
+      routes: this.routesBeforePop
+    };
+
+    this.props.onPrePop(event);
+  }
+
+  _postPop(event) {
+    event.routes = {
+      poppedRoute: this.routesBeforePop[this.routesBeforePop.length - 1],
+      routes: this.routesBeforePop.slice(0, this.routesBeforePop.length - 1)
+    };
+
+    this.props.onPostPop(event);
+  }
+
+  _prePush(event) {
+    event.routes = {
+      pushingRoute: this.routes[this.routes.length - 1],
+      routes: this.routes.slice(0, this.routes.length - 1)
+    };
+
+    this.props.onPrePush(event);
+  }
+
+  _postPush(event) {
+    event.routes = {
+      pushedRoute: this.routes[this.routes.length - 1],
+      routes: this.routes
+    };
+
+    this.props.onPostPush(event);
+  }
+
   componentDidMount() {
     const node = this.refs.navi;
     node.popPage = this.popPage.bind(this);
 
-    node.addEventListener('prepush', this.props.onPrePush);
-    node.addEventListener('postpush', this.props.onPostPush);
-    node.addEventListener('prepop', this.props.onPrePop);
-    node.addEventListener('postpop', this.props.onPostPop);
+    node.addEventListener('prepush', this._prePush);
+    node.addEventListener('postpush', this._postPush);
+    node.addEventListener('prepop', this._prePop);
+    node.addEventListener('postpop', this._postPop);
 
     if (this.props.initialRoute && this.props.initialRouteStack) {
       throw new Error('In Navigator either initalRoute or initalRoutes can be set');
@@ -318,6 +360,15 @@ Navigator.propTypes = {
    *  [jp] [/jp]
    */
   animationOptions: React.PropTypes.object
+};
+
+const NOOP = () => null;
+
+Navigator.defaultProps = {
+  onPostPush: NOOP,
+  onPrePush: NOOP,
+  onPrePop: NOOP,
+  onPostPop: NOOP
 };
 
 export default Navigator;
