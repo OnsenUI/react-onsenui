@@ -33,7 +33,7 @@ class RouterNavigator extends BasicComponent {
   update(pages, obj) {
     this.pages = pages || [];
     return new Promise((resolve) => {
-      this.setState({}, resolve);
+      this.forceUpdate(resolve);
     });
   }
 
@@ -111,7 +111,6 @@ class RouterNavigator extends BasicComponent {
     return new Promise((resolve) => {
       var newPage = this.props.renderPage(route, this);
 
-      this.routes.push(route);
       this.refs.navi._pushPage(options,
                                this.update.bind(this),
                                this.pages,
@@ -170,7 +169,7 @@ class RouterNavigator extends BasicComponent {
     return this.refs.navi._popPage(options, this.update.bind(this), this.pages)
       .then(
         () => {
-          this.routes.pop();
+          // this.routes.pop();
         }
       );
   }
@@ -184,30 +183,37 @@ class RouterNavigator extends BasicComponent {
     node.addEventListener('prepop', this.props.onPrePop);
     node.addEventListener('postpop', this.props.onPostPop);
 
-    if (!this.props.routes) {
-      throw new Error('In RouterNavigator the property routes needs to be set');
+    if (!this.props.routeConfig) {
+      throw new Error('In RouterNavigator the property routeConfig needs to be set');
     }
 
-    this.routes = this.props.routes;
+    // TODO only if state initial
+    this.routeConfig = this.props.routeConfig;
 
-    this.pages = this.routes.map(
+    this.pages = this.routeConfig.routeStack.map(
       (route) => this.props.renderPage(route, this)
     );
     this.forceUpdate();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log('should component update', this.props, this.nextProps);
-    return true;
+    return false;
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('will receive props', this.props, nextProps);
+    let processStack = nextProps.routeConfig.processStack;
 
-    if (nextProps.routes && nextProps.routes.length - 1 === this.props.routes.length) {
-      this.pushPage(nextProps.routes[nextProps.routes.length - 1]);
-    } else if (nextProps.routes && nextProps.routes.length + 1 === this.props.routes.length) {
-      this.popPage();
+    console.log('will receive props', processStack);
+
+    if (processStack.length > 0) {
+      let {type, data} = processStack[0];
+
+      if (type === 'push') {
+        console.log('data', processStack.length, data.props.text);
+        this.pushPage(data);
+      } else if (type === 'pop') {
+        this.popPage();
+      }
     }
   }
 
@@ -221,6 +227,7 @@ class RouterNavigator extends BasicComponent {
 
   render() {
     console.log('render me');
+
     var {...others} = this.props;
     Util.convert(others, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
 

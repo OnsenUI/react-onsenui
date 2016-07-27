@@ -9,7 +9,8 @@ import '../OnsenUI/build/css/onsen-css-components.css';
 import {
   Page,
   RouterNavigator,
-  Button
+  Button,
+  RouterUtil
 } from '../src/index.js';
 
 import MyToolbar from './examples//MyToolbar';
@@ -19,19 +20,25 @@ class MyPage2 extends React.Component {
     super(props);
     this.state = {};
     this.popPage = this.popPage.bind(this);
+    this.popPage2 = this.popPage2.bind(this);
   }
 
   popPage() {
     this.props.popPage();
   }
 
+  popPage2() {
+    this.props.popPage2();
+  }
+
   render() {
     return (
       <Page
-        renderToolbar={() => <MyToolbar title='Page 2' />}
+        renderToolbar={() => <MyToolbar title='Page 3' />}
       >
-        Hello world 2
-        <Button onClick={this.popPage}> Pop Page </Button>
+        {this.props.text}
+        <Button onClick={this.popPage}> Pop Page </Button> <br />
+        {this.props.popPage2 ? <Button onClick={this.popPage2}> Pop Two Page2 </Button> : <div />}
       </Page>
     );
   }
@@ -42,10 +49,15 @@ class MyPage extends React.Component {
     super(props);
     this.state = {};
     this.pushPage = this.pushPage.bind(this);
+    this.pushPage2 = this.pushPage2.bind(this);
   }
 
   pushPage() {
     this.props.pushPage();
+  }
+
+  pushPage2() {
+    this.props.pushPage2();
   }
 
   render() {
@@ -53,12 +65,13 @@ class MyPage extends React.Component {
       <Page
         renderToolbar={() => <MyToolbar title='Page' />}
       >
-        Hello world
-        <Button onClick={this.pushPage}> Push Page </Button>
+        {this.props.text} <br />
+        <Button onClick={this.pushPage}> Push Page </Button> <br />
+        <Button onClick={this.pushPage2}> Push Two Pages </Button>
       </Page>
     );
   }
-};
+}
 
 class App extends React.Component {
   renderPage(route, navigator) {
@@ -71,52 +84,88 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.pushPage = this.pushPage.bind(this);
+    this.pushPage2 = this.pushPage2.bind(this);
     this.popPage = this.popPage.bind(this);
+    this.popPage2 = this.popPage2.bind(this);
+    this.postPush = this.postPush.bind(this);
+    this.postPop = this.postPop.bind(this);
+
     this.state = {
-      routes: [{
+      routeConfig: RouterUtil.init([{
         component: MyPage,
         props: {
           key: 'examples',
-          pushPage: this.pushPage
+          text: 'Page 1',
+          pushPage: this.pushPage,
+          pushPage2: this.pushPage2
         }
-      }]
+      }])
     };
   }
 
   popPage() {
-    console.log('popPage');
-    this.setState({
-      routes: [{
-        component: MyPage,
-        props: {
-          key: 'examples',
-          pushPage: this.pushPage,
-          popPage: this.popPage
-        }
-      }]
-    });
+    let routeConfig = RouterUtil.pop(this.state.routeConfig);
+    this.setState({routeConfig});
+  }
+
+  popPage2() {
+    let routeConfig = RouterUtil.pop(RouterUtil.pop(this.state.routeConfig));
+    this.setState({routeConfig});
+  }
+
+  postPop(e) {
+    console.log('postPop');
+    let routeConfig = RouterUtil.postPop(this.state.routeConfig);
+    this.setState({routeConfig});
+  }
+
+  postPush(e) {
+    let routeConfig = RouterUtil.postPush(this.state.routeConfig);
+
+    this.setState({routeConfig});
   }
 
   pushPage() {
-    this.setState({
-      routes: [{
-        component: MyPage,
-        props: {
-          key: 'examples',
-          pushPage: this.pushPage,
-          popPage: this.popPage
-        }
-      },
-      {
-        component: MyPage2,
-        props: {
-          key: 'examples2',
-          pushPage: this.pushPage,
-          popPage: this.popPage
-        }
+    let routeConfig = RouterUtil.push(this.state.routeConfig, {
+      component: MyPage2,
+      props: {
+        key: 'examplesA',
+        text: 'Page 2',
+        pushPage: this.pushPage,
+        popPage: this.popPage
       }
-      ]
     });
+
+    this.setState({routeConfig});
+  }
+
+  pushPage2() {
+    console.log('push page 2');
+
+    let routeConfig = RouterUtil.push(this.state.routeConfig, {
+      component: MyPage2,
+      props: {
+        key: 'examples2',
+        text: 'Page 2',
+        pushPage: this.pushPage,
+        popPage: this.popPage
+      }
+    });
+
+    routeConfig = RouterUtil.push(routeConfig, {
+      component: MyPage2,
+      props: {
+        key: 'examples3',
+        text: 'Page 3',
+        pushPage: this.pushPage,
+        popPage: this.popPage,
+        popPage2: this.popPage2
+      }
+    });
+
+    console.log('config', routeConfig);
+
+    this.setState({routeConfig});
   }
 
   render() {
@@ -124,10 +173,10 @@ class App extends React.Component {
       <RouterNavigator
         renderPage={this.renderPage}
         onPrePush={e => console.log('prepush', e)}
-        onPostPush={e => console.log('postpush', e)}
+        onPostPush={e => this.postPush(e)}
         onPrePop={e => console.log('prepop', e)}
-        onPostPop={e => console.log('postpop', e)}
-        routes={this.state.routes}
+        onPostPop={e => this.postPop(e)}
+        routeConfig={this.state.routeConfig}
       />
     );
   }

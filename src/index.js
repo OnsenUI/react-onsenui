@@ -13,8 +13,8 @@ import LazyList from './components/LazyList.jsx';
 import List from './components/List.jsx';
 import ListHeader from './components/ListHeader.jsx';
 import ListItem from './components/ListItem.jsx';
-import Navigator from './components/Navigator.jsx';
 import Modal from './components/Modal.jsx';
+import Navigator from './components/Navigator.jsx';
 import Page from './components/Page.jsx';
 import Popover from './components/Popover.jsx';
 import ProgressBar from './components/ProgressBar.jsx';
@@ -22,8 +22,9 @@ import ProgressCircular from './components/ProgressCircular.jsx';
 import PullHook from './components/PullHook.jsx';
 import Range from './components/Range.jsx';
 import Ripple from './components/Ripple.jsx';
-import Row from './components/Row.jsx';
 import RouterNavigator from './components/RouterNavigator.jsx';
+import RouterUtil from './RouterUtil.js';
+import Row from './components/Row.jsx';
 import SpeedDial from './components/SpeedDial.jsx';
 import SpeedDialItem from './components/SpeedDialItem.jsx';
 import Splitter from './components/Splitter.jsx';
@@ -63,6 +64,7 @@ export {
   Range,
   Ripple,
   RouterNavigator,
+  RouterUtil,
   Row,
   SpeedDial,
   SpeedDialItem,

@@ -1,0 +1,51 @@
+/*
+ * routeStack : [userRoute, userRoute2, ...]
+ * processStack: [
+ * { type: push| pop, data: userRoute },
+ * { type: push| pop, data: userRoute2 },
+ * ...
+ * ]
+ */
+
+export default {
+  init: (routes) => {
+    return {
+      routeStack: routes,
+      processStack: []
+    };
+  },
+  push: (routeConfig, data) => {
+    let config = {...routeConfig};
+    config.processStack.push({
+      type: 'push',
+      data
+    });
+
+    return config;
+  },
+  pop: (routeConfig, data) => {
+    let config = {...routeConfig};
+    config.processStack.push({
+      type: 'pop'
+    });
+
+    return config;
+  },
+  postPush: (routeConfig) => {
+    let config = {...routeConfig};
+    let {data} = routeConfig.processStack.shift();
+
+    if (data != null) {
+      config.routeStack.push(data);
+    }
+
+    return config;
+  },
+  postPop: (routeConfig) => {
+    let config = {...routeConfig};
+    routeConfig.processStack.shift();
+    routeConfig.routeStack.pop();
+
+    return config;
+  }
+};
