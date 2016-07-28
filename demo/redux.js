@@ -104,20 +104,26 @@ class App extends React.Component {
   }
 
   popPage() {
-    let routeConfig = RouterUtil.pop(this.state.routeConfig, {
-      animation: 'fade',
+    let options = {
+      animation: 'slide',
       animationOptions: {
-        duration: 0.2,
-        delay: 0.4,
+        duration: 2,
+        delay: 0.1,
         timing: 'ease-in'
       }
-    }
-    );
+    };
+
+    let routeConfig = RouterUtil.pop({
+      routeConfig: this.state.routeConfig,
+      options
+    });
+
     this.setState({routeConfig});
   }
 
   popPage2() {
-    let routeConfig = RouterUtil.pop(RouterUtil.pop(this.state.routeConfig));
+    let routeConfig = RouterUtil.pop({routeConfig: this.state.routeConfig});
+    routeConfig = RouterUtil.pop({routeConfig});
     this.setState({routeConfig});
   }
 
@@ -134,24 +140,33 @@ class App extends React.Component {
   }
 
   pushPage() {
-    let routeConfig = RouterUtil.push(this.state.routeConfig, {
+    let data = {
       component: MyPage2,
       props: {
         key: 'examplesA',
         text: 'Page 2',
+        duration: 2,
+        delay: 0.1,
         pushPage: this.pushPage,
         popPage: this.popPage
       }
-    }, {
-      animation: 'fade',
+    };
+
+    let options = {
+      /* animation: 'slide',
       animationOptions: {
         duration: 0.2,
         delay: 0.4,
         timing: 'ease-in'
-      }
-    }
+        }
+      */
+    };
 
-    );
+    let routeConfig = RouterUtil.push({
+      routeConfig: this.state.routeConfig,
+      data,
+      options
+    });
 
     this.setState({routeConfig});
   }
@@ -159,7 +174,7 @@ class App extends React.Component {
   pushPage2() {
     console.log('push page 2');
 
-    let routeConfig = RouterUtil.push(this.state.routeConfig, {
+    let data = {
       component: MyPage2,
       props: {
         key: 'examples2',
@@ -167,22 +182,29 @@ class App extends React.Component {
         pushPage: this.pushPage,
         popPage: this.popPage
       }
+    };
+
+    let routeConfig = RouterUtil.push({
+      routeConfig: this.state.routeConfig,
+      data: data
     });
 
-    routeConfig = RouterUtil.push(routeConfig, {
-      component: MyPage2,
-      props: {
-        key: 'examples3',
-        text: 'Page 3',
-        pushPage: this.pushPage,
-        popPage: this.popPage,
-        popPage2: this.popPage2
+    let config = RouterUtil.push({
+      routeConfig,
+      data: {
+        component: MyPage2,
+        props: {
+          key: 'examples3',
+          text: 'Page 3',
+          pushPage: this.pushPage,
+          popPage: this.popPage,
+          popPage2: this.popPage2
+        }
       }
     });
 
-    console.log('config', routeConfig);
-
-    this.setState({routeConfig});
+    console.log('config', config);
+    this.setState({routeConfig: config});
   }
 
   render() {

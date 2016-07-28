@@ -14,17 +14,18 @@ export default {
       processStack: []
     };
   },
-  push: (routeConfig, data, options) => {
+  push: ({routeConfig, data, options, key}) => {
     let config = {...routeConfig};
     config.processStack.push({
       type: 'push',
       data,
-      options
+      options,
+      key
     });
 
     return config;
   },
-  pop: (routeConfig, data, options) => {
+  pop: ({routeConfig, options}) => {
     let config = {...routeConfig};
     config.processStack.push({
       type: 'pop',
