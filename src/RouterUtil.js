@@ -16,19 +16,25 @@ export default {
   },
   push: ({routeConfig, data, options, key}) => {
     let config = {...routeConfig};
-    config.processStack.push({
-      type: 'push',
-      data,
-      options,
-      key
-    });
+
+    // do not push keys twice
+    if (key == null ||
+      config.processStack.filter((el) => el.key === key).length === 0) {
+      config.processStack.push({
+        type: 'push',
+        data,
+        options,
+        key
+      });
+    }
 
     return config;
   },
-  pop: ({routeConfig, options}) => {
+  pop: ({routeConfig, options, key}) => {
     let config = {...routeConfig};
     config.processStack.push({
       type: 'pop',
+      key,
       options
     });
 

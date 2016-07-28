@@ -50,6 +50,7 @@ class MyPage extends React.Component {
     this.state = {};
     this.pushPage = this.pushPage.bind(this);
     this.pushPage2 = this.pushPage2.bind(this);
+    this.pushPage3 = this.pushPage3.bind(this);
   }
 
   pushPage() {
@@ -60,6 +61,10 @@ class MyPage extends React.Component {
     this.props.pushPage2();
   }
 
+  pushPage3() {
+    this.props.pushPage3();
+  }
+
   render() {
     return (
       <Page
@@ -67,7 +72,8 @@ class MyPage extends React.Component {
       >
         {this.props.text} <br />
         <Button onClick={this.pushPage}> Push Page </Button> <br />
-        <Button onClick={this.pushPage2}> Push Two Pages </Button>
+        <Button onClick={this.pushPage2}> Push Two Pages </Button> <br />
+        <Button onClick={this.pushPage3}> Push Two Pages same key </Button>
       </Page>
     );
   }
@@ -85,6 +91,7 @@ class App extends React.Component {
     super(props);
     this.pushPage = this.pushPage.bind(this);
     this.pushPage2 = this.pushPage2.bind(this);
+    this.pushPage3 = this.pushPage3.bind(this);
     this.popPage = this.popPage.bind(this);
     this.popPage2 = this.popPage2.bind(this);
     this.postPush = this.postPush.bind(this);
@@ -97,7 +104,8 @@ class App extends React.Component {
           key: 'examples',
           text: 'Page 1',
           pushPage: this.pushPage,
-          pushPage2: this.pushPage2
+          pushPage2: this.pushPage2,
+          pushPage3: this.pushPage3
         }
       }])
     };
@@ -201,6 +209,45 @@ class App extends React.Component {
           popPage2: this.popPage2
         }
       }
+    });
+
+    console.log('config', config);
+    this.setState({routeConfig: config});
+  }
+
+  pushPage3() {
+    console.log('push page 3');
+
+    let data = {
+      component: MyPage2,
+      props: {
+        key: 'examples2',
+        text: 'Page 2',
+        pushPage: this.pushPage,
+        popPage: this.popPage
+      },
+      key: 'hello'
+    };
+
+    let routeConfig = RouterUtil.push({
+      routeConfig: this.state.routeConfig,
+      data: data,
+      key: 'hello'
+    });
+
+    let config = RouterUtil.push({
+      routeConfig,
+      data: {
+        component: MyPage2,
+        props: {
+          key: 'examples3',
+          text: 'Page 3',
+          pushPage: this.pushPage,
+          popPage: this.popPage,
+          popPage2: this.popPage2
+        }
+      },
+      key: 'hello'
     });
 
     console.log('config', config);
