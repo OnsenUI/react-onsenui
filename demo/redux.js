@@ -104,7 +104,15 @@ class App extends React.Component {
   }
 
   popPage() {
-    let routeConfig = RouterUtil.pop(this.state.routeConfig);
+    let routeConfig = RouterUtil.pop(this.state.routeConfig, {
+      animation: 'fade',
+      animationOptions: {
+        duration: 0.2,
+        delay: 0.4,
+        timing: 'ease-in'
+      }
+    }
+    );
     this.setState({routeConfig});
   }
 
@@ -134,7 +142,16 @@ class App extends React.Component {
         pushPage: this.pushPage,
         popPage: this.popPage
       }
-    });
+    }, {
+      animation: 'fade',
+      animationOptions: {
+        duration: 0.2,
+        delay: 0.4,
+        timing: 'ease-in'
+      }
+    }
+
+    );
 
     this.setState({routeConfig});
   }

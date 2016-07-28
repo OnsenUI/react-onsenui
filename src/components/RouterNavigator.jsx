@@ -103,6 +103,17 @@ class RouterNavigator extends BasicComponent {
    *   [en] Pushes a page to the page stack[/en]
    *   [ja] どうしよう[/ja]
    */
+
+  /*
+     {
+     animation: 'fade',
+     animationOptions: {
+     duration: 0.2,
+     delay: 0.4,
+     timing: 'ease-in'
+     }
+     }
+  */
   pushPage(route, options = {}) {
     if (this.isRunning()) {
       return Promise.reject('Navigator is already running animation.');
@@ -206,13 +217,13 @@ class RouterNavigator extends BasicComponent {
     console.log('will receive props', processStack);
 
     if (processStack.length > 0) {
-      let {type, data} = processStack[0];
+      let {type, data, options} = processStack[0];
 
       if (type === 'push') {
         console.log('data', processStack.length, data.props.text);
-        this.pushPage(data);
+        this.pushPage(data, options);
       } else if (type === 'pop') {
-        this.popPage();
+        this.popPage(options);
       }
     }
   }
