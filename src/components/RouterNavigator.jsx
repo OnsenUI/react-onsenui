@@ -155,7 +155,6 @@ class RouterNavigator extends BasicComponent {
     this.pushPage(route, options).then(() => {
       const pos = this.pages.length - 2;
       this.pages.splice(pos, 1);
-      this.routes.splice(pos, 1);
       this.refs.navi.topPage.updateBackButton(this.pages.length > 1);
       this.forceUpdate();
     });
@@ -229,6 +228,8 @@ class RouterNavigator extends BasicComponent {
         } else {
           this.resetPageStack([data], options);
         }
+      } else if (type === 'replace') {
+        this.replacePage(data, options);
       }
     }
   }

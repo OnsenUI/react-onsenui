@@ -51,10 +51,25 @@ class MyPage extends React.Component {
     this.pushPage = this.pushPage.bind(this);
     this.pushPage2 = this.pushPage2.bind(this);
     this.pushPage3 = this.pushPage3.bind(this);
+    this.resetPage = this.resetPage.bind(this);
+    this.replacePage = this.replacePage.bind(this);
+    this.resetPage2 = this.resetPage2.bind(this);
+  }
+
+  resetPage() {
+    this.props.resetPage();
+  }
+
+  replacePage() {
+    this.props.replacePage();
   }
 
   pushPage() {
     this.props.pushPage();
+  }
+
+  resetPage2() {
+    this.props.resetPage2();
   }
 
   pushPage2() {
@@ -73,7 +88,10 @@ class MyPage extends React.Component {
         {this.props.text} <br />
         <Button onClick={this.pushPage}> Push Page </Button> <br />
         <Button onClick={this.pushPage2}> Push Two Pages </Button> <br />
-        <Button onClick={this.pushPage3}> Push Two Pages same key </Button>
+        <Button onClick={this.pushPage3}> Push Two Pages same key </Button> <br />
+        <Button onClick={this.resetPage}> Reset Pages</Button> <br />
+        <Button onClick={this.resetPage2}> Reset Pages Array</Button> <br />
+        <Button onClick={this.replacePage}> Replace Pages</Button>
       </Page>
     );
   }
@@ -96,6 +114,9 @@ class App extends React.Component {
     this.popPage2 = this.popPage2.bind(this);
     this.postPush = this.postPush.bind(this);
     this.postPop = this.postPop.bind(this);
+    this.resetPage = this.resetPage.bind(this);
+    this.replacePage = this.replacePage.bind(this);
+    this.resetPage2 = this.resetPage2.bind(this);
 
     this.state = {
       routeConfig: RouterUtil.init([{
@@ -105,7 +126,10 @@ class App extends React.Component {
           text: 'Page 1',
           pushPage: this.pushPage,
           pushPage2: this.pushPage2,
-          pushPage3: this.pushPage3
+          pushPage3: this.pushPage3,
+          resetPage: this.resetPage,
+          replacePage: this.replacePage,
+          resetPage2: this.resetPage2
         }
       }])
     };
@@ -143,6 +167,91 @@ class App extends React.Component {
 
   postPush(e) {
     let routeConfig = RouterUtil.postPush(this.state.routeConfig);
+
+    this.setState({routeConfig});
+  }
+
+  resetPage() {
+    let data = {
+      component: MyPage2,
+      props: {
+        key: 'examplesA',
+        text: 'Page 2',
+        duration: 2,
+        delay: 0.1,
+        pushPage: this.pushPage,
+        popPage: this.popPage
+      }
+    };
+
+    let options = {};
+
+    let routeConfig = RouterUtil.reset({
+      routeConfig: this.state.routeConfig,
+      data,
+      options
+    });
+
+    this.setState({routeConfig});
+  }
+
+  replacePage() {
+    let data = {
+      component: MyPage2,
+      props: {
+        key: 'examplesA',
+        text: 'Replace Page',
+        duration: 2,
+        delay: 0.1,
+        pushPage: this.pushPage,
+        popPage: this.popPage
+      },
+      key: 'hi'
+    };
+
+    let options = {};
+
+    let routeConfig = RouterUtil.replace({
+      routeConfig: this.state.routeConfig,
+      data,
+      options
+    });
+
+    this.setState({routeConfig});
+  }
+
+  resetPage2() {
+    let data = {
+      component: MyPage2,
+      props: {
+        key: 'examplesA',
+        text: 'Page 2',
+        duration: 2,
+        delay: 0.1,
+        pushPage: this.pushPage,
+        popPage: this.popPage
+      }
+    };
+
+    let data2 = {
+      component: MyPage2,
+      props: {
+        key: 'examplesB',
+        text: 'Page 3',
+        duration: 2,
+        delay: 0.1,
+        pushPage: this.pushPage,
+        popPage: this.popPage
+      }
+    };
+
+    let options = {};
+
+    let routeConfig = RouterUtil.reset({
+      routeConfig: this.state.routeConfig,
+      data: [data, data2],
+      options
+    });
 
     this.setState({routeConfig});
   }

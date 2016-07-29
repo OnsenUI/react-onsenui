@@ -14,6 +14,24 @@ export default {
       processStack: []
     };
   },
+
+  replace: ({routeConfig, data, options, key}) => {
+    let config = {...routeConfig};
+
+    // do not push keys twice
+    if (key == null ||
+      config.processStack.filter((el) => el.key === key).length === 0) {
+      config.processStack.push({
+        type: 'replace',
+        data,
+        options,
+        key
+      });
+    }
+
+    return config;
+  },
+
   reset: ({routeConfig, data, options, key}) => {
     let config = {...routeConfig};
 
@@ -69,6 +87,9 @@ export default {
     } else if (type === 'reset') {
       if (!Array.isArray(data)) data = [data];
       config.routeStack = data;
+    } else if (type === 'replace') {
+      config.routeStack.pop();
+      config.routeStack.push(data);
     }
 
     return config;
