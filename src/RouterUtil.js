@@ -14,6 +14,22 @@ export default {
       processStack: []
     };
   },
+  reset: ({routeConfig, data, options, key}) => {
+    let config = {...routeConfig};
+
+    // do not push keys twice
+    if (key == null ||
+      config.processStack.filter((el) => el.key === key).length === 0) {
+      config.processStack.push({
+        type: 'reset',
+        data,
+        options,
+        key
+      });
+    }
+
+    return config;
+  },
   push: ({routeConfig, data, options, key}) => {
     let config = {...routeConfig};
 
@@ -42,10 +58,17 @@ export default {
   },
   postPush: (routeConfig) => {
     let config = {...routeConfig};
-    let {data} = routeConfig.processStack.shift();
+    let {data, type} = routeConfig.processStack.shift();
 
-    if (data != null) {
-      config.routeStack.push(data);
+    console.log('type', type);
+
+    if (type === 'push') {
+      if (data != null) {
+        config.routeStack.push(data);
+      }
+    } else if (type === 'reset') {
+      if (!Array.isArray(data)) data = [data];
+      config.routeStack = data;
     }
 
     return config;

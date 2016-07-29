@@ -75,7 +75,6 @@ class RouterNavigator extends BasicComponent {
     return new Promise((resolve) => {
       var lastRoute = routes[routes.length - 1];
       var newPage = this.props.renderPage(lastRoute, this);
-      this.routes.push(lastRoute);
 
       this.refs.navi._pushPage(options, this.update.bind(this), this.pages, newPage).then(() => {
         this.routes = routes;
@@ -224,6 +223,12 @@ class RouterNavigator extends BasicComponent {
         this.pushPage(data, options);
       } else if (type === 'pop') {
         this.popPage(options);
+      } else if (type === 'reset') {
+        if (Array.isArray(data)) {
+          this.resetPageStack(data, options);
+        } else {
+          this.resetPageStack([data], options);
+        }
       }
     }
   }
