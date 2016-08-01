@@ -116,15 +116,19 @@ class Navigator extends BasicComponent {
       var newPage = this.props.renderPage(route, this);
 
       this.routes.push(route);
-      this.refs.navi._pushPage(options,
-                               this.update.bind(this),
-                               this.pages,
-                               newPage).then(resolve)
-                               .catch((error) => {
-                                 this.routes.pop();
-                                 this.pages.pop();
-                                 throw error;
-                               });
+      this.refs.navi
+        ._pushPage(
+          options,
+          this.update.bind(this),
+          this.pages,
+          newPage
+        )
+        .then(resolve)
+        .catch((error) => {
+          this.routes.pop();
+          this.pages.pop();
+          throw error;
+        });
     });
   }
 
