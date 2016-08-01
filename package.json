@@ -60,7 +60,7 @@
     "karma-mocha": "^1.1.1",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.7.0",
-    "mocha": "^2.5.3",
+    "mocha": "^3.0.0",
     "onsenui": "^2.0.0-rc.15",
     "prompt": "^1.0.0",
     "react": "^15.2.1",
