@@ -1,4 +1,4 @@
-/*! react-onsenui v0.7.2 - Tue Jul 26 2016 17:34:12 GMT+0900 (JST) */
+/*! react-onsenui v0.7.3 - Mon Aug 01 2016 19:40:24 GMT+0900 (JST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom'), require('onsenui')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom', 'onsenui'], factory) :
@@ -859,7 +859,7 @@
      *  [en]ons-carousel-item's width. Only works when the direction is set to "horizontal".[/en]
      *  [jp] [/jp]
      */
-    itemWidth: React.PropTypes.oneOf(React.PropTypes.string, React.PropTypes.string),
+    itemWidth: React.PropTypes.oneOf([React.PropTypes.string, React.PropTypes.number]),
 
     /**
      * @name itemHeight
@@ -868,7 +868,7 @@
      *  [en]ons-carousel-item's height. Only works when the direction is set to "vertical".[/en]
      *  [jp] [/jp]
      */
-    itemHeight: React.PropTypes.oneOf(React.PropTypes.string, React.PropTypes.string),
+    itemHeight: React.PropTypes.oneOf([React.PropTypes.string, React.PropTypes.number]),
 
     /**
      * @name autoScroll
