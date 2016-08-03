@@ -53,7 +53,7 @@ List.propTypes = {
    * @type string
    * @description
    *  [en]
-   *  Specify modifier name to specify custom styles.
+   *    Source of the list data. Should be an array.
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
