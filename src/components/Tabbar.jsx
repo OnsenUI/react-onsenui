@@ -76,7 +76,7 @@ class Tabbar extends BasicComponent {
 
     return (
       <ons-tabbar {...this.props} ref='tabbar' activeIndex={this.props.index} _compiled='true'>
-        <div no-status-bar-fill className={'ons-tab-bar__content tab-bar__content' + (this.props.position === 'top' ? ' tab-bar--top__content' : '')}>
+        <div className={'ons-tab-bar__content tab-bar__content' + (this.props.position === 'top' ? ' tab-bar--top__content' : '')}>
           {this.tabPages}
         </div>
         <div className={'tab-bar ons-tab-bar__footer ons-tabbar-inner' + (this.props.position === 'top' ? ' tab-bar--top' : '')}>
