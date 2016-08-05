@@ -1,6 +1,6 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {findDOMNode} from 'react-dom';
 import Util from './Util.js';
 
 /**
@@ -34,7 +34,7 @@ class Carousel extends SimpleWrapper {
 
   componentDidMount() {
     super.componentDidMount();
-    var node = ReactDOM.findDOMNode(this);
+    const node = findDOMNode(this);
     CustomElements.upgrade(node);
     node.addEventListener('postchange', this.props.onPostChange);
     node.addEventListener('refresh', this.props.onRefresh);
@@ -42,21 +42,31 @@ class Carousel extends SimpleWrapper {
   }
 
   componentWillReceiveProps(props) {
-    var node = ReactDOM.findDOMNode(this);
+    const node = findDOMNode(this);
+
     if (this.props.index !== props.index) {
       node.setActiveIndex(props.index, props.animationOptions);
+    }
+
+  }
+
+  componentDidUpdate(props) {
+    const node = findDOMNode(this);
+
+    if (this.props.children.length !== props.children.length) {
+      node.refresh();
     }
   }
 
   componentWillUnmount() {
-    var node = ReactDOM.findDOMNode(this);
+    const node = findDOMNode(this);
     node.removeEventListener('postchange', this.props.onPostChange);
     node.removeEventListener('refresh', this.props.onRefresh);
     node.removeEventListener('overscroll', this.props.onOverscroll);
   }
 
   render() {
-    var {...others} = this.props;
+    const {...others} = this.props;
 
     ['fullscreen', 'swipeable', 'disabled', 'centered', 'overscrollable', 'centered'].forEach((el) => {
       Util.convert(others, el);

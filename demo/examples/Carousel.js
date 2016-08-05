@@ -19,7 +19,15 @@ import {
 export default class extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {index: 1};
+    this.state = {
+      index: 1,
+      items: [
+        'gray',
+        'red',
+        'orange',
+        'blue'
+      ]
+    };
     this.goTo = this.goTo.bind(this);
   }
 
@@ -42,34 +50,17 @@ export default class extends React.Component {
           onOverscroll={() => console.log('onOverscroll')}
           onRefresh={() => console.log('onRefresh')}
           ref='carousel' swipeable overscrollable autoScroll fullscreen autoScrollRatio={0.2}>
-          <CarouselItem style={{backgroundColor: 'gray'}}>
-            <div className='item-label'>GRAY</div>
-            <Button onClick={() => this.goTo(0)}> Go to page 1 </Button>
-            <Button onClick={() => this.goTo(1)}> Go to page 2 </Button>
-            <Button onClick={() => this.goTo(2)}> Go to page 3 </Button>
-            <Button onClick={() => this.goTo(3)}> Go to page 4 </Button>
-          </CarouselItem>
-          <CarouselItem style={{backgroundColor: '#085078'}}>
-            <div className='item-label'>BLUE</div>
-            <Button onClick={() => this.goTo(0)}> Go to page 1 </Button>
-            <Button onClick={() => this.goTo(1)}> Go to page 2 </Button>
-            <Button onClick={() => this.goTo(2)}> Go to page 3 </Button>
-            <Button onClick={() => this.goTo(3)}> Go to page 4 </Button>
-          </CarouselItem>
-          <CarouselItem style={{backgroundColor: '#373B44'}}>
-            <div className='item-label'>DARK</div>
-            <Button onClick={() => this.goTo(0)}> Go to page 1 </Button>
-            <Button onClick={() => this.goTo(1)}> Go to page 2 </Button>
-            <Button onClick={() => this.goTo(2)}> Go to page 3 </Button>
-            <Button onClick={() => this.goTo(3)}> Go to page 4 </Button>
-          </CarouselItem>
-          <CarouselItem style={{backgroundColor: '#D38312'}}>
-            <div className='item-label'>ORANGE</div>
-            <Button onClick={() => this.goTo(0)}> Go to page 1 </Button>
-            <Button onClick={() => this.goTo(1)}> Go to page 2 </Button>
-            <Button onClick={() => this.goTo(2)}> Go to page 3 </Button>
-            <Button onClick={() => this.goTo(3)}> Go to page 4 </Button>
-          </CarouselItem>
+
+          {this.state.items.map((item) =>
+            <CarouselItem style={{backgroundColor: item}}>
+              <div className='item-label'>{item}</div>
+              {this.state.items.map((item, index) =>
+                <Button onClick={() => this.goTo(index)}> Go to page {index + 1}</Button>
+              )}
+              <Button onClick={() => this.setState({items: this.state.items.slice(0, this.state.items.length - 1)})}>Remove</Button>
+              <Button onClick={() => this.setState({items: [...this.state.items, 'yellow']})}>Add</Button>
+            </CarouselItem>
+          )}
         </Carousel>
 
         <BottomToolbar>
