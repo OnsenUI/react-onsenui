@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v0.7.4
+----
+* modal: Fix hide and show logic.
+
 v0.7.2
 ----
 * tabbar: Fix regression.
