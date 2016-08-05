@@ -1,4 +1,4 @@
-/*! react-onsenui v0.7.3 - Mon Aug 01 2016 19:40:24 GMT+0900 (JST) */
+/*! react-onsenui v0.7.4 - Fri Aug 05 2016 14:38:31 GMT+0900 (JST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom'), require('onsenui')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom', 'onsenui'], factory) :
@@ -6,7 +6,7 @@
 }(this, function (exports,React,ReactDOM,ons) { 'use strict';
 
   React = 'default' in React ? React['default'] : React;
-  ReactDOM = 'default' in ReactDOM ? ReactDOM['default'] : ReactDOM;
+  var ReactDOM__default = 'default' in ReactDOM ? ReactDOM['default'] : ReactDOM;
   ons = 'default' in ons ? ons['default'] : ons;
 
   var Util = {
@@ -207,7 +207,7 @@
         this.node.removeEventListener('prehide', this.props.onPreHide);
         this.node.removeEventListener('posthide', this.props.onPostHide);
 
-        ReactDOM.unmountComponentAtNode(this.node);
+        ReactDOM__default.unmountComponentAtNode(this.node);
         document.body.removeChild(this.node);
       }
     }, {
@@ -239,7 +239,7 @@
         Util.convert(newProps, 'animationOptions', { fun: Util.animationOptionsConverter, newName: 'animation-options' });
 
         var element = React.createElement(this._getDomNodeName(), newProps);
-        ReactDOM.render(element, this.node, this._update.bind(this, isShown));
+        ReactDOM__default.render(element, this.node, this._update.bind(this, isShown));
       }
     }, {
       key: 'shouldComponentUpdate',
@@ -469,7 +469,7 @@
     createClass(BasicComponent, [{
       key: 'updateClasses',
       value: function updateClasses() {
-        var node = ReactDOM.findDOMNode(this);
+        var node = ReactDOM__default.findDOMNode(this);
 
         if (typeof this.props.className !== 'undefined') {
           if (this.lastClass) {
@@ -559,7 +559,7 @@
     }, {
       key: '_updateOnClick',
       value: function _updateOnClick(props) {
-        var node = ReactDOM.findDOMNode(this);
+        var node = ReactDOM__default.findDOMNode(this);
 
         if (props.onClick) {
           node.onClick = function () {
@@ -776,8 +776,18 @@
       key: 'componentWillReceiveProps',
       value: function componentWillReceiveProps(props) {
         var node = ReactDOM.findDOMNode(this);
+
         if (this.props.index !== props.index) {
           node.setActiveIndex(props.index, props.animationOptions);
+        }
+      }
+    }, {
+      key: 'componentDidUpdate',
+      value: function componentDidUpdate(props) {
+        var node = ReactDOM.findDOMNode(this);
+
+        if (this.props.children.length !== props.children.length) {
+          node.refresh();
         }
       }
     }, {
@@ -1511,7 +1521,7 @@
         var _this2 = this;
 
         get(Object.getPrototypeOf(Input.prototype), 'componentDidMount', this).call(this);
-        var node = ReactDOM.findDOMNode(this);
+        var node = ReactDOM__default.findDOMNode(this);
 
         EVENT_TYPES.forEach(function (eventType) {
           node.addEventListener(eventType, _this2.props.onChange);
@@ -1522,7 +1532,7 @@
       value: function componentWillUnmount() {
         var _this3 = this;
 
-        var node = ReactDOM.findDOMNode(this);
+        var node = ReactDOM__default.findDOMNode(this);
 
         EVENT_TYPES.forEach(function (eventType) {
           node.removeEventListener(eventType, _this3.props.onChange);
@@ -1531,7 +1541,7 @@
     }, {
       key: 'componentWillReceiveProps',
       value: function componentWillReceiveProps(props) {
-        var node = ReactDOM.findDOMNode(this);
+        var node = ReactDOM__default.findDOMNode(this);
 
         if (typeof props.value !== 'undefined' && node.value !== props.value) {
           node.value = props.value;
@@ -1851,7 +1861,7 @@
     * @type string
     * @description
     *  [en]
-    *  Specify modifier name to specify custom styles.
+    *    Source of the list data. Should be an array.
     *  [/en]
     *  [jp] どうしよう[/jp]
     */
@@ -1986,7 +1996,7 @@
       key: 'componentDidMount',
       value: function componentDidMount() {
         get(Object.getPrototypeOf(ListItem.prototype), 'componentDidMount', this).call(this);
-        this.node = ReactDOM.findDOMNode(this);
+        this.node = ReactDOM__default.findDOMNode(this);
       }
     }, {
       key: 'componentDidUpdate',
@@ -2514,7 +2524,7 @@
       key: 'componentDidMount',
       value: function componentDidMount() {
         get(Object.getPrototypeOf(Modal.prototype), 'componentDidMount', this).call(this);
-        this.node = ReactDOM.findDOMNode(this);
+        this.node = ReactDOM__default.findDOMNode(this);
         CustomElements.upgrade(this.node);
 
         this._update(this.props, false);
@@ -2536,7 +2546,7 @@
           this.node.show(animationOptions).then(function () {
             return props.onShow && props.onShow();
           });
-        } else {
+        } else if (!props.isOpen && isOpen) {
           this.node.hide(animationOptions).then(function () {
             return props.onHide && props.onHide();
           });
@@ -2650,7 +2660,7 @@
       key: 'componentDidMount',
       value: function componentDidMount() {
         get(Object.getPrototypeOf(Page.prototype), 'componentDidMount', this).call(this);
-        var node = ReactDOM.findDOMNode(this);
+        var node = ReactDOM__default.findDOMNode(this);
         CustomElements.upgrade(node);
         node.addEventListener('init', this.props.onInit);
         node.addEventListener('show', this.props.onShow);
@@ -2659,7 +2669,7 @@
     }, {
       key: 'componentWillUnmount',
       value: function componentWillUnmount() {
-        var node = ReactDOM.findDOMNode(this);
+        var node = ReactDOM__default.findDOMNode(this);
         node.removeEventListener('init', this.props.onInit);
         node.removeEventListener('show', this.props.onShow);
         node.removeEventListener('hide', this.props.onHide);
@@ -2839,7 +2849,7 @@
       key: 'show',
       value: function show() {
         var target = this.props.getTarget();
-        target = ReactDOM.findDOMNode(target);
+        target = ReactDOM__default.findDOMNode(target);
         return this.node.firstChild.show(target);
       }
     }]);
@@ -3206,7 +3216,7 @@
       key: 'componentDidMount',
       value: function componentDidMount() {
         get(Object.getPrototypeOf(PullHook.prototype), 'componentDidMount', this).call(this);
-        var node = ReactDOM.findDOMNode(this);
+        var node = ReactDOM__default.findDOMNode(this);
         node.addEventListener('changestate', this.props.onChange);
         CustomElements.upgrade(this.refs.pullHook);
         this.refs.pullHook.onAction = this.props.onLoad;
@@ -3214,7 +3224,7 @@
     }, {
       key: 'componentWillUnmount',
       value: function componentWillUnmount() {
-        var node = ReactDOM.findDOMNode(this);
+        var node = ReactDOM__default.findDOMNode(this);
         node.removeEventListener('changestate', this.props.onChange);
       }
     }, {
@@ -3326,7 +3336,7 @@
         var _this2 = this;
 
         get(Object.getPrototypeOf(Range.prototype), 'componentDidMount', this).call(this);
-        var node = ReactDOM.findDOMNode(this);
+        var node = ReactDOM__default.findDOMNode(this);
 
         EVENT_TYPES$1.forEach(function (eventType) {
           node.addEventListener(eventType, _this2.props.onChange);
@@ -3337,7 +3347,7 @@
       value: function componentWillUnmount() {
         var _this3 = this;
 
-        var node = ReactDOM.findDOMNode(this);
+        var node = ReactDOM__default.findDOMNode(this);
 
         EVENT_TYPES$1.forEach(function (eventType) {
           node.removeEventListener(eventType, _this3.props.onChange);
@@ -3346,7 +3356,7 @@
     }, {
       key: 'componentWillReceiveProps',
       value: function componentWillReceiveProps(props) {
-        var node = ReactDOM.findDOMNode(this);
+        var node = ReactDOM__default.findDOMNode(this);
         node.value = props.value;
       }
     }, {
@@ -3643,14 +3653,14 @@
       key: 'componentDidMount',
       value: function componentDidMount() {
         get(Object.getPrototypeOf(SpeedDialItem.prototype), 'componentDidMount', this).call(this);
-        var node = ReactDOM.findDOMNode(this);
+        var node = ReactDOM__default.findDOMNode(this);
         CustomElements.upgrade(node);
         node.addEventListener('click', this.props.onClick);
       }
     }, {
       key: 'componentWillUnmount',
       value: function componentWillUnmount() {
-        var node = ReactDOM.findDOMNode(this);
+        var node = ReactDOM__default.findDOMNode(this);
         node.removeEventListener('click', this.props.onClick);
       }
     }]);
@@ -3862,7 +3872,7 @@
       key: 'componentDidMount',
       value: function componentDidMount() {
         get(Object.getPrototypeOf(SplitterSide.prototype), 'componentDidMount', this).call(this);
-        this.node = ReactDOM.findDOMNode(this);
+        this.node = ReactDOM__default.findDOMNode(this);
         this.componentWillReceiveProps(this.props);
 
         this.node.addEventListener('postopen', this.props.onOpen);
@@ -4318,7 +4328,7 @@
 
         Util.convert(others, 'animationOptions', { fun: Util.animationOptionsConverter, newName: 'animation-options' });
 
-        return React.createElement('ons-tabbar', _extends({}, this.props, { ref: 'tabbar', activeIndex: this.props.index, _compiled: 'true' }), React.createElement('div', { 'no-status-bar-fill': true, className: 'ons-tab-bar__content tab-bar__content' + (this.props.position === 'top' ? ' tab-bar--top__content' : '') }, this.tabPages), React.createElement('div', { className: 'tab-bar ons-tab-bar__footer ons-tabbar-inner' + (this.props.position === 'top' ? ' tab-bar--top' : '') }, tabs.map(function (tab) {
+        return React.createElement('ons-tabbar', _extends({}, this.props, { ref: 'tabbar', activeIndex: this.props.index, _compiled: 'true' }), React.createElement('div', { className: 'ons-tab-bar__content tab-bar__content' + (this.props.position === 'top' ? ' tab-bar--top__content' : '') }, this.tabPages), React.createElement('div', { className: 'tab-bar ons-tab-bar__footer ons-tabbar-inner' + (this.props.position === 'top' ? ' tab-bar--top' : '') }, tabs.map(function (tab) {
           return tab.tab;
         })));
       }
