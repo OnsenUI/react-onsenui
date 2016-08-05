@@ -2,6 +2,14 @@
 CHANGELOG
 ====
 
+v0.7.2
+----
+* tabbar: Fix regression.
+
+v0.7.1
+----
+* navigator: add routes to events
+
 v0.7.0
 ----
 * tabbar: New interface with index.
@@ -9,10 +17,3 @@ v0.7.0
 * page: Add `renderFixed` prop to render fixed position conent.
 * range: Fix `value` prop.
 
-v0.7.1
-----
-* navigator: add routes to events
-
-v0.7.2
-----
-* tabbar: Fix regression.
