@@ -5,6 +5,7 @@ CHANGELOG
 v0.7.4
 ----
 * modal: Fix hide and show logic.
+* carousel: Refresh carousel when number of children changes.
 
 v0.7.2
 ----
