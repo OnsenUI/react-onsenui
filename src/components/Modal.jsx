@@ -54,7 +54,7 @@ class Modal extends BasicComponent {
 
     if (props.isOpen && !isOpen) {
       this.node.show(animationOptions).then(() => props.onShow && props.onShow());
-    } else {
+    } else if (!props.isOpen && isOpen) {
       this.node.hide(animationOptions).then(() => props.onHide && props.onHide());
     }
   }
