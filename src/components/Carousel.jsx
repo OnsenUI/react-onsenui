@@ -47,7 +47,6 @@ class Carousel extends SimpleWrapper {
     if (this.props.index !== props.index) {
       node.setActiveIndex(props.index, props.animationOptions);
     }
-
   }
 
   componentDidUpdate(props) {
