@@ -54,6 +54,8 @@ export default class extends React.Component {
           index={this.state.index}
           onPreChange={(event) =>
             {
+              console.log('prechange', event);
+              console.log('set state prechange');
               this.setState({index: event.index});
               console.log('preChange', event.index);
             }

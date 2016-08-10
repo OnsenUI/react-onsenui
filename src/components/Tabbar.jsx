@@ -38,8 +38,20 @@ class Tabbar extends BasicComponent {
     super.componentDidMount();
     const node = this.refs.tabbar;
     CustomElements.upgrade(node);
-    node.addEventListener('prechange', this.props.onPreChange);
+
+    this.initial = true;
+
+    node.addEventListener('prechange', (event) => {
+      if (event.index !== this.props.index || this.initial) {
+        this.initial = false;
+        this.props.onPreChange(event);
+      } else {
+        // event.cancel();
+      }
+    });
+
     node.addEventListener('postchange', this.props.onPostChange);
+
     node.addEventListener('reactive', this.props.onReactive);
   }
 
@@ -53,7 +65,10 @@ class Tabbar extends BasicComponent {
   componentDidUpdate(prevProps) {
     super.componentDidUpdate(prevProps);
     if (prevProps.index !== this.props.index) {
-      this.refs.tabbar.setActiveTab(this.props.index);
+      this.refs.tabbar
+        .setActiveTab(this.props.index);
+        // we will cancel an event for rerendering
+        // and ignore the error
     }
   }
 
