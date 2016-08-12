@@ -172,7 +172,7 @@ class App extends React.Component {
   }
 
   resetPage() {
-    let data = {
+    let route = {
       component: MyPage2,
       props: {
         key: 'examplesA',
@@ -188,7 +188,7 @@ class App extends React.Component {
 
     let routeConfig = RouterUtil.reset({
       routeConfig: this.state.routeConfig,
-      data,
+      route,
       options
     });
 
@@ -196,7 +196,7 @@ class App extends React.Component {
   }
 
   replacePage() {
-    let data = {
+    let route = {
       component: MyPage2,
       props: {
         key: 'examplesA',
@@ -213,7 +213,7 @@ class App extends React.Component {
 
     let routeConfig = RouterUtil.replace({
       routeConfig: this.state.routeConfig,
-      data,
+      route,
       options
     });
 
@@ -221,7 +221,7 @@ class App extends React.Component {
   }
 
   resetPage2() {
-    let data = {
+    let route = {
       component: MyPage2,
       props: {
         key: 'examplesA',
@@ -233,7 +233,7 @@ class App extends React.Component {
       }
     };
 
-    let data2 = {
+    let route2 = {
       component: MyPage2,
       props: {
         key: 'examplesB',
@@ -249,7 +249,7 @@ class App extends React.Component {
 
     let routeConfig = RouterUtil.reset({
       routeConfig: this.state.routeConfig,
-      data: [data, data2],
+      route: [route, route2],
       options
     });
 
@@ -257,7 +257,7 @@ class App extends React.Component {
   }
 
   pushPage() {
-    let data = {
+    let route = {
       component: MyPage2,
       props: {
         key: 'examplesA',
@@ -281,7 +281,7 @@ class App extends React.Component {
 
     let routeConfig = RouterUtil.push({
       routeConfig: this.state.routeConfig,
-      data,
+      route,
       options
     });
 
@@ -291,7 +291,7 @@ class App extends React.Component {
   pushPage2() {
     console.log('push page 2');
 
-    let data = {
+    let route = {
       component: MyPage2,
       props: {
         key: 'examples2',
@@ -303,12 +303,12 @@ class App extends React.Component {
 
     let routeConfig = RouterUtil.push({
       routeConfig: this.state.routeConfig,
-      data: data
+      route: route
     });
 
     let config = RouterUtil.push({
       routeConfig,
-      data: {
+      route: {
         component: MyPage2,
         props: {
           key: 'examples3',
@@ -327,7 +327,7 @@ class App extends React.Component {
   pushPage3() {
     console.log('push page 3');
 
-    let data = {
+    let route = {
       component: MyPage2,
       props: {
         key: 'examples2',
@@ -340,13 +340,13 @@ class App extends React.Component {
 
     let routeConfig = RouterUtil.push({
       routeConfig: this.state.routeConfig,
-      data: data,
+      route: route,
       key: 'hello'
     });
 
     let config = RouterUtil.push({
       routeConfig,
-      data: {
+      route: {
         component: MyPage2,
         props: {
           key: 'examples3',

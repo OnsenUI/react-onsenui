@@ -1,8 +1,8 @@
 /*
  * routeStack : [userRoute, userRoute2, ...]
  * processStack: [
- * { type: push| pop, data: userRoute },
- * { type: push| pop, data: userRoute2 },
+ * { type: push | pop | reset, route: userRoute },
+ * { type: push | pop | reset, route: userRoute2 },
  * ...
  * ]
  */
@@ -15,7 +15,7 @@ export default {
     };
   },
 
-  replace: ({routeConfig, data, options, key}) => {
+  replace: ({routeConfig, route, options, key}) => {
     let config = {...routeConfig};
 
     // do not push keys twice
@@ -23,7 +23,7 @@ export default {
       config.processStack.filter((el) => el.key === key).length === 0) {
       config.processStack.push({
         type: 'replace',
-        data,
+        route,
         options,
         key
       });
@@ -32,7 +32,7 @@ export default {
     return config;
   },
 
-  reset: ({routeConfig, data, options, key}) => {
+  reset: ({routeConfig, route, options, key}) => {
     let config = {...routeConfig};
 
     // do not push keys twice
@@ -40,7 +40,7 @@ export default {
       config.processStack.filter((el) => el.key === key).length === 0) {
       config.processStack.push({
         type: 'reset',
-        data,
+        route,
         options,
         key
       });
@@ -48,7 +48,8 @@ export default {
 
     return config;
   },
-  push: ({routeConfig, data, options, key}) => {
+
+  push: ({routeConfig, route, options, key}) => {
     let config = {...routeConfig};
 
     // do not push keys twice
@@ -56,7 +57,7 @@ export default {
       config.processStack.filter((el) => el.key === key).length === 0) {
       config.processStack.push({
         type: 'push',
-        data,
+        route,
         options,
         key
       });
@@ -64,6 +65,7 @@ export default {
 
     return config;
   },
+
   pop: ({routeConfig, options, key}) => {
     let config = {...routeConfig};
     config.processStack.push({
@@ -74,26 +76,26 @@ export default {
 
     return config;
   },
+
   postPush: (routeConfig) => {
     let config = {...routeConfig};
-    let {data, type} = routeConfig.processStack.shift();
-
-    console.log('type', type);
+    let {route, type} = routeConfig.processStack.shift();
 
     if (type === 'push') {
-      if (data != null) {
-        config.routeStack.push(data);
+      if (route != null) {
+        config.routeStack.push(route);
       }
     } else if (type === 'reset') {
-      if (!Array.isArray(data)) data = [data];
-      config.routeStack = data;
+      if (!Array.isArray(route)) route = [route];
+      config.routeStack = route;
     } else if (type === 'replace') {
       config.routeStack.pop();
-      config.routeStack.push(data);
+      config.routeStack.push(route);
     }
 
     return config;
   },
+
   postPop: (routeConfig) => {
     let config = {...routeConfig};
     routeConfig.processStack.shift();

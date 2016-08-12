@@ -38,23 +38,6 @@ class RouterNavigator extends BasicComponent {
   }
 
   /**
-   * @method resetPage
-   * @signature resetPage(route, options = {})
-   * @param {Object} [route]
-   *   [en] The route that the page should be reset to.[/en]
-   *   [ja] どうしよう [/ja]
-   * @return {Promise}
-   *   [en]Promise which resolves to the revealed page.[/en]
-   *   [ja]明らかにしたページを解決するPromiseを返します。[/ja]
-   * @description
-   *   [en]Resets the current page[/en]
-   *   [ja]どうしよう[/ja]
-   */
-  resetPage(route, options = {}) {
-    return this.resetPageStack([route], options);
-  }
-
-  /**
    * @method resetPageStack
    * @signature resetPageStack(route, options = {})
    * @param {Array} [routes]
@@ -212,24 +195,28 @@ class RouterNavigator extends BasicComponent {
   componentWillReceiveProps(nextProps) {
     let processStack = nextProps.routeConfig.processStack;
 
-    console.log('will receive props', processStack);
-
     if (processStack.length > 0) {
-      let {type, data, options} = processStack[0];
+      let {type, route, options} = processStack[0];
 
-      if (type === 'push') {
-        console.log('data', processStack.length, data.props.text);
-        this.pushPage(data, options);
-      } else if (type === 'pop') {
-        this.popPage(options);
-      } else if (type === 'reset') {
-        if (Array.isArray(data)) {
-          this.resetPageStack(data, options);
-        } else {
-          this.resetPageStack([data], options);
-        }
-      } else if (type === 'replace') {
-        this.replacePage(data, options);
+      switch (type) {
+        case 'push':
+          this.pushPage(route, options);
+          break;
+        case 'pop':
+          this.popPage(route, options);
+          break;
+        case 'reset':
+          if (Array.isArray(route)) {
+            this.resetPageStack(route, options);
+          } else {
+            this.resetPageStack([route], options);
+          }
+          break;
+        case 'replace':
+          this.replacePage(route, options);
+          break;
+        default:
+          throw new Error(`Unknown type ${type} in processStack`);
       }
     }
   }
@@ -243,8 +230,6 @@ class RouterNavigator extends BasicComponent {
   }
 
   render() {
-    console.log('render me');
-
     var {...others} = this.props;
     Util.convert(others, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
 
