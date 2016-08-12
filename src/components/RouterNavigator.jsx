@@ -203,7 +203,7 @@ class RouterNavigator extends BasicComponent {
           this.pushPage(route, options);
           break;
         case 'pop':
-          this.popPage(route, options);
+          this.popPage(options);
           break;
         case 'reset':
           if (Array.isArray(route)) {
