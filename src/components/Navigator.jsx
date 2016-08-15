@@ -26,19 +26,15 @@ import Util from './Util.js';
 class Navigator extends BasicComponent {
   constructor(props) {
     super(props);
-    this.pages = [];
-    this.state = { };
+
+    this.state = {
+      routes: []
+    };
+
     this._prePush = this._prePush.bind(this);
     this._postPush = this._postPush.bind(this);
     this._prePop = this._prePop.bind(this);
     this._postPop = this._postPop.bind(this);
-  }
-
-  update(pages, obj) {
-    this.pages = pages || [];
-    return new Promise((resolve) => {
-      this.setState({}, resolve);
-    });
   }
 
   /**
@@ -76,22 +72,15 @@ class Navigator extends BasicComponent {
       return Promise.reject('Navigator is already running animation.');
     }
 
-    return new Promise((resolve) => {
-      var lastRoute = routes[routes.length - 1];
-      var newPage = this.props.renderPage(lastRoute, this);
-      this.routes.push(lastRoute);
-
-      this.refs.navi._pushPage(options, this.update.bind(this), this.pages, newPage).then(() => {
-        this.routes = routes;
-
-        var renderPage = (route) => {
-          return this.props.renderPage(route, this);
-        };
-
-        this.pages = routes.map(renderPage);
-        this.update(this.pages).then(resolve);
+    const update = () => {
+      return new Promise((resolve) => {
+        this.setState({
+          routes: [...routes]
+        }, resolve);
       });
-    });
+    };
+
+    return this.refs.navi._pushPage(options, update);
   }
 
   /**
@@ -112,24 +101,15 @@ class Navigator extends BasicComponent {
       return Promise.reject('Navigator is already running animation.');
     }
 
-    return new Promise((resolve) => {
-      var newPage = this.props.renderPage(route, this);
+    const update = () => {
+      return new Promise((resolve) => {
+        this.setState({
+          routes: [...this.state.routes, route]
+        }, resolve);
+      });
+    };
 
-      this.routes.push(route);
-      this.refs.navi
-        ._pushPage(
-          options,
-          this.update.bind(this),
-          this.pages,
-          newPage
-        )
-        .then(resolve)
-        .catch((error) => {
-          this.routes.pop();
-          this.pages.pop();
-          throw error;
-        });
-    });
+    return this.refs.navi._pushPage(options, update);
   }
 
   isRunning() {
@@ -154,13 +134,17 @@ class Navigator extends BasicComponent {
       return Promise.reject('Navigator is already running animation.');
     }
 
-    this.pushPage(route, options).then(() => {
-      const pos = this.pages.length - 2;
-      this.pages.splice(pos, 1);
-      this.routes.splice(pos, 1);
-      this.refs.navi.topPage.updateBackButton(this.pages.length > 1);
-      this.forceUpdate();
-    });
+    const update = () => {
+      return new Promise((resolve) => {
+        const routes = this.state.routes.slice(0, this.state.routes.length - 1);
+
+        this.setState({
+          routes: [...routes, route]
+        }, resolve);
+      });
+    };
+
+    return this.refs._navi.pushPage(options, update);
   }
 
   /**
@@ -178,20 +162,21 @@ class Navigator extends BasicComponent {
       return Promise.reject('Navigator is already running animation.');
     }
 
-    this.routesBeforePop = this.routes.slice();
+    const update = () => {
+      return new Promise((resolve) => {
+        this.setState({
+          routes: this.state.routes.slice(0, this.state.routes.length - 1)
+        }, resolve);
+      });
+    };
 
-    return this.refs.navi._popPage(options, this.update.bind(this), this.pages)
-      .then(
-        () => {
-          this.routes.pop();
-        }
-      );
+    return this.refs.navi._popPage(options, update, this.pages);
   }
 
   _prePop(event) {
     event.routes = {
-      poppingRoute: this.routesBeforePop[this.routesBeforePop.length - 1],
-      routes: this.routesBeforePop
+      poppingRoute: this.state.routes[this.state.routes.length - 1],
+      routes: this.state.routes
     };
 
     this.props.onPrePop(event);
@@ -199,8 +184,8 @@ class Navigator extends BasicComponent {
 
   _postPop(event) {
     event.routes = {
-      poppedRoute: this.routesBeforePop[this.routesBeforePop.length - 1],
-      routes: this.routesBeforePop.slice(0, this.routesBeforePop.length - 1)
+      poppedRoute: this.state.routes[this.state.routes.length - 1],
+      routes: this.state.routes.slice(0, this.state.routes.length - 1)
     };
 
     this.props.onPostPop(event);
@@ -208,8 +193,8 @@ class Navigator extends BasicComponent {
 
   _prePush(event) {
     event.routes = {
-      pushingRoute: this.routes[this.routes.length - 1],
-      routes: this.routes.slice(0, this.routes.length - 1)
+      pushingRoute: this.state.routes[this.state.routes.length - 1],
+      routes: this.state.routes.slice(0, this.state.routes.length - 1)
     };
 
     this.props.onPrePush(event);
@@ -217,8 +202,8 @@ class Navigator extends BasicComponent {
 
   _postPush(event) {
     event.routes = {
-      pushedRoute: this.routes[this.routes.length - 1],
-      routes: this.routes
+      pushedRoute: this.state.routes[this.state.routes.length - 1],
+      routes: this.state.routes
     };
 
     this.props.onPostPush(event);
@@ -238,17 +223,14 @@ class Navigator extends BasicComponent {
     }
 
     if (this.props.initialRoute) {
-      this.routes = [this.props.initialRoute];
+      this.setState({
+        routes: [this.props.initialRoute]
+      });
     } else if (this.props.initialRouteStack) {
-      this.routes = this.props.initialRouteStack;
-    } else {
-      this.routes = [];
+      this.setState({
+        routes: this.props.initialRouteStack
+      });
     }
-
-    this.pages = this.routes.map(
-      (route) => this.props.renderPage(route, this)
-    );
-    this.setState({});
   }
 
   componentWillUnmount() {
@@ -265,7 +247,9 @@ class Navigator extends BasicComponent {
 
     return (
       <ons-navigator {...others} ref='navi'>
-        {this.pages}
+        {this.state.routes
+          .slice(this.state.routes.length - 2)
+          .map((route) => this.props.renderPage(route, this))}
       </ons-navigator>
     );
   }
