@@ -251,6 +251,14 @@ class Navigator extends BasicComponent {
     this.setState({});
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    // component is rerendered => update pages
+    this.pages = this.routes.map(
+      (route) => this.props.renderPage(route, this)
+    );
+    return true;
+  }
+
   componentWillUnmount() {
     const node = this.refs.navi;
     node.removeEventListener('prepush', this.props.onPrePush);
