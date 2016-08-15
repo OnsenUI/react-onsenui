@@ -1,5 +1,6 @@
 import React from 'react';
 import BasicComponent from './BasicComponent.jsx';
+import Util from './Util.js';
 
 /**
  * @original ons-switch
@@ -26,6 +27,8 @@ class Switch extends BasicComponent {
 
   render() {
     var {checked, inputId, ...other} = this.props;
+
+    Util.convert(other, 'disabled');
 
     if (inputId) {
       other['input-id'] = inputId;
