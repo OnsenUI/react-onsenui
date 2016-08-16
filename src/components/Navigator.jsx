@@ -81,7 +81,12 @@ class Navigator extends BasicComponent {
       var newPage = this.props.renderPage(lastRoute, this);
       this.routes.push(lastRoute);
 
-      this.refs.navi._pushPage(options, this.update.bind(this), this.pages, newPage).then(() => {
+      const update = () => {
+        this.pages.push(newPage);
+        return new Promise((resolve) => this.forceUpdate(resolve));
+      };
+
+      this.refs.navi._pushPage(options, update).then(() => {
         this.routes = routes;
 
         var renderPage = (route) => {
@@ -113,15 +118,18 @@ class Navigator extends BasicComponent {
     }
 
     return new Promise((resolve) => {
-      var newPage = this.props.renderPage(route, this);
+      const update = () => {
+        return new Promise((resolve) => {
+          this.pages.push(this.props.renderPage(route, this));
+          this.forceUpdate(resolve);
+        });
+      };
 
       this.routes.push(route);
       this.refs.navi
         ._pushPage(
           options,
-          this.update.bind(this),
-          this.pages,
-          newPage
+          update
         )
         .then(resolve)
         .catch((error) => {
@@ -180,12 +188,15 @@ class Navigator extends BasicComponent {
 
     this.routesBeforePop = this.routes.slice();
 
-    return this.refs.navi._popPage(options, this.update.bind(this), this.pages)
-      .then(
-        () => {
-          this.routes.pop();
-        }
-      );
+    const update = () => {
+      return new Promise((resolve) => {
+        this.pages.pop();
+        this.forceUpdate(resolve);
+      });
+    };
+
+    return this.refs.navi._popPage(options, update)
+      .then(() => this.routes.pop());
   }
 
   _prePop(event) {
