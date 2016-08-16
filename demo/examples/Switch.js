@@ -29,7 +29,7 @@ export default class extends React.Component {
           <h1>Page Content</h1>
           <Input type='checkbox' checked={this.state.checked} onChange={this.onChange} />
           <br />
-          <Switch checked={this.state.checked} onChange={this.onChange} />
+          <Switch disabled={false} checked={this.state.checked} onChange={this.onChange} />
           <p />
           <div style={{marginTop: 10}}> The switch is {this.state.checked ? 'on' : 'off'} </div>
         </div>
