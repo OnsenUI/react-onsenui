@@ -37,7 +37,7 @@ class Navigator extends BasicComponent {
   update(pages, obj) {
     this.pages = pages || [];
     return new Promise((resolve) => {
-      this.setState({}, resolve);
+      this.forceUpdate(resolve);
     });
   }
 
@@ -259,7 +259,15 @@ class Navigator extends BasicComponent {
     this.pages = this.routes.map(
       (route) => this.props.renderPage(route, this)
     );
-    this.setState({});
+    this.forceUpdate();
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // component is rerendered => update pages
+    this.pages = this.routes.map(
+      (route) => this.props.renderPage(route, this)
+    );
+    return true;
   }
 
   componentWillUnmount() {
