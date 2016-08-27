@@ -64,7 +64,7 @@ Fab.propTypes = {
    *  [en] If true, the button will be disabled. [/en]
    *  [jp] [/jp]
    */
-  disabled: React.PropTypes.string,
+  disabled: React.PropTypes.bool,
 
   /**
    * @name onClick
