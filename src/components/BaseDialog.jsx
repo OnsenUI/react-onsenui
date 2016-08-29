@@ -53,7 +53,6 @@ class BaseDialog extends React.Component {
   }
 
   _update(isShown) {
-    CustomElements.upgrade(this.node.firstChild);
     if (this.props.isOpen) {
       if (!isShown) {
         this.show();

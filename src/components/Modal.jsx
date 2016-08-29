@@ -37,7 +37,6 @@ class Modal extends BasicComponent {
   componentDidMount() {
     super.componentDidMount();
     this.node = ReactDOM.findDOMNode(this);
-    CustomElements.upgrade(this.node);
 
     this._update(this.props, false);
   }

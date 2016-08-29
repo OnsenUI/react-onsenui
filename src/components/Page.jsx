@@ -27,7 +27,6 @@ class Page extends BasicComponent {
   componentDidMount() {
     super.componentDidMount();
     var node = ReactDOM.findDOMNode(this);
-    CustomElements.upgrade(node);
     node.addEventListener('init', this.props.onInit);
     node.addEventListener('show', this.props.onShow);
     node.addEventListener('hide', this.props.onHide);

@@ -70,10 +70,6 @@ export default class extends React.Component {
         renderFixed={() => <Fab position='bottom right'><Icon icon='md-plus' /></Fab>}>
         <MyPullHook />
 
-        <Toolbar>
-          <div className='center'>Pull to refresh</div>
-        </Toolbar>
-
         <List
           dataSource={[1, 2, 3, 4]}
           renderRow={(data) => <ListItem>{data}</ListItem>} />

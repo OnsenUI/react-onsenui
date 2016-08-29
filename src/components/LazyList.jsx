@@ -49,7 +49,6 @@ class LazyList extends BasicComponent {
 
   update(props) {
     var self = this;
-    CustomElements.upgrade(this.refs.lazyRepeat);
 
     this.refs.lazyRepeat.delegate = {
       calculateItemHeight: function(index) {

@@ -28,7 +28,6 @@ class SpeedDialItem extends SimpleWrapper {
   componentDidMount() {
     super.componentDidMount();
     var node = ReactDOM.findDOMNode(this);
-    CustomElements.upgrade(node);
     node.addEventListener('click', this.props.onClick);
   }
 

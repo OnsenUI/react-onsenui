@@ -38,7 +38,6 @@ class PullHook extends BasicComponent {
     super.componentDidMount();
     var node = ReactDOM.findDOMNode(this);
     node.addEventListener('changestate', this.props.onChange);
-    CustomElements.upgrade(this.refs.pullHook);
     this.refs.pullHook.onAction = this.props.onLoad;
   }
 

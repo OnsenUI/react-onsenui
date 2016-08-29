@@ -14,19 +14,24 @@ import MyToolbar from './MyToolbar';
 import ons from '../../OnsenUI/build/js/onsenui.js';
 
 class MyPage2 extends React.Component {
+  renderToolbar() {
+    return (
+      <Toolbar inline>
+        <div className='center'>Description</div>
+      </Toolbar>
+    );
+  }
+
   render() {
     return (
       <Page>
-          <Toolbar inline>
-            <div className='center'>Description</div>
-          </Toolbar>
-          <br />
-          <div style={{textAlign: 'center'}}>
-            <Input value={this.props.description} onChange={this.props.onChange} />
-            <p>
-              <Button modifier='light' onClick={this.props.popPage}>Previous</Button>
-            </p>
-          </div>
+        <br />
+        <div style={{textAlign: 'center'}}>
+          <Input value={this.props.description} onChange={this.props.onChange} />
+          <p>
+            <Button modifier='light' onClick={this.props.popPage}>Previous</Button>
+          </p>
+        </div>
       </Page>
     );
   }
@@ -37,19 +42,27 @@ class FirstPage extends React.Component {
     super(props);
     this.state = {};
   }
-  render() {
-    return (<Page>
+
+  renderToolbar() {
+    return (
       <Toolbar>
         <div className='center'>Name</div>
       </Toolbar>
-      <br />
-      <div style={{textAlign: 'center'}}>
-        <Input value={this.props.name} onChange={this.props.onNameChanged} />
-        <p>
-          <Button modifier='light' onClick={this.props.pushPage}>Next</Button>
-        </p>
-      </div>
-    </Page>);
+    );
+  }
+
+  render() {
+    return (
+      <Page renderToolbar={this.renderToolbar}>
+        <br />
+        <div style={{textAlign: 'center'}}>
+          <Input value={this.props.name} onChange={this.props.onNameChanged} />
+          <p>
+            <Button modifier='light' onClick={this.props.pushPage}>Next</Button>
+          </p>
+        </div>
+      </Page>
+    );
   }
 };
 
