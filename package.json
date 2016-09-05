@@ -46,7 +46,7 @@
     "babel-preset-stage-2": "^6.13.0",
     "chai": "^3.5.0",
     "colors": "^1.1.2",
-    "css-loader": "^0.24.0",
+    "css-loader": "^0.25.0",
     "eslint": "^3.2.2",
     "eslint-plugin-promise": "^2.0.0",
     "eslint-plugin-react": "^6.0.0",
