@@ -1,4 +1,4 @@
-/*! react-onsenui v0.7.5 - Fri Aug 05 2016 19:11:25 GMT+0900 (JST) */
+/*! react-onsenui v0.7.6 - Wed Sep 07 2016 15:08:49 GMT+0900 (JST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom'), require('onsenui')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom', 'onsenui'], factory) :
@@ -213,7 +213,6 @@
     }, {
       key: '_update',
       value: function _update(isShown) {
-        CustomElements.upgrade(this.node.firstChild);
         if (this.props.isOpen) {
           if (!isShown) {
             this.show();
@@ -767,7 +766,6 @@
       value: function componentDidMount() {
         get(Object.getPrototypeOf(Carousel.prototype), 'componentDidMount', this).call(this);
         var node = ReactDOM.findDOMNode(this);
-        CustomElements.upgrade(node);
         node.addEventListener('postchange', this.props.onPostChange);
         node.addEventListener('refresh', this.props.onRefresh);
         node.addEventListener('overscroll', this.props.onOverscroll);
@@ -1339,7 +1337,7 @@
      *  [en] If true, the button will be disabled. [/en]
      *  [jp] [/jp]
      */
-    disabled: React.PropTypes.string,
+    disabled: React.PropTypes.bool,
 
     /**
      * @name onClick
@@ -1704,7 +1702,6 @@
       key: 'update',
       value: function update(props) {
         var self = this;
-        CustomElements.upgrade(this.refs.lazyRepeat);
 
         this.refs.lazyRepeat.delegate = {
           calculateItemHeight: function calculateItemHeight(index) {
@@ -2110,7 +2107,7 @@
 
         this.pages = pages || [];
         return new Promise(function (resolve) {
-          _this2.setState({}, resolve);
+          _this2.forceUpdate(resolve);
         });
       }
 
@@ -2166,7 +2163,14 @@
           var newPage = _this3.props.renderPage(lastRoute, _this3);
           _this3.routes.push(lastRoute);
 
-          _this3.refs.navi._pushPage(options, _this3.update.bind(_this3), _this3.pages, newPage).then(function () {
+          var update = function update() {
+            _this3.pages.push(newPage);
+            return new Promise(function (resolve) {
+              return _this3.forceUpdate(resolve);
+            });
+          };
+
+          _this3.refs.navi._pushPage(options, update).then(function () {
             _this3.routes = routes;
 
             var renderPage = function renderPage(route) {
@@ -2205,10 +2209,15 @@
         }
 
         return new Promise(function (resolve) {
-          var newPage = _this4.props.renderPage(route, _this4);
+          var update = function update() {
+            return new Promise(function (resolve) {
+              _this4.pages.push(_this4.props.renderPage(route, _this4));
+              _this4.forceUpdate(resolve);
+            });
+          };
 
           _this4.routes.push(route);
-          _this4.refs.navi._pushPage(options, _this4.update.bind(_this4), _this4.pages, newPage).then(resolve).catch(function (error) {
+          _this4.refs.navi._pushPage(options, update).then(resolve).catch(function (error) {
             _this4.routes.pop();
             _this4.pages.pop();
             throw error;
@@ -2279,8 +2288,15 @@
 
         this.routesBeforePop = this.routes.slice();
 
-        return this.refs.navi._popPage(options, this.update.bind(this), this.pages).then(function () {
-          _this6.routes.pop();
+        var update = function update() {
+          return new Promise(function (resolve) {
+            _this6.pages.pop();
+            _this6.forceUpdate(resolve);
+          });
+        };
+
+        return this.refs.navi._popPage(options, update).then(function () {
+          return _this6.routes.pop();
         });
       }
     }, {
@@ -2351,7 +2367,18 @@
         this.pages = this.routes.map(function (route) {
           return _this7.props.renderPage(route, _this7);
         });
-        this.setState({});
+        this.forceUpdate();
+      }
+    }, {
+      key: 'shouldComponentUpdate',
+      value: function shouldComponentUpdate(nextProps, nextState) {
+        var _this8 = this;
+
+        // component is rerendered => update pages
+        this.pages = this.routes.map(function (route) {
+          return _this8.props.renderPage(route, _this8);
+        });
+        return true;
       }
     }, {
       key: 'componentWillUnmount',
@@ -2525,7 +2552,6 @@
       value: function componentDidMount() {
         get(Object.getPrototypeOf(Modal.prototype), 'componentDidMount', this).call(this);
         this.node = ReactDOM__default.findDOMNode(this);
-        CustomElements.upgrade(this.node);
 
         this._update(this.props, false);
       }
@@ -2661,7 +2687,6 @@
       value: function componentDidMount() {
         get(Object.getPrototypeOf(Page.prototype), 'componentDidMount', this).call(this);
         var node = ReactDOM__default.findDOMNode(this);
-        CustomElements.upgrade(node);
         node.addEventListener('init', this.props.onInit);
         node.addEventListener('show', this.props.onShow);
         node.addEventListener('hide', this.props.onHide);
@@ -3218,7 +3243,6 @@
         get(Object.getPrototypeOf(PullHook.prototype), 'componentDidMount', this).call(this);
         var node = ReactDOM__default.findDOMNode(this);
         node.addEventListener('changestate', this.props.onChange);
-        CustomElements.upgrade(this.refs.pullHook);
         this.refs.pullHook.onAction = this.props.onLoad;
       }
     }, {
@@ -3654,7 +3678,6 @@
       value: function componentDidMount() {
         get(Object.getPrototypeOf(SpeedDialItem.prototype), 'componentDidMount', this).call(this);
         var node = ReactDOM__default.findDOMNode(this);
-        CustomElements.upgrade(node);
         node.addEventListener('click', this.props.onClick);
       }
     }, {
@@ -4087,6 +4110,8 @@
         var inputId = _props.inputId;
         var other = objectWithoutProperties(_props, ['checked', 'inputId']);
 
+        Util.convert(other, 'disabled');
+
         if (inputId) {
           other['input-id'] = inputId;
         }
@@ -4286,7 +4311,6 @@
       value: function componentDidMount() {
         get(Object.getPrototypeOf(Tabbar.prototype), 'componentDidMount', this).call(this);
         var node = this.refs.tabbar;
-        CustomElements.upgrade(node);
         node.addEventListener('prechange', this.props.onPreChange);
         node.addEventListener('postchange', this.props.onPostChange);
         node.addEventListener('reactive', this.props.onReactive);
