@@ -35,7 +35,6 @@ class Carousel extends SimpleWrapper {
   componentDidMount() {
     super.componentDidMount();
     const node = findDOMNode(this);
-    CustomElements.upgrade(node);
     node.addEventListener('postchange', this.props.onPostChange);
     node.addEventListener('refresh', this.props.onRefresh);
     node.addEventListener('overscroll', this.props.onOverscroll);
