@@ -67,16 +67,12 @@ export default class extends React.Component {
           </SplitterSide>
 
           <SplitterContent>
-            <Page>
-              <Toolbar>
-                <div className="center">ons-splitter-content</div>
-              </Toolbar>
+            <Page renderToolbar={() => <MyToolbar title="ons-splitter-content" />}>
               <p>
-
                 <Button
                   onClick={() => this.setState({isSwipeable: !this.state.isSwipeable})}
-                > 
-                  {this.state.isSwipeable ? 'Disable Swipe' : 'Enable Swipeable'} 
+                >
+                  {this.state.isSwipeable ? 'Disable Swipe' : 'Enable Swipeable'}
                 </Button>
               </p>
               <p>
