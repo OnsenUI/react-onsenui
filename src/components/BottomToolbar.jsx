@@ -3,7 +3,7 @@ import React from 'react';
 
 /**
  * @original ons-bottom-toolbar
- * @category toolbar
+ * @category page
  * @description
  * [en] Back button component for Toolbar. It enables to automatically to pop the top page of the navigator. When only presented with one page, the button is hidden automatically.  [/en]
  * [jp][/jp]

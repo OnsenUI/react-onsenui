@@ -4,7 +4,7 @@ import Util from './Util.js';
 
 /**
  * @original ons-icon
- * @category icon
+ * @category visual
  * @tutorial react/Reference/icon
  * @description
  * [en]

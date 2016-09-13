@@ -3,7 +3,7 @@ import React from 'react';
 
 /**
  * @original ons-speed-dial
- * @category speed-dial
+ * @category control
  * @tutorial react/Reference/speed-dial
  * @description
  * [en] Element that displays a Material Design Speed Dialog component. It is useful when there are more than one primary action that can be performed in a page.

@@ -4,7 +4,7 @@ import Util from './Util.js';
 
 /**
  * @original ons-progress-bar
- * @category progress
+ * @category visual
  * @tutorial react/Reference/progress
  * @description
  * [en] The component is used to display a linear progress bar. It can either display a progress bar that shows the user how much of a task has been completed. In the case where the percentage is not known it can be used to display an animated progress bar so the user can see that an operation is in progress.  [/en]

@@ -5,7 +5,7 @@ import Util from './Util.js';
 
 /**
  * @original ons-pull-hook
- * @category pull-hook
+ * @category control
  * @tutorial react/Reference/pull-hook
  * @description
  * [en]  Component that adds **Pull to refresh** functionality to an `<ons-page>` element.

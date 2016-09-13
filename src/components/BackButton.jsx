@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 /**
  * @original ons-back-button
- * @category toolbar
+ * @category navigation
  * @tutorial react/Reference/navigator
  * @description
  * [en]

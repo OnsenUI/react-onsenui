@@ -3,7 +3,7 @@ import React from 'react';
 
 /**
  * @original ons-toolbar-button
- * @category toolbar
+ * @category page
  * @tutorial react/Reference/toolbar
  * @description
  *   [en]
