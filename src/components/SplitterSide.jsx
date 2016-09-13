@@ -5,7 +5,7 @@ import Util from './Util.js';
 
 /**
  * @original ons-splitter-side
- * @category splitter
+ * @category menu
  * @tutorial react/Reference/splitter
  * @description
  * [en]  The SplitterContent  element is used as a child element of Splitter.

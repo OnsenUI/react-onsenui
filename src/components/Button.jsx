@@ -3,7 +3,7 @@ import React from 'react';
 
 /**
  * @original ons-button
- * @category button
+ * @category form
  * @tutorial react/Reference/button
  * @description
  * [en] Button component. If you want to place a button in a toolbar, use `ToolbarButton` or `BackButton` instead. Will automatically display as a Material Design button with a ripple effect on Android.

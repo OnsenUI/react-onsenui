@@ -7,7 +7,7 @@ const EVENT_TYPES = ['change', 'input'];
 
 /**
  * @original ons-input
- * @category input
+ * @category form
  * @tutorial react/Reference/input
  * @description
  * [en]

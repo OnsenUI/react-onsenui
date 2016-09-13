@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 /**
  * @original ons-popover
- * @category popover
+ * @category dialog
  * @tutorial react/Reference/popover
  * @description
  *   [en]

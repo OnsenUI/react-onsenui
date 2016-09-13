@@ -4,7 +4,7 @@ import Util from './Util.js';
 
 /**
  * @original ons-switch
- * @category input
+ * @category form
  * @tutorial react/Reference/input
  * @description
  * [en]   Switch component. The switch can be toggled both by dragging and tapping.
