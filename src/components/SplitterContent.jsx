@@ -1,7 +1,7 @@
 import SimpleWrapper from './SimpleWrapper.jsx';
 /**
  * @original ons-splitter-content
- * @category splitter
+ * @category menu
  * @tutorial react/Reference/splitter
  * @description
  * [en]  The SplitterContent  element is used as a child element of Splitter.

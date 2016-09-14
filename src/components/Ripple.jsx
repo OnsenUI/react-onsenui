@@ -3,7 +3,7 @@ import React from 'react';
 
 /**
  * @original ons-ripple
- * @category ripple
+ * @category visual
  * @tutorial react/Reference/ripple
  * @description
  * [en]
