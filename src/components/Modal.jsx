@@ -29,8 +29,8 @@ import BasicComponent from './BasicComponent.jsx';
   </Page>
  */
 class Modal extends BasicComponent {
-  constructor(props, context) {
-    super(props, context);
+  constructor(...args) {
+    super(...args);
     this.node = null;
   }
 
