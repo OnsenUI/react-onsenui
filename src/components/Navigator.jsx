@@ -191,12 +191,13 @@ class Navigator extends BasicComponent {
     const update = () => {
       return new Promise((resolve) => {
         this.pages.pop();
+        this.routes.pop();
+
         this.forceUpdate(resolve);
       });
     };
 
-    return this.refs.navi._popPage(options, update)
-      .then(() => this.routes.pop());
+    return this.refs.navi._popPage(options, update);
   }
 
   _prePop(event) {
