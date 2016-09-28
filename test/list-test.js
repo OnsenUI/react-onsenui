@@ -12,3 +12,10 @@ describe('List', function() {
     'ons-list'
   );
 });
+
+describe('List without dataSource attributes', function() {
+  rendersToComponent(
+    <List />,
+    'ons-list'
+  );
+});
