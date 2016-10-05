@@ -6,26 +6,27 @@ import React from 'react';
  * @category page
  * @tutorial react/Reference/toolbar
  * @description
- * [en]  Toolbar component that can be used with navigation. Left, center and right container can be specified by class names.  This component will automatically displays as a Material Design toolbar when running on Android devices.[/en]
+ * [en]Toolbar component that can be used with navigation. Left, center and right container can be specified by class names. This component will automatically displays as a Material Design toolbar when running on Android devices.[/en]
  * [jp] どうしよう[/jp]
  * @example
  *
 <Page renderToolbar={() =>
-   <Toolbar>
-     <div className="left">
-       <BackButton>
-         Back
-       </BackButton>
-     </div>
-     <div className="center">
-       Title
-     </div>
-     <div className="right">
-       <ToolbarButton>
-         <Icon icon="md-menu" />
-       </ToolbarButton>
-     </div>
-   </Toolbar> } />
+  <Toolbar>
+    <div className="left">
+      <BackButton>
+          Back
+      </BackButton>
+    </div>
+    <div className="center">
+      Title
+    </div>
+    <div className="right">
+      <ToolbarButton>
+        <Icon icon="md-menu" />
+      </ToolbarButton>
+    </div>
+  </Toolbar> }
+/>
  */
 class Toolbar extends SimpleWrapper {
   _getDomNodeName() {
