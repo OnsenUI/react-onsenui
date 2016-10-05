@@ -104,6 +104,15 @@ Input.propTypes = {
   value: React.PropTypes.string,
 
   /**
+   * @name checked
+   * @type boolean
+   * @description
+   *  [en]Set to to true if the input is checked. Only used for radio buttons and checkboxes.[/en]
+   *  [ja][/ja]
+   */
+  checked: React.PropTypes.bool,
+
+  /**
    * @name placehoder
    * @type string
    * @description
