@@ -136,7 +136,7 @@ Input.propTypes = {
    * @name inputId
    * @type string
    * @description
-   *  [en]  Specify the "id" attribute of the inner <input> element. This is useful when using <label for="..."> elements [/en]
+   *  [en]  Specify the "id" attribute of the inner `<input>` element. This is useful when using <label for="..."> elements [/en]
    *  [jp][/jp]
    */
   inputId: React.PropTypes.string,
@@ -148,7 +148,7 @@ Input.propTypes = {
    *  [en]  If this attribute is present, the placeholder will be animated in Material Design.  [/en]
    *  [jp][/jp]
    */
-  'float': React.PropTypes.bool
+  float: React.PropTypes.bool
 };
 
 export default Input;
