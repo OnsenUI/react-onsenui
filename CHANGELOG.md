@@ -2,6 +2,13 @@
 CHANGELOG
 ====
 
+v1.0.1
+----
+* list: Support static lists.
+
+v1.0.0
+----
+
 v0.7.4
 ----
 * modal: Fix hide and show logic.
