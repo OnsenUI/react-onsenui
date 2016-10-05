@@ -128,7 +128,7 @@ Carousel.propTypes = {
    *  [en]ons-carousel-item's width. Only works when the direction is set to "horizontal".[/en]
    *  [jp] [/jp]
    */
-  itemWidth: React.PropTypes.oneOf([React.PropTypes.string, React.PropTypes.number]),
+  itemWidth: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
 
   /**
    * @name itemHeight
@@ -137,7 +137,7 @@ Carousel.propTypes = {
    *  [en]ons-carousel-item's height. Only works when the direction is set to "vertical".[/en]
    *  [jp] [/jp]
    */
-  itemHeight: React.PropTypes.oneOf([React.PropTypes.string, React.PropTypes.number]),
+  itemHeight: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
 
   /**
    * @name autoScroll
