@@ -41,8 +41,8 @@ import BasicComponent from './BasicComponent.jsx';
 }
  */
 class LazyList extends BasicComponent {
-  constructor(props) {
-    super(props);
+  constructor(...args) {
+    super(...args);
     this.state = {children: []};
     this.update = this.update.bind(this);
   }

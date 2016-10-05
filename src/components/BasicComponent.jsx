@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 import ons from 'onsenui';
 
 class BasicComponent extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor(...args) {
+    super(...args);
     this.updateClasses = this.updateClasses.bind(this);
   }
 
