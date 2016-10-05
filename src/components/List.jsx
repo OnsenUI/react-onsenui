@@ -7,7 +7,7 @@ import BasicComponent from './BasicComponent.jsx';
  * @tutorial react/Reference/list
  * @description
  *   [en]
- *     Component for representing a list. It takes an array called datasrouce and calls renderRow(row, index) for every row.  Furthermore, the header and the footer can be specified with `renderRow` and `renderHeader` respectivly. [/en]
+ *     Component for representing a list. It takes an array called datasource and calls renderRow(row, index) for every row.  Furthermore, the header and the footer can be specified with `renderRow` and `renderHeader` respectivly. [/en]
  * [jp][/jp]
  * @example
   <List
@@ -30,6 +30,7 @@ class List extends BasicComponent {
       <ons-list {...this.props} ref='list'>
         {this.props.renderHeader()}
         {pages}
+        {this.props.children}
         {this.props.renderFooter()}
       </ons-list>
     );
@@ -57,7 +58,7 @@ List.propTypes = {
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  dataSource: React.PropTypes.array.isRequired,
+  dataSource: React.PropTypes.array,
 
    /**
    * @name renderRow
@@ -65,11 +66,11 @@ List.propTypes = {
    * @description
    *  [en]
    *  Function to specify the rendering function for every element in
-   *  in the dataSouce.
+   *  in the dataSource.
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
-  renderRow: React.PropTypes.func.isRequired,
+  renderRow: React.PropTypes.func,
 
    /**
    * @name renderHeader
@@ -95,6 +96,8 @@ List.propTypes = {
 };
 
 List.defaultProps = {
+  dataSource: [],
+  renderRow: () => null,
   renderHeader: () => null,
   renderFooter: () => null
 };
