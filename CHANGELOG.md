@@ -5,6 +5,7 @@ CHANGELOG
 v1.0.1
 ----
 * list: Support static lists.
+* navigator: Properly render pages.
 
 v1.0.0
 ----
