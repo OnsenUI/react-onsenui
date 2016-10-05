@@ -24,8 +24,8 @@ import Util from './Util.js';
  }
  */
 class Navigator extends BasicComponent {
-  constructor(props) {
-    super(props);
+  constructor(...args) {
+    super(...args);
     this.pages = [];
     this.state = { };
     this._prePush = this._prePush.bind(this);
@@ -191,12 +191,13 @@ class Navigator extends BasicComponent {
     const update = () => {
       return new Promise((resolve) => {
         this.pages.pop();
+        this.routes.pop();
+
         this.forceUpdate(resolve);
       });
     };
 
-    return this.refs.navi._popPage(options, update)
-      .then(() => this.routes.pop());
+    return this.refs.navi._popPage(options, update);
   }
 
   _prePop(event) {
@@ -271,12 +272,13 @@ class Navigator extends BasicComponent {
   }
 
   render() {
-    var {...others} = this.props;
+    const {...others} = this.props;
     Util.convert(others, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
+    const pages = this.routes ? this.routes.map((route) => this.props.renderPage(route, this)) : null;
 
     return (
       <ons-navigator {...others} ref='navi'>
-        {this.pages}
+        {pages}
       </ons-navigator>
     );
   }
