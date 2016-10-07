@@ -48,7 +48,7 @@ Fab.propTypes = {
   ripple: React.PropTypes.bool,
 
   /**
-   * @namep position
+   * @name position
    * @type string
    * @required false
    * @description
