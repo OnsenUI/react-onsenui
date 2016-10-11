@@ -1,4 +1,4 @@
-/*! react-onsenui v1.0.0 - Thu Sep 15 2016 22:37:15 GMT+0900 (JST) */
+/*! react-onsenui v1.0.0 - Tue Oct 11 2016 18:18:12 GMT+0900 (JST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom'), require('onsenui')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom', 'onsenui'], factory) :
@@ -28,7 +28,7 @@ var Util = {
     return '{' + innerString.join(',') + '}';
   },
   convert: function convert(dict, name) {
-    var additionalDict = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
+    var additionalDict = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
 
     var fun = additionalDict.fun ? additionalDict.fun : function (x) {
       return x;
@@ -47,6 +47,123 @@ var Util = {
     return dict;
   }
 };
+
+var asyncGenerator = function () {
+  function AwaitValue(value) {
+    this.value = value;
+  }
+
+  function AsyncGenerator(gen) {
+    var front, back;
+
+    function send(key, arg) {
+      return new Promise(function (resolve, reject) {
+        var request = {
+          key: key,
+          arg: arg,
+          resolve: resolve,
+          reject: reject,
+          next: null
+        };
+
+        if (back) {
+          back = back.next = request;
+        } else {
+          front = back = request;
+          resume(key, arg);
+        }
+      });
+    }
+
+    function resume(key, arg) {
+      try {
+        var result = gen[key](arg);
+        var value = result.value;
+
+        if (value instanceof AwaitValue) {
+          Promise.resolve(value.value).then(function (arg) {
+            resume("next", arg);
+          }, function (arg) {
+            resume("throw", arg);
+          });
+        } else {
+          settle(result.done ? "return" : "normal", result.value);
+        }
+      } catch (err) {
+        settle("throw", err);
+      }
+    }
+
+    function settle(type, value) {
+      switch (type) {
+        case "return":
+          front.resolve({
+            value: value,
+            done: true
+          });
+          break;
+
+        case "throw":
+          front.reject(value);
+          break;
+
+        default:
+          front.resolve({
+            value: value,
+            done: false
+          });
+          break;
+      }
+
+      front = front.next;
+
+      if (front) {
+        resume(front.key, front.arg);
+      } else {
+        back = null;
+      }
+    }
+
+    this._invoke = send;
+
+    if (typeof gen.return !== "function") {
+      this.return = undefined;
+    }
+  }
+
+  if (typeof Symbol === "function" && Symbol.asyncIterator) {
+    AsyncGenerator.prototype[Symbol.asyncIterator] = function () {
+      return this;
+    };
+  }
+
+  AsyncGenerator.prototype.next = function (arg) {
+    return this._invoke("next", arg);
+  };
+
+  AsyncGenerator.prototype.throw = function (arg) {
+    return this._invoke("throw", arg);
+  };
+
+  AsyncGenerator.prototype.return = function (arg) {
+    return this._invoke("return", arg);
+  };
+
+  return {
+    wrap: function (fn) {
+      return function () {
+        return new AsyncGenerator(fn.apply(this, arguments));
+      };
+    },
+    await: function (value) {
+      return new AwaitValue(value);
+    }
+  };
+}();
+
+
+
+
 
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -494,10 +611,16 @@ AlertDialog.propTypes = {
 var BasicComponent = function (_React$Component) {
   inherits(BasicComponent, _React$Component);
 
-  function BasicComponent(props) {
+  function BasicComponent() {
+    var _ref;
+
     classCallCheck(this, BasicComponent);
 
-    var _this = possibleConstructorReturn(this, (BasicComponent.__proto__ || Object.getPrototypeOf(BasicComponent)).call(this, props));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    var _this = possibleConstructorReturn(this, (_ref = BasicComponent.__proto__ || Object.getPrototypeOf(BasicComponent)).call.apply(_ref, [this].concat(args)));
 
     _this.updateClasses = _this.updateClasses.bind(_this);
     return _this;
@@ -645,10 +768,10 @@ BackButton.propTypes = {
  * @original ons-bottom-toolbar
  * @category page
  * @description
- * [en] Back button component for Toolbar. It enables to automatically to pop the top page of the navigator. When only presented with one page, the button is hidden automatically.  [/en]
+ * [en]Toolbar component that is positioned at the bottom of the page.[/en]
  * [jp][/jp]
  * @example
- *<BottomToolbar modifier="material"> Content </BottomToolbar>
+ * <BottomToolbar modifier="material"> Content </BottomToolbar>
  */
 
 var BottomToolbar = function (_SimpleWrapper) {
@@ -675,9 +798,7 @@ BottomToolbar.propTypes = {
    * @name modifier
    * @type string
    * @description
-   *  [en]
-   *  Specify modifier name to specify custom styles. Optional.
-   *  [/en]
+   *  [en]Specify modifier name to specify custom styles. Optional.[/en]
    *  [jp][/jp]
    */
   modifier: React.PropTypes.string
@@ -903,7 +1024,7 @@ Carousel.propTypes = {
    *  [en]ons-carousel-item's width. Only works when the direction is set to "horizontal".[/en]
    *  [jp] [/jp]
    */
-  itemWidth: React.PropTypes.oneOf([React.PropTypes.string, React.PropTypes.number]),
+  itemWidth: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
 
   /**
    * @name itemHeight
@@ -912,7 +1033,7 @@ Carousel.propTypes = {
    *  [en]ons-carousel-item's height. Only works when the direction is set to "vertical".[/en]
    *  [jp] [/jp]
    */
-  itemHeight: React.PropTypes.oneOf([React.PropTypes.string, React.PropTypes.number]),
+  itemHeight: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]),
 
   /**
    * @name autoScroll
@@ -1357,7 +1478,7 @@ Fab.propTypes = {
   ripple: React.PropTypes.bool,
 
   /**
-   * @namep position
+   * @name position
    * @type string
    * @required false
    * @description
@@ -1643,6 +1764,15 @@ Input.propTypes = {
   value: React.PropTypes.string,
 
   /**
+   * @name checked
+   * @type boolean
+   * @description
+   *  [en]Set to to true if the input is checked. Only used for radio buttons and checkboxes.[/en]
+   *  [ja][/ja]
+   */
+  checked: React.PropTypes.bool,
+
+  /**
    * @name placehoder
    * @type string
    * @description
@@ -1666,7 +1796,7 @@ Input.propTypes = {
    * @name inputId
    * @type string
    * @description
-   *  [en]  Specify the "id" attribute of the inner <input> element. This is useful when using <label for="..."> elements [/en]
+   *  [en]  Specify the "id" attribute of the inner `<input>` element. This is useful when using <label for="..."> elements [/en]
    *  [jp][/jp]
    */
   inputId: React.PropTypes.string,
@@ -1678,7 +1808,7 @@ Input.propTypes = {
    *  [en]  If this attribute is present, the placeholder will be animated in Material Design.  [/en]
    *  [jp][/jp]
    */
-  'float': React.PropTypes.bool
+  float: React.PropTypes.bool
 };
 
 /**
@@ -1724,10 +1854,16 @@ Input.propTypes = {
 var LazyList = function (_BasicComponent) {
   inherits(LazyList, _BasicComponent);
 
-  function LazyList(props) {
+  function LazyList() {
+    var _ref;
+
     classCallCheck(this, LazyList);
 
-    var _this = possibleConstructorReturn(this, (LazyList.__proto__ || Object.getPrototypeOf(LazyList)).call(this, props));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    var _this = possibleConstructorReturn(this, (_ref = LazyList.__proto__ || Object.getPrototypeOf(LazyList)).call.apply(_ref, [this].concat(args)));
 
     _this.state = { children: [] };
     _this.update = _this.update.bind(_this);
@@ -1746,9 +1882,9 @@ var LazyList = function (_BasicComponent) {
         _render: function (items, newHeight) {
           var _this2 = this;
 
-          var createElement = function createElement(_ref) {
-            var index = _ref.index;
-            var top = _ref.top;
+          var createElement = function createElement(_ref2) {
+            var index = _ref2.index;
+            var top = _ref2.top;
 
             return props.renderRow(index);
           };
@@ -1838,7 +1974,7 @@ LazyList.propTypes = {
  * @tutorial react/Reference/list
  * @description
  *   [en]
- *     Component for representing a list. It takes an array called datasrouce and calls renderRow(row, index) for every row.  Furthermore, the header and the footer can be specified with `renderRow` and `renderHeader` respectivly. [/en]
+ *     Component for representing a list. It takes an array called datasource and calls renderRow(row, index) for every row.  Furthermore, the header and the footer can be specified with `renderRow` and `renderHeader` respectivly. [/en]
  * [jp][/jp]
  * @example
   <List
@@ -1871,7 +2007,7 @@ var List = function (_BasicComponent) {
         return _this2.props.renderRow(data, idx);
       });
 
-      return React.createElement('ons-list', _extends({}, this.props, { ref: 'list' }), this.props.renderHeader(), pages, this.props.renderFooter());
+      return React.createElement('ons-list', _extends({}, this.props, { ref: 'list' }), this.props.renderHeader(), pages, this.props.children, this.props.renderFooter());
     }
   }]);
   return List;
@@ -1898,7 +2034,7 @@ List.propTypes = {
   *  [/en]
   *  [jp] どうしよう[/jp]
   */
-  dataSource: React.PropTypes.array.isRequired,
+  dataSource: React.PropTypes.array,
 
   /**
   * @name renderRow
@@ -1906,11 +2042,11 @@ List.propTypes = {
   * @description
   *  [en]
   *  Function to specify the rendering function for every element in
-  *  in the dataSouce.
+  *  in the dataSource.
   *  [/en]
   *  [jp] どうしよう[/jp]
   */
-  renderRow: React.PropTypes.func.isRequired,
+  renderRow: React.PropTypes.func,
 
   /**
   * @name renderHeader
@@ -1936,6 +2072,10 @@ List.propTypes = {
 };
 
 List.defaultProps = {
+  dataSource: [],
+  renderRow: function renderRow() {
+    return null;
+  },
   renderHeader: function renderHeader() {
     return null;
   },
@@ -2122,10 +2262,16 @@ ListItem.propTypes = {
 var Navigator = function (_BasicComponent) {
   inherits(Navigator, _BasicComponent);
 
-  function Navigator(props) {
+  function Navigator() {
+    var _ref;
+
     classCallCheck(this, Navigator);
 
-    var _this = possibleConstructorReturn(this, (Navigator.__proto__ || Object.getPrototypeOf(Navigator)).call(this, props));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    var _this = possibleConstructorReturn(this, (_ref = Navigator.__proto__ || Object.getPrototypeOf(Navigator)).call.apply(_ref, [this].concat(args)));
 
     _this.pages = [];
     _this.state = {};
@@ -2164,7 +2310,7 @@ var Navigator = function (_BasicComponent) {
   }, {
     key: 'resetPage',
     value: function resetPage(route) {
-      var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
       return this.resetPageStack([route], options);
     }
@@ -2188,7 +2334,7 @@ var Navigator = function (_BasicComponent) {
     value: function resetPageStack(routes) {
       var _this3 = this;
 
-      var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
       if (this.isRunning()) {
         return Promise.reject('Navigator is already running animation.');
@@ -2238,7 +2384,7 @@ var Navigator = function (_BasicComponent) {
     value: function pushPage(route) {
       var _this4 = this;
 
-      var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
       if (this.isRunning()) {
         return Promise.reject('Navigator is already running animation.');
@@ -2285,7 +2431,7 @@ var Navigator = function (_BasicComponent) {
     value: function replacePage(route) {
       var _this5 = this;
 
-      var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
       if (this.isRunning()) {
         return Promise.reject('Navigator is already running animation.');
@@ -2316,7 +2462,7 @@ var Navigator = function (_BasicComponent) {
     value: function popPage() {
       var _this6 = this;
 
-      var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+      var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
       if (this.isRunning()) {
         return Promise.reject('Navigator is already running animation.');
@@ -2327,13 +2473,13 @@ var Navigator = function (_BasicComponent) {
       var update = function update() {
         return new Promise(function (resolve) {
           _this6.pages.pop();
+          _this6.routes.pop();
+
           _this6.forceUpdate(resolve);
         });
       };
 
-      return this.refs.navi._popPage(options, update).then(function () {
-        return _this6.routes.pop();
-      });
+      return this.refs.navi._popPage(options, update);
     }
   }, {
     key: '_prePop',
@@ -2417,11 +2563,16 @@ var Navigator = function (_BasicComponent) {
   }, {
     key: 'render',
     value: function render() {
+      var _this8 = this;
+
       var others = objectWithoutProperties(this.props, []);
 
       Util.convert(others, 'animationOptions', { fun: Util.animationOptionsConverter, newName: 'animation-options' });
+      var pages = this.routes ? this.routes.map(function (route) {
+        return _this8.props.renderPage(route, _this8);
+      }) : null;
 
-      return React.createElement('ons-navigator', _extends({}, others, { ref: 'navi' }), this.pages);
+      return React.createElement('ons-navigator', _extends({}, others, { ref: 'navi' }), pages);
     }
   }]);
   return Navigator;
@@ -2563,10 +2714,16 @@ Navigator.defaultProps = {
 var Modal = function (_BasicComponent) {
   inherits(Modal, _BasicComponent);
 
-  function Modal(props, context) {
+  function Modal() {
+    var _ref;
+
     classCallCheck(this, Modal);
 
-    var _this = possibleConstructorReturn(this, (Modal.__proto__ || Object.getPrototypeOf(Modal)).call(this, props, context));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    var _this = possibleConstructorReturn(this, (_ref = Modal.__proto__ || Object.getPrototypeOf(Modal)).call.apply(_ref, [this].concat(args)));
 
     _this.node = null;
     return _this;
@@ -3358,7 +3515,7 @@ var EVENT_TYPES$1 = ['change', 'input'];
 /**
  * @original ons-range
  * @category form
- * @tutorial react/Reference/input
+ * @tutorial react/Reference/range
  * @description
  * [en]
  *   Range input component.
@@ -4094,7 +4251,7 @@ SplitterSide.propTypes = {
 /**
  * @original ons-switch
  * @category form
- * @tutorial react/Reference/input
+ * @tutorial react/Reference/switch
  * @description
  * [en]   Switch component. The switch can be toggled both by dragging and tapping.
  *     Will automatically displays a Material Design switch on Android devices.
@@ -4367,7 +4524,7 @@ var Tabbar = function (_BasicComponent) {
 
       Util.convert(others, 'animationOptions', { fun: Util.animationOptionsConverter, newName: 'animation-options' });
 
-      return React.createElement('ons-tabbar', _extends({}, this.props, { ref: 'tabbar', activeIndex: this.props.index, _compiled: 'true' }), React.createElement('div', { className: 'ons-tab-bar__content tab-bar__content' + (this.props.position === 'top' ? ' tab-bar--top__content' : '') }, this.tabPages), React.createElement('div', { className: 'tab-bar ons-tab-bar__footer ons-tabbar-inner' + (this.props.position === 'top' ? ' tab-bar--top' : '') }, tabs.map(function (tab) {
+      return React.createElement('ons-tabbar', _extends({}, this.props, { ref: 'tabbar', activeIndex: this.props.index }), React.createElement('div', { className: 'ons-tab-bar__content tab-bar__content' + (this.props.position === 'top' ? ' tab-bar--top__content' : '') }, this.tabPages), React.createElement('div', { className: 'tab-bar ons-tab-bar__footer ons-tabbar-inner' + (this.props.position === 'top' ? ' tab-bar--top' : '') }, tabs.map(function (tab) {
         return tab.tab;
       })));
     }
@@ -4458,28 +4615,29 @@ Tabbar.defaultProps = {
 /**
  * @original ons-toolbar
  * @category page
- * @tutorial react/Reference/toolbar
+ * @tutorial react/Reference/page
  * @description
- * [en]  Toolbar component that can be used with navigation. Left, center and right container can be specified by class names.  This component will automatically displays as a Material Design toolbar when running on Android devices.
+ * [en]Toolbar component that can be used with navigation. Left, center and right container can be specified by class names. This component will automatically displays as a Material Design toolbar when running on Android devices.[/en]
  * [jp] どうしよう[/jp]
  * @example
  *
 <Page renderToolbar={() =>
-   <Toolbar>
-     <div className="left">
-       <BackButton>
-         Back
-       </BackButton>
-     </div>
-     <div className="center">
-       Title
-     </div>
-     <div className="right">
-       <ToolbarButton>
-         <Icon icon="md-menu" />
-       </ToolbarButton>
-     </div>
-   </Toolbar> } />
+  <Toolbar>
+    <div className="left">
+      <BackButton>
+          Back
+      </BackButton>
+    </div>
+    <div className="center">
+      Title
+    </div>
+    <div className="right">
+      <ToolbarButton>
+        <Icon icon="md-menu" />
+      </ToolbarButton>
+    </div>
+  </Toolbar> }
+/>
  */
 
 var Toolbar = function (_SimpleWrapper) {
@@ -4517,7 +4675,7 @@ Toolbar.propTypes = {
 /**
  * @original ons-toolbar-button
  * @category page
- * @tutorial react/Reference/toolbar
+ * @tutorial react/Reference/page
  * @description
  *   [en]
  *   Button component for the Toolbar. Using this component gives a nice default style.
