@@ -5,7 +5,7 @@ import Util from './Util.js';
 /**
  * @original ons-switch
  * @category form
- * @tutorial react/Reference/input
+ * @tutorial react/Reference/switch
  * @description
  * [en]   Switch component. The switch can be toggled both by dragging and tapping.
  *     Will automatically displays a Material Design switch on Android devices.
