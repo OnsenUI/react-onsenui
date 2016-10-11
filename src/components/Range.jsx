@@ -7,7 +7,7 @@ const EVENT_TYPES = ['change', 'input'];
 /**
  * @original ons-range
  * @category form
- * @tutorial react/Reference/input
+ * @tutorial react/Reference/range
  * @description
  * [en]
  *   Range input component.
