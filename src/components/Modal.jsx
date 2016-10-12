@@ -4,7 +4,7 @@ import BasicComponent from './BasicComponent.jsx';
 
 /**
  * @original ons-modal
- * @category modal
+ * @category dialog
  * @tutorial react/Reference/modal
  * @description
  * [en]
