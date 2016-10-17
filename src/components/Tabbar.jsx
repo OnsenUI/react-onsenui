@@ -40,6 +40,10 @@ class Tabbar extends BasicComponent {
     node.addEventListener('prechange', this.props.onPreChange);
     node.addEventListener('postchange', this.props.onPostChange);
     node.addEventListener('reactive', this.props.onReactive);
+
+    setTimeout(() => {
+      node.setActiveTab(this.props.index);
+    }, 0);
   }
 
   componentWillUnmount() {
@@ -74,7 +78,7 @@ class Tabbar extends BasicComponent {
     Util.convert(others, 'animationOptions', {fun: Util.animationOptionsConverter, newName: 'animation-options'});
 
     return (
-      <ons-tabbar {...this.props} ref='tabbar' activeIndex={this.props.index}>
+      <ons-tabbar {...this.props} ref='tabbar'>
         <div className={'ons-tab-bar__content tab-bar__content' + (this.props.position === 'top' ? ' tab-bar--top__content' : '')}>
           {this.tabPages}
         </div>
