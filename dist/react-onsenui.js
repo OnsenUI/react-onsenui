@@ -1,4 +1,4 @@
-/*! react-onsenui v1.0.1 - Tue Oct 11 2016 18:30:49 GMT+0900 (JST) */
+/*! react-onsenui v1.0.2 - Mon Oct 24 2016 20:01:21 GMT+0900 (JST) */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('react-dom'), require('onsenui')) :
   typeof define === 'function' && define.amd ? define(['exports', 'react', 'react-dom', 'onsenui'], factory) :
@@ -2686,7 +2686,7 @@ Navigator.defaultProps = {
 
 /**
  * @original ons-modal
- * @category modal
+ * @category dialog
  * @tutorial react/Reference/modal
  * @description
  * [en]
@@ -4481,11 +4481,17 @@ var Tabbar = function (_BasicComponent) {
   createClass(Tabbar, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      var _this2 = this;
+
       get(Tabbar.prototype.__proto__ || Object.getPrototypeOf(Tabbar.prototype), 'componentDidMount', this).call(this);
       var node = this.refs.tabbar;
       node.addEventListener('prechange', this.props.onPreChange);
       node.addEventListener('postchange', this.props.onPostChange);
       node.addEventListener('reactive', this.props.onReactive);
+
+      setTimeout(function () {
+        node.setActiveTab(_this2.props.index);
+      }, 0);
     }
   }, {
     key: 'componentWillUnmount',
@@ -4524,7 +4530,7 @@ var Tabbar = function (_BasicComponent) {
 
       Util.convert(others, 'animationOptions', { fun: Util.animationOptionsConverter, newName: 'animation-options' });
 
-      return React.createElement('ons-tabbar', _extends({}, this.props, { ref: 'tabbar', activeIndex: this.props.index }), React.createElement('div', { className: 'ons-tab-bar__content tab-bar__content' + (this.props.position === 'top' ? ' tab-bar--top__content' : '') }, this.tabPages), React.createElement('div', { className: 'tab-bar ons-tab-bar__footer ons-tabbar-inner' + (this.props.position === 'top' ? ' tab-bar--top' : '') }, tabs.map(function (tab) {
+      return React.createElement('ons-tabbar', _extends({}, this.props, { ref: 'tabbar' }), React.createElement('div', { className: 'ons-tab-bar__content tab-bar__content' + (this.props.position === 'top' ? ' tab-bar--top__content' : '') }, this.tabPages), React.createElement('div', { className: 'tab-bar ons-tab-bar__footer ons-tabbar-inner' + (this.props.position === 'top' ? ' tab-bar--top' : '') }, tabs.map(function (tab) {
         return tab.tab;
       })));
     }
