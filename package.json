@@ -1,6 +1,6 @@
 {
   "name": "react-onsenui",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Onsen UI - React Components for Hybrid Cordova/PhoneGap Apps with Material Design and iOS UI components",
   "main": "dist/react-onsenui.js",
   "scripts": {
@@ -61,7 +61,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.8.0",
     "mocha": "^3.1.2",
-    "onsenui": "^2.0.2",
+    "onsenui": "^2.0.3",
     "prompt": "^1.0.0",
     "react": "^15.3.2",
     "react-docgen": "^2.11.0",
@@ -80,6 +80,6 @@
   "peerDependencies": {
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
-    "onsenui": "^2.0.2"
+    "onsenui": "^2.0.3"
   }
 }
