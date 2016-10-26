@@ -76,12 +76,11 @@ class Modal extends BasicComponent {
 
 Modal.propTypes = {
   /**
-   * @property animation
+   * @name animation
    * @type {String}
    * @description
    *   [en]
-   *     Animation name. Available animations are `"slide"`, `"lift"`, `"fade"` and `"none"`.
-   *     These are platform based animations. For fixed animations, add `"-ios"` or `"-md"` suffix to the animation name. E.g. `"lift-ios"`, `"lift-md"`. Defaults values are `"slide-ios"` and `"fade-md"`.
+   *     Animation name. Available animations are `"fade"` and `"none"`.
    *   [/en]
    */
   animation: React.PropTypes.oneOf(['none', 'fade']),
