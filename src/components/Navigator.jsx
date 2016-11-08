@@ -291,7 +291,7 @@ Navigator.propTypes = {
    * @required true
    * @defaultValue null
    * @description
-   *  [en] This function takes the current route object as a parameter and  creates returns a react componen.[/en]
+   *  [en] This function takes the current route object as a parameter and  creates returns a React component.[/en]
    *  [jp] どうしよう[/jp]
    */
   renderPage: React.PropTypes.func.isRequired,
@@ -301,8 +301,8 @@ Navigator.propTypes = {
    * @required false
    * @defaultValue null
    * @description
-   *  [en] This array contains the initial routes from the navigator,
-   *  which will be used to render the initial pages in the renderPage method.
+   *  [en] This array contains the initial routes from the Navigator,
+   *  which will be used to render the initial pages in the `renderPage` method.
    *  [/en]
    *  [jp] どうしよう[/jp]
    */
@@ -359,7 +359,7 @@ Navigator.propTypes = {
   onPostPop: React.PropTypes.func,
 
   /**
-   * @property animation
+   * @name animation
    * @type {String}
    * @description
    *   [en]
