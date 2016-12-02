@@ -1,3 +1,5 @@
+**This package has been moved to the [main Onsen UI repository](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/react).**
+
 [![npm version](https://badge.fury.io/js/react-onsenui.svg)](https://badge.fury.io/js/react-onsenui)
 
 # Onsen UI - React Components for Cordova/PhoneGap hybrid apps
