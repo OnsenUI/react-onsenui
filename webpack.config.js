@@ -4,14 +4,21 @@ var path = require('path');
 module.exports = {
   devtool: 'eval-source-map',
   context: __dirname + "/demo",
-  entry: [
+  entry: {
+    bundle: [
     'webpack-dev-server/client?http://0.0.0.0:9000',
     'webpack/hot/only-dev-server',
     './index.js'
-  ],
+    ],
+    redux: [
+    'webpack-dev-server/client?http://0.0.0.0:9000',
+    'webpack/hot/only-dev-server',
+    './redux.js'
+    ]
+  },
   output: {
     path: __dirname + '/demo',
-    filename: "bundle.js"
+    filename: "[name].js"
   },
   devServer: {
     // contentBase
