@@ -39,7 +39,7 @@
   "homepage": "https://onsen.io/v2/",
   "devDependencies": {
     "babel-core": "^6.17.0",
-    "babel-loader": "^6.2.5",
+    "babel-loader": "^6.2.9",
     "babel-preset-es2015": "^6.16.0",
     "babel-preset-es2015-rollup": "^1.2.0",
     "babel-preset-react": "^6.16.0",
