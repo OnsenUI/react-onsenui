@@ -80,6 +80,6 @@
   "peerDependencies": {
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
-    "onsenui": "^2.0.3"
+    "onsenui": "^2.0.5"
   }
 }
