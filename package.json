@@ -59,7 +59,7 @@
     "karma-chrome-launcher": "^2.0.0",
     "karma-mocha": "^1.2.0",
     "karma-sourcemap-loader": "^0.3.7",
-    "karma-webpack": "^1.8.0",
+    "karma-webpack": "^1.8.1",
     "mocha": "^3.1.2",
     "onsenui": "^2.0.3",
     "prompt": "^1.0.0",
